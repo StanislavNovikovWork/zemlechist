@@ -26,5 +26,8 @@ export const reactify = ymaps3React.reactify.bindTo(React, ReactDom);
 export const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } =
   reactify.module(ymaps3);
 
+// Export additional components
+export const { YMapMarker, YMapClusterer } = reactify.module(ymaps3);
+
 // Export the search module for geocoding
 export const { YMapSearch } = ymaps3;
