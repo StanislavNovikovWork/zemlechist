@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { Drawer } from "antd";
 import {
   YMap,
   YMapDefaultSchemeLayer,
@@ -9,7 +10,6 @@ import {
 } from "@/lib/ymaps3";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "../MapSearch";
-import MarkerModal from "../MarkerModal";
 import { Marker } from "../Marker";
 import { MarkerFeature } from "../types";
 import { useMarkers } from "@/hooks/useMarkers";
@@ -85,11 +85,42 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
           />
         ))}
       </YMap>
-      <MarkerModal
-        isOpen={isModalOpen}
+      <Drawer
+        title="Информация о маркере"
+        placement="right"
+        open={isModalOpen}
         onClose={handleCloseModal}
-        marker={selectedMarker?.properties || null}
-      />
+        size="default"
+      >
+        {selectedMarker?.properties && (
+          <div className="space-y-4">
+            {selectedMarker.properties.phone && (
+              <div>
+                <span className="block text-sm font-semibold text-gray-700 mb-1">
+                  Телефон
+                </span>
+                <span className="text-gray-900">{selectedMarker.properties.phone}</span>
+              </div>
+            )}
+            {selectedMarker.properties.name && (
+              <div>
+                <span className="block text-sm font-semibold text-gray-700 mb-1">
+                  Имя
+                </span>
+                <span className="text-gray-900">{selectedMarker.properties.name}</span>
+              </div>
+            )}
+            {selectedMarker.properties.description && (
+              <div>
+                <span className="block text-sm font-semibold text-gray-700 mb-1">
+                  Описание
+                </span>
+                <span className="text-gray-900">{selectedMarker.properties.description}</span>
+              </div>
+            )}
+          </div>
+        )}
+      </Drawer>
     </div>
   );
 }

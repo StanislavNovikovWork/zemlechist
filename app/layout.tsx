@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import Sidebar from "@/components/layout/Sidebar";
+import AppLayout from "@/components/layout/AppLayout";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,9 +37,8 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
       </head>
-      <body className="min-h-full flex">
-        <Sidebar />
-        <main className="flex-1">{children}</main>
+      <body className="min-h-full">
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );

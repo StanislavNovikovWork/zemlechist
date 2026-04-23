@@ -48,11 +48,11 @@ my-app/
 │   └── globals.css             # Глобальные стили
 ├── components/
 │   ├── layout/                 # Layout компоненты
+│   │   └── AppLayout.tsx       # Основной layout с sidebar
 │   ├── map/                    # Компоненты карты
 │   │   ├── Map/                # Основной компонент карты
 │   │   ├── MapSearch/          # Поиск по карте
 │   │   ├── Marker/             # Компонент маркера
-│   │   ├── MarkerModal/        # Модальное окно маркера
 │   │   ├── MarkerPopup/        # Всплывающее окно маркера
 │   │   └── types.ts            # Общие типы для карты
 │   └── ui/                     # UI компоненты
