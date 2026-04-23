@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { Spin } from "antd";
 
 // Динамический импорт карты с отключенным SSR
 const Map = dynamic(
@@ -9,7 +10,7 @@ const Map = dynamic(
     ssr: false,
     loading: () => (
       <div className="flex items-center justify-center h-[500px] bg-gray-100 rounded-lg">
-        <div className="text-gray-500">Загрузка карты...</div>
+        <Spin size="large" />
       </div>
     ),
   },
