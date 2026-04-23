@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,8 +9,8 @@ import { usePathname } from "next/navigation";
 const { Header, Sider, Content } = Layout;
 
 const navItems = [
-  { key: "/", label: "Главная", href: "/" },
-  { key: "/maps", label: "Карта", href: "/maps" },
+  { key: "/", label: "Главная", href: "/", icon: <HomeOutlined /> },
+  { key: "/maps", label: "Карта", href: "/maps", icon: <EnvironmentOutlined /> },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -22,6 +22,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const menuItems = navItems.map((item) => ({
     key: item.key,
+    icon: item.icon,
     label: <Link href={item.href}>{item.label}</Link>,
   }));
 
