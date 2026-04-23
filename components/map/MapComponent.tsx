@@ -6,9 +6,9 @@ import {
   YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
   YMapMarker,
-} from "../../lib/ymaps3";
-import markersData from "../../constants/markers.json";
-import { DEFAULT_LOCATION } from "../../constants/map.constants";
+} from "@/lib/ymaps3";
+import markersData from "@/constants/markers.json";
+import { DEFAULT_LOCATION } from "@/constants/map.constants";
 
 interface MapComponentProps {
   location?: { center: [number, number]; zoom: number };

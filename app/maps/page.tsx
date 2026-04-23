@@ -1,11 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Header from "../../components/layout/Header";
+import Header from "@/components/layout/Header";
 
 // Динамический импорт карты с отключенным SSR
 const MapComponent = dynamic(
-  () => import("../../components/map/MapComponent").then((mod) => mod.MapComponent),
+  () => import("@/components/map/MapComponent").then((mod) => mod.MapComponent),
   {
     ssr: false,
     loading: () => (
