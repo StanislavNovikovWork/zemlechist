@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Drawer, Spin } from "antd";
+import { Drawer, Spin, Button, Space } from "antd";
+import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import {
   YMap,
   YMapDefaultSchemeLayer,
@@ -13,6 +14,8 @@ import MapSearch from "../MapSearch";
 import { Marker } from "../Marker";
 import { MarkerFeature } from "../types";
 import { useMarkers } from "../api/useMarkers";
+import { useMarkerEdit } from "../api/useMarkerEdit";
+import { MarkerDrawerContent } from "../MarkerDrawerContent";
 
 /**
  * Пропсы компонента Map
@@ -30,6 +33,13 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkers();
+  const {
+    isEditing,
+    startEditing,
+    toggleEdit,
+    saveChanges,
+    resetEditing,
+  } = useMarkerEdit();
 
   const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
     setLocation(newLocation);
@@ -41,12 +51,14 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
   const handleOpenModal = (marker: MarkerFeature) => {
     setSelectedMarker(marker);
+    startEditing(marker.properties);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedMarker(null);
+    resetEditing();
   };
 
   const handleMouseEnter = (id: number) => {
@@ -92,39 +104,31 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         </YMap>
       )}
       <Drawer
-        title="Информация о маркере"
+        title={
+          <Space>
+            Информация о маркере
+            <Button
+              type="text"
+              icon={isEditing ? <SaveOutlined /> : <EditOutlined />}
+              onClick={isEditing ? saveChanges : toggleEdit}
+            />
+          </Space>
+        }
         placement="right"
         open={isModalOpen}
         onClose={handleCloseModal}
         size="default"
       >
-        {selectedMarker?.properties && (
-          <div className="space-y-4">
-            {selectedMarker.properties.phone && (
-              <div>
-                <span className="block text-sm font-semibold text-gray-700 mb-1">
-                  Телефон
-                </span>
-                <span className="text-gray-900">{selectedMarker.properties.phone}</span>
-              </div>
-            )}
-            {selectedMarker.properties.name && (
-              <div>
-                <span className="block text-sm font-semibold text-gray-700 mb-1">
-                  Имя
-                </span>
-                <span className="text-gray-900">{selectedMarker.properties.name}</span>
-              </div>
-            )}
-            {selectedMarker.properties.description && (
-              <div>
-                <span className="block text-sm font-semibold text-gray-700 mb-1">
-                  Описание
-                </span>
-                <span className="text-gray-900">{selectedMarker.properties.description}</span>
-              </div>
-            )}
-          </div>
+        {selectedMarker && (
+          <MarkerDrawerContent
+            properties={selectedMarker.properties}
+            isEditing={isEditing}
+            onSave={(values) => {
+              console.log("Saving changes:", values);
+              saveChanges();
+            }}
+            onCancel={toggleEdit}
+          />
         )}
       </Drawer>
     </div>
