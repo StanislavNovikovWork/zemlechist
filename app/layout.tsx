@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import AppLayout from "@/components/layout/AppLayout";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,7 +39,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full">
-        <AppLayout>{children}</AppLayout>
+        <QueryProvider>
+          <AppLayout>{children}</AppLayout>
+        </QueryProvider>
       </body>
     </html>
   );

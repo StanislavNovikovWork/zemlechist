@@ -42,7 +42,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', borderBottom: '1px solid #e8e8e8' }} />
+        <Header style={{ padding: 0, background: '#fff', boxShadow: '0 2px 4px rgba(0,0,0,.15)', borderBottom: '1px solid #e8e8e8' }} />
         <Content style={{ margin: 0 }}>
           {children}
         </Content>
