@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Drawer } from "antd";
+import { Drawer, Spin } from "antd";
 import {
   YMap,
   YMapDefaultSchemeLayer,
@@ -68,7 +68,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       <MapSearch onLocationChange={handleLocationChange} onSearchResult={handleSearchResult} />
       {isLoading ? (
         <div className="flex items-center justify-center h-full">
-          <div className="text-gray-500">Загрузка маркеров...</div>
+          <Spin size="large" />
         </div>
       ) : (
         <YMap location={location}>
