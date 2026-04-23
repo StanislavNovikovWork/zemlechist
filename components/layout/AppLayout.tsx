@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Layout, Menu } from "antd";
+import React, { useState } from "react";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Button, Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,6 +16,9 @@ const navItems = [
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
 
   const menuItems = navItems.map((item) => ({
     key: item.key,
@@ -22,28 +26,37 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }));
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider 
-        collapsible 
-        collapsed={collapsed} 
-        onCollapse={(value) => setCollapsed(value)}
-        theme="light"
-      >
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider trigger={null} collapsible collapsed={collapsed} theme="dark">
         <div className="h-16 flex items-center justify-center bg-white/10 mb-4">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-300 transition-colors">
             {collapsed ? "З" : "Землечист"}
           </Link>
         </div>
-        <Menu 
-          theme="light" 
-          mode="inline" 
-          selectedKeys={[pathname]}
-          items={menuItems}
-        />
+        <Menu theme="dark" mode="inline" selectedKeys={[pathname]} items={menuItems} />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: '#fff', boxShadow: '0 2px 4px rgba(0,0,0,.15)', borderBottom: '1px solid #e8e8e8' }} />
-        <Content style={{ margin: 0 }}>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: "16px",
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content
+          style={{
+            margin: "24px 16px 0 16px",
+            padding: 0,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: `${borderRadiusLG}px ${borderRadiusLG}px 0 0`,
+          }}
+        >
           {children}
         </Content>
       </Layout>
