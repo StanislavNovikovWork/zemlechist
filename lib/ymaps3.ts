@@ -28,6 +28,3 @@ export const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } =
 
 // Export additional components
 export const { YMapMarker, YMapClusterer } = reactify.module(ymaps3);
-
-// Export the search module for geocoding
-export const { YMapSearch } = ymaps3;

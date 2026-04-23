@@ -1,1 +1,3808 @@
-{"type":"FeatureCollection","metadata":{"name":"JCB тест","creator":"Yandex Map Constructor","description":"Трактора<br>Контейнеры<br>Самосвалы<br>Любые строительные материалы и техника<br>Бетон<br>Минитехника<br>Колодцы<br>Грунт<br>Натуральный камень"},"features":[{"type":"Feature","id":0,"geometry":{"type":"Point","coordinates":[38.2673446,55.5732403]},"properties":{"description":"8(964)505-10-51 Георгий\nесть еще техника и самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":1,"geometry":{"type":"Point","coordinates":[37.6978524,55.5510674]},"properties":{"description":"8(916)620-22-30 Игорь","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":2,"geometry":{"type":"Point","coordinates":[38.1089694,55.4990459]},"properties":{"description":"8(963)712-76-40; Иван, так же доставляют песок, грунт, щебень","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":3,"geometry":{"type":"Point","coordinates":[36.6261348,55.9315017]},"properties":{"description":"8(965)434-72-42 Есиф, есть самовалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":4,"geometry":{"type":"Point","coordinates":[38.2223085,55.3476196]},"properties":{"description":"8(901)543-59-99 Игорь, есть самосвалы, есть миниэкскаваторы., так же у них местный чат где много техники","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":5,"geometry":{"type":"Point","coordinates":[36.7237136,56.0123786]},"properties":{"description":"8(926)302-03-79; Арамбек полноповоротный, сыпучка, миниэкскаватор, с его слов второй его номер:\n8(909)973-62-75","iconCaption":"JCB +","marker-color":"#ffd21e"}},{"type":"Feature","id":6,"geometry":{"type":"Point","coordinates":[37.8081073,55.3224268]},"properties":{"description":"8(903)238-04-08 Хачатур \n8(916)511-78-58 - абонент временно не доступен 28,03,22","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":7,"geometry":{"type":"Point","coordinates":[37.0373938,55.6343991]},"properties":{"description":"8(903)510-42-44 Максим, гидромолот, (много оборудования на JCB), есть самосвалы и миниэкскаватор","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":8,"geometry":{"type":"Point","coordinates":[37.6665206,55.4887522]},"properties":{"description":"8(926)739-89-13 Гарик, есть 10м3 самосвал","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":9,"geometry":{"type":"Point","coordinates":[37.9678136,56.034846]},"properties":{"description":"8(926)860-35-24 Михаил, есть еще стройматериалы, цемент и прочее","iconCaption":"Case+","marker-color":"#ffd21e"}},{"type":"Feature","id":10,"geometry":{"type":"Point","coordinates":[37.74855,55.4843625]},"properties":{"description":"8(985)877-55-88 не один трактор \nномер не отвечает 17,05,22\nномер временно заблокирован 28,03,22","iconCaption":"JCB","marker-color":"#ed4543"}},{"type":"Feature","id":11,"geometry":{"type":"Point","coordinates":[36.6971582,56.3566674]},"properties":{"description":"8(968)760-56-85 Григорий","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":12,"geometry":{"type":"Point","coordinates":[37.1341087,56.0692108]},"properties":{"description":"8(905)549-91-12 Рома, есть самосвалы","iconCaption":"New Holland","marker-color":"#ffd21e"}},{"type":"Feature","id":13,"geometry":{"type":"Point","coordinates":[37.170091,56.0288507]},"properties":{"description":"8(926)895-77-77 Рафик, миниэкскаваторы, есть так же полноповоротные","iconCaption":"Terex +","marker-color":"#ffd21e"}},{"type":"Feature","id":14,"geometry":{"type":"Point","coordinates":[37.4128163,55.3850385]},"properties":{"description":"8(925)030-36-86 Арсен, есть еще самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":15,"geometry":{"type":"Point","coordinates":[36.604392316454074,55.86763619968723]},"properties":{"description":"8(926)716-42-24 Норик, есть еще кран, каток, самосвалы, ","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":16,"geometry":{"type":"Point","coordinates":[37.0579681,55.8857152]},"properties":{"description":"8(916)690-62-42 Георгий, самосвалы, гидромолот есть","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":17,"geometry":{"type":"Point","coordinates":[37.1300053,55.8706961]},"properties":{"description":"8(926)988-33-38 Павел, есть бур, гидромолот, есть самосвалы и бобкет","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":18,"geometry":{"type":"Point","coordinates":[38.0355601,55.6585069]},"properties":{"description":"8(926)593-70-19 Миша, есть самосвалы \n8(915)809-11-17 песок, щебень, чернозем, грунт, асф. крошка","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":19,"geometry":{"type":"Point","coordinates":[38.4388617,55.6031625]},"properties":{"description":"8(915)213-51-51 Сергей, есть самосвалы (песок, щебень, грунт), манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":20,"geometry":{"type":"Point","coordinates":[37.9474242,56.0212259]},"properties":{"description":"8(916)882-23-25 Георг \n\nесть бобкет, JCB..","iconCaption":"Terex","marker-color":"#ffd21e"}},{"type":"Feature","id":21,"geometry":{"type":"Point","coordinates":[37.9187471,56.0817599]},"properties":{"description":"8(999)844-62-59 Григорий, не в сети 28,03,22г.\nесть манипулятор 8(925)060-96-00 Эдмон, есть бобкет и JCB, так же самосвалы..","iconCaption":"Case+","marker-color":"#ffd21e"}},{"type":"Feature","id":22,"geometry":{"type":"Point","coordinates":[38.1339921,55.6540101]},"properties":{"description":"8(906)032-32-07, Хамвел (мог ошибиться)\n8(926)897-37-38 есть кран, самосвалы (песок, щебень, земля)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":23,"geometry":{"type":"Point","coordinates":[37.5398729,56.2065725]},"properties":{"description":"8(916)444-77-67 Виктор, есть еще спецтехника","iconCaption":"Komatsu+","marker-color":"#ffd21e"}},{"type":"Feature","id":24,"geometry":{"type":"Point","coordinates":[37.5494964,56.2295222]},"properties":{"description":"8(905)784-88-58 Вардан, есть самосвалы, миниэскаваторы, кран, эвакуатор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":25,"geometry":{"type":"Point","coordinates":[37.5502759,56.2353758]},"properties":{"description":"8(965)222-88-58 Сергей \nесть еще кран 8(925)555-19-61","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":26,"geometry":{"type":"Point","coordinates":[37.548506,56.2230503]},"properties":{"description":"8(985)820-65-88 Камо, есть самосвалы \n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":27,"geometry":{"type":"Point","coordinates":[37.5465845,56.0112718]},"properties":{"description":"8(903)700-35-32 Сергей\nгидромолота нет, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":28,"geometry":{"type":"Point","coordinates":[38.051959,55.7506411]},"properties":{"description":"8(926)268-32-29 Александр \nне берет трубку 17,05,22\nне берет трубку 28,03,22","iconCaption":"JCB","marker-color":"#ed4543"}},{"type":"Feature","id":29,"geometry":{"type":"Point","coordinates":[37.5323585,55.3671288]},"properties":{"description":"8(919)038-36-36, Абов \n8(961)006-44-48 (второй номер Абова) есть еще техника есть самосвалы- песок, щебень, чернозем, торф, асф. крошка","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":30,"geometry":{"type":"Point","coordinates":[38.0821418,55.9658711]},"properties":{"description":"8(985)422-25-24 Миша, есть самосвалы, контейнеры..","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":31,"geometry":{"type":"Point","coordinates":[37.9687508,55.8510071]},"properties":{"description":"8(903)514-37-05,\n8(985)664-13-36 Артур","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":32,"geometry":{"type":"Point","coordinates":[37.397134,56.1353794]},"properties":{"description":"8(906)024-68-68 есть самосвалы\nтелефон не доступен 17,05,22\nне берет трубку 25,03,22","iconCaption":"JCB+","marker-color":"#ed4543"}},{"type":"Feature","id":33,"geometry":{"type":"Point","coordinates":[37.3067492,56.1785174]},"properties":{"description":"8(915)047-60-43 Артур","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":34,"geometry":{"type":"Point","coordinates":[37.3162145,56.151255]},"properties":{"description":"8(925)720-25-02 есть самосвалы Мага\n\nнедозвон 25,03,22","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":35,"geometry":{"type":"Point","coordinates":[37.4142981,56.1357823]},"properties":{"description":"8(968)074-06-00, Мгер (Миша)\n8(929)515-00-09 ","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":36,"geometry":{"type":"Point","coordinates":[36.2099055,55.7040572]},"properties":{"description":"8(916)164-66-95 Захар\n","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":37,"geometry":{"type":"Point","coordinates":[37.1938487,55.4146903]},"properties":{"description":"8(926)335-49-57 Олег","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":38,"geometry":{"type":"Point","coordinates":[38.1996024,55.3895357]},"properties":{"description":"8(966)047-79-97 Овик","iconCaption":"Case","marker-color":"#ffd21e"}},{"type":"Feature","id":39,"geometry":{"type":"Point","coordinates":[37.1372669,55.9920924]},"properties":{"description":"8(926)047-22-22 Артур есть самосвалы есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":40,"geometry":{"type":"Point","coordinates":[37.30335,55.9404098]},"properties":{"description":"8(903)011-98-99 Наир, есть гидромолот","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":41,"geometry":{"type":"Point","coordinates":[37.6144351,55.9278237]},"properties":{"description":"8(968)393-13-00 Артем, есть самосвалы песок, щебень, чернозем, грунт, торф","iconCaption":"Terex+","marker-color":"#ffd21e"}},{"type":"Feature","id":42,"geometry":{"type":"Point","coordinates":[37.6149773,55.9295405]},"properties":{"description":"8(985)726-50-82 Алексей\n\nне берет трубку 25,03,22","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":43,"geometry":{"type":"Point","coordinates":[38.10008274902248,55.60809118914903]},"properties":{"description":"8(916)696-25-96 Алексей","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":44,"geometry":{"type":"Point","coordinates":[36.8393322,56.1403741]},"properties":{"description":"8(985)806-77-41 Гриша, есть самосвалы","iconCaption":"Трактор (э-п)+","marker-color":"#ffd21e"}},{"type":"Feature","id":45,"geometry":{"type":"Point","coordinates":[38.1521074,55.4924757]},"properties":{"description":"8(968)524-14-33 Шафкат (можно сказать Саша)\nесть самосвал","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":46,"geometry":{"type":"Point","coordinates":[36.9078581,56.0778618]},"properties":{"description":"8(999)969-09-59 Гоша\n\n","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":47,"geometry":{"type":"Point","coordinates":[36.9200063,56.0363181]},"properties":{"description":"8(963)662-90-62, Михаил \n8(964)580-47-91 есть самосвалы есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":48,"geometry":{"type":"Point","coordinates":[37.2267948,55.9098316]},"properties":{"description":"8(926)631-02-03 Армен","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":49,"geometry":{"type":"Point","coordinates":[37.2760025,55.8987353]},"properties":{"description":"8(903)118-20-72 есть гидромолот, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":50,"geometry":{"type":"Point","coordinates":[36.9609796,55.209079]},"properties":{"description":"8(903)220-85-62 Арман, есть гидромолот есть самосвалы бетон\n","iconCaption":"Komatsu+","marker-color":"#ffd21e"}},{"type":"Feature","id":51,"geometry":{"type":"Point","coordinates":[38.2831675,55.5472098]},"properties":{"description":"8(929)585-41-05 Карен есть самосвалы бетон\n\n","iconCaption":"Terex+","marker-color":"#ffd21e"}},{"type":"Feature","id":52,"geometry":{"type":"Point","coordinates":[38.2669234,55.5811633]},"properties":{"description":"8(963)996-66-61 есть еще самосвалы -  у него нет трактора (только самосвалы), но есть у Валерия: 89057952000 ","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":53,"geometry":{"type":"Point","coordinates":[38.1520103,55.6435229]},"properties":{"description":"8(985)454-58-88, Юра \n8(903)107-43-49 второй номер Юры - есть еще самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":54,"geometry":{"type":"Point","coordinates":[38.0586115,55.6975295]},"properties":{"description":"8(903)678-24-28, Роман, есть гидромолот\n8(926)405-56-19 есть самосвалы есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":55,"geometry":{"type":"Point","coordinates":[36.9015931,56.2343959]},"properties":{"description":"8(926)494-81-74 Арсен, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":56,"geometry":{"type":"Point","coordinates":[37.0457326,55.6373177]},"properties":{"description":"8(909)671-41-44 есть самосвалы есть еще техника Эрвор\n\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":57,"geometry":{"type":"Point","coordinates":[38.1223406,55.7534238]},"properties":{"description":"8(965)325-41-45 Арсен, гидромолота нет, есть самосвалы\n","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":58,"geometry":{"type":"Point","coordinates":[36.8932222,55.6916699]},"properties":{"description":"8(964)792-79-69 Али есть самосвалы бетон\n8(964)792-94-13, - недозвон 25,03,22","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":59,"geometry":{"type":"Point","coordinates":[37.662035,55.9612195]},"properties":{"description":"8(926)704-20-24, Вартан \n8(926)27449-20 Валера (брат Вартана) есть еще техника, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":60,"geometry":{"type":"Point","coordinates":[36.968922,56.2123445]},"properties":{"description":"8(905)748-28-40 Мурад есть еще техника, есть самосвалы, есть гидромолот","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":61,"geometry":{"type":"Point","coordinates":[37.1546353,56.0487912]},"properties":{"description":"8(985)783-02-02, Араик \n8(977)137-22-01 тлф. не доступен 25,03,22\nесть самосвалы ","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":62,"geometry":{"type":"Point","coordinates":[37.5249726,56.0881524]},"properties":{"description":"8(909)620-67-99 Артем, самосвалы (говорит ездит по работе по области) гидромолот есть","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":63,"geometry":{"type":"Point","coordinates":[38.5520543,55.5831281]},"properties":{"description":"8(963)614-51-61, Владимир гидромолота нет ниже тлф. тракториста \n8(903)746-12-04  есть еще самосвалы","iconCaption":"Terex+","marker-color":"#ffd21e"}},{"type":"Feature","id":64,"geometry":{"type":"Point","coordinates":[38.4015389,55.6066691]},"properties":{"description":"8(985)315-48-69 Михаил, гидромолот, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":65,"geometry":{"type":"Point","coordinates":[38.0258657,55.6595733]},"properties":{"description":"8(926)366-63-20 Варуш, гидромолота нет, самосвалы есть","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":66,"geometry":{"type":"Point","coordinates":[37.7536686,55.4858919]},"properties":{"description":"8(916)111-15-16 Евгений \n8(905)720-81-86 Александр Самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":67,"geometry":{"type":"Point","coordinates":[37.8145759,55.3699528]},"properties":{"description":"8(968)404-32-30, Артур гидромолот, самосвалы\n8(925)545-82-94  - номер не в сети 25,03,22\nесть самосвалы есть еще техника ","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":68,"geometry":{"type":"Point","coordinates":[37.6396501,55.5369973]},"properties":{"description":"8(925)865-67-68 Александр\nесть самосвалы","iconCaption":"СAT+","marker-color":"#ffd21e"}},{"type":"Feature","id":69,"geometry":{"type":"Point","coordinates":[37.4693407,55.1756074]},"properties":{"description":"8(999)095-39-90 Норик есть самосвалы бетон","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":70,"geometry":{"type":"Point","coordinates":[37.466616,55.1807684]},"properties":{"description":"8(926)895-59-80 Дмитрий есть самосвалы песок, щебень, грунт, торф\n\n8(926)753-51-81 Георгий не дозвон 25,03,22","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":71,"geometry":{"type":"Point","coordinates":[36.7819698,56.1463407]},"properties":{"description":"8(967)171-11-46, Маис\n8(903)614-39-32  Давид, есть самосвалы есть еще техника","iconCaption":"Case+","marker-color":"#ffd21e"}},{"type":"Feature","id":72,"geometry":{"type":"Point","coordinates":[36.8781912,56.1425021]},"properties":{"description":"8(906)755-48-79  Арман \nесть самосвалы  есть еще техника, минипогрузчики, есть гидромолот","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":73,"geometry":{"type":"Point","coordinates":[36.892267,56.1425256]},"properties":{"description":"8(968)892-50-89 Артем, самосвалы 7м3, 10, 20м3\n\n","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":74,"geometry":{"type":"Point","coordinates":[37.2182951,55.913353]},"properties":{"description":"8(967)164-40-08 есть самосвалы\nне доступен 17,05,22\nабонент временно не доступен","iconCaption":"JCB+","marker-color":"#ed4543"}},{"type":"Feature","id":75,"geometry":{"type":"Point","coordinates":[37.5908003,55.0375549]},"properties":{"description":"8(925)889-32-30 Карен, есть самосвалы","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":76,"geometry":{"type":"Point","coordinates":[37.555472,56.0732053]},"properties":{"description":"8(903)547-92-79, Владимир \n8(965)152-73-37 есть самосвалы (сын Владимира Гера)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":77,"geometry":{"type":"Point","coordinates":[38.2065256,55.3853223]},"properties":{"description":"8(926)178-41-37 Владимир \nесть минитрактор с культиватором","iconCaption":"Тракторы+","marker-color":"#ffd21e"}},{"type":"Feature","id":78,"geometry":{"type":"Point","coordinates":[36.9847576,55.5088396]},"properties":{"description":"8(925)500-50-01 Илья, есть гидромолот, самосвалы20м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":79,"geometry":{"type":"Point","coordinates":[36.93925,55.2066764]},"properties":{"description":"8(960)519-44-64 Алексей, есть самосвалы\n\n","iconCaption":"Hidromek+","marker-color":"#ffd21e"}},{"type":"Feature","id":80,"geometry":{"type":"Point","coordinates":[37.5976907,55.3313363]},"properties":{"description":"8(903)707-01-38 Данил","iconCaption":"New Holland","marker-color":"#ffd21e"}},{"type":"Feature","id":81,"geometry":{"type":"Point","coordinates":[37.7529879,55.3354229]},"properties":{"description":"8(916)175-29-62, Мариман, кран, манипуляторы, самосвалы \n8(915)198-11-68 второй номер Маримана","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":82,"geometry":{"type":"Point","coordinates":[38.2043521,55.3899448]},"properties":{"description":"8(964)781-52-53 Гога, есть бетон, есть самосвалы, есть манипуляторы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":83,"geometry":{"type":"Point","coordinates":[37.8776202,56.0129981]},"properties":{"description":"8(910)458-35-63 Роман, есть гидромолот, есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":84,"geometry":{"type":"Point","coordinates":[37.6039545,55.3712546]},"properties":{"description":"8(926)552-33-53","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":85,"geometry":{"type":"Point","coordinates":[37.43207254277294,55.895683416694524]},"properties":{"description":"8(926)690-29-15 Игорь, есть гидромолот есть еще техника\nтрактор полноповоротный (работает по всей МО с его слов)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":86,"geometry":{"type":"Point","coordinates":[37.951553470800505,55.8123419497374]},"properties":{"description":"8(966)092-59-87 Сергей \nесть мини эскаватор, ","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":87,"geometry":{"type":"Point","coordinates":[38.0988619,55.8467937]},"properties":{"description":"8(926)636-10-40 Арман, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":88,"geometry":{"type":"Point","coordinates":[38.1475879,55.4945645]},"properties":{"description":"8(916)338-88-90, Карен \n8(925)795-64-41 второй номер Карена (на нем лучше связь), есть знакомые у него с самосвалами и сыпучкой","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":89,"geometry":{"type":"Point","coordinates":[37.88480021796787,55.91731783234789]},"properties":{"description":"8(916)769-99-00 Маис, манипулятор, кран","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":90,"geometry":{"type":"Point","coordinates":[38.1261357,55.3727735]},"properties":{"description":"8(985)500-92-09\n временно не доступен\nвременно недоступен 17,05,22","iconCaption":"JCB","marker-color":"#ed4543"}},{"type":"Feature","id":91,"geometry":{"type":"Point","coordinates":[36.9394776,55.4603601]},"properties":{"description":"8(926)592-94-03 Ашот, может помочь с сыпучкой (песок, щебень)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":92,"geometry":{"type":"Point","coordinates":[36.9878077,55.4968482]},"properties":{"description":"8(926)978-82-42, Эдгар\n8(926)353-75-19 Армен.есть самосвалы, есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":93,"geometry":{"type":"Point","coordinates":[37.0676461,55.8150593]},"properties":{"description":"8(495)227-77-49 Анатолий","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":94,"geometry":{"type":"Point","coordinates":[37.0433238,55.8118617]},"properties":{"description":"8(985)222-65-59 Женя, есть маленькие контейнера","iconCaption":"Экскав.-погрузч.","marker-color":"#ffd21e"}},{"type":"Feature","id":95,"geometry":{"type":"Point","coordinates":[37.4550845,54.913078]},"properties":{"description":"8(916)535-75-14 Рудольф","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":96,"geometry":{"type":"Point","coordinates":[37.3254307,55.4925822]},"properties":{"description":"8(903)786-41-06 Арарат есть самосвалы, есть сыпучка\n8(926)528-13-63, не дозвонился 25,03,22","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":97,"geometry":{"type":"Point","coordinates":[37.3292477,55.4323915]},"properties":{"description":"8(926)242-52-01 Сергей, есть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":98,"geometry":{"type":"Point","coordinates":[38.2133501,55.2933824]},"properties":{"description":"8(985)645-00-94, Максим самосвал 12м3, кран 25тон\n8(916)055-36-16 второй номер Максима","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":99,"geometry":{"type":"Point","coordinates":[37.9427096,55.9649057]},"properties":{"description":"8(925)400-30-00 Ливан (подвязан ватсап)\n8(925)800-01-73 тот же Ливан самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":100,"geometry":{"type":"Point","coordinates":[37.5452389,55.3332873]},"properties":{"description":"8(968)646-11-18 Станислав, самосвал 10м3, манипулятор","iconCaption":"Terex","marker-color":"#ffd21e"}},{"type":"Feature","id":101,"geometry":{"type":"Point","coordinates":[37.54906298891512,55.38832455143238]},"properties":{"description":"8(926)552-33-53 Игорь, есть гидромолот (полноповоротный)","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":102,"geometry":{"type":"Point","coordinates":[37.3102291,55.4997779]},"properties":{"description":"8(963)888-19-88 Ибрагим,\nесть манипулятор, рядом говорит карьер, самосвалы вся данная красота","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":103,"geometry":{"type":"Point","coordinates":[37.179395,56.1015386]},"properties":{"description":"8(915)130-26-77 Петр, есть самосвалы\n\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":104,"geometry":{"type":"Point","coordinates":[37.3526684,55.5132464]},"properties":{"description":"8(910)402-90-25 есть гидромолот","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":105,"geometry":{"type":"Point","coordinates":[37.9590199,54.9737868]},"properties":{"description":"8(903)689-01-85 Михаил есть зил","iconCaption":"Трактор с чудо-фрезой+","marker-color":"#ffd21e"}},{"type":"Feature","id":106,"geometry":{"type":"Point","coordinates":[37.6530078,55.9574009]},"properties":{"description":"8(915)085-00-05 Артур, есть самосвалы 10, 20м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":107,"geometry":{"type":"Point","coordinates":[38.2563539,56.3514324]},"properties":{"description":"8(925)144-19-60 Максим, есть самосвалы 8, 10, 15м3\n\n8(958)127-77-74, - сразу сброс 25,03,22","iconCaption":"Экскав.- погрузч.","marker-color":"#ffd21e"}},{"type":"Feature","id":108,"geometry":{"type":"Point","coordinates":[36.9528463,55.8720856]},"properties":{"description":"8(495)999-04-16 Армен, у соседей есть самосвалы, манипулятор..","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":109,"geometry":{"type":"Point","coordinates":[37.13845928045624,55.57787076034667]},"properties":{"description":"8(916)368-00-31, Иван есть самосвалы 10м3\n8(926)336-94-36  Михаил, манипулятор, кран.","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":110,"geometry":{"type":"Point","coordinates":[38.0294494,54.944306]},"properties":{"description":"8(909)909-98-96 есть самосвалы Арам\n\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":111,"geometry":{"type":"Point","coordinates":[37.894199,55.2727206]},"properties":{"description":"8(903)558-89-84 Ильяз \nесть самосвалы 10м3, манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":112,"geometry":{"type":"Point","coordinates":[37.54645192451118,55.41758187031609]},"properties":{"description":"8(926)279-56-81 Вираб \n есть самосвалы 12, 20м3, есть каток","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":113,"geometry":{"type":"Point","coordinates":[37.6038802,55.5442794]},"properties":{"description":"8(926)148-72-73 Арман \nесть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":114,"geometry":{"type":"Point","coordinates":[37.4683908,55.1771751]},"properties":{"description":"8(967)184-54-74 Карен\nманипулятор, сыпучка, самосвалы 5, 10, 20м3\n8(925)875-31-32 есть самосвалы не берет трубку 25,03,22","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":115,"geometry":{"type":"Point","coordinates":[37.3375756,55.1236771]},"properties":{"description":"8(920)086-86-16 Владимир, так же Чехов (2 базы техники с его слов)\nсыпучка + самосвалы.","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":116,"geometry":{"type":"Point","coordinates":[37.5405561,56.048265]},"properties":{"description":"8(901)569-96-89 Васак, есть самосвалы","iconCaption":"New Holland+","marker-color":"#ffd21e"}},{"type":"Feature","id":117,"geometry":{"type":"Point","coordinates":[37.0984357,55.6395878]},"properties":{"description":"8(926)447-33-87 Петр, есть манипулятор","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":118,"geometry":{"type":"Point","coordinates":[37.0241849,55.7066666]},"properties":{"description":"8(916)656-65-17  есть самосвалы, голос был уставший","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":119,"geometry":{"type":"Point","coordinates":[36.5576737,55.5596705]},"properties":{"description":"8(985)365-50-06, Валерий, самосвалы 10, 15, 20м3\n8(905)774-84-24 Ахмед есть еще техника\n8(985)508-59-19 есть еще самосвалы, есть еще техника данный вид связи не доступен для абонента","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":120,"geometry":{"type":"Point","coordinates":[36.4831068,55.5997768]},"properties":{"description":"8(926)390-22-40 есть еще техника 24.03.22\n8(926)793-15-61<br>самосвалы !! Сергей","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":121,"geometry":{"type":"Point","coordinates":[36.867214760326604,55.927022876277874]},"properties":{"description":"89161669883 есть самосвалы Эмин\n\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":122,"geometry":{"type":"Point","coordinates":[35.9186714,55.9847781]},"properties":{"description":"89163823857 Петр, есть еще техника есть самосвалы, кран","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":123,"geometry":{"type":"Point","coordinates":[37.9723935,55.8975199]},"properties":{"description":"89264497689 Вартан, самосвал 10, 15, 20м3\n89197271395 - второй номер Вартана\n89772778332 Армен (сын Вартана)","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":124,"geometry":{"type":"Point","coordinates":[37.21878364819284,55.402963546209676]},"properties":{"description":"89629025062 Игорь, есть самосвалы\n89653254378 Степан, JCB есть самосвалы 10м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":125,"geometry":{"type":"Point","coordinates":[36.9711189,56.2208031]},"properties":{"description":"89260230390 \nсамосвалы так же есть","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":126,"geometry":{"type":"Point","coordinates":[37.4149066,56.3738985]},"properties":{"description":"89263908163 Сергей, есть много техники , \n89258662450 - Александр, JCB, есть самосвалы \n89035256337 - Владимир, есть самосвалы (работает по всему дмитровскому району","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":127,"geometry":{"type":"Point","coordinates":[37.4901667,56.3577473]},"properties":{"description":"89037199926 Георг.\nесть так же самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":128,"geometry":{"type":"Point","coordinates":[38.1139315,55.6544977]},"properties":{"description":"89267836313 Артур\n89060597226 есть самосвалы 10, 20м3\nвторое место базирования в Раменском\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":129,"geometry":{"type":"Point","coordinates":[37.5455585,56.0112856]},"properties":{"description":"\n\n89057218815 самосвалы  Арсен","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":130,"geometry":{"type":"Point","coordinates":[38.2607153,55.8282553]},"properties":{"description":"89057497199 - Алексей \nманипулятор, кран есть в наличии","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":131,"geometry":{"type":"Point","coordinates":[37.5240623,56.0858732]},"properties":{"description":"89035553822 \nСамосвал 8 и 12м3, кран","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":132,"geometry":{"type":"Point","coordinates":[36.5390581,56.0962839]},"properties":{"description":"\n89030047500 есть самосвалы не дозвон 24,03,22 Сайгез","iconCaption":"Трактор с навесным от JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":133,"geometry":{"type":"Point","coordinates":[37.3319924,55.5571666]},"properties":{"description":"89250730505 Ринат\nесть самосвалы, манипулятор..","iconCaption":"Komatsu","marker-color":"#ffd21e"}},{"type":"Feature","id":134,"geometry":{"type":"Point","coordinates":[38.1245565,55.919373]},"properties":{"description":"89629997537 Арсен","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":135,"geometry":{"type":"Point","coordinates":[38.96570626445255,55.83208563176858]},"properties":{"description":"89265941554 \nесть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":136,"geometry":{"type":"Point","coordinates":[36.6063932,55.920422]},"properties":{"description":"89165616034  Жора\n\nтелефон выкл. 24,03,2022","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":137,"geometry":{"type":"Point","coordinates":[38.0181079,55.5338284]},"properties":{"description":"89057241907 Константин\n84957232503 есть самосвалы, фронтальным экскаватором не выезжают, манипулятор есть","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":138,"geometry":{"type":"Point","coordinates":[38.17233928500811,55.81486582070329]},"properties":{"description":"89295864061 Андрей \nесть свой парк, самосвалы, каток.. базируется где Старая купавна, но в сезон бывает в разных точках.","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":139,"geometry":{"type":"Point","coordinates":[36.9224016,55.4963725]},"properties":{"description":"89265914161, Ару \nсамосвалы 10, 20м3\nРазные ребята у которых есть техника\n89260109027 Ванес, JCB, есть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":140,"geometry":{"type":"Point","coordinates":[36.5968686,55.0428969]},"properties":{"description":"89807166351 Павел \nесть самосвалы 10м3 и еще техника","iconCaption":"CAT+","marker-color":"#ffd21e"}},{"type":"Feature","id":141,"geometry":{"type":"Point","coordinates":[38.18337699675203,55.387348928830605]},"properties":{"description":"89031288469 \n89855009209 \nесть самосвалы 10-20м3, сыпучка","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":142,"geometry":{"type":"Point","coordinates":[37.2331211,55.3948926]},"properties":{"description":"89660400267 Григорий\nесть самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":143,"geometry":{"type":"Point","coordinates":[37.7997814,55.6026725]},"properties":{"description":"89265954223 Сергей\nесть 10м3 самосвалы, манипулятор\n8(929)902-47-94 Виктор - самосвалы","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":144,"geometry":{"type":"Point","coordinates":[37.225938,56.2601668]},"properties":{"description":"89255048087 Руслан \nМТЗ, может JCB найти, есть самосвалы 10м3","iconCaption":"Трактор","marker-color":"#ffd21e"}},{"type":"Feature","id":145,"geometry":{"type":"Point","coordinates":[38.6542938,57.0231513]},"properties":{"description":"89605436192 МТЗ82","iconCaption":"Трактор","marker-color":"#ffd21e"}},{"type":"Feature","id":146,"geometry":{"type":"Point","coordinates":[37.8149009326553,55.92116489729165]},"properties":{"description":"89031639383 \nработает королев, Щелково есть самосвалы","iconCaption":"JCB +","marker-color":"#ffd21e"}},{"type":"Feature","id":147,"geometry":{"type":"Point","coordinates":[37.7265702,55.9809616]},"properties":{"description":"89261384474 Маис есть самосвалы 12м3","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":148,"geometry":{"type":"Point","coordinates":[37.4283965,55.032246]},"properties":{"description":"89852017136 \nсамосвалы 10, 12, 20м3, есть манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":149,"geometry":{"type":"Point","coordinates":[37.0128796,56.0187759]},"properties":{"description":"89161911100 Артур \nговорит есть еще манипулятор, разная техника","iconCaption":"Трактор+","marker-color":"#ffd21e"}},{"type":"Feature","id":150,"geometry":{"type":"Point","coordinates":[37.8355133,55.9847423]},"properties":{"description":"89164833313, Андрэй\n есть самосвалы, есть еще техника\n","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":151,"geometry":{"type":"Point","coordinates":[37.9017975,55.3454471]},"properties":{"description":"89636143333 Александр \nесть самосвалы 10м3 и 8м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":152,"geometry":{"type":"Point","coordinates":[36.9560321,55.9708534]},"properties":{"description":"89265540578, - Савелий \n89672553303 есть еще техника - не доступен 24,03,22\nпервый номер даже не соединяет 03.05.22\nвторой номер выключен 03.05.22","iconCaption":"JCB+ ","marker-color":"#ffd21e"}},{"type":"Feature","id":153,"geometry":{"type":"Point","coordinates":[36.8370994,55.9470954]},"properties":{"description":"89165368881 - Гарик (не Харламов)\nесть еще техника: самосвалы 10 тонные, манипулятор, кран","iconCaption":"Трактор+","marker-color":"#ffd21e"}},{"type":"Feature","id":154,"geometry":{"type":"Point","coordinates":[37.9702693,55.8666451]},"properties":{"description":"89151550001 - Ашот\nговорит есть и самосвалы и манипуляторы и кран\n84956695598 самосвалы - на этот номере сразу сброс 24,03,22","iconCaption":"Трактор+","marker-color":"#ffd21e"}},{"type":"Feature","id":155,"geometry":{"type":"Point","coordinates":[37.85443292414508,55.561600094576164]},"properties":{"description":"89037568783 - Апер\nРаботает Молоково, Видное, Домодедово.\nЕсть самосвалы 20м3, сыпучка: песок, щебень..","iconCaption":"JCB","marker-color":"#ffd21e"}},{"type":"Feature","id":156,"geometry":{"type":"Point","coordinates":[36.8257543,55.9120062]},"properties":{"description":"89191053737 - Геннадий (уезжая оставляет на телефоне Александра или кого то еще)\nтак же в парке есть самосвалы, манипуляторы, кран..","iconCaption":"JCB + ","marker-color":"#ffd21e"}},{"type":"Feature","id":157,"geometry":{"type":"Point","coordinates":[37.7503429,56.1524334]},"properties":{"description":"89035508527 - Александр\n\nтакже есть самосвалы до 10 тонн","iconCaption":"New Holland 115","marker-color":"#ffd21e"}},{"type":"Feature","id":158,"geometry":{"type":"Point","coordinates":[36.2533539,55.6726764]},"properties":{"description":"89295392385 - Алексей (ниже второй его номер)\n89031814075\n\nесть так же манипуляторы и самосвалы, работают так же Нестерово, Руза, Тучково","iconCaption":"Трактор+","marker-color":"#ffd21e"}},{"type":"Feature","id":159,"geometry":{"type":"Point","coordinates":[37.5298888888889,56.5778611111111]},"properties":{"description":"8(926)267-60-78 Виталий \nесть самосвалы, миники, эвакуаторы, манипуляторы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":160,"geometry":{"type":"Point","coordinates":[38.3380328,55.4620207]},"properties":{"description":"89175136963 Виктор \nкопка колодцев, манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":161,"geometry":{"type":"Point","coordinates":[36.615382266716985,55.43933230288185]},"properties":{"description":"89060344102 89168429750 Виктор \nесть еще самосвалы (3, 10, 16м3), манипуляторы (доставляют плитку Нобитек), краны, трактора","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":162,"geometry":{"type":"Point","coordinates":[36.60347325869111,55.446102096310874]},"properties":{"description":"89057789140 89295621930 Артём \nесть еще самосвалы (3, 10м3), кран","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":163,"geometry":{"type":"Point","coordinates":[36.7630279,55.3931697]},"properties":{"description":"89264711238 Гарик \nесть еще самосвалы (разные), краны, манипуляторы и т.п.","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":164,"geometry":{"type":"Point","coordinates":[37.398613251098304,55.020952813638125]},"properties":{"description":"89670129302 89162483434 Гарик \nесть самосвалы (10, 15, 20м3), манипулятор, газели","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":165,"geometry":{"type":"Point","coordinates":[37.4138952,55.0410431]},"properties":{"description":"89099097779 89163344460 Георгий \nесть самосвалы (3,10, 20, тонары), манипулятор, ямобур, тротуарка, укладчики","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":166,"geometry":{"type":"Point","coordinates":[37.441451,55.1954264]},"properties":{"description":"8(926)146-13-54 8(925)347-49-99 Зорик\nесть ещё самосвалы (8, 15, 20м3), манипулятор, производство плитки и работы по её укладке","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":167,"geometry":{"type":"Point","coordinates":[37.9440546,55.1224632]},"properties":{"description":"89261010695 89686522880 Гарик \nесть еще самосвалы 10м3, каток, тротуарная плитка","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":168,"geometry":{"type":"Point","coordinates":[37.8921293,55.0744058]},"properties":{"description":"89167777430 Александр \nесть ещё самосвалы (5, 10, 25м3) ","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":169,"geometry":{"type":"Point","coordinates":[36.9712255,55.8409216]},"properties":{"description":"8(495)643-22-79 Александр \n89017020505 Дмитрий менеджер\nесть еще самосвалы (10, 16, 18, 20м3), контейнеры (8, 20м3)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":170,"geometry":{"type":"Point","coordinates":[37.0215608,55.7062539]},"properties":{"description":"89582222522 89057152065 Карен \nесть еще самосвалы (10, 20м3), манипуляторы, краны","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":171,"geometry":{"type":"Point","coordinates":[36.98402797909817,55.632084490568296]},"properties":{"description":"8(985)355-96-00 8(916)759-12-50 Зафар \nесть еще самосвалы (20, тоннары 30м), кран, фронтальник","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":172,"geometry":{"type":"Point","coordinates":[36.77898966137553,56.16349999933735]},"properties":{"description":"89032610748 Сергей \nесть еще самосвалы (4, 10, 20, 25м3), краны, манипуляторы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":173,"geometry":{"type":"Point","coordinates":[37.223798,56.2602395]},"properties":{"description":"8(963)641-23-23 Армен \nесть еще самосвалы (4, 10, 12, 20, 25м3) кран, манипулятор, строительные работы (заборы, крыши, дома, тротуарка)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":174,"geometry":{"type":"Point","coordinates":[38.4000365,55.4823543]},"properties":{"description":"8(903)185-70-01 Вячеслав \nесть еще навесное оборудование для ЭП, самосвалы 20м3, манипуляторы, краны и другая спецтехника \nсайт https://www.песок7.рф","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":175,"geometry":{"type":"Point","coordinates":[37.4059506572684,54.80899097202003]},"properties":{"description":"8(909)901-07-27 8(916)622-50-98 Хуршет \nесть еще ПП экс, самосвалы (10, 15, 20м3)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":176,"geometry":{"type":"Point","coordinates":[38.4179565,55.4739163]},"properties":{"description":"8(926)890-80-80 8(916)332-02-71 Александр \nесть еще самосвалы 10м3, кран, манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":177,"geometry":{"type":"Point","coordinates":[37.3215763,55.9877922]},"properties":{"description":"8(903)776-12-16 Сашик \nесть еще самосвалы (10, 20м3), продажа и доставка стройматериалов (большой выбор)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":178,"geometry":{"type":"Point","coordinates":[37.5251335,56.0881509]},"properties":{"description":"8(965)242-40-81 8(905)583-53-52 Артур \nесть еще самосвалы (10, 20м3), контейнеры 8м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":179,"geometry":{"type":"Point","coordinates":[36.9072254,55.1887026]},"properties":{"description":"8(903)220-85-62 Арман \nесть еще самосвалы (5, 10, 20м3), манипулятор, миксеры. Работают в радиусе 50 км","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":180,"geometry":{"type":"Point","coordinates":[37.42912419999978,55.68686935117109]},"properties":{"description":"8(985)364-89-70 Игорь \nесть еще навесное для JCB, ПП эксы, самосвалы (20, 24м3)","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":181,"geometry":{"type":"Point","coordinates":[37.4344039,55.6775932]},"properties":{"description":"8(926)909-03-90, Андрей директор \n8(495)109-93-90 диспетчер \nесть еще навесное для JCB, Самосвалы (20, 23м3), ПП эксы, Манипуляторы, тралы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":182,"geometry":{"type":"Point","coordinates":[36.8573457,55.9203231]},"properties":{"description":"8(495)643-22-79 Александр \nесть еще Самосвалы (10, 16, 18, 20, 32м3), манипуляторы, краны и прочее \nhttps://stroytech-istra.ru/","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":183,"geometry":{"type":"Point","coordinates":[37.3162887,55.9383412]},"properties":{"description":"8(926)066-62-69 Овик \nесть еще самосвалы 20м3, ПП экскаваторы, кран.","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":184,"geometry":{"type":"Point","coordinates":[36.2167768,55.7261738]},"properties":{"description":"Максим\n8(916)077-38-88 \nпесок, щебень 10, 20м3\nесть еще техника JCB и манипулятор","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":185,"geometry":{"type":"Point","coordinates":[38.4245836,56.1215282]},"properties":{"description":"Олег   \n8(916)205-25-90 \nКамаз: земля, навоз\nесть экскаватор-погрузчик JCB, есть полноповоротный экскаватор\n8(926)590-06-52\n8(965)209-16-39","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":186,"geometry":{"type":"Point","coordinates":[38.1569053,55.642029]},"properties":{"description":"Михаил   \n8(926)187-53-77, \n8(905)791-07-39\nпесок, щебень, земля, есть 10м3 и 20м3 самосвалы\nбетон\nесть еще техника","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":187,"geometry":{"type":"Point","coordinates":[37.0327342,55.6327934]},"properties":{"description":"Тельман   \n8(926)077-33-34\nЕсть JCB, есть самосвалы 10-20м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":188,"geometry":{"type":"Point","coordinates":[38.1225185,55.7535397]},"properties":{"description":"Александр   \n8(926)866-03-76, \n8(965)270-37-52 \nесть JCB и самосвалы 10-20м3","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":189,"geometry":{"type":"Point","coordinates":[37.1463019,55.695244]},"properties":{"description":"89055937042\nесть ещё Манипулятор, Самосвалы","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":190,"geometry":{"type":"Point","coordinates":[37.74549034770508,56.14274394183138]},"properties":{"description":"89261914962 89162711429 консантин от георгия","iconCaption":"джсб","marker-color":"#ffd21e"}},{"type":"Feature","id":191,"geometry":{"type":"Point","coordinates":[37.488751761230404,56.34554659745356]},"properties":{"description":"89258662450 джсб пескогрунт","iconCaption":"JCB+","marker-color":"#ffd21e"}},{"type":"Feature","id":192,"geometry":{"type":"Point","coordinates":[37.44879877109339,55.57467635372727]},"properties":{"description":"89638881988 игорь\nсамосвалы","iconCaption":"jcb ","marker-color":"#ffd21e"}},{"type":"Feature","id":193,"geometry":{"type":"Point","coordinates":[38.968796169237635,55.79651556847243]},"properties":{"description":"89672834565","iconCaption":"jcb","marker-color":"#ffd21e"}},{"type":"Feature","id":194,"geometry":{"type":"Point","coordinates":[38.66066399760656,56.10492144403938]},"properties":{"description":"89607326992 Сергей. есть самосвалы","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":195,"geometry":{"type":"Point","coordinates":[38.55516910195301,54.864276595292004]},"properties":{"description":"89031887855 Денис","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":196,"geometry":{"type":"Point","coordinates":[36.19079112648899,55.342950166558055]},"properties":{"description":"89253400858 александр","iconCaption":"jcb","marker-color":"#ffd21e"}},{"type":"Feature","id":197,"geometry":{"type":"Point","coordinates":[38.18721294045367,56.264395106381144]},"properties":{"description":"89261556964 карен","iconCaption":"jcb+самосвалы","marker-color":"#ffd21e"}},{"type":"Feature","id":198,"geometry":{"type":"Point","coordinates":[36.01844310402775,55.476701236010726]},"properties":{"description":"89036296945 Михаил","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":199,"geometry":{"type":"Point","coordinates":[35.53779839413133,56.02793929277992]},"properties":{"description":"89779776303 арам","iconCaption":"jcb+самосвалы","marker-color":"#ffd21e"}},{"type":"Feature","id":200,"geometry":{"type":"Point","coordinates":[38.00747633321086,55.59508004735735]},"properties":{"description":"89104853755 акоб самосвалы","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":201,"geometry":{"type":"Point","coordinates":[36.58356277851559,55.942678451662154]},"properties":{"description":"89013473707 Андрей. самосвалы.\n37477210584","iconCaption":"jcb гидромолот","marker-color":"#ffd21e"}},{"type":"Feature","id":202,"geometry":{"type":"Point","coordinates":[37.51789849667948,55.95293894325397]},"properties":{"description":"89651388420 Алексей есть техника","iconCaption":"jcb+ ","marker-color":"#ffd21e"}},{"type":"Feature","id":203,"geometry":{"type":"Point","coordinates":[39.155356762488665,55.40662717086017]},"properties":{"description":"89037444993  Алексей","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":204,"geometry":{"type":"Point","coordinates":[38.765549098925064,55.9038993346218]},"properties":{"description":"89164573699\n89258936825\nАлександр","iconCaption":"jcb +","marker-color":"#ffd21e"}},{"type":"Feature","id":205,"geometry":{"type":"Point","coordinates":[36.808780743554614,55.854828260255054]},"properties":{"description":"89266931223 Владимир","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":206,"geometry":{"type":"Point","coordinates":[36.853412701562426,55.896036001341855]},"properties":{"description":"89858947699 Григорий","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":207,"geometry":{"type":"Point","coordinates":[37.63230232011707,56.54748630417024]},"properties":{"description":"89032706546 Вадим","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":208,"geometry":{"type":"Point","coordinates":[37.23542121660125,55.94844698864461]},"properties":{"description":"89858543832 Михаил самосвалы","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":209,"geometry":{"type":"Point","coordinates":[37.8564920784175,56.41726190511242]},"properties":{"description":"89269922193 Сергей Анатольевич","iconCaption":"jcb+","marker-color":"#ffd21e"}},{"type":"Feature","id":210,"geometry":{"type":"Point","coordinates":[38.45524696122968,55.28620495561286]},"properties":{"description":"89168150409 армо","iconCaption":"jcb+","marker-color":"#ffd21e"}}]}
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "name": "JCB тест",
+    "creator": "Yandex Map Constructor",
+    "description": "Трактора<br>Контейнеры<br>Самосвалы<br>Любые строительные материалы и техника<br>Бетон<br>Минитехника<br>Колодцы<br>Грунт<br>Натуральный камень"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 0,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2673446,
+          55.5732403
+        ]
+      },
+      "properties": {
+        "description": "есть еще техника и самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(964)505-10-51",
+        "name": "Георгий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6978524,
+          55.5510674
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)620-22-30",
+        "name": "Игорь"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1089694,
+          55.4990459
+        ]
+      },
+      "properties": {
+        "description": "; Иван, так же доставляют песок, грунт, щебень",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)712-76-40",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.6261348,
+          55.9315017
+        ]
+      },
+      "properties": {
+        "description": "есть самовалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(965)434-72-42",
+        "name": "Есиф"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2223085,
+          55.3476196
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы, есть миниэкскаваторы., так же у них местный чат где много техники",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(901)543-59-99",
+        "name": "Игорь"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.7237136,
+          56.0123786
+        ]
+      },
+      "properties": {
+        "description": "; Арамбек полноповоротный, сыпучка, миниэкскаватор, с его слов второй его номер:\n8(909)973-62-75",
+        "iconCaption": "JCB +",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)302-03-79",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8081073,
+          55.3224268
+        ]
+      },
+      "properties": {
+        "description": "8(916)511-78-58 - абонент временно не доступен 28,03,22",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)238-04-08",
+        "name": "Хачатур"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0373938,
+          55.6343991
+        ]
+      },
+      "properties": {
+        "description": "гидромолот, (много оборудования на JCB), есть самосвалы и миниэкскаватор",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)510-42-44",
+        "name": "Максим"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6665206,
+          55.4887522
+        ]
+      },
+      "properties": {
+        "description": "есть 10м3 самосвал",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)739-89-13",
+        "name": "Гарик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9678136,
+          56.034846
+        ]
+      },
+      "properties": {
+        "description": "есть еще стройматериалы, цемент и прочее",
+        "iconCaption": "Case+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)860-35-24",
+        "name": "Михаил"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.74855,
+          55.4843625
+        ]
+      },
+      "properties": {
+        "description": "номер не отвечает 17,05,22\nномер временно заблокирован 28,03,22",
+        "iconCaption": "JCB",
+        "marker-color": "#ed4543",
+        "phone": "8(985)877-55-88",
+        "name": "не один трактор"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.6971582,
+          56.3566674
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)760-56-85",
+        "name": "Григорий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1341087,
+          56.0692108
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "New Holland",
+        "marker-color": "#ffd21e",
+        "phone": "8(905)549-91-12",
+        "name": "Рома"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.170091,
+          56.0288507
+        ]
+      },
+      "properties": {
+        "description": "миниэкскаваторы, есть так же полноповоротные",
+        "iconCaption": "Terex +",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)895-77-77",
+        "name": "Рафик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4128163,
+          55.3850385
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)030-36-86",
+        "name": "Арсен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.604392316454074,
+          55.86763619968723
+        ]
+      },
+      "properties": {
+        "description": "есть еще кран, каток, самосвалы,",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)716-42-24",
+        "name": "Норик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0579681,
+          55.8857152
+        ]
+      },
+      "properties": {
+        "description": "самосвалы, гидромолот есть",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)690-62-42",
+        "name": "Георгий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1300053,
+          55.8706961
+        ]
+      },
+      "properties": {
+        "description": "есть бур, гидромолот, есть самосвалы и бобкет",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)988-33-38",
+        "name": "Павел"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0355601,
+          55.6585069
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы \n8(915)809-11-17 песок, щебень, чернозем, грунт, асф. крошка",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)593-70-19",
+        "name": "Миша"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4388617,
+          55.6031625
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы (песок, щебень, грунт), манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(915)213-51-51",
+        "name": "Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9474242,
+          56.0212259
+        ]
+      },
+      "properties": {
+        "description": "есть бобкет, JCB..",
+        "iconCaption": "Terex",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)882-23-25",
+        "name": "Георг"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9187471,
+          56.0817599
+        ]
+      },
+      "properties": {
+        "description": "не в сети 28,03,22г.\nесть манипулятор 8(925)060-96-00 Эдмон, есть бобкет и JCB, так же самосвалы..",
+        "iconCaption": "Case+",
+        "marker-color": "#ffd21e",
+        "phone": "8(999)844-62-59",
+        "name": "Григорий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1339921,
+          55.6540101
+        ]
+      },
+      "properties": {
+        "description": ", Хамвел (мог ошибиться)\n8(926)897-37-38 есть кран, самосвалы (песок, щебень, земля)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(906)032-32-07",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5398729,
+          56.2065725
+        ]
+      },
+      "properties": {
+        "description": "есть еще спецтехника",
+        "iconCaption": "Komatsu+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)444-77-67",
+        "name": "Виктор"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5494964,
+          56.2295222
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы, миниэскаваторы, кран, эвакуатор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(905)784-88-58",
+        "name": "Вардан"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 25,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5502759,
+          56.2353758
+        ]
+      },
+      "properties": {
+        "description": "есть еще кран 8(925)555-19-61",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(965)222-88-58",
+        "name": "Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 26,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.548506,
+          56.2230503
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)820-65-88",
+        "name": "Камо"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 27,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5465845,
+          56.0112718
+        ]
+      },
+      "properties": {
+        "description": "гидромолота нет, есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)700-35-32",
+        "name": "Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 28,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.051959,
+          55.7506411
+        ]
+      },
+      "properties": {
+        "description": "не берет трубку 17,05,22\nне берет трубку 28,03,22",
+        "iconCaption": "JCB",
+        "marker-color": "#ed4543",
+        "phone": "8(926)268-32-29",
+        "name": "Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 29,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5323585,
+          55.3671288
+        ]
+      },
+      "properties": {
+        "description": ", Абов \n8(961)006-44-48 (второй номер Абова) есть еще техника есть самосвалы- песок, щебень, чернозем, торф, асф. крошка",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(919)038-36-36",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 30,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0821418,
+          55.9658711
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы, контейнеры..",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)422-25-24",
+        "name": "Миша"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 31,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9687508,
+          55.8510071
+        ]
+      },
+      "properties": {
+        "description": ",\n8(985)664-13-36 Артур",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)514-37-05",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 32,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.397134,
+          56.1353794
+        ]
+      },
+      "properties": {
+        "description": "телефон не доступен 17,05,22\nне берет трубку 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ed4543",
+        "phone": "8(906)024-68-68",
+        "name": "есть самосвалы"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 33,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3067492,
+          56.1785174
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(915)047-60-43",
+        "name": "Артур"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 34,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3162145,
+          56.151255
+        ]
+      },
+      "properties": {
+        "description": "недозвон 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)720-25-02",
+        "name": "есть самосвалы Мага"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 35,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4142981,
+          56.1357823
+        ]
+      },
+      "properties": {
+        "description": ", Мгер (Миша)\n8(929)515-00-09",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)074-06-00",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 36,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2099055,
+          55.7040572
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)164-66-95",
+        "name": "Захар"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 37,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1938487,
+          55.4146903
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)335-49-57",
+        "name": "Олег"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 38,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1996024,
+          55.3895357
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "Case",
+        "marker-color": "#ffd21e",
+        "phone": "8(966)047-79-97",
+        "name": "Овик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 39,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1372669,
+          55.9920924
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)047-22-22",
+        "name": "Артур есть самосвалы есть еще техника"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 40,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.30335,
+          55.9404098
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)011-98-99",
+        "name": "Наир"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 41,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6144351,
+          55.9278237
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы песок, щебень, чернозем, грунт, торф",
+        "iconCaption": "Terex+",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)393-13-00",
+        "name": "Артем"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 42,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6149773,
+          55.9295405
+        ]
+      },
+      "properties": {
+        "description": "не берет трубку 25,03,22",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)726-50-82",
+        "name": "Алексей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 43,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.10008274902248,
+          55.60809118914903
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)696-25-96",
+        "name": "Алексей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 44,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8393322,
+          56.1403741
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "Трактор (э-п)+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)806-77-41",
+        "name": "Гриша"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 45,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1521074,
+          55.4924757
+        ]
+      },
+      "properties": {
+        "description": "есть самосвал",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)524-14-33",
+        "name": "Шафкат (можно сказать Саша)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 46,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9078581,
+          56.0778618
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(999)969-09-59",
+        "name": "Гоша"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 47,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9200063,
+          56.0363181
+        ]
+      },
+      "properties": {
+        "description": ", Михаил \n8(964)580-47-91 есть самосвалы есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)662-90-62",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 48,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.2267948,
+          55.9098316
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)631-02-03",
+        "name": "Армен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 49,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.2760025,
+          55.8987353
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)118-20-72",
+        "name": "есть гидромолот"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 50,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9609796,
+          55.209079
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот есть самосвалы бетон",
+        "iconCaption": "Komatsu+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)220-85-62",
+        "name": "Арман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 51,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2831675,
+          55.5472098
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "Terex+",
+        "marker-color": "#ffd21e",
+        "phone": "8(929)585-41-05",
+        "name": "Карен есть самосвалы бетон"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 52,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2669234,
+          55.5811633
+        ]
+      },
+      "properties": {
+        "description": "но есть у Валерия: 89057952000",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)996-66-61",
+        "name": "есть еще самосвалы -  у него нет трактора (только самосвалы)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 53,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1520103,
+          55.6435229
+        ]
+      },
+      "properties": {
+        "description": ", Юра \n8(903)107-43-49 второй номер Юры - есть еще самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)454-58-88",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 54,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0586115,
+          55.6975295
+        ]
+      },
+      "properties": {
+        "description": ", Роман, есть гидромолот\n8(926)405-56-19 есть самосвалы есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)678-24-28",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 55,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9015931,
+          56.2343959
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)494-81-74",
+        "name": "Арсен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 56,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0457326,
+          55.6373177
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(909)671-41-44",
+        "name": "есть самосвалы есть еще техника Эрвор"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 57,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1223406,
+          55.7534238
+        ]
+      },
+      "properties": {
+        "description": "гидромолота нет, есть самосвалы",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(965)325-41-45",
+        "name": "Арсен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 58,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8932222,
+          55.6916699
+        ]
+      },
+      "properties": {
+        "description": "8(964)792-94-13, - недозвон 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(964)792-79-69",
+        "name": "Али есть самосвалы бетон"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 59,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.662035,
+          55.9612195
+        ]
+      },
+      "properties": {
+        "description": ", Вартан \n8(926)27449-20 Валера (брат Вартана) есть еще техника, есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)704-20-24",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 60,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.968922,
+          56.2123445
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы, есть гидромолот",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(905)748-28-40",
+        "name": "Мурад есть еще техника"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 61,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1546353,
+          56.0487912
+        ]
+      },
+      "properties": {
+        "description": ", Араик \n8(977)137-22-01 тлф. не доступен 25,03,22\nесть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)783-02-02",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 62,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5249726,
+          56.0881524
+        ]
+      },
+      "properties": {
+        "description": "самосвалы (говорит ездит по работе по области) гидромолот есть",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(909)620-67-99",
+        "name": "Артем"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 63,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.5520543,
+          55.5831281
+        ]
+      },
+      "properties": {
+        "description": ", Владимир гидромолота нет ниже тлф. тракториста \n8(903)746-12-04  есть еще самосвалы",
+        "iconCaption": "Terex+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)614-51-61",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 64,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4015389,
+          55.6066691
+        ]
+      },
+      "properties": {
+        "description": "гидромолот, есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)315-48-69",
+        "name": "Михаил"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 65,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0258657,
+          55.6595733
+        ]
+      },
+      "properties": {
+        "description": "гидромолота нет, самосвалы есть",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)366-63-20",
+        "name": "Варуш"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 66,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.7536686,
+          55.4858919
+        ]
+      },
+      "properties": {
+        "description": "8(905)720-81-86 Александр Самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)111-15-16",
+        "name": "Евгений"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 67,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8145759,
+          55.3699528
+        ]
+      },
+      "properties": {
+        "description": ", Артур гидромолот, самосвалы\n8(925)545-82-94  - номер не в сети 25,03,22\nесть самосвалы есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)404-32-30",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 68,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6396501,
+          55.5369973
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "СAT+",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)865-67-68",
+        "name": "Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 69,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4693407,
+          55.1756074
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(999)095-39-90",
+        "name": "Норик есть самосвалы бетон"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 70,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.466616,
+          55.1807684
+        ]
+      },
+      "properties": {
+        "description": "щебень, грунт, торф\n\n8(926)753-51-81 Георгий не дозвон 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)895-59-80",
+        "name": "Дмитрий есть самосвалы песок"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 71,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.7819698,
+          56.1463407
+        ]
+      },
+      "properties": {
+        "description": ", Маис\n8(903)614-39-32  Давид, есть самосвалы есть еще техника",
+        "iconCaption": "Case+",
+        "marker-color": "#ffd21e",
+        "phone": "8(967)171-11-46",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 72,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8781912,
+          56.1425021
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы  есть еще техника, минипогрузчики, есть гидромолот",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(906)755-48-79",
+        "name": "Арман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 73,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.892267,
+          56.1425256
+        ]
+      },
+      "properties": {
+        "description": "самосвалы 7м3, 10, 20м3",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)892-50-89",
+        "name": "Артем"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 74,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.2182951,
+          55.913353
+        ]
+      },
+      "properties": {
+        "description": "не доступен 17,05,22\nабонент временно не доступен",
+        "iconCaption": "JCB+",
+        "marker-color": "#ed4543",
+        "phone": "8(967)164-40-08",
+        "name": "есть самосвалы"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 75,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5908003,
+          55.0375549
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)889-32-30",
+        "name": "Карен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 76,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.555472,
+          56.0732053
+        ]
+      },
+      "properties": {
+        "description": ", Владимир \n8(965)152-73-37 есть самосвалы (сын Владимира Гера)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)547-92-79",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 77,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2065256,
+          55.3853223
+        ]
+      },
+      "properties": {
+        "description": "есть минитрактор с культиватором",
+        "iconCaption": "Тракторы+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)178-41-37",
+        "name": "Владимир"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 78,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9847576,
+          55.5088396
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот, самосвалы20м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)500-50-01",
+        "name": "Илья"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 79,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.93925,
+          55.2066764
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "Hidromek+",
+        "marker-color": "#ffd21e",
+        "phone": "8(960)519-44-64",
+        "name": "Алексей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 80,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5976907,
+          55.3313363
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "New Holland",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)707-01-38",
+        "name": "Данил"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 81,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.7529879,
+          55.3354229
+        ]
+      },
+      "properties": {
+        "description": ", Мариман, кран, манипуляторы, самосвалы \n8(915)198-11-68 второй номер Маримана",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)175-29-62",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 82,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2043521,
+          55.3899448
+        ]
+      },
+      "properties": {
+        "description": "есть бетон, есть самосвалы, есть манипуляторы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(964)781-52-53",
+        "name": "Гога"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 83,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8776202,
+          56.0129981
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот, есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(910)458-35-63",
+        "name": "Роман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 84,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6039545,
+          55.3712546
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)552-33-53",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 85,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.43207254277294,
+          55.895683416694524
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот есть еще техника\nтрактор полноповоротный (работает по всей МО с его слов)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)690-29-15",
+        "name": "Игорь"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 86,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.951553470800505,
+          55.8123419497374
+        ]
+      },
+      "properties": {
+        "description": "есть мини эскаватор,",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(966)092-59-87",
+        "name": "Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 87,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0988619,
+          55.8467937
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)636-10-40",
+        "name": "Арман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 88,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1475879,
+          55.4945645
+        ]
+      },
+      "properties": {
+        "description": ", Карен \n8(925)795-64-41 второй номер Карена (на нем лучше связь), есть знакомые у него с самосвалами и сыпучкой",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)338-88-90",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 89,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.88480021796787,
+          55.91731783234789
+        ]
+      },
+      "properties": {
+        "description": "манипулятор, кран",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)769-99-00",
+        "name": "Маис"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 90,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1261357,
+          55.3727735
+        ]
+      },
+      "properties": {
+        "description": "временно недоступен 17,05,22",
+        "iconCaption": "JCB",
+        "marker-color": "#ed4543",
+        "phone": "8(985)500-92-09",
+        "name": "временно не доступен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 91,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9394776,
+          55.4603601
+        ]
+      },
+      "properties": {
+        "description": "может помочь с сыпучкой (песок, щебень)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)592-94-03",
+        "name": "Ашот"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 92,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9878077,
+          55.4968482
+        ]
+      },
+      "properties": {
+        "description": ", Эдгар\n8(926)353-75-19 Армен.есть самосвалы, есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)978-82-42",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 93,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0676461,
+          55.8150593
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(495)227-77-49",
+        "name": "Анатолий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 94,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0433238,
+          55.8118617
+        ]
+      },
+      "properties": {
+        "description": "есть маленькие контейнера",
+        "iconCaption": "Экскав.-погрузч.",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)222-65-59",
+        "name": "Женя"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 95,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4550845,
+          54.913078
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)535-75-14",
+        "name": "Рудольф"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 96,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3254307,
+          55.4925822
+        ]
+      },
+      "properties": {
+        "description": "есть сыпучка\n8(926)528-13-63, не дозвонился 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)786-41-06",
+        "name": "Арарат есть самосвалы"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 97,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3292477,
+          55.4323915
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)242-52-01",
+        "name": "Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 98,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2133501,
+          55.2933824
+        ]
+      },
+      "properties": {
+        "description": ", Максим самосвал 12м3, кран 25тон\n8(916)055-36-16 второй номер Максима",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)645-00-94",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 99,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9427096,
+          55.9649057
+        ]
+      },
+      "properties": {
+        "description": "8(925)800-01-73 тот же Ливан самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)400-30-00",
+        "name": "Ливан (подвязан ватсап)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 100,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5452389,
+          55.3332873
+        ]
+      },
+      "properties": {
+        "description": "самосвал 10м3, манипулятор",
+        "iconCaption": "Terex",
+        "marker-color": "#ffd21e",
+        "phone": "8(968)646-11-18",
+        "name": "Станислав"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 101,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.54906298891512,
+          55.38832455143238
+        ]
+      },
+      "properties": {
+        "description": "есть гидромолот (полноповоротный)",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)552-33-53",
+        "name": "Игорь"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 102,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3102291,
+          55.4997779
+        ]
+      },
+      "properties": {
+        "description": "есть манипулятор, рядом говорит карьер, самосвалы вся данная красота",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)888-19-88",
+        "name": "Ибрагим"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 103,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.179395,
+          56.1015386
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(915)130-26-77",
+        "name": "Петр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 104,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3526684,
+          55.5132464
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(910)402-90-25",
+        "name": "есть гидромолот"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 105,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9590199,
+          54.9737868
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "Трактор с чудо-фрезой+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)689-01-85",
+        "name": "Михаил есть зил"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 106,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6530078,
+          55.9574009
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы 10, 20м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(915)085-00-05",
+        "name": "Артур"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 107,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2563539,
+          56.3514324
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы 8, 10, 15м3\n\n8(958)127-77-74, - сразу сброс 25,03,22",
+        "iconCaption": "Экскав.- погрузч.",
+        "marker-color": "#ffd21e",
+        "phone": "8(925)144-19-60",
+        "name": "Максим"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 108,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9528463,
+          55.8720856
+        ]
+      },
+      "properties": {
+        "description": "у соседей есть самосвалы, манипулятор..",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(495)999-04-16",
+        "name": "Армен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 109,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.13845928045624,
+          55.57787076034667
+        ]
+      },
+      "properties": {
+        "description": ", Иван есть самосвалы 10м3\n8(926)336-94-36  Михаил, манипулятор, кран.",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)368-00-31",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 110,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0294494,
+          54.944306
+        ]
+      },
+      "properties": {
+        "description": "",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(909)909-98-96",
+        "name": "есть самосвалы Арам"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 111,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.894199,
+          55.2727206
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы 10м3, манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)558-89-84",
+        "name": "Ильяз"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 112,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.54645192451118,
+          55.41758187031609
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы 12, 20м3, есть каток",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)279-56-81",
+        "name": "Вираб"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 113,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6038802,
+          55.5442794
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)148-72-73",
+        "name": "Арман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 114,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4683908,
+          55.1771751
+        ]
+      },
+      "properties": {
+        "description": "манипулятор, сыпучка, самосвалы 5, 10, 20м3\n8(925)875-31-32 есть самосвалы не берет трубку 25,03,22",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(967)184-54-74",
+        "name": "Карен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 115,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3375756,
+          55.1236771
+        ]
+      },
+      "properties": {
+        "description": "так же Чехов (2 базы техники с его слов)\nсыпучка + самосвалы.",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(920)086-86-16",
+        "name": "Владимир"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 116,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5405561,
+          56.048265
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы",
+        "iconCaption": "New Holland+",
+        "marker-color": "#ffd21e",
+        "phone": "8(901)569-96-89",
+        "name": "Васак"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 117,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0984357,
+          55.6395878
+        ]
+      },
+      "properties": {
+        "description": "есть манипулятор",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)447-33-87",
+        "name": "Петр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 118,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0241849,
+          55.7066666
+        ]
+      },
+      "properties": {
+        "description": "голос был уставший",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)656-65-17",
+        "name": "есть самосвалы"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 119,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.5576737,
+          55.5596705
+        ]
+      },
+      "properties": {
+        "description": ", Валерий, самосвалы 10, 15, 20м3\n8(905)774-84-24 Ахмед есть еще техника\n8(985)508-59-19 есть еще самосвалы, есть еще техника данный вид связи не доступен для абонента",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)365-50-06",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 120,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.4831068,
+          55.5997768
+        ]
+      },
+      "properties": {
+        "description": "8(926)793-15-61<br>самосвалы !! Сергей",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)390-22-40",
+        "name": "есть еще техника 24.03.22"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 121,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.867214760326604,
+          55.927022876277874
+        ]
+      },
+      "properties": {
+        "description": "89161669883 есть самосвалы Эмин\n\n",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 122,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.9186714,
+          55.9847781
+        ]
+      },
+      "properties": {
+        "description": "89163823857 Петр, есть еще техника есть самосвалы, кран",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 123,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9723935,
+          55.8975199
+        ]
+      },
+      "properties": {
+        "description": "89264497689 Вартан, самосвал 10, 15, 20м3\n89197271395 - второй номер Вартана\n89772778332 Армен (сын Вартана)",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 124,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.21878364819284,
+          55.402963546209676
+        ]
+      },
+      "properties": {
+        "description": "89629025062 Игорь, есть самосвалы\n89653254378 Степан, JCB есть самосвалы 10м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 125,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9711189,
+          56.2208031
+        ]
+      },
+      "properties": {
+        "description": "89260230390 \nсамосвалы так же есть",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 126,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4149066,
+          56.3738985
+        ]
+      },
+      "properties": {
+        "description": "89263908163 Сергей, есть много техники , \n89258662450 - Александр, JCB, есть самосвалы \n89035256337 - Владимир, есть самосвалы (работает по всему дмитровскому району",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 127,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4901667,
+          56.3577473
+        ]
+      },
+      "properties": {
+        "description": "89037199926 Георг.\nесть так же самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 128,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1139315,
+          55.6544977
+        ]
+      },
+      "properties": {
+        "description": "89267836313 Артур\n89060597226 есть самосвалы 10, 20м3\nвторое место базирования в Раменском\n",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 129,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5455585,
+          56.0112856
+        ]
+      },
+      "properties": {
+        "description": "\n\n89057218815 самосвалы  Арсен",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 130,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.2607153,
+          55.8282553
+        ]
+      },
+      "properties": {
+        "description": "89057497199 - Алексей \nманипулятор, кран есть в наличии",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 131,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5240623,
+          56.0858732
+        ]
+      },
+      "properties": {
+        "description": "89035553822 \nСамосвал 8 и 12м3, кран",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 132,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.5390581,
+          56.0962839
+        ]
+      },
+      "properties": {
+        "description": "\n89030047500 есть самосвалы не дозвон 24,03,22 Сайгез",
+        "iconCaption": "Трактор с навесным от JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 133,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3319924,
+          55.5571666
+        ]
+      },
+      "properties": {
+        "description": "89250730505 Ринат\nесть самосвалы, манипулятор..",
+        "iconCaption": "Komatsu",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 134,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1245565,
+          55.919373
+        ]
+      },
+      "properties": {
+        "description": "89629997537 Арсен",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 135,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.96570626445255,
+          55.83208563176858
+        ]
+      },
+      "properties": {
+        "description": "89265941554 \nесть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 136,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.6063932,
+          55.920422
+        ]
+      },
+      "properties": {
+        "description": "89165616034  Жора\n\nтелефон выкл. 24,03,2022",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 137,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.0181079,
+          55.5338284
+        ]
+      },
+      "properties": {
+        "description": "89057241907 Константин\n84957232503 есть самосвалы, фронтальным экскаватором не выезжают, манипулятор есть",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 138,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.17233928500811,
+          55.81486582070329
+        ]
+      },
+      "properties": {
+        "description": "89295864061 Андрей \nесть свой парк, самосвалы, каток.. базируется где Старая купавна, но в сезон бывает в разных точках.",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 139,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9224016,
+          55.4963725
+        ]
+      },
+      "properties": {
+        "description": "89265914161, Ару \nсамосвалы 10, 20м3\nРазные ребята у которых есть техника\n89260109027 Ванес, JCB, есть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 140,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.5968686,
+          55.0428969
+        ]
+      },
+      "properties": {
+        "description": "89807166351 Павел \nесть самосвалы 10м3 и еще техника",
+        "iconCaption": "CAT+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 141,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.18337699675203,
+          55.387348928830605
+        ]
+      },
+      "properties": {
+        "description": "89031288469 \n89855009209 \nесть самосвалы 10-20м3, сыпучка",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 142,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.2331211,
+          55.3948926
+        ]
+      },
+      "properties": {
+        "description": "89660400267 Григорий\nесть самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 143,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.7997814,
+          55.6026725
+        ]
+      },
+      "properties": {
+        "description": "есть 10м3 самосвалы, манипулятор\n Виктор - самосвалы",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "8(929)902-47-94",
+        "name": "89265954223 Сергей"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 144,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.225938,
+          56.2601668
+        ]
+      },
+      "properties": {
+        "description": "89255048087 Руслан \nМТЗ, может JCB найти, есть самосвалы 10м3",
+        "iconCaption": "Трактор",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 145,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.6542938,
+          57.0231513
+        ]
+      },
+      "properties": {
+        "description": "89605436192 МТЗ82",
+        "iconCaption": "Трактор",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 146,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8149009326553,
+          55.92116489729165
+        ]
+      },
+      "properties": {
+        "description": "89031639383 \nработает королев, Щелково есть самосвалы",
+        "iconCaption": "JCB +",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 147,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.7265702,
+          55.9809616
+        ]
+      },
+      "properties": {
+        "description": "89261384474 Маис есть самосвалы 12м3",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 148,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4283965,
+          55.032246
+        ]
+      },
+      "properties": {
+        "description": "89852017136 \nсамосвалы 10, 12, 20м3, есть манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 149,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0128796,
+          56.0187759
+        ]
+      },
+      "properties": {
+        "description": "89161911100 Артур \nговорит есть еще манипулятор, разная техника",
+        "iconCaption": "Трактор+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 150,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8355133,
+          55.9847423
+        ]
+      },
+      "properties": {
+        "description": "89164833313, Андрэй\n есть самосвалы, есть еще техника\n",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 151,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9017975,
+          55.3454471
+        ]
+      },
+      "properties": {
+        "description": "89636143333 Александр \nесть самосвалы 10м3 и 8м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 152,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9560321,
+          55.9708534
+        ]
+      },
+      "properties": {
+        "description": "89265540578, - Савелий \n89672553303 есть еще техника - не доступен 24,03,22\nпервый номер даже не соединяет 03.05.22\nвторой номер выключен 03.05.22",
+        "iconCaption": "JCB+ ",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 153,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8370994,
+          55.9470954
+        ]
+      },
+      "properties": {
+        "description": "89165368881 - Гарик (не Харламов)\nесть еще техника: самосвалы 10 тонные, манипулятор, кран",
+        "iconCaption": "Трактор+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 154,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9702693,
+          55.8666451
+        ]
+      },
+      "properties": {
+        "description": "89151550001 - Ашот\nговорит есть и самосвалы и манипуляторы и кран\n84956695598 самосвалы - на этот номере сразу сброс 24,03,22",
+        "iconCaption": "Трактор+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 155,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.85443292414508,
+          55.561600094576164
+        ]
+      },
+      "properties": {
+        "description": "89037568783 - Апер\nРаботает Молоково, Видное, Домодедово.\nЕсть самосвалы 20м3, сыпучка: песок, щебень..",
+        "iconCaption": "JCB",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 156,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8257543,
+          55.9120062
+        ]
+      },
+      "properties": {
+        "description": "89191053737 - Геннадий (уезжая оставляет на телефоне Александра или кого то еще)\nтак же в парке есть самосвалы, манипуляторы, кран..",
+        "iconCaption": "JCB + ",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 157,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.7503429,
+          56.1524334
+        ]
+      },
+      "properties": {
+        "description": "89035508527 - Александр\n\nтакже есть самосвалы до 10 тонн",
+        "iconCaption": "New Holland 115",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 158,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2533539,
+          55.6726764
+        ]
+      },
+      "properties": {
+        "description": "89295392385 - Алексей (ниже второй его номер)\n89031814075\n\nесть так же манипуляторы и самосвалы, работают так же Нестерово, Руза, Тучково",
+        "iconCaption": "Трактор+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 159,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5298888888889,
+          56.5778611111111
+        ]
+      },
+      "properties": {
+        "description": "есть самосвалы, миники, эвакуаторы, манипуляторы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)267-60-78",
+        "name": "Виталий"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 160,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.3380328,
+          55.4620207
+        ]
+      },
+      "properties": {
+        "description": "89175136963 Виктор \nкопка колодцев, манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 161,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.615382266716985,
+          55.43933230288185
+        ]
+      },
+      "properties": {
+        "description": "89060344102 89168429750 Виктор \nесть еще самосвалы (3, 10, 16м3), манипуляторы (доставляют плитку Нобитек), краны, трактора",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 162,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.60347325869111,
+          55.446102096310874
+        ]
+      },
+      "properties": {
+        "description": "89057789140 89295621930 Артём \nесть еще самосвалы (3, 10м3), кран",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 163,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.7630279,
+          55.3931697
+        ]
+      },
+      "properties": {
+        "description": "89264711238 Гарик \nесть еще самосвалы (разные), краны, манипуляторы и т.п.",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 164,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.398613251098304,
+          55.020952813638125
+        ]
+      },
+      "properties": {
+        "description": "89670129302 89162483434 Гарик \nесть самосвалы (10, 15, 20м3), манипулятор, газели",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 165,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4138952,
+          55.0410431
+        ]
+      },
+      "properties": {
+        "description": "89099097779 89163344460 Георгий \nесть самосвалы (3,10, 20, тонары), манипулятор, ямобур, тротуарка, укладчики",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 166,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.441451,
+          55.1954264
+        ]
+      },
+      "properties": {
+        "description": "есть ещё самосвалы (8, 15, 20м3), манипулятор, производство плитки и работы по её укладке",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)146-13-54",
+        "name": "8(925)347-49-99 Зорик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 167,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.9440546,
+          55.1224632
+        ]
+      },
+      "properties": {
+        "description": "89261010695 89686522880 Гарик \nесть еще самосвалы 10м3, каток, тротуарная плитка",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 168,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8921293,
+          55.0744058
+        ]
+      },
+      "properties": {
+        "description": "89167777430 Александр \nесть ещё самосвалы (5, 10, 25м3) ",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 169,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9712255,
+          55.8409216
+        ]
+      },
+      "properties": {
+        "description": "89017020505 Дмитрий менеджер\nесть еще самосвалы (10, 16, 18, 20м3), контейнеры (8, 20м3)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(495)643-22-79",
+        "name": "Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 170,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0215608,
+          55.7062539
+        ]
+      },
+      "properties": {
+        "description": "89582222522 89057152065 Карен \nесть еще самосвалы (10, 20м3), манипуляторы, краны",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 171,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.98402797909817,
+          55.632084490568296
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы (20, тоннары 30м), кран, фронтальник",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)355-96-00",
+        "name": "8(916)759-12-50 Зафар"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 172,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.77898966137553,
+          56.16349999933735
+        ]
+      },
+      "properties": {
+        "description": "89032610748 Сергей \nесть еще самосвалы (4, 10, 20, 25м3), краны, манипуляторы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 173,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.223798,
+          56.2602395
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы (4, 10, 12, 20, 25м3) кран, манипулятор, строительные работы (заборы, крыши, дома, тротуарка)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(963)641-23-23",
+        "name": "Армен"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 174,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4000365,
+          55.4823543
+        ]
+      },
+      "properties": {
+        "description": "есть еще навесное оборудование для ЭП, самосвалы 20м3, манипуляторы, краны и другая спецтехника \nсайт https://www.песок7.рф",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)185-70-01",
+        "name": "Вячеслав"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 175,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4059506572684,
+          54.80899097202003
+        ]
+      },
+      "properties": {
+        "description": "есть еще ПП экс, самосвалы (10, 15, 20м3)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(909)901-07-27",
+        "name": "8(916)622-50-98 Хуршет"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 176,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4179565,
+          55.4739163
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы 10м3, кран, манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)890-80-80",
+        "name": "8(916)332-02-71 Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 177,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3215763,
+          55.9877922
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы (10, 20м3), продажа и доставка стройматериалов (большой выбор)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)776-12-16",
+        "name": "Сашик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 178,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5251335,
+          56.0881509
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы (10, 20м3), контейнеры 8м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(965)242-40-81",
+        "name": "8(905)583-53-52 Артур"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 179,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.9072254,
+          55.1887026
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы (5, 10, 20м3), манипулятор, миксеры. Работают в радиусе 50 км",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(903)220-85-62",
+        "name": "Арман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 180,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.42912419999978,
+          55.68686935117109
+        ]
+      },
+      "properties": {
+        "description": "есть еще навесное для JCB, ПП эксы, самосвалы (20, 24м3)",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(985)364-89-70",
+        "name": "Игорь"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 181,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4344039,
+          55.6775932
+        ]
+      },
+      "properties": {
+        "description": ", Андрей директор \n8(495)109-93-90 диспетчер \nесть еще навесное для JCB, Самосвалы (20, 23м3), ПП эксы, Манипуляторы, тралы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)909-03-90",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 182,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.8573457,
+          55.9203231
+        ]
+      },
+      "properties": {
+        "description": "есть еще Самосвалы (10, 16, 18, 20, 32м3), манипуляторы, краны и прочее \nhttps://stroytech-istra.ru/",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(495)643-22-79",
+        "name": "Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 183,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3162887,
+          55.9383412
+        ]
+      },
+      "properties": {
+        "description": "есть еще самосвалы 20м3, ПП экскаваторы, кран.",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)066-62-69",
+        "name": "Овик"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 184,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2167768,
+          55.7261738
+        ]
+      },
+      "properties": {
+        "description": "песок, щебень 10, 20м3\nесть еще техника JCB и манипулятор",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)077-38-88",
+        "name": "Максим"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 185,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.4245836,
+          56.1215282
+        ]
+      },
+      "properties": {
+        "description": "Камаз: земля, навоз\nесть экскаватор-погрузчик JCB, есть полноповоротный экскаватор\n8(926)590-06-52\n8(965)209-16-39",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(916)205-25-90",
+        "name": "Олег"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 186,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1569053,
+          55.642029
+        ]
+      },
+      "properties": {
+        "description": "8(905)791-07-39\nпесок, щебень, земля, есть 10м3 и 20м3 самосвалы\nбетон\nесть еще техника",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)187-53-77",
+        "name": "Михаил"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 187,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.0327342,
+          55.6327934
+        ]
+      },
+      "properties": {
+        "description": "Есть JCB, есть самосвалы 10-20м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)077-33-34",
+        "name": "Тельман"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 188,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.1225185,
+          55.7535397
+        ]
+      },
+      "properties": {
+        "description": "8(965)270-37-52 \nесть JCB и самосвалы 10-20м3",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "8(926)866-03-76",
+        "name": "Александр"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 189,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1463019,
+          55.695244
+        ]
+      },
+      "properties": {
+        "description": "89055937042\nесть ещё Манипулятор, Самосвалы",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 190,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.74549034770508,
+          56.14274394183138
+        ]
+      },
+      "properties": {
+        "description": "89261914962 89162711429 консантин от георгия",
+        "iconCaption": "джсб",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 191,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.488751761230404,
+          56.34554659745356
+        ]
+      },
+      "properties": {
+        "description": "89258662450 джсб пескогрунт",
+        "iconCaption": "JCB+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 192,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.44879877109339,
+          55.57467635372727
+        ]
+      },
+      "properties": {
+        "description": "89638881988 игорь\nсамосвалы",
+        "iconCaption": "jcb ",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 193,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.968796169237635,
+          55.79651556847243
+        ]
+      },
+      "properties": {
+        "description": "89672834565",
+        "iconCaption": "jcb",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 194,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.66066399760656,
+          56.10492144403938
+        ]
+      },
+      "properties": {
+        "description": "89607326992 Сергей. есть самосвалы",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 195,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.55516910195301,
+          54.864276595292004
+        ]
+      },
+      "properties": {
+        "description": "89031887855 Денис",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 196,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.19079112648899,
+          55.342950166558055
+        ]
+      },
+      "properties": {
+        "description": "89253400858 александр",
+        "iconCaption": "jcb",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 197,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.18721294045367,
+          56.264395106381144
+        ]
+      },
+      "properties": {
+        "description": "89261556964 карен",
+        "iconCaption": "jcb+самосвалы",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 198,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.01844310402775,
+          55.476701236010726
+        ]
+      },
+      "properties": {
+        "description": "89036296945 Михаил",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 199,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.53779839413133,
+          56.02793929277992
+        ]
+      },
+      "properties": {
+        "description": "89779776303 арам",
+        "iconCaption": "jcb+самосвалы",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 200,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.00747633321086,
+          55.59508004735735
+        ]
+      },
+      "properties": {
+        "description": "89104853755 акоб самосвалы",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 201,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.58356277851559,
+          55.942678451662154
+        ]
+      },
+      "properties": {
+        "description": "89013473707 Андрей. самосвалы.\n37477210584",
+        "iconCaption": "jcb гидромолот",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 202,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.51789849667948,
+          55.95293894325397
+        ]
+      },
+      "properties": {
+        "description": "89651388420 Алексей есть техника",
+        "iconCaption": "jcb+ ",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 203,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.155356762488665,
+          55.40662717086017
+        ]
+      },
+      "properties": {
+        "description": "89037444993  Алексей",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 204,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.765549098925064,
+          55.9038993346218
+        ]
+      },
+      "properties": {
+        "description": "89164573699\n89258936825\nАлександр",
+        "iconCaption": "jcb +",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 205,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.808780743554614,
+          55.854828260255054
+        ]
+      },
+      "properties": {
+        "description": "89266931223 Владимир",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 206,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.853412701562426,
+          55.896036001341855
+        ]
+      },
+      "properties": {
+        "description": "89858947699 Григорий",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 207,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.63230232011707,
+          56.54748630417024
+        ]
+      },
+      "properties": {
+        "description": "89032706546 Вадим",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 208,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.23542121660125,
+          55.94844698864461
+        ]
+      },
+      "properties": {
+        "description": "89858543832 Михаил самосвалы",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 209,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.8564920784175,
+          56.41726190511242
+        ]
+      },
+      "properties": {
+        "description": "89269922193 Сергей Анатольевич",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 210,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          38.45524696122968,
+          55.28620495561286
+        ]
+      },
+      "properties": {
+        "description": "89168150409 армо",
+        "iconCaption": "jcb+",
+        "marker-color": "#ffd21e",
+        "phone": "",
+        "name": ""
+      }
+    }
+  ]
+}
