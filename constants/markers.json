@@ -1,9 +1,7 @@
 {
   "type": "FeatureCollection",
   "metadata": {
-    "name": "JCB тест",
-    "creator": "Yandex Map Constructor",
-    "description": "Трактора<br>Контейнеры<br>Самосвалы<br>Любые строительные материалы и техника<br>Бетон<br>Минитехника<br>Колодцы<br>Грунт<br>Натуральный камень"
+    "name": "JCB тест"
   },
   "features": [
     {

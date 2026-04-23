@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   YMap,
   YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
   YMapMarker,
 } from "@/lib/ymaps3";
-import markersData from "@/constants/markers.json";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "./MapSearch";
 import MarkerModal from "./MarkerModal";
@@ -37,8 +36,21 @@ export function MapComponent({ location: propLocation = DEFAULT_LOCATION }: MapC
   const [searchMarker, setSearchMarker] = useState<[number, number] | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<MarkerFeature | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [markers, setMarkers] = useState<any>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const markers = (markersData as any).default || markersData;
+
+  useEffect(() => {
+    async function fetchMarkers() {
+      try {
+        const response = await fetch('/api/markers');
+        const data = await response.json();
+        setMarkers(data);
+      } catch (error) {
+        console.error('Error fetching markers:', error);
+      }
+    }
+    fetchMarkers();
+  }, []);
 
   const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
     setLocation(newLocation);
@@ -83,7 +95,7 @@ export function MapComponent({ location: propLocation = DEFAULT_LOCATION }: MapC
             <div className="w-6 h-6 rounded-full bg-red-500 border-2 border-white shadow-md" />
           </YMapMarker>
         )}
-        {markers.features.slice(0, 50).map((feature: MarkerFeature) => (
+        {markers?.features?.slice(0, 50).map((feature: MarkerFeature) => (
           <YMapMarker
             key={feature.id}
             coordinates={feature.geometry.coordinates as [number, number]}
