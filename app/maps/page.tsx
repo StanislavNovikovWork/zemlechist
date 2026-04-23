@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 
 // Динамический импорт карты с отключенным SSR
-const MapComponent = dynamic(
-  () => import("@/components/map/MapComponent").then((mod) => mod.MapComponent),
+const Map = dynamic(
+  () => import("@/components/map/Map").then((mod) => mod.Map),
   {
     ssr: false,
     loading: () => (
@@ -18,7 +18,7 @@ const MapComponent = dynamic(
 export default function MapsPage() {
   return (
     <div className="h-full">
-      <MapComponent />
+      <Map />
     </div>
   );
 }

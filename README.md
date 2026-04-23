@@ -35,20 +35,36 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Структура проекта
+
+```
 my-app/
 ├── app/
-│   ├── maps/page.tsx          # Страница карты
-│   ├── page.tsx               # Главная
-│   ├── constants/             # Константы (markers.json)
-│   └── layout.tsx
+│   ├── api/                    # API маршруты
+│   │   └── markers/            # API для маркеров
+│   ├── maps/                   # Страница карты
+│   ├── layout.tsx              # Корневой layout
+│   ├── page.tsx                # Главная страница
+│   └── globals.css             # Глобальные стили
 ├── components/
-│   ├── map/                   # Компоненты карты
-│   ├── markers/               # Компоненты маркеров
-│   ├── ui/                    # UI компоненты
-│   └── layout/                # Layout компоненты
-├── hooks/                     # Хуки
-├── services/                  # Сервисы
-├── types/                     # Типы
-├── lib/                       # Утилиты и интеграции
-├── constants/                 # Константы
-└── config/                    # Конфигурация
+│   ├── layout/                 # Layout компоненты
+│   ├── map/                    # Компоненты карты
+│   │   ├── Map/                # Основной компонент карты
+│   │   ├── MapSearch/          # Поиск по карте
+│   │   ├── Marker/             # Компонент маркера
+│   │   ├── MarkerModal/        # Модальное окно маркера
+│   │   ├── MarkerPopup/        # Всплывающее окно маркера
+│   │   └── types.ts            # Общие типы для карты
+│   └── ui/                     # UI компоненты
+├── hooks/                      # React хуки
+│   └── useMarkers.ts           # Хук для получения маркеров
+├── services/                   # Сервисы для работы с внешними API
+├── lib/                        # Утилиты и интеграции
+│   └── ymaps3/                 # Интеграция с Яндекс Картами
+├── constants/                  # Константы приложения
+├── config/                     # Конфигурация
+├── types/                      # Общие типы TypeScript
+├── scripts/                    # Скрипты для импорта данных
+└── CODE_STANDARDS.md           # Стандарты кода проекта
+```
+
