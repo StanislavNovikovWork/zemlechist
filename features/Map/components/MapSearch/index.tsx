@@ -21,39 +21,9 @@ export default function MapSearch({ onLocationChange, onSearchResult }: MapSearc
       }
     }
 
-    // If not coordinates, treat as address and use geocoding
-    return geocodeAddress(value);
-  };
-
-  const geocodeAddress = async (address: string): Promise<{ center: [number, number]; zoom: number } | null> => {
-    try {
-      const ymaps3 = (window as any).ymaps3;
-      if (!ymaps3) {
-        alert("API Яндекс Карт не загружен.");
-        return null;
-      }
-
-      // Load search module if not already loaded
-      if (!ymaps3.search) {
-        await ymaps3.import("@yandex/ymaps3-search");
-      }
-
-      const search = await ymaps3.search.search({ text: address });
-      
-      if (search && search.length > 0) {
-        const firstResult = search[0];
-        const coords = firstResult.geometry?.coordinates;
-        if (coords && coords.length >= 2) {
-          return { center: [coords[0], coords[1]] as [number, number], zoom: 12 };
-        }
-      }
-      alert("Адрес не найден. Попробуйте другой запрос.");
-      return null;
-    } catch (error) {
-      console.error("Geocoding error:", error);
-      alert("Ошибка при поиске адреса.");
-      return null;
-    }
+    // If not valid coordinates, show error
+    alert("Неверный формат координат. Используйте формат: широта, долгота (например: 55.376861,35.850685)");
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
