@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 // Динамический импорт карты с отключенным SSR
 const Map = dynamic(
-  () => import("@/components/map/Map").then((mod) => mod.Map),
+  () => import("@/features/Map").then((mod) => mod.Map),
   {
     ssr: false,
   },

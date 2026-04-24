@@ -1,4 +1,4 @@
-import { MarkerFeature } from "../types";
+import { MarkerFeature } from "../../types";
 
 /**
  * Пропсы компонента MarkerPopup

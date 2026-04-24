@@ -1,21 +1,22 @@
 import { Form, Input, Button, Space } from "antd";
 import { useEffect } from "react";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 /**
- * Пропсы компонента MarkerDrawerContent
+ * Пропсы компонента MarkerEditForm
  * @property properties - Свойства маркера
  * @property isEditing - Режим редактирования
  * @property onSave - Callback при сохранении изменений
  * @property onCancel - Callback при отмене редактирования
  */
-interface MarkerDrawerContentProps {
+interface MarkerEditFormProps {
   properties: any;
   isEditing: boolean;
   onSave?: (values: any) => void;
   onCancel?: () => void;
 }
 
-export function MarkerDrawerContent({ properties, isEditing, onSave, onCancel }: MarkerDrawerContentProps) {
+export function MarkerEditForm({ properties, isEditing, onSave, onCancel }: MarkerEditFormProps) {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -34,8 +35,13 @@ export function MarkerDrawerContent({ properties, isEditing, onSave, onCancel }:
           onSave?.(values);
         }}
       >
-        <Form.Item label="Телефон" name="phone">
-          <Input />
+        <Form.Item
+          label="Телефон"
+          name="phone"
+          trigger="onChange"
+          valuePropName="value"
+        >
+          <PhoneInput />
         </Form.Item>
         <Form.Item label="Имя" name="name">
           <Input />

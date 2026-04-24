@@ -12,3 +12,8 @@ export interface MarkerFeature {
     "marker-color": string;
   };
 }
+
+export interface MarkersGeoJSON {
+  type: 'FeatureCollection';
+  features: MarkerFeature[];
+}

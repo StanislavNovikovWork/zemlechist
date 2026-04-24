@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function useMarkers() {
+export function useMarkersQuery() {
   return useQuery({
     queryKey: ["markers"],
     queryFn: async () => {

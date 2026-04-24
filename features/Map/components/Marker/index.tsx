@@ -1,7 +1,7 @@
 "use client";
 
 import { YMapMarker } from "@/lib/ymaps3";
-import { MarkerFeature } from "../types";
+import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
 
 /**

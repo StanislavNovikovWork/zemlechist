@@ -42,29 +42,51 @@ my-app/
 ├── app/
 │   ├── api/                    # API маршруты
 │   │   └── markers/            # API для маркеров
+│   │       ├── route.ts        # GET /api/markers
+│   │       └── [id]/           # PUT /api/markers/:id
 │   ├── maps/                   # Страница карты
+│   │   └── page.tsx
 │   ├── layout.tsx              # Корневой layout
 │   ├── page.tsx                # Главная страница
 │   └── globals.css             # Глобальные стили
 ├── components/
 │   ├── layout/                 # Layout компоненты
 │   │   └── AppLayout.tsx       # Основной layout с sidebar
-│   ├── map/                    # Компоненты карты
-│   │   ├── Map/                # Основной компонент карты
-│   │   ├── MapSearch/          # Поиск по карте
-│   │   ├── Marker/             # Компонент маркера
-│   │   ├── MarkerPopup/        # Всплывающее окно маркера
-│   │   └── types.ts            # Общие типы для карты
+│   ├── providers/              # React Query и другие провайдеры
+│   │   └── QueryProvider.tsx
 │   └── ui/                     # UI компоненты
-├── hooks/                      # React хуки
-│   └── useMarkers.ts           # Хук для получения маркеров
-├── services/                   # Сервисы для работы с внешними API
+├── features/                   # Feature-based структура
+│   └── Map/                    # Feature карты
+│       ├── index.tsx           # Основной компонент карты
+│       ├── components/         # Компоненты карты
+│       │   ├── MapSearch/      # Поиск по карте
+│       │   ├── Marker/         # Компонент маркера
+│       │   ├── MarkerDrawerContent/ # Контент drawer для редактирования
+│       │   └── MarkerPopup/    # Всплывающее окно маркера
+│       ├── hooks/              # React Query хуки для Map
+│       │   ├── queries/        # GET запросы
+│       │   │   └── useMarkersQuery.ts
+│       │   ├── mutations/      # POST/PUT/DELETE
+│       │   │   └── useUpdateMarkerMutation.ts
+│       │   └── ui/             # Хуки без API (local state, effects)
+│       └── types.ts            # Типы для Map
+├── hooks/                      # Общие React хуки
+│   ├── useDebounce.ts
+│   └── useMapLocation.ts
 ├── lib/                        # Утилиты и интеграции
-│   └── ymaps3/                 # Интеграция с Яндекс Картами
+│   ├── utils.ts
+│   ├── validators.ts
+│   └── ymaps3.ts               # Интеграция с Яндекс Картами
 ├── constants/                  # Константы приложения
+│   ├── app.constants.ts
+│   ├── map.constants.ts
+│   └── markers.json            # Исходные данные маркеров
 ├── config/                     # Конфигурация
-├── types/                      # Общие типы TypeScript
+│   └── env.config.ts
 ├── scripts/                    # Скрипты для импорта данных
-└── CODE_STANDARDS.md           # Стандарты кода проекта
+│   ├── import-markers.js       # Импорт маркеров в БД
+│   └── restructure-markers.js  # Реструктуризация JSON
+├── CODE_STANDARDS.md           # Стандарты кода проекта
+└── README.md
 ```
 
