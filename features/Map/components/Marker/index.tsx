@@ -4,6 +4,7 @@ import { YMapMarker } from "@/lib/ymaps3";
 import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
 import { CarMarkerIcon } from "@/components/icons/CarMarker";
+import TrashMarker from "@/components/icons/TrashMarker";
 
 /**
  * Пропсы компонента Marker
@@ -34,7 +35,11 @@ export function Marker({ feature, isHovered, onMouseEnter, onMouseLeave, onOpenM
         className="relative z-[1]"
         style={{ transform: 'translate(-50%, -100%)' }}
       >
-        <CarMarkerIcon />
+        {feature.properties.type === 'garbageCollection' ? (
+          <TrashMarker color={isHovered ? "rgb(255, 68, 51)" : "rgb(59, 179, 0)"} />
+        ) : (
+          <CarMarkerIcon color={isHovered ? "rgb(255, 68, 51)" : "rgb(59, 179, 0)"} />
+        )}
         {isHovered && (
           <MarkerPopup
             marker={feature}
