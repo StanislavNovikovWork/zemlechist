@@ -10,6 +10,7 @@ export interface MarkerFeature {
     description: string;
     iconCaption: string;
     "marker-color": string;
+    type: string;
   };
 }
 

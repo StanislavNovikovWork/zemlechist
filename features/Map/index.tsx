@@ -5,6 +5,7 @@ import { Spin } from "antd";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "./components/MapSearch";
 import { MapContent } from "./components/MapContent";
+import { FilterSidebar } from "./components/FilterSidebar";
 import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useUpdateMarkerMutation } from "./hooks/mutations/useUpdateMarkerMutation";
@@ -28,9 +29,21 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [searchMarker, setSearchMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const updateMarkerMutation = useUpdateMarkerMutation();
+
+  // Filter markers based on selected types
+  const filteredMarkers = markers && selectedTypes.length > 0
+    ? {
+        ...markers,
+        features: markers.features.filter((marker: MarkerFeature) => {
+          const markerType = marker.properties.type;
+          return selectedTypes.includes(markerType);
+        })
+      }
+    : markers;
 
   const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
     setLocation(newLocation);
@@ -90,25 +103,28 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   };
 
   return (
-    <div className="w-full h-full relative">
-      {isLoading ? (
-        <div className="flex items-center justify-center h-full">
-          <Spin size="large" />
-        </div>
-      ) : (
-        <>
-          <MapSearch onLocationChange={handleLocationChange} onSearchResult={handleSearchResult} />
-          <MapContent
-            location={location}
-            markers={markers}
-            searchMarker={searchMarker}
-            hoveredId={hoveredId}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}
-            onOpenModal={handleOpenModal}
-          />
-        </>
-      )}
+    <div className="w-full h-full flex">
+      <FilterSidebar selectedTypes={selectedTypes} onTypeChange={setSelectedTypes} />
+      <div className="flex-1 relative">
+        {isLoading ? (
+          <div className="flex items-center justify-center h-full">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <>
+            <MapSearch onLocationChange={handleLocationChange} onSearchResult={handleSearchResult} />
+            <MapContent
+              location={location}
+              markers={filteredMarkers}
+              searchMarker={searchMarker}
+              hoveredId={hoveredId}
+              handleMouseEnter={handleMouseEnter}
+              handleMouseLeave={handleMouseLeave}
+              onOpenModal={handleOpenModal}
+            />
+          </>
+        )}
+      </div>
       <AppDrawer
         title="Информация о маркере"
         placement="right"

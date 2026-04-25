@@ -8,7 +8,7 @@ const pool = new Pool({
 export async function GET() {
   try {
     const result = await pool.query(
-      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor"
+      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type
        FROM markers
        ORDER BY id`
     );
@@ -27,6 +27,7 @@ export async function GET() {
         description: row.description,
         iconCaption: row.iconCaption,
         'marker-color': row.markerColor,
+        type: row.type,
       },
     }));
 
