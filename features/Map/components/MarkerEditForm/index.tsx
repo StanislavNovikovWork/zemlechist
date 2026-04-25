@@ -8,15 +8,17 @@ import { PhoneInput } from "@/components/ui/PhoneInput";
  * @property isEditing - Режим редактирования
  * @property onSave - Callback при сохранении изменений
  * @property onCancel - Callback при отмене редактирования
+ * @property loading - Состояние загрузки для кнопки сохранения
  */
 interface MarkerEditFormProps {
   properties: any;
   isEditing: boolean;
   onSave?: (values: any) => void;
   onCancel?: () => void;
+  loading?: boolean;
 }
 
-export function MarkerEditForm({ properties, isEditing, onSave, onCancel }: MarkerEditFormProps) {
+export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loading }: MarkerEditFormProps) {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel }: Mark
         </Form.Item>
         <Form.Item>
           <Space>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={loading}>
               Сохранить
             </Button>
             <Button onClick={onCancel}>

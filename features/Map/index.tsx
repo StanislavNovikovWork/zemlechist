@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Spin } from "antd";
+import { Spin, message } from "antd";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "./components/MapSearch";
 import { MapContent } from "./components/MapContent";
@@ -86,6 +86,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       { id: selectedMarker.id, values },
       {
         onSuccess: (data) => {
+          message.success('Успешно');
           setIsEditing(false);
           queryClient.invalidateQueries({ queryKey: ['markers'] });
           setSelectedMarker({
@@ -97,6 +98,9 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
               description: data.description,
             },
           });
+        },
+        onError: (error) => {
+          message.error('Ошибка при сохранении');
         },
       }
     );
@@ -140,6 +144,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
             isEditing={isEditing}
             onSave={handleSaveMarker}
             onCancel={() => setIsEditing(false)}
+            loading={updateMarkerMutation.isPending}
           />
         )}
       </AppDrawer>
