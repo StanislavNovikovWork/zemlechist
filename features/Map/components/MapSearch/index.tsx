@@ -4,6 +4,11 @@ import { useState } from "react";
 import { Input } from "antd";
 import { parseCoordinates } from "@/lib/coordinateParser";
 
+/**
+ * Пропсы компонента MapSearch
+ * @property onLocationChange - Callback при изменении расположения карты
+ * @property onSearchResult - Callback при получении результата поиска с координатами
+ */
 interface MapSearchProps {
   onLocationChange: (location: { center: [number, number]; zoom: number }) => void;
   onSearchResult: (coordinates: [number, number] | null) => void;
