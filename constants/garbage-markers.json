@@ -1,0 +1,465 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "name": "Контейнеры!!!",
+    "creator": "Yandex Map Constructor",
+    "description": "Трактора<br>Контейнеры<br>Самосвалы<br>Любые строительные материалы и техника<br>Бетон<br>Минитехника<br>Колодцы<br>Грунт<br>Натуральный камень"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 0,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.750861, 55.5027614]
+      },
+      "properties": {
+        "description": "8(980)000-04-23 вывоз мусора Москва, МО (юг, юго-восток)",
+        "iconCaption": "Конты 8-36м3",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.6982928, 55.5463246]
+      },
+      "properties": {
+        "description": "8(917)880-73-13 еще есть базы в Печатниках и Реутове",
+        "iconCaption": "Конты 8, 20, 27",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.8611524, 55.7604915]
+      },
+      "properties": {
+        "description": "8(917)880-73-13 есть еще базы в Печатниках и Видном",
+        "iconCaption": "Конты 8, 20, 27м3",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.4461794, 55.9680826]
+      },
+      "properties": {
+        "description": "8(985)435-98-95 Химки, Сходня, Лобня и близ лежащие районы",
+        "iconCaption": "Конты 8м3",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.1482315, 55.6332117]
+      },
+      "properties": {
+        "description": "8(903)567-54-65",
+        "iconCaption": "Конты 8м3",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.3360209, 55.6302471]
+      },
+      "properties": {
+        "description": "8(925)340-08-5\nесть еще экскаватор-погрузчик, самосвалы (песок, щебень, торф, дрова)",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.5426577, 55.9075424]
+      },
+      "properties": {
+        "description": "8(495)532-94-94\n8(495)739-80-24 МАЗ",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.7593372, 55.5722029]
+      },
+      "properties": {
+        "description": "8(901)720-25-02\nесть трактор, манипулятор",
+        "iconCaption": "Конты+",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.1660272, 55.6693461]
+      },
+      "properties": {
+        "description": "8(903)723-55-68",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.6372208, 55.5738145]
+      },
+      "properties": {
+        "description": "8(495)988-01-21",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.5319241, 55.3534636]
+      },
+      "properties": {
+        "description": "Нал, безнал. 8,20,24,27м3\n8(901)517-30-99\nПодольск, Чехов, Домодедово",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.3435921, 55.3238752]
+      },
+      "properties": {
+        "description": "8(903)720-85-44",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.3835451, 55.3692145]
+      },
+      "properties": {
+        "description": "Нал, безнал\n8(926)284-18-00\n8(985)167-33-41\nооо эко-драйв",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.9350061, 55.9101309]
+      },
+      "properties": {
+        "description": "8(495)649-68-48\n8(926)747-14-79",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.1854654, 56.2707921]
+      },
+      "properties": {
+        "description": "8(963)658-89-33",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.9872448, 55.4984295]
+      },
+      "properties": {
+        "description": "8(903)136-13-31",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.9878205, 56.1561369]
+      },
+      "properties": {
+        "description": "8(985)773-71-42",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.2698287, 55.5318245]
+      },
+      "properties": {
+        "description": "8(926)104-07-86",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.9816717, 55.4507001]
+      },
+      "properties": {
+        "description": "8(964)569-00-09",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.2384826, 55.5033768]
+      },
+      "properties": {
+        "description": "8(926)104-07-86, \n8(916)430-35-12",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.7269591, 55.6930579]
+      },
+      "properties": {
+        "description": "8(985)781-04-04\n8(985)384-28-42",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.4319449, 55.6818357]
+      },
+      "properties": {
+        "description": "нал, безнал 8, 20,24,27м3\n8(926)237-26-83\n",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.3566341, 55.5677869]
+      },
+      "properties": {
+        "description": "8(965)177-97-03 только 8м3",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.3361963, 55.5463768]
+      },
+      "properties": {
+        "description": "8(926)255-64-82 только 8м3",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.8767122, 56.1425497]
+      },
+      "properties": {
+        "description": "89167505050",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 25,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.1048615, 55.7136523]
+      },
+      "properties": {
+        "description": "89258445555\n89035500540\n89265801111\nесть самосвалы",
+        "iconCaption": "Конты+",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 26,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.1000727, 55.6428738]
+      },
+      "properties": {
+        "description": "89032489816\nесть самосвалы и еще техника",
+        "iconCaption": "Конты+",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 27,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.0623073, 55.4696965]
+      },
+      "properties": {
+        "description": "89255448176\n89163557823",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 28,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.2730366, 55.6792173]
+      },
+      "properties": {
+        "description": "89017947371\n89778495633",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 29,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.5997659, 55.5949949]
+      },
+      "properties": {
+        "description": "89773821480\n89260364886\n89161607755\n84955086321\nallomusor.ru",
+        "iconCaption": "Конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 30,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.28758894726538, 55.4221353432213]
+      },
+      "properties": {
+        "description": "8(903)121-60-74 Иван \nесть партнёры с ЭП, кранами",
+        "iconCaption": "Конты+",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 31,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.51225131757809, 55.577315587345254]
+      },
+      "properties": {
+        "description": "89523458554",
+        "iconCaption": "конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 32,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.331518590527025, 55.09907094806622]
+      },
+      "properties": {
+        "description": "89263491191",
+        "iconCaption": "конты ",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 33,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.10605472333954, 55.46044364281266]
+      },
+      "properties": {
+        "description": "89995992121 Дмитрий",
+        "iconCaption": "конты",
+        "marker-color": "#595959"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 34,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.82178348310499, 55.788355278464785]
+      },
+      "properties": {
+        "description": "89262127159 Константин (прямой поставщик)",
+        "iconCaption": "конты",
+        "marker-color": "#595959"
+      }
+    }
+  ]
+}

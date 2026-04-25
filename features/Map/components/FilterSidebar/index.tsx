@@ -15,7 +15,7 @@ interface FilterSidebarProps {
 export function FilterSidebar({ selectedTypes, onTypeChange }: FilterSidebarProps) {
   const options = [
     { label: "Спецтехника", value: "specialTechnique" },
-    { label: "Вывоз мусора", value: "wasteRemoval" },
+    { label: "Вывоз мусора", value: "garbageCollection" },
   ];
 
   return (
