@@ -4,13 +4,13 @@ import { MarkerFeature } from "../../types";
  * Пропсы компонента MarkerPopup
  * @property marker - Маркер для отображения
  * @property onOpenModal - Callback при нажатии кнопки "Подробнее"
- * @property onMouseEnter - Callback при наведении курсора на всплывающее окно
+ * @property onMouseEnter - Callback при наведении курсора на всплывающее окно (опционально)
  * @property onMouseLeave - Callback при уходе курсора со всплывающего окна
  */
 interface MarkerPopupProps {
   marker: MarkerFeature;
   onOpenModal: (marker: MarkerFeature) => void;
-  onMouseEnter: () => void;
+  onMouseEnter?: () => void;
   onMouseLeave: () => void;
 }
 

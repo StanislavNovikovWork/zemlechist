@@ -44,7 +44,6 @@ export function Marker({ feature, isHovered, onMouseEnter, onMouseLeave, onOpenM
           <MarkerPopup
             marker={feature}
             onOpenModal={onOpenModal}
-            onMouseEnter={() => onMouseEnter(feature.id)}
             onMouseLeave={onMouseLeave}
           />
         )}
