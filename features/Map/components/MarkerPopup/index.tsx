@@ -19,7 +19,7 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="absolute bottom-[30px] left-1/2 w-[300px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm"
+      className="absolute bottom-[50px] left-1/2 w-[300px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm"
     >
       <div className="space-y-1">
         {marker.properties.phone && (

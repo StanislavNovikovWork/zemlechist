@@ -3,6 +3,7 @@
 import { YMapMarker } from "@/lib/ymaps3";
 import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
+import { CarMarkerIcon } from "@/components/icons/CarMarker";
 
 /**
  * Пропсы компонента Marker
@@ -31,8 +32,9 @@ export function Marker({ feature, isHovered, onMouseEnter, onMouseLeave, onOpenM
         onMouseEnter={() => onMouseEnter(feature.id)}
         onMouseLeave={onMouseLeave}
         className="relative z-[1]"
+        style={{ transform: 'translate(-50%, -100%)' }}
       >
-        <div className="w-6 h-6 rounded-full bg-[#ffd21e] border-2 border-white shadow-md" />
+        <CarMarkerIcon />
         {isHovered && (
           <MarkerPopup
             marker={feature}
