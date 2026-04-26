@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import AppLayout from "@/components/layout/AppLayout";
-import { QueryProvider } from "@/components/providers/QueryProvider";
-import { AddMarkerDrawerWrapper } from "@/features/Map/components/AddMarkerDrawerWrapper";
+import AppLayout from "@/layout/AppLayout";
+import { QueryProvider } from "@/providers/QueryProvider";
+import { AddMarkerDrawerWrapper } from "@/features/AddMarkerDrawer/components/AddMarkerDrawerWrapper";
 import "./globals.css";
 
 const geistSans = Geist({

@@ -1,6 +1,6 @@
 import { Form, Input, Button, Space, Modal } from "antd";
 import { useEffect, useState } from "react";
-import { PhoneInput } from "@/components/ui/PhoneInput";
+import { PhoneInput } from "@/ui/PhoneInput";
 
 /**
  * Пропсы компонента MarkerEditForm

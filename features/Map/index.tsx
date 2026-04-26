@@ -10,9 +10,9 @@ import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useUpdateMarkerMutation } from "./hooks/mutations/useUpdateMarkerMutation";
 import { useDeleteMarkerMutation } from "./hooks/mutations/useDeleteMarkerMutation";
-import { useAddMarkerDrawer } from "./hooks/useAddMarkerDrawer";
+import { useAddMarkerDrawer } from "@/features/AddMarkerDrawer/hooks/useAddMarkerDrawer";
 import { MarkerEditForm } from "./components/MarkerEditForm";
-import { AppDrawer } from "@/components/ui/AppDrawer";
+import { AppDrawer } from "@/ui/AppDrawer";
 import { useQueryClient } from "@tanstack/react-query";
 
 /**

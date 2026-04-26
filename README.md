@@ -42,31 +42,52 @@ my-app/
 ├── app/
 │   ├── api/                    # API маршруты
 │   │   └── markers/            # API для маркеров
-│   │       ├── route.ts        # GET /api/markers
-│   │       └── [id]/           # PUT /api/markers/:id
+│   │       ├── route.ts        # GET /api/markers, POST /api/markers
+│   │       └── [id]/           # PUT /api/markers/:id, DELETE /api/markers/:id
 │   ├── maps/                   # Страница карты
 │   │   └── page.tsx
 │   ├── layout.tsx              # Корневой layout
 │   ├── page.tsx                # Главная страница
 │   └── globals.css             # Глобальные стили
-├── components/
-│   ├── layout/                 # Layout компоненты
-│   │   └── AppLayout.tsx       # Основной layout с sidebar
-│   ├── providers/              # React Query и другие провайдеры
-│   │   └── QueryProvider.tsx
-│   └── ui/                     # UI компоненты
+├── ui/                         # Общие UI компоненты
+│   ├── AppDrawer/              # Drawer компонент
+│   ├── Button.tsx              # Кнопка
+│   ├── Card.tsx                # Карточка
+│   ├── Input.tsx               # Поле ввода
+│   └── PhoneInput/             # Поле ввода телефона
+├── layout/                     # Layout компоненты
+│   ├── AppLayout.tsx           # Основной layout с sidebar
+│   ├── Footer.tsx              # Подвал
+│   └── Header.tsx              # Шапка
+├── providers/                  # Провайдеры
+│   └── QueryProvider.tsx      # React Query провайдер
+├── icons/                      # Иконки
+│   ├── CarMarker.tsx           # Иконка маркера спецтехники
+│   └── TrashMarker.tsx         # Иконка маркера мусора
 ├── features/                   # Feature-based структура
+│   ├── AddMarkerDrawer/        # Глобальная фича добавления маркера
+│   │   ├── components/         # Компоненты фичи
+│   │   │   ├── AddMarkerDrawer/      # Drawer для добавления маркера
+│   │   │   ├── AddMarkerDrawerWrapper.tsx # Обертка для глобального рендеринга
+│   │   │   └── AddMarkerForm/         # Форма добавления маркера
+│   │   ├── hooks/              # Хуки фичи
+│   │   │   ├── useAddMarkerDrawer.tsx # Zustand store для управления drawer
+│   │   │   └── mutations/      # Мутации
+│   │   │       └── useCreateMarkerMutation.ts
 │   └── Map/                    # Feature карты
 │       ├── index.tsx           # Основной компонент карты
 │       ├── components/         # Компоненты карты
-│       │   ├── MapSearch/      # Поиск по карте
-│       │   ├── Marker/         # Компонент маркера
-│       │   ├── MarkerDrawerContent/ # Контент drawer для редактирования
-│       │   └── MarkerPopup/    # Всплывающее окно маркера
+│       │   ├── FilterSidebar/         # Боковая панель с фильтрами
+│       │   ├── MapContent/            # Контент карты с маркерами
+│       │   ├── MapSearch/             # Поиск по карте
+│       │   ├── Marker/                # Компонент маркера
+│       │   ├── MarkerEditForm/        # Форма редактирования маркера
+│       │   └── MarkerPopup/           # Всплывающее окно маркера
 │       ├── hooks/              # React Query хуки для Map
 │       │   ├── queries/        # GET запросы
 │       │   │   └── useMarkersQuery.ts
 │       │   ├── mutations/      # POST/PUT/DELETE
+│       │   │   ├── useDeleteMarkerMutation.ts
 │       │   │   └── useUpdateMarkerMutation.ts
 │       │   └── ui/             # Хуки без API (local state, effects)
 │       └── types.ts            # Типы для Map

@@ -1,7 +1,7 @@
 "use client";
 
 import { Form, Input, Button, Space, Select } from "antd";
-import { PhoneInput } from "@/components/ui/PhoneInput";
+import { PhoneInput } from "@/ui/PhoneInput";
 
 /**
  * Пропсы компонента AddMarkerForm

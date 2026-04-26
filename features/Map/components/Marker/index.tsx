@@ -3,8 +3,8 @@
 import { YMapMarker } from "@/lib/ymaps3";
 import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
-import { CarMarkerIcon } from "@/components/icons/CarMarker";
-import TrashMarker from "@/components/icons/TrashMarker";
+import { CarMarkerIcon } from "@/icons/CarMarker";
+import TrashMarker from "@/icons/TrashMarker";
 
 /**
  * Пропсы компонента Marker
