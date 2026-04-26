@@ -2,7 +2,7 @@
 
 import { Form, Input, Button, Space, Select } from "antd";
 import { PhoneInput } from "@/ui/PhoneInput";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Пропсы компонента AddMarkerForm
@@ -10,16 +10,19 @@ import { useEffect } from "react";
  * @property onCancel - Callback при отмене создания маркера
  * @property loading - Состояние загрузки для кнопки сохранения
  * @property initialCoordinates - Начальные координаты для предзаполнения [долгота, широта]
+ * @property onSuccess - Callback при успешном создании маркера
  */
 interface AddMarkerFormProps {
   onSave?: (values: any) => void;
   onCancel?: () => void;
   loading?: boolean;
   initialCoordinates?: [number, number] | null;
+  onSuccess?: () => void;
 }
 
-export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates }: AddMarkerFormProps) {
+export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, onSuccess }: AddMarkerFormProps) {
   const [form] = Form.useForm();
+  const [shouldReset, setShouldReset] = useState(false);
 
   useEffect(() => {
     if (initialCoordinates && initialCoordinates[0] !== undefined && initialCoordinates[1] !== undefined) {
@@ -28,8 +31,31 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates }:
       const lng = initialCoordinates[0].toFixed(6);
       const coordinatesString = `${lat}, ${lng}`;
       form.setFieldsValue({ coordinates: coordinatesString });
+    } else if (initialCoordinates === null) {
+      // Если координаты null, сбрасываем форму
+      form.resetFields();
     }
   }, [initialCoordinates, form]);
+
+  useEffect(() => {
+    if (shouldReset) {
+      form.resetFields();
+      setShouldReset(false);
+      // После сброса снова заполняем координаты, если они есть
+      if (initialCoordinates && initialCoordinates[0] !== undefined && initialCoordinates[1] !== undefined) {
+        const lat = initialCoordinates[1].toFixed(6);
+        const lng = initialCoordinates[0].toFixed(6);
+        const coordinatesString = `${lat}, ${lng}`;
+        form.setFieldsValue({ coordinates: coordinatesString });
+      }
+    }
+  }, [shouldReset, form, initialCoordinates]);
+
+  useEffect(() => {
+    if (onSuccess) {
+      setShouldReset(true);
+    }
+  }, [onSuccess]);
 
   return (
     <Form

@@ -11,10 +11,10 @@ import { parseCoordinates } from "@/lib/coordinateParser";
  */
 interface MapSearchProps {
   onLocationChange: (location: { center: [number, number]; zoom: number }) => void;
-  onSearchResult: (coordinates: [number, number] | null) => void;
+  onMapClick: (coordinates: [number, number]) => void;
 }
 
-export default function MapSearch({ onLocationChange, onSearchResult }: MapSearchProps) {
+export default function MapSearch({ onLocationChange, onMapClick }: MapSearchProps) {
   const [error, setError] = useState("");
 
   const handleSearch = (value: string) => {
@@ -24,7 +24,7 @@ export default function MapSearch({ onLocationChange, onSearchResult }: MapSearc
     if (parsed) {
       setError("");
       onLocationChange(parsed);
-      onSearchResult(parsed.center);
+      onMapClick(parsed.center);
     } else {
       setError("Используйте формат: широта, долгота (например: 55.376861,35.850685)");
     }

@@ -6,12 +6,18 @@ interface AddMarkerDrawerStore {
   onSuccess?: () => void;
   open: (coordinates?: [number, number], onSuccess?: () => void) => void;
   close: () => void;
+  clearCoordinates: () => void;
 }
 
 export const useAddMarkerDrawerStore = create<AddMarkerDrawerStore>((set: any) => ({
   isOpen: false,
   coordinates: null,
   onSuccess: undefined,
-  open: (coordinates?: [number, number], onSuccess?: () => void) => set({ isOpen: true, coordinates: coordinates || null, onSuccess }),
+  open: (coordinates?: [number, number], onSuccess?: () => void) => set({ 
+    isOpen: true, 
+    coordinates: coordinates || null,
+    onSuccess 
+  }),
   close: () => set({ isOpen: false, coordinates: null, onSuccess: undefined }),
+  clearCoordinates: () => set({ coordinates: null }),
 }));

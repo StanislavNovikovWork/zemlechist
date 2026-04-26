@@ -13,7 +13,6 @@ import { MarkerFeature, MarkersGeoJSON } from "../../types";
  * Пропсы компонента MapContent
  * @property location - Расположение карты с координатами центра и уровнем масштаба
  * @property markers - Массив маркеров для отображения
- * @property searchMarker - Координаты временного маркера поиска
  * @property clickMarker - Координаты временного маркера при клике на карту
  * @property hoveredId - ID маркера с наведенным курсором
  * @property handleMouseEnter - Callback при наведении курсора на маркер
@@ -26,7 +25,6 @@ import { MarkerFeature, MarkersGeoJSON } from "../../types";
 interface MapContentProps {
   location: { center: [number, number]; zoom: number };
   markers: MarkersGeoJSON | null;
-  searchMarker: [number, number] | null;
   clickMarker: [number, number] | null;
   hoveredId: number | null;
   handleMouseEnter: (id: number) => void;
@@ -40,7 +38,6 @@ interface MapContentProps {
 export function MapContent({
   location,
   markers,
-  searchMarker,
   clickMarker,
   hoveredId,
   handleMouseEnter,
@@ -62,11 +59,6 @@ export function MapContent({
           }
         }}
       />
-      {searchMarker && (
-        <YMapMarker coordinates={searchMarker} zIndex={2000}>
-          <div className="w-6 h-6 rounded-full bg-red-500 border-2 border-white shadow-md" />
-        </YMapMarker>
-      )}
       {clickMarker && (
         <ClickMarker
           coordinates={clickMarker}

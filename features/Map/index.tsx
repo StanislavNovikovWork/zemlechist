@@ -29,7 +29,6 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [selectedMarker, setSelectedMarker] = useState<MarkerFeature | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [searchMarker, setSearchMarker] = useState<[number, number] | null>(null);
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedTypes, setSelectedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection']);
@@ -54,9 +53,6 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setLocation(newLocation);
   };
 
-  const handleSearchResult = (coordinates: [number, number] | null) => {
-    setSearchMarker(coordinates);
-  };
 
   const handleMapClick = (coordinates: [number, number]) => {
     setClickMarker(coordinates);
@@ -71,6 +67,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const handleAddMarkerFromClick = () => {
     addMarkerDrawer.open(clickMarker, () => {
       setClickMarker(null);
+      addMarkerDrawer.clearCoordinates();
     });
   };
 
@@ -150,11 +147,10 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
           </div>
         ) : (
           <>
-            <MapSearch onLocationChange={handleLocationChange} onSearchResult={handleSearchResult} />
+            <MapSearch onLocationChange={handleLocationChange} onMapClick={handleMapClick} />
             <MapContent
               location={location}
               markers={filteredMarkers}
-              searchMarker={searchMarker}
               clickMarker={clickMarker}
               hoveredId={hoveredId}
               handleMouseEnter={handleMouseEnter}

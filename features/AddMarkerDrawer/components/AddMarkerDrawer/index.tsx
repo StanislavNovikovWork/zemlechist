@@ -3,6 +3,7 @@ import { AddMarkerForm } from "../AddMarkerForm";
 import { useCreateMarkerMutation } from "../../hooks/mutations/useCreateMarkerMutation";
 import { useAddMarkerDrawerStore } from "@/store/addMarkerDrawerStore";
 import { message } from "antd";
+import { useEffect } from "react";
 
 /**
  * Пропсы компонента AddMarkerDrawer
@@ -39,6 +40,13 @@ export function AddMarkerDrawer({ open, onClose }: AddMarkerDrawerProps) {
     );
   };
 
+  // Сбрасываем форму при закрытии drawer
+  useEffect(() => {
+    if (!open) {
+      // Форма будет сброшена через onSuccess callback в AddMarkerForm
+    }
+  }, [open]);
+
   return (
     <Drawer
       title="Добавить маркер"
@@ -52,6 +60,7 @@ export function AddMarkerDrawer({ open, onClose }: AddMarkerDrawerProps) {
         onCancel={onClose}
         loading={createMarkerMutation.isPending}
         initialCoordinates={coordinates}
+        onSuccess={onSuccess}
       />
     </Drawer>
   );

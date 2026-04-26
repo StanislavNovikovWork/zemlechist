@@ -8,6 +8,7 @@ export function useAddMarkerDrawer() {
   return {
     open: useAddMarkerDrawerStore((state: any) => state.open),
     close: useAddMarkerDrawerStore((state: any) => state.close),
+    clearCoordinates: useAddMarkerDrawerStore((state: any) => state.clearCoordinates),
     isOpen: useAddMarkerDrawerStore((state: any) => state.isOpen),
   };
 }
