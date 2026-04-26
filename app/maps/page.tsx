@@ -12,7 +12,7 @@ const Map = dynamic(
 
 export default function MapsPage() {
   return (
-    <div className="h-full">
+    <div className="h-screen">
       <Map />
     </div>
   );

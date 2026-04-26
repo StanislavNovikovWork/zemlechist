@@ -39,7 +39,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
       </head>
-      <body className="min-h-full">
+      <body className="h-screen overflow-hidden">
         <QueryProvider>
           <AppLayout>{children}</AppLayout>
           <AddMarkerDrawerWrapper />

@@ -26,7 +26,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }));
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={true} theme="dark">
         <div className="h-16 flex items-center justify-center bg-white/10 mb-4">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-300 transition-colors">
@@ -35,11 +35,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
         <Menu theme="dark" mode="inline" selectedKeys={[pathname]} items={menuItems} />
       </Sider>
-      <Layout>
+      <Layout style={{ height: "100vh" }}>
         <Content
           style={{
             padding: 0,
-            minHeight: 280,
+            height: "100%",
             background: colorBgContainer,
             borderRadius: `${borderRadiusLG}px ${borderRadiusLG}px 0 0`,
           }}

@@ -69,6 +69,16 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setIsModalOpen(true);
   };
 
+  const handleMarkerClick = (marker: MarkerFeature) => {
+    // Перемещаем карту к маркеру
+    setLocation({
+      center: marker.geometry.coordinates,
+      zoom: 14,
+    });
+    // Устанавливаем маркер как hovered для показа попапа
+    setHoveredId(marker.id);
+  };
+
   const handleAddMarkerFromClick = () => {
     addMarkerDrawer.open(clickMarker, () => {
       setClickMarker(null);
@@ -144,7 +154,13 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
   return (
     <div className="w-full h-full flex">
-      <FilterSidebar selectedTypes={selectedTypes} onTypeChange={setSelectedTypes} onAddMarker={addMarkerDrawer.open} />
+      <FilterSidebar 
+        selectedTypes={selectedTypes} 
+        onTypeChange={setSelectedTypes} 
+        onAddMarker={addMarkerDrawer.open}
+        markers={markers}
+        onMarkerClick={handleMarkerClick}
+      />
       <div className="flex-1 relative">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
