@@ -27,4 +27,4 @@ export const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } =
   reactify.module(ymaps3);
 
 // Export additional components
-export const { YMapMarker, YMapClusterer } = reactify.module(ymaps3);
+export const { YMapMarker, YMapClusterer, YMapListener } = reactify.module(ymaps3);

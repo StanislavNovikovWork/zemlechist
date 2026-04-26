@@ -30,6 +30,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [searchMarker, setSearchMarker] = useState<[number, number] | null>(null);
+  const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedTypes, setSelectedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection']);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -57,10 +58,22 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setSearchMarker(coordinates);
   };
 
+  const handleMapClick = (coordinates: [number, number]) => {
+    setClickMarker(coordinates);
+  };
+
   const handleOpenModal = (marker: MarkerFeature) => {
     setSelectedMarker(marker);
     setIsEditing(false);
     setIsModalOpen(true);
+  };
+
+  const handleAddMarkerFromClick = () => {
+    addMarkerDrawer.open();
+  };
+
+  const handleCancelAddMarker = () => {
+    setClickMarker(null);
   };
 
   const handleMouseEnter = (id: number) => {
@@ -140,10 +153,14 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
               location={location}
               markers={filteredMarkers}
               searchMarker={searchMarker}
+              clickMarker={clickMarker}
               hoveredId={hoveredId}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
               onOpenModal={handleOpenModal}
+              onMapClick={handleMapClick}
+              onAddMarker={handleAddMarkerFromClick}
+              onCancelAddMarker={handleCancelAddMarker}
             />
           </>
         )}
