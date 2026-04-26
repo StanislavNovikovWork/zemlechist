@@ -18,7 +18,7 @@ export function ClickMarker({ coordinates, onAddMarker, onCancelAddMarker }: Cli
     <YMapMarker coordinates={coordinates} zIndex={3000}>
       <div className="relative" onClick={(e) => e.stopPropagation()}>
         <div className="w-[18px] h-[18px] rounded-full bg-blue-500 border-2 border-white shadow-md" />
-        <div className="absolute bottom-[30px] left-1/2 w-[200px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm">
+        <div className="absolute bottom-[25px] left-1/2 w-[200px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm">
           <Button
             type="primary"
             block

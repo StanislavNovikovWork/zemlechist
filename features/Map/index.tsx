@@ -31,20 +31,20 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection']);
+  const [selectedType, setSelectedType] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const updateMarkerMutation = useUpdateMarkerMutation();
   const deleteMarkerMutation = useDeleteMarkerMutation();
   const addMarkerDrawer = useAddMarkerDrawer();
 
-  // Filter markers based on selected types
-  const filteredMarkers = markers && selectedTypes.length > 0
+  // Filter markers based on selected type
+  const filteredMarkers = markers && selectedType
     ? {
         ...markers,
         features: markers.features.filter((marker: MarkerFeature) => {
           const markerType = marker.properties.type;
-          return selectedTypes.includes(markerType);
+          return markerType === selectedType;
         })
       }
     : markers;
@@ -77,6 +77,14 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     });
     // Устанавливаем маркер как hovered для показа попапа
     setHoveredId(marker.id);
+  };
+
+  const handleTypeSelect = (type: string) => {
+    setSelectedType(type);
+  };
+
+  const handleAllTypesSelect = () => {
+    setSelectedType(null);
   };
 
   const handleAddMarkerFromClick = () => {
@@ -155,11 +163,11 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   return (
     <div className="w-full h-full flex">
       <FilterSidebar 
-        selectedTypes={selectedTypes} 
-        onTypeChange={setSelectedTypes} 
         onAddMarker={addMarkerDrawer.open}
         markers={markers}
         onMarkerClick={handleMarkerClick}
+        onTypeSelect={handleTypeSelect}
+        onAllTypesSelect={handleAllTypesSelect}
       />
       <div className="flex-1 relative">
         {isLoading ? (
