@@ -2,12 +2,16 @@ import { create } from 'zustand';
 
 interface AddMarkerDrawerStore {
   isOpen: boolean;
-  open: () => void;
+  coordinates: [number, number] | null;
+  onSuccess?: () => void;
+  open: (coordinates?: [number, number], onSuccess?: () => void) => void;
   close: () => void;
 }
 
 export const useAddMarkerDrawerStore = create<AddMarkerDrawerStore>((set: any) => ({
   isOpen: false,
-  open: () => set({ isOpen: true }),
-  close: () => set({ isOpen: false }),
+  coordinates: null,
+  onSuccess: undefined,
+  open: (coordinates?: [number, number], onSuccess?: () => void) => set({ isOpen: true, coordinates: coordinates || null, onSuccess }),
+  close: () => set({ isOpen: false, coordinates: null, onSuccess: undefined }),
 }));

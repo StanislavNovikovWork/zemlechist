@@ -2,21 +2,34 @@
 
 import { Form, Input, Button, Space, Select } from "antd";
 import { PhoneInput } from "@/ui/PhoneInput";
+import { useEffect } from "react";
 
 /**
  * Пропсы компонента AddMarkerForm
  * @property onSave - Callback при сохранении нового маркера
  * @property onCancel - Callback при отмене создания маркера
  * @property loading - Состояние загрузки для кнопки сохранения
+ * @property initialCoordinates - Начальные координаты для предзаполнения [долгота, широта]
  */
 interface AddMarkerFormProps {
   onSave?: (values: any) => void;
   onCancel?: () => void;
   loading?: boolean;
+  initialCoordinates?: [number, number] | null;
 }
 
-export function AddMarkerForm({ onSave, onCancel, loading }: AddMarkerFormProps) {
+export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates }: AddMarkerFormProps) {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (initialCoordinates && initialCoordinates[0] !== undefined && initialCoordinates[1] !== undefined) {
+      // Конвертируем из [долгота, широта] в строку "широта, долгота" с округлением до 6 знаков
+      const lat = initialCoordinates[1].toFixed(6);
+      const lng = initialCoordinates[0].toFixed(6);
+      const coordinatesString = `${lat}, ${lng}`;
+      form.setFieldsValue({ coordinates: coordinatesString });
+    }
+  }, [initialCoordinates, form]);
 
   return (
     <Form

@@ -69,7 +69,9 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   };
 
   const handleAddMarkerFromClick = () => {
-    addMarkerDrawer.open();
+    addMarkerDrawer.open(clickMarker, () => {
+      setClickMarker(null);
+    });
   };
 
   const handleCancelAddMarker = () => {
