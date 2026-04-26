@@ -9,6 +9,8 @@ import { FilterSidebar } from "./components/FilterSidebar";
 import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useUpdateMarkerMutation } from "./hooks/mutations/useUpdateMarkerMutation";
+import { useDeleteMarkerMutation } from "./hooks/mutations/useDeleteMarkerMutation";
+import { useAddMarkerDrawer } from "./hooks/useAddMarkerDrawer";
 import { MarkerEditForm } from "./components/MarkerEditForm";
 import { AppDrawer } from "@/components/ui/AppDrawer";
 import { useQueryClient } from "@tanstack/react-query";
@@ -33,6 +35,8 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const updateMarkerMutation = useUpdateMarkerMutation();
+  const deleteMarkerMutation = useDeleteMarkerMutation();
+  const addMarkerDrawer = useAddMarkerDrawer();
 
   // Filter markers based on selected types
   const filteredMarkers = markers && selectedTypes.length > 0
@@ -57,12 +61,6 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setSelectedMarker(marker);
     setIsEditing(false);
     setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedMarker(null);
-    setIsEditing(false);
   };
 
   const handleMouseEnter = (id: number) => {
@@ -106,9 +104,30 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     );
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMarker(null);
+    setIsEditing(false);
+  };
+
+  const handleDeleteMarker = () => {
+    if (!selectedMarker) return;
+
+    deleteMarkerMutation.mutate(selectedMarker.id, {
+      onSuccess: () => {
+        message.success('Маркер успешно удален');
+        setIsModalOpen(false);
+        setSelectedMarker(null);
+      },
+      onError: (error: any) => {
+        message.error('Ошибка при удалении маркера');
+      },
+    });
+  };
+
   return (
     <div className="w-full h-full flex">
-      <FilterSidebar selectedTypes={selectedTypes} onTypeChange={setSelectedTypes} />
+      <FilterSidebar selectedTypes={selectedTypes} onTypeChange={setSelectedTypes} onAddMarker={addMarkerDrawer.open} />
       <div className="flex-1 relative">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
@@ -145,6 +164,8 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
             onSave={handleSaveMarker}
             onCancel={() => setIsEditing(false)}
             loading={updateMarkerMutation.isPending}
+            onDelete={handleDeleteMarker}
+            deleteLoading={deleteMarkerMutation.isPending}
           />
         )}
       </AppDrawer>

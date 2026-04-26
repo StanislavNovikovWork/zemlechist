@@ -45,3 +45,36 @@ export async function GET() {
     );
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { type, coordinates, phone, name, description } = body;
+
+    console.log('Received data:', { type, coordinates, phone, name, description });
+
+    // Парсим координаты из массива [долгота, широта]
+    const [lon, lat] = coordinates;
+
+    // Определяем iconCaption и markerColor на основе типа
+    const iconCaption = type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора';
+    const markerColor = '#3BB300';
+
+    const result = await pool.query(
+      `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, "updatedAt")
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
+       RETURNING id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type`,
+      [lat, lon, phone, name, description, iconCaption, markerColor, type]
+    );
+
+    const createdMarker = result.rows[0];
+
+    return NextResponse.json(createdMarker, { status: 201 });
+  } catch (error) {
+    console.error('Error creating marker:', error);
+    return NextResponse.json(
+      { error: 'Failed to create marker', details: error instanceof Error ? error.message : String(error) },
+      { status: 500 }
+    );
+  }
+}

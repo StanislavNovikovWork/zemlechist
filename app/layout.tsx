@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import AppLayout from "@/components/layout/AppLayout";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { AddMarkerDrawerWrapper } from "@/features/Map/components/AddMarkerDrawerWrapper";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className="min-h-full">
         <QueryProvider>
           <AppLayout>{children}</AppLayout>
+          <AddMarkerDrawerWrapper />
         </QueryProvider>
       </body>
     </html>

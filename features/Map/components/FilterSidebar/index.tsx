@@ -1,19 +1,21 @@
 "use client";
 
-import { Checkbox } from "antd";
+import { Checkbox, Button } from "antd";
 import { useState, useEffect } from "react";
 
 /**
  * Пропсы компонента FilterSidebar
  * @property selectedTypes - Выбранные типы маркеров для фильтрации
  * @property onTypeChange - Callback при изменении выбранных типов
+ * @property onAddMarker - Callback при нажатии на кнопку добавления маркера
  */
 interface FilterSidebarProps {
   selectedTypes: string[];
   onTypeChange: (types: string[]) => void;
+  onAddMarker?: () => void;
 }
 
-export function FilterSidebar({ selectedTypes, onTypeChange }: FilterSidebarProps) {
+export function FilterSidebar({ selectedTypes, onTypeChange, onAddMarker }: FilterSidebarProps) {
   const [selectAll, setSelectAll] = useState(true);
 
   const options = [
@@ -75,6 +77,14 @@ export function FilterSidebar({ selectedTypes, onTypeChange }: FilterSidebarProp
           ))}
         </ul>
       </div>
+
+      <Button
+        type="primary"
+        block
+        onClick={onAddMarker}
+      >
+        Добавить точку
+      </Button>
     </div>
   );
 }
