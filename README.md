@@ -64,6 +64,8 @@ my-app/
 ├── icons/                      # Иконки
 │   ├── CarMarker.tsx           # Иконка маркера спецтехники
 │   └── TrashMarker.tsx         # Иконка маркера мусора
+├── store/                      # Глобальные Zustand stores
+│   └── addMarkerDrawerStore.ts # Store для управления drawer добавления маркера
 ├── features/                   # Feature-based структура
 │   ├── AddMarkerDrawer/        # Глобальная фича добавления маркера
 │   │   ├── components/         # Компоненты фичи
@@ -71,7 +73,7 @@ my-app/
 │   │   │   ├── AddMarkerDrawerWrapper.tsx # Обертка для глобального рендеринга
 │   │   │   └── AddMarkerForm/         # Форма добавления маркера
 │   │   ├── hooks/              # Хуки фичи
-│   │   │   ├── useAddMarkerDrawer.tsx # Zustand store для управления drawer
+│   │   │   ├── useAddMarkerDrawer.tsx # Хук для управления drawer
 │   │   │   └── mutations/      # Мутации
 │   │   │       └── useCreateMarkerMutation.ts
 │   └── Map/                    # Feature карты

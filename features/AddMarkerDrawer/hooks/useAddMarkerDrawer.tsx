@@ -1,16 +1,4 @@
-import { create } from 'zustand';
-
-interface AddMarkerDrawerStore {
-  isOpen: boolean;
-  open: () => void;
-  close: () => void;
-}
-
-const useAddMarkerDrawerStore = create<AddMarkerDrawerStore>((set: any) => ({
-  isOpen: false,
-  open: () => set({ isOpen: true }),
-  close: () => set({ isOpen: false }),
-}));
+import { useAddMarkerDrawerStore } from '@/store/addMarkerDrawerStore';
 
 /**
  * Хук для управления drawer добавления маркера
@@ -23,5 +11,3 @@ export function useAddMarkerDrawer() {
     isOpen: useAddMarkerDrawerStore((state: any) => state.isOpen),
   };
 }
-
-export { useAddMarkerDrawerStore };

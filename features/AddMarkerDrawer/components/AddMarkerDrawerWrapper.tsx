@@ -1,7 +1,7 @@
 "use client";
 
 import { AddMarkerDrawer } from "./AddMarkerDrawer";
-import { useAddMarkerDrawerStore } from "../hooks/useAddMarkerDrawer";
+import { useAddMarkerDrawerStore } from "@/store/addMarkerDrawerStore";
 
 /**
  * Компонент-обертка для глобального рендеринга AddMarkerDrawer
