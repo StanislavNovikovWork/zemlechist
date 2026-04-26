@@ -55,7 +55,12 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
 
   const handleMapClick = (coordinates: [number, number]) => {
-    setClickMarker(coordinates);
+    // Если маркер уже есть, удаляем его при клике в другое место
+    if (clickMarker) {
+      setClickMarker(null);
+    } else {
+      setClickMarker(coordinates);
+    }
   };
 
   const handleOpenModal = (marker: MarkerFeature) => {
