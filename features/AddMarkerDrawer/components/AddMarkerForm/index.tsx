@@ -99,6 +99,12 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, o
         <PhoneInput />
       </Form.Item>
       <Form.Item
+        label="Почта"
+        name="email"
+      >
+        <Input placeholder="example@mail.com" />
+      </Form.Item>
+      <Form.Item
         label="Имя"
         name="name"
         rules={[{ required: true, message: 'Введите имя' }]}
@@ -106,10 +112,28 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, o
         <Input />
       </Form.Item>
       <Form.Item
+        label="Название организации"
+        name="organizationName"
+      >
+        <Input placeholder="ООО Рога и копыта" />
+      </Form.Item>
+      <Form.Item
         label="Описание"
         name="description"
       >
         <Input.TextArea rows={4} />
+      </Form.Item>
+      <Form.Item
+        label="Сайт"
+        name="website"
+      >
+        <Input placeholder="https://example.com" />
+      </Form.Item>
+      <Form.Item
+        label="ИНН"
+        name="inn"
+      >
+        <Input placeholder="123456789012" />
       </Form.Item>
       <Form.Item>
         <Space>

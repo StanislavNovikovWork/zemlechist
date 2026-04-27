@@ -11,6 +11,11 @@ export interface MarkerFeature {
     iconCaption: string;
     "marker-color": string;
     type: string;
+    website?: string;
+    inn?: string;
+    organizationName?: string;
+    updatedAt?: string;
+    email?: string;
   };
 }
 
