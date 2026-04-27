@@ -4,10 +4,13 @@ import {
   YMapDefaultFeaturesLayer,
   YMapMarker,
   YMapListener,
+  YMapClusterer,
+  clusterByGrid,
 } from "@/lib/ymaps3";
 import { Marker } from "../Marker";
 import { ClickMarker } from "../ClickMarker";
 import { MarkerFeature, MarkersGeoJSON } from "../../types";
+import { useMemo, useCallback } from "react";
 
 /**
  * Пропсы компонента MapContent
@@ -47,6 +50,33 @@ export function MapContent({
   onAddMarker,
   onCancelAddMarker,
 }: MapContentProps) {
+  const gridSizedMethod = useMemo(() => clusterByGrid({ gridSize: 32 }), []);
+
+  const marker = useCallback(
+    (feature: MarkerFeature) => (
+      <Marker
+        key={feature.id}
+        feature={feature}
+        isHovered={hoveredId === feature.id}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onOpenModal={onOpenModal}
+      />
+    ),
+    [hoveredId, handleMouseEnter, handleMouseLeave, onOpenModal]
+  );
+
+  const cluster = useCallback(
+    (coordinates: [number, number], features: MarkerFeature[]) => (
+      <YMapMarker coordinates={coordinates}>
+        <div className="w-10 h-10 rounded-full bg-blue-500 border-2 border-white shadow-md flex items-center justify-center text-white font-bold">
+          {features.length}
+        </div>
+      </YMapMarker>
+    ),
+    []
+  );
+
   return (
     <YMap location={location}>
       <YMapDefaultSchemeLayer />
@@ -66,16 +96,14 @@ export function MapContent({
           onCancelAddMarker={onCancelAddMarker}
         />
       )}
-      {markers?.features?.map((feature: MarkerFeature) => (
-        <Marker
-          key={feature.id}
-          feature={feature}
-          isHovered={hoveredId === feature.id}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onOpenModal={onOpenModal}
+      {markers?.features && (
+        <YMapClusterer
+          marker={marker}
+          cluster={cluster}
+          method={gridSizedMethod}
+          features={markers.features}
         />
-      ))}
+      )}
     </YMap>
   );
 }

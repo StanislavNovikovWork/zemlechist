@@ -17,6 +17,11 @@ if (typeof window !== "undefined") {
 
 const ymaps3 = (window as any).ymaps3;
 
+// Register CDN for clusterer package
+ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}', [
+  '@yandex/ymaps3-clusterer@0.0.12'
+]);
+
 const [ymaps3React] = await Promise.all([
   ymaps3.import("@yandex/ymaps3-reactify"),
   ymaps3.ready,
@@ -27,4 +32,9 @@ export const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } =
   reactify.module(ymaps3);
 
 // Export additional components
-export const { YMapMarker, YMapClusterer, YMapListener } = reactify.module(ymaps3);
+export const { YMapMarker, YMapListener } = reactify.module(ymaps3);
+
+// Import clusterer
+const clusterer = await ymaps3.import('@yandex/ymaps3-clusterer@0.0.12');
+export const { YMapClusterer, clusterByGrid } = reactify.module(clusterer);
+
