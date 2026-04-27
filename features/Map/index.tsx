@@ -56,11 +56,13 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
   const handleMapClick = (coordinates: [number, number]) => {
     // Если маркер уже есть, удаляем его при клике в другое место
-    if (clickMarker) {
-      setClickMarker(null);
-    } else {
-      setClickMarker(coordinates);
-    }
+          setClickMarker(null);
+
+    // if (clickMarker) {
+    //   setClickMarker(null);
+    // } else {
+    //   setClickMarker(coordinates);
+    // }
   };
 
   const handleOpenModal = (marker: MarkerFeature) => {
@@ -176,7 +178,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
           </div>
         ) : (
           <>
-            <MapSearch onLocationChange={handleLocationChange} onMapClick={handleMapClick} />
+            <MapSearch onLocationChange={handleLocationChange} onMapClick={setClickMarker} />
             <MapContent
               location={location}
               markers={filteredMarkers}
