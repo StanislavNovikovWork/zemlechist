@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
+import dayjs from 'dayjs';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -8,7 +9,7 @@ const pool = new Pool({
 export async function GET() {
   try {
     const result = await pool.query(
-      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type
+      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at
        FROM markers
        ORDER BY id`
     );
@@ -28,6 +29,11 @@ export async function GET() {
         iconCaption: row.iconCaption,
         'marker-color': row.markerColor,
         type: row.type,
+        website: row.website,
+        inn: row.inn,
+        organizationName: row.organization_name,
+        email: row.email,
+        updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
       },
     }));
 
@@ -49,9 +55,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, coordinates, phone, name, description } = body;
-
-    console.log('Received data:', { type, coordinates, phone, name, description });
+    const { type, coordinates, phone, name, description, website, inn, organization_name, email, updatedAt } = body;
 
     // Парсим координаты из массива [долгота, широта]
     const [lon, lat] = coordinates;
@@ -60,11 +64,18 @@ export async function POST(request: Request) {
     const iconCaption = type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора';
     const markerColor = '#3BB300';
 
+    // Конвертируем дату из DD.MM.YYYY в формат для PostgreSQL
+    let dbUpdatedAt = null;
+    if (updatedAt) {
+      const [day, month, year] = updatedAt.split('.');
+      dbUpdatedAt = `${year}-${month}-${day}`;
+    }
+
     const result = await pool.query(
-      `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, "updatedAt")
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
-       RETURNING id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type`,
-      [lat, lon, phone, name, description, iconCaption, markerColor, type]
+      `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, website, inn, organization_name, email, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+       RETURNING id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at`,
+      [lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organization_name, email, dbUpdatedAt]
     );
 
     const createdMarker = result.rows[0];

@@ -1,8 +1,9 @@
 "use client";
 
-import { Form, Input, Button, Space, Select } from "antd";
+import { Form, Input, Button, Space, Select, DatePicker } from "antd";
 import { PhoneInput } from "@/ui/PhoneInput";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 /**
  * Пропсы компонента AddMarkerForm
@@ -63,7 +64,11 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, o
       layout="vertical"
       onFinish={(values) => {
         console.log("Creating marker:", values);
-        onSave?.(values);
+        const submitValues = { ...values };
+        if (values.updatedAt) {
+          submitValues.updatedAt = values.updatedAt.format('DD.MM.YYYY');
+        }
+        onSave?.(submitValues);
       }}
     >
       <Form.Item
@@ -134,6 +139,12 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, o
         name="inn"
       >
         <Input placeholder="123456789012" />
+      </Form.Item>
+      <Form.Item
+        label="Дата обновления информации"
+        name="updatedAt"
+      >
+        <DatePicker format="DD.MM.YYYY" placeholder="ДД.ММ.ГГГГ" style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item>
         <Space>

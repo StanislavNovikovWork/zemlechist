@@ -114,25 +114,25 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     }, 200);
   };
 
-  const handleSaveMarker = (values: any) => {
+  const handleSaveMarker = async (values: any) => {
     if (!selectedMarker) return;
 
     updateMarkerMutation.mutate(
       { id: selectedMarker.id, values },
       {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           message.success('Успешно');
           setIsEditing(false);
-          queryClient.invalidateQueries({ queryKey: ['markers'] });
-          setSelectedMarker({
-            ...selectedMarker,
-            properties: {
-              ...selectedMarker.properties,
-              phone: data.phone,
-              name: data.name,
-              description: data.description,
-            },
-          });
+          // Перезагружаем данные с сервера и ждем завершения
+          await queryClient.refetchQueries({ queryKey: ['markers'] });
+          // Получаем свежие данные
+          const freshMarkers = queryClient.getQueryData(['markers']) as any;
+          if (freshMarkers) {
+            const freshMarker = freshMarkers.features.find((m: any) => m.id === selectedMarker.id);
+            if (freshMarker) {
+              setSelectedMarker(freshMarker);
+            }
+          }
         },
         onError: (error) => {
           message.error('Ошибка при сохранении');

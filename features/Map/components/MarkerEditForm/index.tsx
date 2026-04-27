@@ -1,6 +1,7 @@
-import { Form, Input, Button, Space, Modal, Typography, Descriptions } from "antd";
+import { Form, Input, Button, Space, Modal, Typography, Descriptions, DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import { PhoneInput } from "@/ui/PhoneInput";
+import dayjs from "dayjs";
 
 const { Text, Link } = Typography;
 
@@ -30,7 +31,18 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loadin
 
   useEffect(() => {
     if (properties && isEditing) {
-      form.setFieldsValue(properties);
+      const formValues = { ...properties };
+      if (properties.updatedAt && properties.updatedAt !== 'Invalid Date') {
+        const parsedDate = dayjs(properties.updatedAt, 'DD.MM.YYYY');
+        if (parsedDate.isValid()) {
+          formValues.updatedAt = parsedDate;
+        } else {
+          formValues.updatedAt = null;
+        }
+      } else {
+        formValues.updatedAt = null;
+      }
+      form.setFieldsValue(formValues);
     }
   }, [properties, form, isEditing]);
 
@@ -54,8 +66,11 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loadin
           form={form}
           layout="vertical"
           onFinish={(values) => {
-            console.log("Saving changes:", values);
-            onSave?.(values);
+            const submitValues = { ...values };
+            if (values.updatedAt) {
+              submitValues.updatedAt = values.updatedAt.format('DD.MM.YYYY');
+            }
+            onSave?.(submitValues);
           }}
         >
           <Form.Item
@@ -83,6 +98,9 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loadin
           </Form.Item>
           <Form.Item label="ИНН" name="inn">
             <Input placeholder="123456789012" />
+          </Form.Item>
+          <Form.Item label="Дата обновления информации" name="updatedAt">
+            <DatePicker format="DD.MM.YYYY" placeholder="ДД.ММ.ГГГГ" style={{ width: '100%' }} />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -132,6 +150,11 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loadin
               {properties.inn !== undefined && properties.inn && (
                 <Descriptions.Item label="ИНН">
                   <Text>{properties.inn}</Text>
+                </Descriptions.Item>
+              )}
+              {properties.updatedAt !== undefined && properties.updatedAt && (
+                <Descriptions.Item label="Дата обновления информации">
+                  <Text>{dayjs(properties.updatedAt, 'DD.MM.YYYY').format('DD.MM.YYYY')}</Text>
                 </Descriptions.Item>
               )}
             </Descriptions>
