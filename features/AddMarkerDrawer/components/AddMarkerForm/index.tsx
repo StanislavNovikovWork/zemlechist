@@ -104,18 +104,18 @@ export function AddMarkerForm({ onSave, onCancel, loading, initialCoordinates, o
           >
             <PhoneInput />
           </Form.Item>
-          <Form.Item
-            label="Почта"
-            name="email"
-          >
-            <Input placeholder="example@mail.com" />
-          </Form.Item>
-          <Form.Item
+           <Form.Item
             label="Имя"
             name="name"
             rules={[{ required: true, message: 'Введите имя' }]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item
+            label="Почта"
+            name="email"
+          >
+            <Input placeholder="example@mail.com" />
           </Form.Item>
           <Form.Item
             label="Название организации"

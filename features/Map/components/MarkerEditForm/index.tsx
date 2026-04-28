@@ -83,11 +83,11 @@ export function MarkerEditForm({ properties, isEditing, onSave, onCancel, loadin
               >
                 <PhoneInput />
               </Form.Item>
+               <Form.Item label="Имя" name="name">
+                <Input />
+              </Form.Item>
               <Form.Item label="Почта" name="email">
                 <Input placeholder="example@mail.com" />
-              </Form.Item>
-              <Form.Item label="Имя" name="name">
-                <Input />
               </Form.Item>
               <Form.Item label="Название организации" name="organizationName">
                 <Input placeholder="ООО Рога и копыта" />
