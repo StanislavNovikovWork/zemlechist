@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import AppLayout from "@/layout/AppLayout";
 import { QueryProvider } from "@/providers/QueryProvider";
-import { AddMarkerDrawerWrapper } from "@/features/AddMarkerDrawer/components/AddMarkerDrawerWrapper";
+import { AddSupplierDrawerWrapper } from "@/features/AddSupplierDrawer/components/AddSupplierDrawerWrapper";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,7 +42,7 @@ export default function RootLayout({
       <body className="h-screen overflow-hidden">
         <QueryProvider>
           <AppLayout>{children}</AppLayout>
-          <AddMarkerDrawerWrapper />
+          <AddSupplierDrawerWrapper />
         </QueryProvider>
       </body>
     </html>

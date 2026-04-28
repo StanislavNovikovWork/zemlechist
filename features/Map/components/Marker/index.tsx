@@ -12,7 +12,7 @@ import TrashMarker from "@/icons/TrashMarker";
  * @property isHovered - Наведен ли курсор на маркер
  * @property onMouseEnter - Callback при наведении курсора на маркер
  * @property onMouseLeave - Callback при уходе курсора с маркера
- * @property onOpenModal - Callback при клике на маркер для открытия модального окна
+ * @property onOpenModal - Callback при клике на маркер для открытия модального окна просмотра
  */
 interface MarkerProps {
   feature: MarkerFeature;

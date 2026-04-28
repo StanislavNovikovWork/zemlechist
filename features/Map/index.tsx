@@ -10,9 +10,7 @@ import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useUpdateMarkerMutation } from "./hooks/mutations/useUpdateMarkerMutation";
 import { useDeleteMarkerMutation } from "./hooks/mutations/useDeleteMarkerMutation";
-import { useAddMarkerDrawer } from "@/features/AddMarkerDrawer/hooks/useAddMarkerDrawer";
-import { MarkerEditForm } from "./components/MarkerEditForm";
-import { AppDrawer } from "@/ui/AppDrawer";
+import { useSupplierDrawer } from "@/features/AddSupplierDrawer/hooks/useAddMarkerDrawer";
 import { useQueryClient } from "@tanstack/react-query";
 
 /**
@@ -26,9 +24,6 @@ interface MapProps {
 export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const queryClient = useQueryClient();
   const [location, setLocation] = useState(propLocation);
-  const [selectedMarker, setSelectedMarker] = useState<MarkerFeature | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
@@ -36,7 +31,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const { data: markers, isLoading } = useMarkersQuery();
   const updateMarkerMutation = useUpdateMarkerMutation();
   const deleteMarkerMutation = useDeleteMarkerMutation();
-  const addMarkerDrawer = useAddMarkerDrawer();
+  const addMarkerDrawer = useSupplierDrawer();
 
   // Filter markers based on selected type
   const filteredMarkers = markers && selectedType
@@ -66,9 +61,12 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   };
 
   const handleOpenModal = (marker: MarkerFeature) => {
-    setSelectedMarker(marker);
-    setIsEditing(false);
-    setIsModalOpen(true);
+    addMarkerDrawer.open('view', {
+      properties: marker.properties,
+      onSave: (values: any) => handleSaveMarker(marker.id, values),
+      onDelete: () => handleDeleteMarker(marker.id),
+      deleteLoading: deleteMarkerMutation.isPending,
+    });
   };
 
   const handleMarkerClick = (marker: MarkerFeature) => {
@@ -114,25 +112,14 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     }, 200);
   };
 
-  const handleSaveMarker = async (values: any) => {
-    if (!selectedMarker) return;
-
+  const handleSaveMarker = async (markerId: number, values: any) => {
     updateMarkerMutation.mutate(
-      { id: selectedMarker.id, values },
+      { id: markerId, values },
       {
         onSuccess: async (data) => {
           message.success('Успешно');
-          setIsEditing(false);
           // Перезагружаем данные с сервера и ждем завершения
           await queryClient.refetchQueries({ queryKey: ['markers'] });
-          // Получаем свежие данные
-          const freshMarkers = queryClient.getQueryData(['markers']) as any;
-          if (freshMarkers) {
-            const freshMarker = freshMarkers.features.find((m: any) => m.id === selectedMarker.id);
-            if (freshMarker) {
-              setSelectedMarker(freshMarker);
-            }
-          }
         },
         onError: (error) => {
           message.error('Ошибка при сохранении');
@@ -141,20 +128,10 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     );
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedMarker(null);
-    setIsEditing(false);
-  };
-
-  const handleDeleteMarker = () => {
-    if (!selectedMarker) return;
-
-    deleteMarkerMutation.mutate(selectedMarker.id, {
+  const handleDeleteMarker = (markerId: number) => {
+    deleteMarkerMutation.mutate(markerId, {
       onSuccess: () => {
         message.success('Маркер успешно удален');
-        setIsModalOpen(false);
-        setSelectedMarker(null);
       },
       onError: (error: any) => {
         message.error('Ошибка при удалении маркера');
@@ -194,27 +171,6 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
           </>
         )}
       </div>
-      <AppDrawer
-        title="Информация о маркере"
-        placement="right"
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        size="default"
-        isEditing={isEditing}
-        onToggleEdit={() => setIsEditing(!isEditing)}
-      >
-        {selectedMarker && (
-          <MarkerEditForm
-            properties={selectedMarker.properties}
-            isEditing={isEditing}
-            onSave={handleSaveMarker}
-            onCancel={() => setIsEditing(false)}
-            loading={updateMarkerMutation.isPending}
-            onDelete={handleDeleteMarker}
-            deleteLoading={deleteMarkerMutation.isPending}
-          />
-        )}
-      </AppDrawer>
     </div>
   );
 }

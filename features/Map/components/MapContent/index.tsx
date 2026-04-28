@@ -20,7 +20,7 @@ import { useMemo, useCallback } from "react";
  * @property hoveredId - ID маркера с наведенным курсором
  * @property handleMouseEnter - Callback при наведении курсора на маркер
  * @property handleMouseLeave - Callback при уходе курсора с маркера
- * @property onOpenModal - Callback при клике на маркер для открытия модального окна
+ * @property onOpenModal - Callback при клике на маркер для открытия модального окна просмотра
  * @property onMapClick - Callback при клике на карту
  * @property onAddMarker - Callback при клике на кнопку "Добавить точку"
  * @property onCancelAddMarker - Callback при клике на крестик для отмены добавления маркера
