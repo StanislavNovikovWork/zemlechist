@@ -1,6 +1,6 @@
 "use client";
 
-import { AddSupplierDrawer } from "./AddSupplierDrawer";
+import { AddSupplierDrawer } from "./SupplierDrawer";
 
 export function AddSupplierDrawerWrapper() {
 
