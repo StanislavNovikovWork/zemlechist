@@ -102,6 +102,7 @@ export function MapContent({
           cluster={cluster}
           method={gridSizedMethod}
           features={markers.features}
+          maxZoom={16}
         />
       )}
     </YMap>

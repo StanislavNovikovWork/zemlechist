@@ -1,86 +1,93 @@
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import { AddSupplierForm } from "../AddSupplierForm";
-import { useAddSupplierDrawerStore } from "@/store/addMarkerDrawerStore";
-import { message } from "antd";
-import { useEffect } from "react";
+import { useSupplierDrawerController, type SupplierForm } from "@/store/addMarkerDrawerStore";
+import { useUpdateSupplierMutation } from "../../hooks/mutations/useUpdateSupplierMutation";
+import { useCreateSupplierMutation } from "../../hooks/mutations/useCreateSupplierMutation";
+import { useDeleteSupplierMutation } from "../../hooks/mutations/useDeleteSupplierMutation";
 
-/**
- * Пропсы компонента AddSupplierDrawer
- * @property open - Состояние открытия drawer
- * @property onClose - Callback при закрытии drawer
- */
-interface AddSupplierDrawerProps {
-  open: boolean;
-  onClose: () => void;
-  onEdit?: () => void;
-}
+export function AddSupplierDrawer() {
+  const {
+    isOpen,
+    mode,
+    data,
+    close,
+    openEditSupplier,
+  } = useSupplierDrawerController();
 
-export function AddSupplierDrawer({ open, onClose }: AddSupplierDrawerProps) {
-  const store = useAddSupplierDrawerStore();
-  const { mode, coordinates, properties, onSuccess, onSave, onDelete, onCancel, loading, deleteLoading, setMode } = store;
+  const { mutateAsync: updateSupplier, isPending: updatePending } = useUpdateSupplierMutation();
+  const { mutateAsync: createSupplier, isPending: createPending } = useCreateSupplierMutation();
+  const { mutateAsync: deleteSupplier, isPending: deletePending } = useDeleteSupplierMutation();
 
-  const getTitle = () => {
-    switch (mode) {
-      case 'create':
-        return 'Добавить поставщика';
-      case 'edit':
-        return 'Редактировать поставщика';
-      case 'view':
-        return 'Информация о поставщике';
-      default:
-        return 'Поставщик';
-    }
-  };
+  const isLoading = updatePending || createPending || deletePending;
 
-  const handleSave = (values: any) => {
-    if (onSave) {
-      onSave(values);
-    } else {
-      // Для обратной совместимости с созданием маркера
-      message.success('Сохранено');
-      onSuccess?.();
-      onClose();
-    }
-  };
+const titles = {
+  create: "Добавить поставщика",
+  edit: "Редактировать поставщика",
+  view: "Информация о поставщике",
+} as const;
+
+const title = titles[mode]
+
+const handleSubmit = (values: SupplierForm) => {
+  const isEdit = mode === "edit" && data?.id;
+
+  const action = isEdit ? updateSupplier : createSupplier;
+  const payload = isEdit
+    ? { id: data!.id, ...values }
+    : values;
+
+  action(payload, {
+    onSuccess: () => {
+      message.success("Сохранено");
+      close();
+    },
+    onError: () => {
+      message.error("Ошибка при сохранении");
+    },
+  });
+};
+
+const handleDelete = () => {
+  if (mode !== "view" || !data) return;
+
+  deleteSupplier(data.id, {
+    onSuccess: () => {
+      message.success("Поставщик удалён");
+      close();
+    },
+    onError: () => {
+      message.error("Ошибка при удалении");
+    },
+  });
+};
 
   const handleCancel = () => {
-    if (onCancel) {
-      onCancel();
-    } else {
-      onClose();
-    }
+    close();
   };
 
   const handleEdit = () => {
-    setMode('edit', {
-      onSave,
-      onDelete,
-      onCancel: () => setMode('view'),
-      loading,
-      deleteLoading,
-    });
+    if (data) {
+      openEditSupplier(data);
+    }
   };
 
   return (
     <Drawer
-      title={getTitle()}
+      title={title}
       placement="right"
-      open={open}
-      onClose={onClose}
+      open={isOpen}
+      onClose={close}
       size="default"
     >
       <AddSupplierForm
-        onSave={handleSave}
+        initialValues={data}
+        mode={mode}
+        loading={isLoading}
+        deleteLoading={deletePending}
+        onSubmit={handleSubmit}
         onCancel={handleCancel}
-        loading={loading}
-        initialCoordinates={coordinates}
-        onSuccess={onSuccess}
-        properties={properties}
-        isEditing={mode === 'edit'}
-        isViewMode={mode === 'view'}
-        onDelete={onDelete}
-        deleteLoading={deleteLoading}
-        onEdit={mode === 'view' ? handleEdit : undefined}
+        onDelete={mode === "view" ? handleDelete : undefined}
+        onEdit={mode === "view" ? handleEdit : undefined}
       />
     </Drawer>
   );

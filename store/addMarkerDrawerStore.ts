@@ -1,78 +1,101 @@
 import { create } from 'zustand';
+import { useShallow } from 'zustand/react/shallow';
 
-interface AddSupplierDrawerStore {
-  isOpen: boolean;
-  mode: 'create' | 'edit' | 'view';
-  coordinates: [number, number] | null;
-  properties?: any;
-  onSuccess?: () => void;
-  onSave?: (values: any) => void;
-  onDelete?: () => void;
-  onCancel?: () => void;
-  loading?: boolean;
-  deleteLoading?: boolean;
-  open: (mode: 'create' | 'edit' | 'view', options?: {
-    coordinates?: [number, number];
-    properties?: any;
-    onSuccess?: () => void;
-    onSave?: (values: any) => void;
-    onDelete?: () => void;
-    onCancel?: () => void;
-    loading?: boolean;
-    deleteLoading?: boolean;
-  }) => void;
-  setMode: (mode: 'create' | 'edit' | 'view', options?: {
-    onSave?: (values: any) => void;
-    onDelete?: () => void;
-    onCancel?: () => void;
-    loading?: boolean;
-    deleteLoading?: boolean;
-  }) => void;
+
+export type SupplierForm = {
+  id?: number;
+  phone: string;
+  coordinates: [number, number];
+  name: string;
+  description: string;
+  iconCaption: string;
+  "marker-color": string;
+  type: 'specialTechnique' | 'garbageCollection';
+  reliability?: number;
+
+  website?: string;
+  inn?: string;
+  organizationName?: string;
+  updatedAt?: string;
+  email?: string;
+};
+
+type SupplierWithId = SupplierForm & { id: number };
+
+type AddSupplierDrawerState =
+  | {
+      isOpen: boolean;
+      mode: 'create';
+      data: null;
+    }
+  | {
+      isOpen: boolean;
+      mode: 'edit' | 'view';
+      data: SupplierWithId;
+    };
+
+type AddSupplierDrawerActions = {
+  openCreateSupplier: () => void;
+  openEditSupplier: (data: SupplierWithId) => void;
+  openViewSupplier: (data: SupplierWithId) => void;
   close: () => void;
-  clearCoordinates: () => void;
-}
+  reset: () => void;
+};
 
-export const useAddSupplierDrawerStore = create<AddSupplierDrawerStore>((set: any) => ({
+type AddSupplierDrawerStore =
+  AddSupplierDrawerState & AddSupplierDrawerActions;
+
+const initialState: AddSupplierDrawerState = {
   isOpen: false,
   mode: 'create',
-  coordinates: null,
-  properties: undefined,
-  onSuccess: undefined,
-  onSave: undefined,
-  onDelete: undefined,
-  onCancel: undefined,
-  loading: false,
-  deleteLoading: false,
-  open: (mode: 'create' | 'edit' | 'view', options = {}) => set({
-    isOpen: true,
-    mode,
-    coordinates: options.coordinates || null,
-    properties: mode === 'create' ? undefined : options.properties,
-    onSuccess: options.onSuccess,
-    onSave: options.onSave,
-    onDelete: options.onDelete,
-    onCancel: options.onCancel,
-    loading: options.loading,
-    deleteLoading: options.deleteLoading,
-  }),
-  setMode: (mode: 'create' | 'edit' | 'view', options = {}) => set((state: any) => ({
-    mode,
-    onSave: options.onSave !== undefined ? options.onSave : state.onSave,
-    onDelete: options.onDelete !== undefined ? options.onDelete : state.onDelete,
-    onCancel: options.onCancel !== undefined ? options.onCancel : state.onCancel,
-    loading: options.loading !== undefined ? options.loading : state.loading,
-    deleteLoading: options.deleteLoading !== undefined ? options.deleteLoading : state.deleteLoading,
-  })),
-  close: () => set({
-    isOpen: false,
-    coordinates: null,
-    properties: undefined,
-    onSuccess: undefined,
-    onSave: undefined,
-    onDelete: undefined,
-    onCancel: undefined,
-    loading: false,
-    deleteLoading: false,
-  }),
-  clearCoordinates: () => set({ coordinates: null }),
+  data: null,
+};
+
+export const useSupplierDrawerStore = create<AddSupplierDrawerStore>((set) => ({
+  ...initialState,
+
+  openCreateSupplier: () =>
+    set({
+      isOpen: true,
+      mode: 'create',
+      data: null,
+    }),
+
+  openEditSupplier: (data) =>
+    set({
+      isOpen: true,
+      mode: 'edit',
+      data,
+    }),
+
+  openViewSupplier: (data) =>
+    set({
+      isOpen: true,
+      mode: 'view',
+      data,
+    }),
+
+  close: () =>
+    set((state) => ({
+      ...state,
+      isOpen: false,
+    })),
+
+  reset: () => set(initialState),
 }));
+
+export const useSupplierDrawerController = () => {
+  return useSupplierDrawerStore(
+    useShallow((s) => ({
+      isOpen: s.isOpen,
+      mode: s.mode,
+      data: s.data,
+
+      openCreateSupplier: s.openCreateSupplier,
+      openEditSupplier: s.openEditSupplier,
+      openViewSupplier: s.openViewSupplier,
+      close: s.close,
+      reset: s.reset,
+    }))
+  );
+};

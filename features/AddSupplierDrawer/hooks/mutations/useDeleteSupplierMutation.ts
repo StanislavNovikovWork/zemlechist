@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
  * Хук для удаления маркера
  * @returns Объект с мутацией для удаления маркера
  */
-export function useDeleteMarkerMutation() {
+export function useDeleteSupplierMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({

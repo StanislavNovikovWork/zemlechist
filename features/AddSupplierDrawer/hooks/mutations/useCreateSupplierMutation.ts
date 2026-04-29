@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
  * Хук для создания маркера
  * @returns Объект с мутацией для создания маркера
  */
-export function useCreateMarkerMutation() {
+export function useCreateSupplierMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({

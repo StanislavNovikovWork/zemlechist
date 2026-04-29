@@ -5,13 +5,13 @@ import { Table, Button, message, Typography, Rate } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Supplier } from "@/types/supplier.types";
-import { useSupplierDrawer } from "@/features/AddSupplierDrawer/hooks/useAddMarkerDrawer";
+import { useSupplierDrawerController } from "@/store/addMarkerDrawerStore";
 
 const { Title, Link } = Typography;
 
 export function Suppliers() {
   const queryClient = useQueryClient();
-  const { open } = useSupplierDrawer();
+  const { openCreateSupplier } = useSupplierDrawerController();
 
   // Fetch suppliers
   const { data: suppliers = [], isLoading } = useQuery<Supplier[]>({
@@ -23,33 +23,6 @@ export function Suppliers() {
     },
   });
 
-  // Create supplier mutation
-  const createMutation = useMutation({
-    mutationFn: async (values: any) => {
-      const response = await fetch("/api/suppliers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!response.ok) throw new Error("Failed to create supplier");
-      return response.json();
-    },
-    onSuccess: () => {
-      message.success("Поставщик успешно добавлен");
-      queryClient.invalidateQueries({ queryKey: ["suppliers"] });
-    },
-    onError: () => {
-      message.error("Ошибка при добавлении поставщика");
-    },
-  });
-
-  const handleAddSupplier = () => {
-    open('create', {
-      onSave: (values: any) => {
-        createMutation.mutate(values);
-      },
-    });
-  };
 
   const columns = [
     {
@@ -103,7 +76,7 @@ export function Suppliers() {
         <Title level={2} className="m-0">
           Поставщики
         </Title>
-        <Button type="primary" icon={<PlusOutlined />} onClick={handleAddSupplier}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={openCreateSupplier}>
           Добавить поставщика
         </Button>
       </div>
