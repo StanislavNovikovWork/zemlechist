@@ -32,7 +32,7 @@ export const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } =
   reactify.module(ymaps3);
 
 // Export additional components
-export const { YMapMarker, YMapListener } = reactify.module(ymaps3);
+export const { YMapMarker, YMapListener, YMapDefaultMarker } = reactify.module(ymaps3);
 
 // Import clusterer
 const clusterer = await ymaps3.import('@yandex/ymaps3-clusterer@0.0.12');

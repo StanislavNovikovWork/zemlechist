@@ -3,9 +3,9 @@
 import { useState, useRef } from "react";
 import { Spin } from "antd";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
-import MapSearch from "./components/MapSearch";
-import { MapContent } from "./components/MapContent";
-import { FilterSidebar } from "./components/FilterSidebar";
+import MapSearch from "./ui/MapSearch";
+import { MapContent } from "./ui/MapContent";
+import { FilterSidebar } from "./ui/FilterSidebar";
 import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useQueryClient } from "@tanstack/react-query";
