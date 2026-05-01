@@ -9,7 +9,7 @@ const pool = new Pool({
 export async function GET() {
   try {
     const result = await pool.query(
-      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at
+      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability
        FROM markers
        ORDER BY id`
     );
@@ -34,6 +34,7 @@ export async function GET() {
         organizationName: row.organization_name,
         email: row.email,
         updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
+        reliability: row.reliability,
       },
     }));
 
@@ -55,7 +56,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, coordinates, phone, name, description, website, inn, organization_name, email, updatedAt } = body;
+    const { type, coordinates, phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
 
     // Парсим координаты из массива [долгота, широта]
     const [lon, lat] = coordinates;
@@ -72,10 +73,10 @@ export async function POST(request: Request) {
     }
 
     const result = await pool.query(
-      `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, website, inn, organization_name, email, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-       RETURNING id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at`,
-      [lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organization_name, email, dbUpdatedAt]
+      `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, website, inn, organization_name, email, updated_at, reliability)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+       RETURNING id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability`,
+      [lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, dbUpdatedAt, reliability]
     );
 
     const createdMarker = result.rows[0];

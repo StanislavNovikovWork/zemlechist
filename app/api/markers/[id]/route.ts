@@ -23,7 +23,7 @@ export async function PUT(
 
     const body = await request.json();
 
-    const { phone, name, description, website, inn, organization_name, email, updatedAt } = body;
+    const { phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
 
     // Конвертируем дату из DD.MM.YYYY в формат для PostgreSQL
     let dbUpdatedAt = null;
@@ -41,10 +41,11 @@ export async function PUT(
            inn = COALESCE($5, inn),
            organization_name = COALESCE($6, organization_name),
            email = COALESCE($7, email),
-           updated_at = COALESCE($8, updated_at)
-       WHERE id = $9
+           updated_at = COALESCE($8, updated_at),
+           reliability = COALESCE($9, reliability)
+       WHERE id = $10
        RETURNING *`,
-      [phone, name, description, website, inn, organization_name, email, dbUpdatedAt, id]
+      [phone, name, description, website, inn, organizationName, email, dbUpdatedAt, reliability, id]
     );
 
     if (result.rows.length === 0) {
