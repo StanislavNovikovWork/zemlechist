@@ -34,9 +34,23 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     ? markers?.features?.filter((marker: MarkerFeature) => selectedTypes.includes(marker.properties.type)) || []
     : markers?.features || [];
 
+  // Разделяем маркеры на constructionSite и остальные
+  const constructionSiteMarkers = filteredMarkers.filter((marker: MarkerFeature) => marker.properties.type === 'constructionSite');
+  const otherMarkers = filteredMarkers.filter((marker: MarkerFeature) => marker.properties.type !== 'constructionSite');
+
   const filteredGeoJSON = {
     type: 'FeatureCollection' as const,
     features: filteredMarkers,
+  };
+
+  const constructionSiteGeoJSON = {
+    type: 'FeatureCollection' as const,
+    features: constructionSiteMarkers,
+  };
+
+  const otherMarkersGeoJSON = {
+    type: 'FeatureCollection' as const,
+    features: otherMarkers,
   };
 
   const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
@@ -136,7 +150,8 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
             <MapSearch onLocationChange={handleLocationChange} onMapClick={setClickMarker} />
             <MapContent
               location={location}
-              markers={filteredGeoJSON}
+              constructionSiteMarkers={constructionSiteGeoJSON}
+              otherMarkers={otherMarkersGeoJSON}
               clickMarker={clickMarker}
               hoveredId={hoveredId}
               handleMouseEnter={handleMouseEnter}

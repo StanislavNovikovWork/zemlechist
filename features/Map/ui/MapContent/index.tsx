@@ -15,7 +15,8 @@ import { useMemo, useCallback } from "react";
 /**
  * Пропсы компонента MapContent
  * @property location - Расположение карты с координатами центра и уровнем масштаба
- * @property markers - Массив маркеров для отображения
+ * @property constructionSiteMarkers - Массив маркеров строй площадок для отображения (без кластеризации)
+ * @property otherMarkers - Массив остальных маркеров для отображения (с кластеризацией)
  * @property clickMarker - Координаты временного маркера при клике на карту
  * @property hoveredId - ID маркера с наведенным курсором
  * @property handleMouseEnter - Callback при наведении курсора на маркер
@@ -27,7 +28,8 @@ import { useMemo, useCallback } from "react";
  */
 interface MapContentProps {
   location: { center: [number, number]; zoom: number };
-  markers: MarkersGeoJSON | null;
+  constructionSiteMarkers: MarkersGeoJSON | null;
+  otherMarkers: MarkersGeoJSON | null;
   clickMarker: [number, number] | null;
   hoveredId: number | null;
   handleMouseEnter: (id: number) => void;
@@ -40,7 +42,8 @@ interface MapContentProps {
 
 export function MapContent({
   location,
-  markers,
+  constructionSiteMarkers,
+  otherMarkers,
   clickMarker,
   hoveredId,
   handleMouseEnter,
@@ -96,12 +99,25 @@ export function MapContent({
           onCancelAddMarker={onCancelAddMarker}
         />
       )}
-      {markers?.features && (
+      {/* Слой строй площадок - без кластеризации, с наивысшим z-index */}
+      {constructionSiteMarkers?.features?.map((feature: MarkerFeature) => (
+        <Marker
+          key={feature.id}
+          feature={feature}
+          isHovered={hoveredId === feature.id}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onOpenModal={onOpenModal}
+        />
+      ))}
+      
+      {/* Слой остальных маркеров - с кластеризацией */}
+      {otherMarkers?.features && (
         <YMapClusterer
           marker={marker}
           cluster={cluster}
           method={gridSizedMethod}
-          features={markers.features}
+          features={otherMarkers.features}
           maxZoom={16}
         />
       )}

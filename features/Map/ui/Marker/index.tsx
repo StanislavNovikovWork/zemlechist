@@ -37,7 +37,7 @@ export function Marker({
     <YMapMarker
       key={feature.id}
       coordinates={feature.geometry.coordinates as [number, number]}
-      zIndex={isHovered ? 1000 : 0}
+      zIndex={feature.properties.type === 'constructionSite' ? 2000 : (isHovered ? 1000 : 0)}
     >
       <div
         onMouseEnter={() => onMouseEnter(feature.id)}
