@@ -1,16 +1,14 @@
 import { Drawer, message } from 'antd';
 import { AddSupplierForm } from '../SupplierForm';
-import {
-  useSupplierDrawerController,
-  type SupplierForm,
-} from '@/store/addMarkerDrawerStore';
-import { useUpdateSupplierMutation } from '../../hooks/mutations/useUpdateSupplierMutation';
-import { useCreateSupplierMutation } from '../../hooks/mutations/useCreateSupplierMutation';
-import { useDeleteSupplierMutation } from '../../hooks/mutations/useDeleteSupplierMutation';
+import { useSupplierDrawerController } from '@/features/SupplierDrawerControll/model/supplierDrawer.store';
+import { useUpdateSupplierMutation } from '../../api/mutations/useUpdateSupplierMutation';
+import { useCreateSupplierMutation } from '../../api/mutations/useCreateSupplierMutation';
+import { useDeleteSupplierMutation } from '../../api/mutations/useDeleteSupplierMutation';
 import { SupplierView } from '../SupplierView';
+import { SupplierForm } from '../../model/supplier.types';
 
 export function AddSupplierDrawer() {
-  const { isOpen, mode, data, close, openEditSupplier } =
+  const { isOpen, mode, data, closeSupplierDrawer, openEditSupplier } =
     useSupplierDrawerController();
 
   const { mutateAsync: updateSupplier, isPending: updatePending } =
@@ -39,7 +37,7 @@ export function AddSupplierDrawer() {
     action(payload, {
       onSuccess: () => {
         message.success('Сохранено');
-        close();
+        closeSupplierDrawer();
       },
       onError: () => {
         message.error('Ошибка при сохранении');
@@ -53,7 +51,7 @@ export function AddSupplierDrawer() {
     await deleteSupplier(data.id, {
       onSuccess: () => {
         message.success('Поставщик удалён');
-        close();
+        closeSupplierDrawer();
       },
       onError: () => {
         message.error('Ошибка при удалении');
@@ -61,9 +59,6 @@ export function AddSupplierDrawer() {
     });
   };
 
-  const handleCancel = () => {
-    close();
-  };
 
   const handleEdit = () => {
     if (data) {
@@ -76,8 +71,9 @@ export function AddSupplierDrawer() {
       title={title}
       placement="right"
       open={isOpen}
-      onClose={close}
+      onClose={closeSupplierDrawer}
       size="default"
+      destroyOnHidden
     >
       {mode === 'view' && data ? (
         <SupplierView
@@ -89,10 +85,9 @@ export function AddSupplierDrawer() {
       ) : (
         <AddSupplierForm
           initialValues={data}
-          mode={mode}
           loading={isLoading}
           onSubmit={handleSubmit}
-          onCancel={handleCancel}
+          onCancel={closeSupplierDrawer}
         />
       )}
     </Drawer>

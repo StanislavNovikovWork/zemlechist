@@ -5,7 +5,7 @@ import { Table, Button, message, Typography, Rate } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Supplier } from "@/types/supplier.types";
-import { useSupplierDrawerController } from "@/store/addMarkerDrawerStore";
+import { useSupplierDrawerController } from '@/features/SupplierDrawerControll/model/supplierDrawer.store';
 
 const { Title, Link } = Typography;
 
@@ -71,6 +71,8 @@ export function Suppliers() {
   ];
 
   return (
+        <div className="h-screen">
+
     <div className="p-6 h-full flex flex-col">
       <div className="flex justify-between items-center mb-6">
         <Title level={2} className="m-0">
@@ -91,5 +93,7 @@ export function Suppliers() {
         />
       </div>
     </div>
+        </div>
+
   );
 }

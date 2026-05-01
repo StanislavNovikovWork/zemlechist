@@ -1,1 +1,0 @@
-export { SupplierView } from "./SupplierView";

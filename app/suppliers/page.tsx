@@ -1,6 +1,6 @@
 "use client";
 
-import { Suppliers } from "@/features/Suppliers";
+import { Suppliers } from "@/features/Supplier";
 
 export default function SuppliersPage() {
   return (

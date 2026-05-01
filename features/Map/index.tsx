@@ -9,7 +9,7 @@ import { FilterSidebar } from "./components/FilterSidebar";
 import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useQueryClient } from "@tanstack/react-query";
-import { useSupplierDrawerStore } from "@/store/addMarkerDrawerStore";
+import { useSupplierDrawerController } from "../SupplierDrawerControll/model/supplierDrawer.store";
 
 /**
  * Пропсы компонента Map
@@ -27,7 +27,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
-  const { openCreateSupplier, openViewSupplier } = useSupplierDrawerStore();
+  const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
   // Filter markers based on selected type
   const filteredMarkers = markers && selectedType

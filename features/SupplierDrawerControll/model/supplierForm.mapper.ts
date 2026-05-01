@@ -1,5 +1,4 @@
-import type { SupplierForm } from "@/store/addMarkerDrawerStore";
-import type { SupplierFormValues } from "../types";
+import type { SupplierFormValues, SupplierForm } from "./supplier.types";
 
 
 export function toSubmitValues(values: SupplierFormValues): SupplierForm {

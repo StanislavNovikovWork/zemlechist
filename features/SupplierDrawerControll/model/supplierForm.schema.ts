@@ -1,4 +1,4 @@
-import type { SupplierForm } from "@/store/addMarkerDrawerStore";
+import type { SupplierForm } from "./supplier.types";
 
 type FieldType =
   | "input"

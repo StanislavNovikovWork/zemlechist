@@ -1,26 +1,7 @@
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
+import { SupplierWithId } from './supplier.types';
 
-
-export type SupplierForm = {
-  id?: number;
-  phone: string;
-  coordinates: [number, number];
-  name: string;
-  description: string;
-  iconCaption: string;
-  "marker-color": string;
-  type: 'specialTechnique' | 'garbageCollection';
-  reliability?: number;
-
-  website?: string;
-  inn?: string;
-  organizationName?: string;
-  updatedAt?: string;
-  email?: string;
-};
-
-type SupplierWithId = SupplierForm & { id: number };
 
 type AddSupplierDrawerState =
   | {
@@ -38,7 +19,7 @@ type AddSupplierDrawerActions = {
   openCreateSupplier: () => void;
   openEditSupplier: (data: SupplierWithId) => void;
   openViewSupplier: (data: SupplierWithId) => void;
-  close: () => void;
+  closeSupplierDrawer: () => void;
   reset: () => void;
 };
 
@@ -75,7 +56,7 @@ export const useSupplierDrawerStore = create<AddSupplierDrawerStore>((set) => ({
       data,
     }),
 
-  close: () =>
+  closeSupplierDrawer: () =>
     set((state) => ({
       ...state,
       isOpen: false,
@@ -94,7 +75,7 @@ export const useSupplierDrawerController = () => {
       openCreateSupplier: s.openCreateSupplier,
       openEditSupplier: s.openEditSupplier,
       openViewSupplier: s.openViewSupplier,
-      close: s.close,
+      closeSupplierDrawer: s.closeSupplierDrawer,
       reset: s.reset,
     }))
   );
