@@ -36,18 +36,20 @@ export function ClickMarker({ coordinates, onAddMarker, onCancelAddMarker }: Cli
           <circle cx="20" cy="17" r="6" fill="white" />
         </svg>
         {isHovered && (
-          <div className="absolute bottom-[25px] left-1/2 w-[200px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm">
-            <Button
-              type="primary"
-              block
-              size="small"
-              onClick={(e) => {
-                e.stopPropagation();
-                onAddMarker();
-              }}
-            >
-              Добавить точку
-            </Button>
+          <div className="absolute left-1/2 -translate-x-1/2 mb-2" style={{ bottom: '100%' }}>
+            <div className="w-[200px] bg-white px-4 py-3 rounded shadow-lg text-sm">
+              <Button
+                type="primary"
+                block
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddMarker();
+                }}
+              >
+                Добавить точку
+              </Button>
+            </div>
           </div>
         )}
       </div>
