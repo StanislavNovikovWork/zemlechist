@@ -21,16 +21,15 @@ export function AddSupplierDrawer() {
   const isLoading = updatePending || createPending || deletePending;
 
   const titles = {
-    create: 'Добавить поставщика',
-    edit: 'Редактировать поставщика',
-    view: 'Информация о поставщике',
+    create: data?.type === 'constructionSite' ? 'Добавить строй площадку' : 'Добавить поставщика',
+    edit: data?.type === 'constructionSite' ? 'Редактировать строй площадку' : 'Редактировать поставщика',
+    view: data?.type === 'constructionSite' ? 'Информация о строй площадке' : 'Информация о поставщике',
   } as const;
 
   const title = titles[mode];
 
   const handleSubmit = (values: SupplierForm) => {
     const isEdit = mode === 'edit' && data?.id;
-
     const action = isEdit ? updateSupplier : createSupplier;
     const payload = isEdit ? { id: data!.id, ...values } : values;
 
@@ -50,7 +49,7 @@ export function AddSupplierDrawer() {
 
     await deleteSupplier(data.id, {
       onSuccess: () => {
-        message.success('Поставщик удалён');
+        message.success(data.type === 'constructionSite' ? 'Строительная площадка удалена' : 'Поставщик удалён');
         closeSupplierDrawer();
       },
       onError: () => {

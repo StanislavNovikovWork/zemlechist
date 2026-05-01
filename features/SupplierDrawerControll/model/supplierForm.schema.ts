@@ -26,7 +26,13 @@ export const supplierFormSchema: FieldSchema[] = [
     options: [
       { value: "specialTechnique", label: "Спецтехника" },
       { value: "garbageCollection", label: "Вывоз мусора" },
+      { value: "constructionSite", label: "Строительная площадка" },
     ],
+  },
+  {
+    name: "orderNumber",
+    label: "Заказ",
+    type: "input",
   },
   {
     name: "coordinates",

@@ -8,7 +8,7 @@ export type SupplierForm = {
   description: string;
   iconCaption: string;
   "marker-color": string;
-  type: 'specialTechnique' | 'garbageCollection';
+  type: 'specialTechnique' | 'garbageCollection' | 'constructionSite';
   reliability?: number;
 
   website?: string;
@@ -16,6 +16,7 @@ export type SupplierForm = {
   organizationName?: string;
   updatedAt?: string;
   email?: string;
+  orderNumber?: string;
 };
 
 export type SupplierWithId = SupplierForm & { id: number };

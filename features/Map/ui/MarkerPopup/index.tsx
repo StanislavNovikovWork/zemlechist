@@ -19,9 +19,15 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="absolute bottom-[40px] left-1/2 w-[300px] -translate-x-1/2 bg-white px-4 py-3 rounded shadow-lg text-sm"
+      className="w-[300px] bg-white px-4 py-3 rounded shadow-lg text-sm"
     >
       <div className="space-y-1">
+        {marker.properties.orderNumber && (
+          <div>
+            <span className="font-semibold text-gray-700">Заказ:</span>{' '}
+            <span className="text-gray-900">{marker.properties.orderNumber}</span>
+          </div>
+        )}
         {marker.properties.phone && (
           <div>
             <span className="font-semibold text-gray-700">Телефон:</span>{' '}

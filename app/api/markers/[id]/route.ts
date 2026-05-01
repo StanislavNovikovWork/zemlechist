@@ -22,10 +22,55 @@ export async function PUT(
     }
 
     const body = await request.json();
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
 
-    const { phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
+    // Строительная площадка — обновляем в отдельной таблице
+    if (type === 'constructionSite') {
+      const updates: string[] = [];
+      const values: any[] = [];
+      let paramIndex = 1;
 
-    // Конвертируем дату из DD.MM.YYYY в формат для PostgreSQL
+      if (coordinates) {
+        const [lon, lat] = coordinates;
+        updates.push(`lat = $${paramIndex++}`);
+        values.push(lat);
+        updates.push(`lon = $${paramIndex++}`);
+        values.push(lon);
+      }
+
+      if (orderNumber !== undefined) {
+        updates.push(`order_number = $${paramIndex++}`);
+        values.push(orderNumber);
+      }
+
+      if (updates.length === 0) {
+        return NextResponse.json(
+          { error: 'No fields to update' },
+          { status: 400 }
+        );
+      }
+
+      values.push(id);
+
+      const result = await pool.query(
+        `UPDATE construction_sites
+         SET ${updates.join(', ')}
+         WHERE id = $${paramIndex}
+         RETURNING *`,
+        values
+      );
+
+      if (result.rows.length === 0) {
+        return NextResponse.json(
+          { error: 'Construction site not found' },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json(result.rows[0]);
+    }
+
+    // Остальные типы — обновляем в markers
     let dbUpdatedAt = null;
     if (updatedAt) {
       const [day, month, year] = updatedAt.split('.');
@@ -56,7 +101,6 @@ export async function PUT(
     }
 
     const updatedMarker = result.rows[0];
-    // Конвертируем дату из формата PostgreSQL в DD.MM.YYYY для фронтенда
     if (updatedMarker.updated_at) {
       updatedMarker.updated_at = dayjs(updatedMarker.updated_at).format('DD.MM.YYYY');
     }
@@ -86,7 +130,18 @@ export async function DELETE(
       );
     }
 
-    const result = await pool.query(
+    // Сначала проверяем в construction_sites
+    let result = await pool.query(
+      `DELETE FROM construction_sites WHERE id = $1 RETURNING *`,
+      [id]
+    );
+
+    if (result.rows.length > 0) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    // Если не нашли, проверяем в markers
+    result = await pool.query(
       `DELETE FROM markers WHERE id = $1 RETURNING *`,
       [id]
     );

@@ -24,21 +24,20 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [location, setLocation] = useState(propLocation);
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedTypes, setSelectedTypes] = useState<string[] | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
-  // Filter markers based on selected type
-  const filteredMarkers = markers && selectedType
-    ? {
-        ...markers,
-        features: markers.features.filter((marker: MarkerFeature) => {
-          const markerType = marker.properties.type;
-          return markerType === selectedType;
-        })
-      }
-    : markers;
+  // Filter markers based on selected types
+  const filteredMarkers = selectedTypes
+    ? markers?.features?.filter((marker: MarkerFeature) => selectedTypes.includes(marker.properties.type)) || []
+    : markers?.features || [];
+
+  const filteredGeoJSON = {
+    type: 'FeatureCollection' as const,
+    features: filteredMarkers,
+  };
 
   const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
     setLocation(newLocation);
@@ -50,11 +49,36 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   };
 
   const handleOpenModal = (marker: MarkerFeature) => {
+    if (marker.properties.type === 'constructionSite') {
+      const constructionSiteForm = {
+        id: marker.id,
+        coordinates: marker.geometry.coordinates,
+        type: 'constructionSite' as const,
+        orderNumber: marker.properties.orderNumber,
+        phone: '',
+        name: '',
+        description: '',
+        iconCaption: '',
+        'marker-color': '',
+      };
+      openViewSupplier(constructionSiteForm);
+      return;
+    }
     const supplierForm = {
       id: marker.id,
-      ...marker.properties,
+      phone: marker.properties.phone || '',
+      name: marker.properties.name || '',
+      description: marker.properties.description || '',
+      iconCaption: marker.properties.iconCaption || '',
+      'marker-color': marker.properties['marker-color'] || '',
       coordinates: marker.geometry.coordinates,
       type: marker.properties.type as 'specialTechnique' | 'garbageCollection',
+      website: marker.properties.website,
+      inn: marker.properties.inn,
+      organizationName: marker.properties.organizationName,
+      updatedAt: marker.properties.updatedAt,
+      email: marker.properties.email,
+      reliability: marker.properties.reliability,
     };
     openViewSupplier(supplierForm);
   };
@@ -69,12 +93,8 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setHoveredId(marker.id);
   };
 
-  const handleTypeSelect = (type: string) => {
-    setSelectedType(type);
-  };
-
-  const handleAllTypesSelect = () => {
-    setSelectedType(null);
+  const handleFilterChange = (types: string[] | null) => {
+    setSelectedTypes(types);
   };
 
 
@@ -99,12 +119,11 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
   return (
     <div className="w-full h-full flex">
-      <FilterSidebar 
+      <FilterSidebar
         onAddMarker={openCreateSupplier}
         markers={markers}
         onMarkerClick={handleMarkerClick}
-        onTypeSelect={handleTypeSelect}
-        onAllTypesSelect={handleAllTypesSelect}
+        onFilterChange={handleFilterChange}
       />
       <div className="flex-1 relative">
         {isLoading ? (
@@ -116,7 +135,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
             <MapSearch onLocationChange={handleLocationChange} onMapClick={setClickMarker} />
             <MapContent
               location={location}
-              markers={filteredMarkers}
+              markers={filteredGeoJSON}
               clickMarker={clickMarker}
               hoveredId={hoveredId}
               handleMouseEnter={handleMouseEnter}

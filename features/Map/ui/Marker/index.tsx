@@ -3,8 +3,7 @@
 import { YMapMarker } from "@/lib/ymaps3";
 import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
-import { CarMarkerIcon } from "@/icons/CarMarker";
-import TrashMarker from "@/icons/TrashMarker";
+import { getMarkerConfig } from "./model/getMarkerConfig";
 
 /**
  * Пропсы компонента Marker
@@ -22,7 +21,18 @@ interface MarkerProps {
   onOpenModal: (marker: MarkerFeature) => void;
 }
 
-export function Marker({ feature, isHovered, onMouseEnter, onMouseLeave, onOpenModal }: MarkerProps) {
+export function Marker({
+  feature,
+  isHovered,
+  onMouseEnter,
+  onMouseLeave,
+  onOpenModal,
+}: MarkerProps) {
+  const { Icon, offset, color } = getMarkerConfig(
+    feature.properties.type,
+    isHovered
+  );
+
   return (
     <YMapMarker
       key={feature.id}
@@ -33,19 +43,25 @@ export function Marker({ feature, isHovered, onMouseEnter, onMouseLeave, onOpenM
         onMouseEnter={() => onMouseEnter(feature.id)}
         onMouseLeave={onMouseLeave}
         className="relative z-[1]"
-        style={{ transform: 'translate(-50%, -100%)' }}
+        style={{ transform: "translate(-50%, -100%)" }}
       >
-        {feature.properties.type === 'garbageCollection' ? (
-          <TrashMarker color={isHovered ? "rgb(255, 68, 51)" : "rgb(59, 179, 0)"} />
-        ) : (
-          <CarMarkerIcon color={isHovered ? "rgb(255, 68, 51)" : "rgb(59, 179, 0)"} />
-        )}
+        <Icon color={color} />
+
         {isHovered && (
-          <MarkerPopup
-            marker={feature}
-            onOpenModal={onOpenModal}
-            onMouseLeave={onMouseLeave}
-          />
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              bottom: "100%",
+              transform: `translate(-50%, ${offset[1]}px)`,
+            }}
+          >
+            <MarkerPopup
+              marker={feature}
+              onOpenModal={onOpenModal}
+              onMouseLeave={onMouseLeave}
+            />
+          </div>
         )}
       </div>
     </YMapMarker>

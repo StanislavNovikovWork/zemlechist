@@ -2,7 +2,7 @@
 
 import { Form, Input, Button, Space, Select, DatePicker, Rate } from 'antd';
 import { PhoneInput } from '@/ui/PhoneInput';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
@@ -23,7 +23,19 @@ export function AddSupplierForm({
   onCancel,
 }: AddSupplierFormProps) {
   const [form] = Form.useForm();
+  const typeValue = Form.useWatch('type', form);
 
+  // Фильтруем поля формы в зависимости от типа
+  const filteredSchema = useMemo(() => {
+    if (typeValue === 'constructionSite') {
+      // Для строительной площадки показываем только type и coordinates
+      return supplierFormSchema.filter(
+        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'coordinates'
+      );
+    }
+    // Для остальных типов показываем все поля
+    return supplierFormSchema;
+  }, [typeValue]);
 
   useEffect(() => {
       form.resetFields();
@@ -105,7 +117,7 @@ export function AddSupplierForm({
           layout="vertical"
           onFinish={handleFinish}
         >
-          {renderFormItems({ schema: supplierFormSchema })}
+          {renderFormItems({ schema: filteredSchema })}
         </Form>
       </div>
       <div className="pt-4">

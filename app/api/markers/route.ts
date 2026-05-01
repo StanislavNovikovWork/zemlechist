@@ -8,35 +8,44 @@ const pool = new Pool({
 
 export async function GET() {
   try {
-    const result = await pool.query(
-      `SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability
-       FROM markers
-       ORDER BY id`
-    );
+    const result = await pool.query(`
+      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number
+      FROM markers
+      UNION ALL
+      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number
+      FROM construction_sites
+      ORDER BY id
+    `);
 
     // Convert to GeoJSON format
-    const features = result.rows.map((row) => ({
-      type: 'Feature',
-      id: row.id,
-      geometry: {
-        type: 'Point',
-        coordinates: [parseFloat(row.lon), parseFloat(row.lat)],
-      },
-      properties: {
-        phone: row.phone,
-        name: row.name,
-        description: row.description,
-        iconCaption: row.iconCaption,
-        'marker-color': row.markerColor,
-        type: row.type,
-        website: row.website,
-        inn: row.inn,
-        organizationName: row.organization_name,
-        email: row.email,
-        updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
-        reliability: row.reliability,
-      },
-    }));
+    const features = result.rows.map((row) => {
+      const isConstructionSite = row.type === 'constructionSite';
+      return {
+        type: 'Feature',
+        id: row.id,
+        geometry: {
+          type: 'Point',
+          coordinates: [parseFloat(row.lon), parseFloat(row.lat)],
+        },
+        properties: {
+          phone: row.phone,
+          name: isConstructionSite
+            ? (row.order_number ? `Заказ ${row.order_number}` : `Строй площадка #${row.id}`)
+            : row.name,
+          description: row.description,
+          iconCaption: isConstructionSite ? 'Строительная площадка' : row.iconCaption,
+          'marker-color': isConstructionSite ? '#3BB300' : row.markerColor,
+          type: row.type,
+          website: row.website,
+          inn: row.inn,
+          organizationName: row.organization_name,
+          email: row.email,
+          updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
+          reliability: row.reliability,
+          orderNumber: row.order_number,
+        },
+      };
+    });
 
     const geojson = {
       type: 'FeatureCollection',
@@ -56,16 +65,34 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, coordinates, phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
+    const { type, coordinates, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, orderNumber } = body;
 
-    // Парсим координаты из массива [долгота, широта]
     const [lon, lat] = coordinates;
 
-    // Определяем iconCaption и markerColor на основе типа
-    const iconCaption = type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора';
+    // Строительная площадка — сохраняем в отдельную таблицу
+    if (type === 'constructionSite') {
+      const result = await pool.query(
+        `INSERT INTO construction_sites (lat, lon, order_number)
+         VALUES ($1, $2, $3)
+         RETURNING id, lat, lon, order_number, created_at, updated_at`,
+        [lat, lon, orderNumber || null]
+      );
+      return NextResponse.json(result.rows[0], { status: 201 });
+    }
+
+    // Остальные типы — сохраняем в markers
+    const getIconCaption = (t: string) => {
+      switch (t) {
+        case 'specialTechnique':
+          return 'Спецтехника';
+        case 'garbageCollection':
+        default:
+          return 'Вывоз мусора';
+      }
+    };
+    const iconCaption = getIconCaption(type);
     const markerColor = '#3BB300';
 
-    // Конвертируем дату из DD.MM.YYYY в формат для PostgreSQL
     let dbUpdatedAt = null;
     if (updatedAt) {
       const [day, month, year] = updatedAt.split('.');
@@ -79,9 +106,7 @@ export async function POST(request: Request) {
       [lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, dbUpdatedAt, reliability]
     );
 
-    const createdMarker = result.rows[0];
-
-    return NextResponse.json(createdMarker, { status: 201 });
+    return NextResponse.json(result.rows[0], { status: 201 });
   } catch (error) {
     console.error('Error creating marker:', error);
     return NextResponse.json(

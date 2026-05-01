@@ -5,17 +5,19 @@ export interface MarkerFeature {
     coordinates: [number, number];
   };
   properties: {
-    phone: string;
-    name: string;
-    description: string;
-    iconCaption: string;
-    "marker-color": string;
+    phone?: string;
+    name?: string;
+    description?: string;
+    iconCaption?: string;
+    "marker-color"?: string;
     type: string;
     website?: string;
     inn?: string;
     organizationName?: string;
     updatedAt?: string;
     email?: string;
+    reliability?: number;
+    orderNumber?: string;
   };
 }
 
