@@ -1,6 +1,6 @@
 import { Descriptions, Typography, Rate, Button, Modal } from "antd";
 import { useState } from "react";
-import type { SupplierForm } from "@/store/addMarkerDrawerStore";
+import type { SupplierForm } from "@/features/SupplierDrawerControll/model/supplier.types";
 
 const { Text, Link } = Typography;
 
