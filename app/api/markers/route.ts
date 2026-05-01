@@ -8,14 +8,35 @@ const pool = new Pool({
 
 export async function GET() {
   try {
-    const result = await pool.query(`
-      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number
-      FROM markers
-      UNION ALL
-      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number
-      FROM construction_sites
-      ORDER BY id
+    // Сначала проверим, существует ли поле responsible
+    const tableInfo = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name = 'construction_sites' AND column_name = 'responsible'
     `);
+    
+    const hasResponsibleField = tableInfo.rows.length > 0;
+    
+    // Строим запрос в зависимости от наличия поля
+    const query = hasResponsibleField 
+      ? `
+        SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible
+        FROM markers
+        UNION ALL
+        SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, responsible
+        FROM construction_sites
+        ORDER BY id
+      `
+      : `
+        SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible
+        FROM markers
+        UNION ALL
+        SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, NULL as responsible
+        FROM construction_sites
+        ORDER BY id
+      `;
+    
+    const result = await pool.query(query);
 
     // Convert to GeoJSON format
     const features = result.rows.map((row) => {
@@ -43,6 +64,7 @@ export async function GET() {
           updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
           reliability: row.reliability,
           orderNumber: row.order_number,
+          responsible: row.responsible,
         },
       };
     });
@@ -65,18 +87,37 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, coordinates, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, orderNumber } = body;
+    const { type, coordinates, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, orderNumber, responsible } = body;
 
     const [lon, lat] = coordinates;
 
     // Строительная площадка — сохраняем в отдельную таблицу
     if (type === 'constructionSite') {
-      const result = await pool.query(
-        `INSERT INTO construction_sites (lat, lon, order_number)
-         VALUES ($1, $2, $3)
-         RETURNING id, lat, lon, order_number, created_at, updated_at`,
-        [lat, lon, orderNumber || null]
-      );
+      // Проверяем, существует ли поле responsible
+      const tableInfo = await pool.query(`
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'construction_sites' AND column_name = 'responsible'
+      `);
+      
+      const hasResponsibleField = tableInfo.rows.length > 0;
+      
+      let result;
+      if (hasResponsibleField) {
+        result = await pool.query(
+          `INSERT INTO construction_sites (lat, lon, order_number, responsible)
+           VALUES ($1, $2, $3, $4)
+           RETURNING id, lat, lon, order_number, responsible, created_at, updated_at`,
+          [lat, lon, orderNumber || null, responsible || null]
+        );
+      } else {
+        result = await pool.query(
+          `INSERT INTO construction_sites (lat, lon, order_number)
+           VALUES ($1, $2, $3)
+           RETURNING id, lat, lon, order_number, created_at, updated_at`,
+          [lat, lon, orderNumber || null]
+        );
+      }
       return NextResponse.json(result.rows[0], { status: 201 });
     }
 

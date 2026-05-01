@@ -22,7 +22,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability } = body;
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible } = body;
 
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
@@ -41,6 +41,20 @@ export async function PUT(
       if (orderNumber !== undefined) {
         updates.push(`order_number = $${paramIndex++}`);
         values.push(orderNumber);
+      }
+
+      // Проверяем, существует ли поле responsible
+      const tableInfo = await pool.query(`
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'construction_sites' AND column_name = 'responsible'
+      `);
+      
+      const hasResponsibleField = tableInfo.rows.length > 0;
+
+      if (responsible !== undefined && hasResponsibleField) {
+        updates.push(`responsible = $${paramIndex++}`);
+        values.push(responsible);
       }
 
       if (updates.length === 0) {

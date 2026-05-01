@@ -55,6 +55,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         coordinates: marker.geometry.coordinates,
         type: 'constructionSite' as const,
         orderNumber: marker.properties.orderNumber,
+        responsible: marker.properties.responsible,
         phone: '',
         name: '',
         description: '',

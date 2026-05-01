@@ -17,6 +17,7 @@ export type SupplierForm = {
   updatedAt?: string;
   email?: string;
   orderNumber?: string;
+  responsible?: string;
 };
 
 export type SupplierWithId = SupplierForm & { id: number };

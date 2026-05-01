@@ -42,6 +42,11 @@ export function SupplierView({
                     <Text>{initialValues.orderNumber}</Text>
                   </Descriptions.Item>
                 )}
+                {initialValues.responsible && (
+                  <Descriptions.Item label="Ответственный">
+                    <Text>{initialValues.responsible}</Text>
+                  </Descriptions.Item>
+                )}
                 <Descriptions.Item label="Координаты">
                   <Text>
                     {initialValues.coordinates ? `${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}` : ''}

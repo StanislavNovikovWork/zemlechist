@@ -35,6 +35,11 @@ export const supplierFormSchema: FieldSchema[] = [
     type: "input",
   },
   {
+    name: "responsible",
+    label: "Ответственный",
+    type: "input",
+  },
+  {
     name: "coordinates",
     label: "Координаты",
     type: "input",

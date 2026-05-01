@@ -28,6 +28,12 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
             <span className="text-gray-900">{marker.properties.orderNumber}</span>
           </div>
         )}
+        {marker.properties.responsible && (
+          <div>
+            <span className="font-semibold text-gray-700">Ответственный:</span>{' '}
+            <span className="text-gray-900">{marker.properties.responsible}</span>
+          </div>
+        )}
         {marker.properties.phone && (
           <div>
             <span className="font-semibold text-gray-700">Телефон:</span>{' '}

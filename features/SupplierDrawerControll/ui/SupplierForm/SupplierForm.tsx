@@ -28,9 +28,9 @@ export function AddSupplierForm({
   // Фильтруем поля формы в зависимости от типа
   const filteredSchema = useMemo(() => {
     if (typeValue === 'constructionSite') {
-      // Для строительной площадки показываем только type и coordinates
+      // Для строительной площадки показываем только type, orderNumber, responsible и coordinates
       return supplierFormSchema.filter(
-        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'coordinates'
+        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'responsible' || field.name === 'coordinates'
       );
     }
     // Для остальных типов показываем все поля

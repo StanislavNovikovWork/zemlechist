@@ -18,6 +18,7 @@ export interface MarkerFeature {
     email?: string;
     reliability?: number;
     orderNumber?: string;
+    responsible?: string;
   };
 }
 
