@@ -104,6 +104,7 @@ export function AddSupplierForm({
             label={field.label}
             rules={field.rules}
             initialValue={field.initialValue}
+            style={{ marginBottom: '8px' }}
           >
             {renderField(field)}
           </Form.Item>
