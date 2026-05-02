@@ -1,4 +1,5 @@
 import { MarkerFeature } from "../../types";
+import { StarFilled } from "@ant-design/icons";
 
 /**
  * Пропсы компонента MarkerPopup
@@ -19,8 +20,14 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="w-[300px] bg-white px-4 py-3 rounded shadow-lg text-sm"
+      className="w-[300px] bg-white px-4 py-3 rounded shadow-lg text-sm relative"
     >
+      {marker.properties.reliability && (
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          <StarFilled className="text-xs" style={{ color: '#FADB14' }} />
+          <span className="text-gray-700 text-xs font-medium">{marker.properties.reliability}</span>
+        </div>
+      )}
       <div className="space-y-1">
         {marker.properties.orderNumber && (
           <div>
