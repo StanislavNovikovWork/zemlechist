@@ -38,101 +38,108 @@ export function SupplierView({
             style={{ marginBottom: '8px' }}
             colon={false}
           >
-            {isConstructionSite ? (
-              <>
-                <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
-                  <Text>Строительная площадка</Text>
+            <>
+              {/* Тип */}
+              <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
+                <Text>
+                  {initialValues.type === 'constructionSite' ? 'Строительная площадка' : 
+                   initialValues.type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора'}
+                </Text>
+              </Descriptions.Item>
+
+              {/* Заказ (только для стройплощадок) */}
+              {initialValues.orderNumber && (
+                <Descriptions.Item label="Заказ" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.orderNumber}</Text>
                 </Descriptions.Item>
-                {initialValues.orderNumber && (
-                  <Descriptions.Item label="Заказ" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.orderNumber}</Text>
-                  </Descriptions.Item>
-                )}
-                {initialValues.responsible && (
-                  <Descriptions.Item label="Ответственный" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.responsible}</Text>
-                  </Descriptions.Item>
-                )}
-                <Descriptions.Item label="Координаты" style={{ paddingBottom: '4px' }}>
+              )}
+
+              {/* Ответственный (только для стройплощадок) */}
+              {initialValues.responsible && (
+                <Descriptions.Item label="Ответственный" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.responsible}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Телефон (кроме стройплощадок) */}
+              {!isConstructionSite && initialValues.phone && (
+                <Descriptions.Item label="Телефон" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.phone}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Имя (кроме стройплощадок) */}
+              {!isConstructionSite && initialValues.name && (
+                <Descriptions.Item label="Имя" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.name}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Email */}
+              {initialValues.email && (
+                <Descriptions.Item label="Почта" style={{ paddingBottom: '4px' }}>
+                  <Link href={`mailto:${initialValues.email}`}>
+                    {initialValues.email}
+                  </Link>
+                </Descriptions.Item>
+              )}
+
+              {/* Организация */}
+              {initialValues.organizationName && (
+                <Descriptions.Item label="Организация" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.organizationName}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Описание */}
+              {initialValues.description && (
+                <Descriptions.Item label="Описание" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.description}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Сайт */}
+              {initialValues.website && (
+                <Descriptions.Item label="Сайт" style={{ paddingBottom: '4px' }}>
+                  <Link href={initialValues.website} target="_blank">
+                    {initialValues.website}
+                  </Link>
+                </Descriptions.Item>
+              )}
+
+              {/* ИНН */}
+              {initialValues.inn && (
+                <Descriptions.Item label="ИНН" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.inn}</Text>
+                </Descriptions.Item>
+              )}
+
+              
+              {/* Дата обновления */}
+              {initialValues.updatedAt && (
+                <Descriptions.Item label="Дата" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.updatedAt}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Надежность */}
+              {initialValues.reliability !== undefined && (
+                <Descriptions.Item label="Надежность" style={{ paddingBottom: '4px' }}>
+                  <Rate disabled value={initialValues.reliability} />
+                </Descriptions.Item>
+              )}
+
+              {/* Способ оплаты */}
+              {initialValues.paymentMethod && (
+                <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
                   <Text>
-                    {initialValues.coordinates ? `${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}` : ''}
+                    {initialValues.paymentMethod === 'cash' ? 'Нал' : 
+                     initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
+                     'Оба варианта'}
                   </Text>
                 </Descriptions.Item>
-              </>
-            ) : (
-              <>
-                <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
-                  <Text>{initialValues.type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора'}</Text>
-                </Descriptions.Item>
-                {initialValues.phone && (
-                  <Descriptions.Item label="Телефон" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.phone}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.email && (
-                  <Descriptions.Item label="Почта" style={{ paddingBottom: '4px' }}>
-                    <Link href={`mailto:${initialValues.email}`}>
-                      {initialValues.email}
-                    </Link>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.name && (
-                  <Descriptions.Item label="Имя" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.name}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.organizationName && (
-                  <Descriptions.Item label="Организация" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.organizationName}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.description && (
-                  <Descriptions.Item label="Описание" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.description}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.website && (
-                  <Descriptions.Item label="Сайт" style={{ paddingBottom: '4px' }}>
-                    <Link href={initialValues.website} target="_blank">
-                      {initialValues.website}
-                    </Link>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.inn && (
-                  <Descriptions.Item label="ИНН" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.inn}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.updatedAt && (
-                  <Descriptions.Item label="Дата" style={{ paddingBottom: '4px' }}>
-                    <Text>{initialValues.updatedAt}</Text>
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.reliability !== undefined && (
-                  <Descriptions.Item label="Надежность" style={{ paddingBottom: '4px' }}>
-                    <Rate disabled value={initialValues.reliability} />
-                  </Descriptions.Item>
-                )}
-
-                {initialValues.paymentMethod && (
-                  <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
-                    <Text>
-                      {initialValues.paymentMethod === 'cash' ? 'Нал' : 
-                       initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
-                       'Оба варианта'}
-                    </Text>
-                  </Descriptions.Item>
-                )}
-              </>
-            )}
+              )}
+            </>
           </Descriptions>
         </div>
 
