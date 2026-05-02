@@ -65,6 +65,16 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
             <span className="text-gray-900">{marker.properties.updatedAt}</span>
           </div>
         )}
+        {marker.properties.paymentMethod && (
+          <div>
+            <span className="font-semibold text-gray-700">Оплата:</span>{' '}
+            <span className="text-gray-900">
+              {marker.properties.paymentMethod === 'cash' ? 'Нал' : 
+               marker.properties.paymentMethod === 'cashless' ? 'Без нал' : 
+               'Оба варианта'}
+            </span>
+          </div>
+        )}
       </div>
       <button
         onClick={() => onOpenModal(marker)}

@@ -121,6 +121,16 @@ export function SupplierView({
                     <Rate disabled value={initialValues.reliability} />
                   </Descriptions.Item>
                 )}
+
+                {initialValues.paymentMethod && (
+                  <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
+                    <Text>
+                      {initialValues.paymentMethod === 'cash' ? 'Нал' : 
+                       initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
+                       'Оба варианта'}
+                    </Text>
+                  </Descriptions.Item>
+                )}
               </>
             )}
           </Descriptions>

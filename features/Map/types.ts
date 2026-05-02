@@ -19,6 +19,7 @@ export interface MarkerFeature {
     reliability?: number;
     orderNumber?: string;
     responsible?: string;
+    paymentMethod?: string;
   };
 }
 

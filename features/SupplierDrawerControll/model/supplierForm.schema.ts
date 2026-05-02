@@ -99,6 +99,16 @@ export const supplierFormSchema: FieldSchema[] = [
     placeholder: "1234567890",
   },
   {
+    name: "paymentMethod",
+    label: "Способ оплаты",
+    type: "select",
+    options: [
+      { value: "cash", label: "Нал" },
+      { value: "cashless", label: "Без нал" },
+      { value: "both", label: "Оба варианта" },
+    ],
+  },
+  {
     name: "updatedAt",
     label: "Дата",
     type: "date",

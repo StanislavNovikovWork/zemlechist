@@ -18,6 +18,7 @@ export type SupplierForm = {
   email?: string;
   orderNumber?: string;
   responsible?: string;
+  paymentMethod?: 'cash' | 'cashless' | 'both';
 };
 
 export type SupplierWithId = SupplierForm & { id: number };
