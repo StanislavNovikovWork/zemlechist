@@ -1,6 +1,6 @@
 import { MarkerFeature } from "../../../types";
-import { CarMarkerIcon } from "@/icons/CarMarker";
-import TrashMarker from "@/icons/TrashMarker";
+import { SpecialTechniqueMarker } from "@/icons/SpecialTechniqueMarker";
+import { GarbageCollectionMarker } from "@/icons/GarbageCollectionMarker";
 import { ConstructionMarkerIcon } from "@/icons/ConstructionMarker";
 
 type MarkerType = MarkerFeature["properties"]["type"];
@@ -16,7 +16,7 @@ interface MarkerConfig {
 
 const markerConfig: Record<MarkerType, MarkerConfig> = {
   garbageCollection: {
-    Icon: TrashMarker,
+    Icon: GarbageCollectionMarker,
     offset: [0, -5],
     color: {
       default: "rgb(59, 179, 0)",
@@ -32,7 +32,7 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
     },
   },
   specialTechnique: {
-    Icon: CarMarkerIcon,
+    Icon: SpecialTechniqueMarker,
     offset: [0, -7],
     color: {
       default: "rgb(59, 179, 0)",
