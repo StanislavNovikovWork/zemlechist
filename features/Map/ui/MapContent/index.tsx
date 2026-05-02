@@ -53,7 +53,7 @@ export function MapContent({
   onAddMarker,
   onCancelAddMarker,
 }: MapContentProps) {
-  const gridSizedMethod = useMemo(() => clusterByGrid({ gridSize: 32 }), []);
+  const gridSizedMethod = useMemo(() => clusterByGrid({ gridSize: 64 }), []);
 
   const marker = useCallback(
     (feature: MarkerFeature) => (
@@ -118,7 +118,7 @@ export function MapContent({
           cluster={cluster}
           method={gridSizedMethod}
           features={otherMarkers.features}
-          maxZoom={16}
+          maxZoom={14}
         />
       )}
     </YMap>

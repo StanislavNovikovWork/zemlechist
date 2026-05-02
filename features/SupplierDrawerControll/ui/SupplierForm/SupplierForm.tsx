@@ -33,8 +33,10 @@ export function AddSupplierForm({
         (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'responsible' || field.name === 'coordinates'
       );
     }
-    // Для остальных типов показываем все поля
-    return supplierFormSchema;
+    // Для остальных типов показываем все поля кроме orderNumber и responsible
+    return supplierFormSchema.filter(
+      (field) => field.name !== 'orderNumber' && field.name !== 'responsible'
+    );
   }, [typeValue]);
 
   useEffect(() => {
