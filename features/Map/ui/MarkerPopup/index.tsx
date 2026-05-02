@@ -52,6 +52,12 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
             <span className="text-gray-900">{marker.properties.description}</span>
           </div>
         )}
+        {marker.properties.updatedAt && (
+          <div>
+            <span className="font-semibold text-gray-700">Обновлено:</span>{' '}
+            <span className="text-gray-900">{marker.properties.updatedAt}</span>
+          </div>
+        )}
       </div>
       <button
         onClick={() => onOpenModal(marker)}
