@@ -36,7 +36,7 @@ export function SupplierView({
             size="small" 
             layout="vertical"
             style={{ marginBottom: '8px' }}
-            colon={false}
+            colon={true}
           >
             <>
               {/* Тип */}
@@ -114,11 +114,14 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
 
-              
-              {/* Дата обновления */}
-              {initialValues.updatedAt && (
-                <Descriptions.Item label="Дата" style={{ paddingBottom: '4px' }}>
-                  <Text>{initialValues.updatedAt}</Text>
+              {/* Способ оплаты */}
+              {initialValues.paymentMethod && (
+                <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
+                  <Text>
+                    {initialValues.paymentMethod === 'cash' ? 'Нал' : 
+                     initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
+                     'Оба варианта'}
+                  </Text>
                 </Descriptions.Item>
               )}
 
@@ -129,14 +132,10 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
 
-              {/* Способ оплаты */}
-              {initialValues.paymentMethod && (
-                <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
-                  <Text>
-                    {initialValues.paymentMethod === 'cash' ? 'Нал' : 
-                     initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
-                     'Оба варианта'}
-                  </Text>
+              {/* Дата обновления */}
+              {initialValues.updatedAt && (
+                <Descriptions.Item label="Дата" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.updatedAt}</Text>
                 </Descriptions.Item>
               )}
             </>

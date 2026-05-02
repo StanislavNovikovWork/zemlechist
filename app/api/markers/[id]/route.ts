@@ -22,7 +22,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible } = body;
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod } = body;
 
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
@@ -43,18 +43,24 @@ export async function PUT(
         values.push(orderNumber);
       }
 
-      // Проверяем, существует ли поле responsible
+      // Проверяем, существуют ли поля responsible и payment_method
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name = 'responsible'
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method')
       `);
       
-      const hasResponsibleField = tableInfo.rows.length > 0;
+      const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
+      const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
 
       if (responsible !== undefined && hasResponsibleField) {
         updates.push(`responsible = $${paramIndex++}`);
         values.push(responsible);
+      }
+
+      if (paymentMethod !== undefined && hasPaymentMethodField) {
+        updates.push(`payment_method = $${paramIndex++}`);
+        values.push(paymentMethod);
       }
 
       if (updates.length === 0) {
@@ -91,21 +97,38 @@ export async function PUT(
       dbUpdatedAt = `${year}-${month}-${day}`;
     }
 
-    const result = await pool.query(
-      `UPDATE markers
-       SET phone = COALESCE($1, phone),
-           name = COALESCE($2, name),
-           description = COALESCE($3, description),
-           website = COALESCE($4, website),
-           inn = COALESCE($5, inn),
-           organization_name = COALESCE($6, organization_name),
-           email = COALESCE($7, email),
-           updated_at = COALESCE($8, updated_at),
-           reliability = COALESCE($9, reliability)
-       WHERE id = $10
-       RETURNING *`,
-      [phone, name, description, website, inn, organizationName, email, dbUpdatedAt, reliability, id]
-    );
+    // Проверяем наличие поля payment_method в таблице markers
+    const paymentMethodInfo = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name = 'markers' AND column_name = 'payment_method'
+    `);
+    
+    const hasPaymentMethodField = paymentMethodInfo.rows.length > 0;
+
+    // Строим запрос динамически в зависимости от наличия поля
+    let updateQuery = `
+      UPDATE markers
+      SET phone = COALESCE($1, phone),
+          name = COALESCE($2, name),
+          description = COALESCE($3, description),
+          website = COALESCE($4, website),
+          inn = COALESCE($5, inn),
+          organization_name = COALESCE($6, organization_name),
+          email = COALESCE($7, email),
+          updated_at = COALESCE($8, updated_at),
+          reliability = COALESCE($9, reliability)
+          ${hasPaymentMethodField ? ', payment_method = COALESCE($10, payment_method)' : ''}
+      WHERE id = $${hasPaymentMethodField ? '11' : '10'}
+      RETURNING *`;
+    
+    const queryParams = [phone, name, description, website, inn, organizationName, email, dbUpdatedAt, reliability];
+    if (hasPaymentMethodField) {
+      queryParams.push(paymentMethod);
+    }
+    queryParams.push(id);
+
+    const result = await pool.query(updateQuery, queryParams);
 
     if (result.rows.length === 0) {
       return NextResponse.json(

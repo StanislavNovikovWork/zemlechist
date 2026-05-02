@@ -18,7 +18,13 @@ async function addPaymentMethodField() {
       ADD COLUMN IF NOT EXISTS payment_method VARCHAR(20)
     `);
 
-    console.log('✅ Added payment_method column to suppliers and construction_sites tables');
+    // Добавляем поле в таблицу markers
+    await pool.query(`
+      ALTER TABLE markers
+      ADD COLUMN IF NOT EXISTS payment_method VARCHAR(20)
+    `);
+
+    console.log('✅ Added payment_method column to suppliers, construction_sites and markers tables');
   } catch (error) {
     console.error('❌ Error:', error);
   } finally {

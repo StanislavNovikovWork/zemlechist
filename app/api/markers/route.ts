@@ -26,27 +26,15 @@ export async function GET() {
     const hasPaymentMethodInMarkers = paymentMethodInfo.rows.some(row => row.table_name === 'markers');
     const hasPaymentMethodInConstructionSites = paymentMethodInfo.rows.some(row => row.table_name === 'construction_sites');
 
-    // Базовый запрос без payment_method
+    // Строим запрос с payment_method для каждой таблицы отдельно
     let query = `
-      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible
+      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible${hasPaymentMethodInMarkers ? ', payment_method' : ', NULL as payment_method'}
       FROM markers
       UNION ALL
-      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}
+      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}${hasPaymentMethodInConstructionSites ? ', payment_method' : ', NULL as payment_method'}
       FROM construction_sites
       ORDER BY id
     `;
-
-    // Добавляем payment_method если есть в обеих таблицах
-    if (hasPaymentMethodInMarkers && hasPaymentMethodInConstructionSites) {
-      query = `
-        SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, payment_method
-        FROM markers
-        UNION ALL
-        SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}, payment_method
-        FROM construction_sites
-        ORDER BY id
-      `;
-    }
     
     const result = await pool.query(query);
 

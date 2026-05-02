@@ -70,6 +70,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         type: 'constructionSite' as const,
         orderNumber: marker.properties.orderNumber,
         responsible: marker.properties.responsible,
+        paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
         phone: '',
         name: '',
         description: '',
@@ -94,6 +95,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       updatedAt: marker.properties.updatedAt,
       email: marker.properties.email,
       reliability: marker.properties.reliability,
+      paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
     };
     openViewSupplier(supplierForm);
   };
