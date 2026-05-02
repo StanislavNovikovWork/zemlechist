@@ -128,6 +128,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
         </div>
         <div className="flex-1 overflow-y-auto">
           <Tree
+            className="my-tree"
             expandedKeys={expandedKeys}
             onExpand={setExpandedKeys}
             onSelect={handleSelect}

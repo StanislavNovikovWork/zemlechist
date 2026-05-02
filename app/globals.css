@@ -27,3 +27,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
 }
+
+.ant-tree.my-tree .ant-tree-indent-unit {
+  width: 12px;
+}
+
+.my-tree .ant-tree-node-content-wrapper {
+  padding-left: 0px; /* уменьшаем расстояние */
+}
+

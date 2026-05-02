@@ -8,7 +8,7 @@ import { SupplierView } from '../SupplierView';
 import { SupplierForm } from '../../model/supplier.types';
 
 export function AddSupplierDrawer() {
-  const { isOpen, mode, data, closeSupplierDrawer, openEditSupplier } =
+  const { isOpen, mode, data, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
     useSupplierDrawerController();
 
   const { mutateAsync: updateSupplier, isPending: updatePending } =
@@ -65,6 +65,12 @@ export function AddSupplierDrawer() {
     }
   };
 
+  const handleCancel = () => {
+    if(data) {
+      openViewSupplier(data);
+    }
+  };
+
   return (
     <Drawer
       title={title}
@@ -86,7 +92,7 @@ export function AddSupplierDrawer() {
           initialValues={data}
           loading={isLoading}
           onSubmit={handleSubmit}
-          onCancel={closeSupplierDrawer}
+          onCancel={handleCancel}
         />
       )}
     </Drawer>
