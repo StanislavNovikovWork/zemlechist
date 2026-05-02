@@ -20,5 +20,6 @@ export type FieldSchema = {
   type: FieldType;
   rules?: any[];
   initialValue?: any;
+  placeholder?: string;
   options?: { label: string; value: string }[];
 };

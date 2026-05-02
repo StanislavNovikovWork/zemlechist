@@ -14,6 +14,7 @@ type FieldSchema = {
   type: FieldType;
   rules?: any[];
   initialValue?: any;
+  placeholder?: string;
   options?: { label: string; value: string }[];
 };
 
@@ -33,21 +34,24 @@ export const supplierFormSchema: FieldSchema[] = [
     name: "orderNumber",
     label: "Заказ",
     type: "input",
+    placeholder: "Номер заказа",
   },
   {
     name: "responsible",
     label: "Ответственный",
     type: "input",
+    placeholder: "ФИО ответственного",
   },
   {
     name: "coordinates",
     label: "Координаты",
     type: "input",
+    placeholder: "55.370000, 35.850000",
     rules: [
       { required: true },
       {
         pattern: /^-?\d+\.?\d*,\s*-?\d+\.?\d*$/,
-        message: "Формат: 55.37, 35.85",
+        message: "Формат: 55.370000, 35.850000",
       },
     ],
   },
@@ -61,32 +65,38 @@ export const supplierFormSchema: FieldSchema[] = [
     name: "name",
     label: "Имя",
     type: "input",
+    placeholder: "Название компании или услуги",
     rules: [{ required: true }],
   },
   {
     name: "email",
     label: "Email",
     type: "input",
+    placeholder: "email@example.com",
   },
   {
     name: "organizationName",
     label: "Организация",
     type: "input",
+    placeholder: "Название организации",
   },
   {
     name: "description",
     label: "Описание",
     type: "textarea",
+    placeholder: "Подробное описание услуги или компании",
   },
   {
     name: "website",
     label: "Сайт",
     type: "input",
+    placeholder: "https://example.com",
   },
   {
     name: "inn",
     label: "ИНН",
     type: "input",
+    placeholder: "1234567890",
   },
   {
     name: "updatedAt",

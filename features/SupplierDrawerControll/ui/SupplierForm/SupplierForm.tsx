@@ -72,10 +72,10 @@ export function AddSupplierForm({
   const renderField = (field: FieldSchema) => {
     switch (field.type) {
       case 'input':
-        return <Input {...field.initialValue} />;
+        return <Input placeholder={field.placeholder} {...field.initialValue} />;
 
       case 'textarea':
-        return <Input.TextArea rows={4} {...field.initialValue} />;
+        return <Input.TextArea rows={4} placeholder={field.placeholder} {...field.initialValue} />;
 
       case 'select':
         return <Select options={field.options} {...field.initialValue} />;
