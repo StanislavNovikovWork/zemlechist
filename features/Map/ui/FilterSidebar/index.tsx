@@ -20,17 +20,19 @@ interface FilterSidebarProps {
 
 export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterChange }: FilterSidebarProps) {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>(['objects', 'suppliers']);
-  const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite']);
+  const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
 
   const filterOptions = [
     { label: "Спецтехника", value: "specialTechnique" },
     { label: "Вывоз мусора", value: "garbageCollection" },
     { label: "Строй площадки", value: "constructionSite" },
+    { label: "Нерудные материалы", value: "nonMetallicMaterials" },
   ];
 
   const supplierOptions = [
     { label: "Спецтехника", value: "specialTechnique" },
     { label: "Вывоз мусора", value: "garbageCollection" },
+    { label: "Нерудные материалы", value: "nonMetallicMaterials" },
   ];
 
   // Группируем маркеры по типу
@@ -88,7 +90,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
     // При клике по дереву сбрасываем фильтрацию
     if (key !== 'objects' && key !== 'suppliers' && key !== 'constructionSite') {
       // Это конкретный маркер — сбрасываем фильтрацию
-      setCheckedTypes(['specialTechnique', 'garbageCollection', 'constructionSite']);
+      setCheckedTypes(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
       onFilterChange?.(null);
     }
     if (key.startsWith('cs-')) {

@@ -8,7 +8,7 @@ export type SupplierForm = {
   description: string;
   iconCaption: string;
   "marker-color": string;
-  type: 'specialTechnique' | 'garbageCollection' | 'constructionSite';
+  type: 'specialTechnique' | 'garbageCollection' | 'constructionSite' | 'nonMetallicMaterials';
   reliability?: number;
 
   website?: string;

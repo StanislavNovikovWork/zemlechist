@@ -42,8 +42,9 @@ export function SupplierView({
               {/* Тип */}
               <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
                 <Text>
-                  {initialValues.type === 'constructionSite' ? 'Строительная площадка' : 
-                   initialValues.type === 'specialTechnique' ? 'Спецтехника' : 'Вывоз мусора'}
+                  {initialValues.type === 'constructionSite' ? 'Строительная площадка' :
+                   initialValues.type === 'specialTechnique' ? 'Спецтехника' :
+                   initialValues.type === 'nonMetallicMaterials' ? 'Нерудные материалы' : 'Вывоз мусора'}
                 </Text>
               </Descriptions.Item>
 
