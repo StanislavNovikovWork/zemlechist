@@ -23,7 +23,7 @@ export const supplierFormSchema: FieldSchema[] = [
     name: "type",
     label: "Тип",
     type: "select",
-    rules: [{ required: true }],
+    rules: [{ required: true, message: "Выберите тип" }],
     options: [
       { value: "specialTechnique", label: "Спецтехника" },
       { value: "garbageCollection", label: "Вывоз мусора" },
@@ -49,10 +49,10 @@ export const supplierFormSchema: FieldSchema[] = [
     type: "input",
     placeholder: "55.370000, 35.850000",
     rules: [
-      { required: true },
+      { required: true, message: "Введите координаты" },
       {
         pattern: /^-?\d+\.?\d*,\s*-?\d+\.?\d*$/,
-        message: "Формат: 55.370000, 35.850000",
+        message: "Неверный формат. Пример: 55.370000, 35.850000",
       },
     ],
   },
@@ -60,14 +60,14 @@ export const supplierFormSchema: FieldSchema[] = [
     name: "phone",
     label: "Телефон",
     type: "phone",
-    rules: [{ required: true }],
+    rules: [{ required: true, message: "Введите телефон" }],
   },
   {
     name: "name",
     label: "Имя",
     type: "input",
     placeholder: "Имя",
-    rules: [{ required: true }],
+    rules: [{ required: true, message: "Введите имя" }],
   },
   {
     name: "email",
