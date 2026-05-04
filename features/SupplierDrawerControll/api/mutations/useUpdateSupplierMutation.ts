@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { SupplierForm } from "../../model/supplier.types";
 
-type UpdatePayload = { id: number } & SupplierForm;
+type UpdatePayload = SupplierForm & { id?: number };
 
 /**
  * Преобразует данные формы в формат API для обновления
@@ -40,6 +40,9 @@ export function useUpdateSupplierMutation() {
   return useMutation({
     mutationFn: async (values: UpdatePayload) => {
       const { id, ...data } = values;
+      if (!id) {
+        throw new Error('ID is required for update');
+      }
       const response = await fetch(`/api/markers/${id}`, {
         method: 'PUT',
         headers: {
