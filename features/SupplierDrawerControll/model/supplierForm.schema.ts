@@ -66,7 +66,7 @@ export const supplierFormSchema: FieldSchema[] = [
     name: "name",
     label: "Имя",
     type: "input",
-    placeholder: "Название компании или услуги",
+    placeholder: "Имя",
     rules: [{ required: true }],
   },
   {
