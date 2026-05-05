@@ -79,6 +79,7 @@ export function AddSupplierDrawer() {
       onClose={closeSupplierDrawer}
       size={420}
       destroyOnHidden
+      mask={mode === 'create' || mode === 'edit'}
       rootClassName="glass-drawer"
       style={{
         position: 'absolute',
@@ -88,7 +89,7 @@ export function AddSupplierDrawer() {
         height: 'auto',
       }}
       styles={{
-        mask: {
+         mask: {
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
         },
         section: {
