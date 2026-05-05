@@ -102,24 +102,34 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
         {
           key: 'constructionSite',
           title: 'Строй площадки',
-          children: constructionSites.map((site: MarkerFeature) => ({
-            key: `cs-${site.id}`,
-            title: site.properties.orderNumber ? `Заказ ${site.properties.orderNumber}` : `Строй площадка #${site.id}`,
-          })),
+          children: constructionSites.map((site: MarkerFeature) => {
+            const orderNum = site.properties.orderNumber;
+            const responsible = site.properties.responsible;
+            let title: string;
+            
+            if (orderNum && responsible) {
+              title = `${orderNum} ${responsible}`;
+            } else if (orderNum) {
+              title = orderNum;
+            } else if (responsible) {
+              title = responsible;
+            } else {
+              title = `Строй площадка #${site.id}`;
+            }
+            
+            return {
+              key: `cs-${site.id}`,
+              title,
+            };
+          }),
         },
       ],
     },
   ];
 
-  const handleSelect = (selectedKeys: React.Key[], info: any) => {
+  const handleSelect = (selectedKeys: React.Key[]) => {
     const key = selectedKeys[0] as string;
     if (!key) return;
-    // При клике по дереву сбрасываем фильтрацию
-    if (key !== 'objects' && key !== 'suppliers' && key !== 'constructionSite') {
-      // Это конкретный маркер — сбрасываем фильтрацию
-      setCheckedTypes(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
-      onFilterChange?.(null);
-    }
     if (key.startsWith('cs-')) {
       const siteId = parseInt(key.replace('cs-', ''));
       const site = markers?.features?.find((m: MarkerFeature) => m.id === siteId);
