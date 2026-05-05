@@ -188,12 +188,34 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
               display: none !important;
             }
             .my-tree .ant-tree-node-content-wrapper {
-              width: 100%;
+              width: 100% !important;
+              display: flex !important;
+              align-items: center !important;
+            }
+            .my-tree .ant-tree-treenode {
+              width: 100% !important;
+              max-width: 100% !important;
+              overflow: hidden !important;
             }
             .my-tree .ant-tree-treenode:hover,
             .my-tree .ant-tree-treenode:hover .ant-tree-node-content-wrapper {
               background-color: #f5f5f5 !important;
               border-radius: 6px;
+            }
+            .my-tree .ant-tree-title {
+              overflow: hidden !important;
+              text-overflow: ellipsis !important;
+              white-space: nowrap !important;
+              display: block !important;
+              width: 100% !important;
+            }
+            .my-tree .ant-tree-node-content-wrapper {
+              overflow: hidden !important;
+              text-overflow: ellipsis !important;
+              white-space: nowrap !important;
+            }
+            .my-tree .ant-tree-list-holder-inner {
+              overflow-x: hidden !important;
             }
           `}</style>
           <Tree
@@ -236,7 +258,8 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
                     alignItems: 'center',
                     gap: '4px',
                     flex: 1,
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    minWidth: 0
                   }}>
                     {hasChildren && (
                       <span 
@@ -254,19 +277,23 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
                       </span>
                     )}
                     {!hasChildren && <span style={{ width: '14px', flexShrink: 0 }} />}
-                    <span style={{ 
+                    <div style={{ 
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap'
+                      whiteSpace: 'nowrap',
+                      minWidth: 0,
+                      flex: 1,
+                      width: '100%',
+                      position: 'relative'
                     }}>
                       {nodeData.title as string}
-                    </span>
+                    </div>
                   </div>
                   {showCount && (
                     <span 
                       style={{ 
-                        backgroundColor: '#f0f0f0', 
-                        color: '#595959',
+                        backgroundColor: 'transparent', 
+                        color: '#8c8c8c',
                         fontSize: '11px',
                         fontWeight: 500,
                         minWidth: '22px',
