@@ -82,14 +82,14 @@ export function AddSupplierDrawer() {
       rootClassName="glass-drawer"
       style={{
         position: 'absolute',
-        top: 16,
-        bottom: 16,
+        top: 8,
+        bottom: 8,
         right: 16,
         height: 'auto',
       }}
       styles={{
         mask: {
-          backgroundColor: 'rgba(0, 0, 0, 0)',
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
         },
         section: {
           background: 'rgba(243, 244, 246, 0.6)',

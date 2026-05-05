@@ -55,7 +55,7 @@ export function MapContent({
   onCancelAddMarker,
 }: MapContentProps) {
   const gridSizedMethod = useMemo(() => clusterByGrid({ gridSize: 64 }), []);
-
+  
   // Координаты полигона Московской области
 //   const POLYGONS_COORDINATES = [
 //     [
@@ -110,8 +110,18 @@ export function MapContent({
 
   return (
     <YMap location={location}>
-      <YMapDefaultSchemeLayer />
-      <YMapDefaultFeaturesLayer />
+        <YMapDefaultSchemeLayer 
+      // customization={[
+      //   {
+      //     "stylers": [
+      //       {
+      //         "saturation": -1
+      //       }
+      //     ]
+      //   }
+      // ]}
+    />
+        <YMapDefaultFeaturesLayer />
 
       {/* Полигоны */}
       {/* {POLYGONS_COORDINATES.map((polygonCoords, index) => (
