@@ -72,13 +72,13 @@ export function AddSupplierForm({
   const renderField = (field: FieldSchema) => {
     switch (field.type) {
       case 'input':
-        return <Input placeholder={field.placeholder} {...field.initialValue} />;
+        return <Input placeholder={field.placeholder} {...field.initialValue} style={{ width: '100%' }} />;
 
       case 'textarea':
-        return <Input.TextArea rows={4} placeholder={field.placeholder} {...field.initialValue} />;
+        return <Input.TextArea rows={4} placeholder={field.placeholder} {...field.initialValue} style={{ width: '100%' }} />;
 
       case 'select':
-        return <Select options={field.options} {...field.initialValue} />;
+        return <Select options={field.options} {...field.initialValue} style={{ width: '100%' }} />;
 
       case 'date':
         return <DatePicker style={{ width: '100%' }} {...field.initialValue} />;
@@ -87,7 +87,7 @@ export function AddSupplierForm({
         return <Rate {...field.initialValue} />;
 
       case 'phone':
-        return <PhoneInput {...field.initialValue} />;
+        return <PhoneInput {...field.initialValue} style={{ width: '100%' }} />;
 
       default:
         return null;
@@ -119,11 +119,12 @@ export function AddSupplierForm({
           form={form}
           layout="vertical"
           onFinish={handleFinish}
+          className="px-4"
         >
           {renderFormItems({ schema: filteredSchema })}
         </Form>
       </div>
-      <div className="pt-4">
+      <div className="pt-4 px-4 bg-inherit w-full">
         <Space className="w-full justify-end">
           <Button
             type="primary"
