@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Tree, Badge } from "antd";
+import { Button, Tree, Badge, Divider } from "antd";
 import { useState, useCallback } from "react";
 import type { DataNode } from "antd/es/tree";
 import { MarkerFeature, MarkersGeoJSON } from "../../types";
@@ -29,7 +29,7 @@ interface FilterSidebarProps {
 }
 
 export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterChange }: FilterSidebarProps) {
-  const [expandedKeys, setExpandedKeys] = useState<React.Key[]>(['objects', 'suppliers']);
+  const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
   const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
 
   const filterOptions = [
@@ -75,6 +75,23 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
     return acc;
   }, {}) || {};
 
+  // Рекурсивная функция для подсчета всех дочерних элементов
+  const countAllChildren = (node: any): number => {
+    if (!node.children || node.children.length === 0) {
+      return 0;
+    }
+    
+    let count = 0;
+    for (const child of node.children) {
+      if (child.children && child.children.length > 0) {
+        count += countAllChildren(child);
+      } else {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
   // Фильтруем строй площадки
   const constructionSites = markers?.features?.filter((m: MarkerFeature) => m.properties.type === 'constructionSite') || [];
 
@@ -87,46 +104,40 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   // Генерируем элементы дерева для Ant Design Tree
   const treeData = [
     {
-      key: 'objects',
-      title: 'Объекты',
-      children: [
-        {
-          key: 'suppliers',
-          title: 'Поставщики',
-          children: supplierOptions.map((option) => ({
-            key: option.value,
-            title: option.label,
-            children: markersByType[option.value]?.map((marker) => ({
-              key: String(marker.id),
-              title: marker.properties.name || `Маркер #${marker.id}`,
-            })) || [],
-          })),
-        },
-        {
-          key: 'constructionSite',
-          title: 'Строй площадки',
-          children: constructionSites.map((site: MarkerFeature) => {
-            const orderNum = site.properties.orderNumber;
-            const responsible = site.properties.responsible;
-            let title: string;
-            
-            if (orderNum && responsible) {
-              title = `${orderNum} ${responsible}`;
-            } else if (orderNum) {
-              title = orderNum;
-            } else if (responsible) {
-              title = responsible;
-            } else {
-              title = `Строй площадка #${site.id}`;
-            }
-            
-            return {
-              key: `cs-${site.id}`,
-              title,
-            };
-          }),
-        },
-      ],
+      key: 'suppliers',
+      title: 'Поставщики',
+      children: supplierOptions.map((option) => ({
+        key: option.value,
+        title: option.label,
+        children: markersByType[option.value]?.map((marker) => ({
+          key: String(marker.id),
+          title: marker.properties.name || `Маркер #${marker.id}`,
+        })) || [],
+      })),
+    },
+    {
+      key: 'constructionSite',
+      title: 'Строй площадки',
+      children: constructionSites.map((site: MarkerFeature) => {
+        const orderNum = site.properties.orderNumber;
+        const responsible = site.properties.responsible;
+        let title: string;
+        
+        if (orderNum && responsible) {
+          title = `${orderNum} ${responsible}`;
+        } else if (orderNum) {
+          title = orderNum;
+        } else if (responsible) {
+          title = responsible;
+        } else {
+          title = `Строй площадка #${site.id}`;
+        }
+        
+        return {
+          key: `cs-${site.id}`,
+          title,
+        };
+      }),
     },
   ];
 
@@ -155,8 +166,8 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   return (
     <div className="w-[300px] h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">      
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div className="flex items-center justify-between mb-3 flex-shrink-0">
-          <h4 className="text-sm font-medium text-gray-900">Быстрые фильтры</h4>
+        <div className="flex items-center justify-between mb-4 mt-2 flex-shrink-0">
+          <h4 className="text-base font-semibold text-gray-900">Быстрые фильтры</h4>
           <button 
             onClick={handleReset}
             className="text-sm text-blue-500 hover:text-blue-600 transition-colors"
@@ -181,6 +192,17 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
               color={option.color}
             />
           ))}
+        </div>
+        <Divider style={{ margin: '4px 0' }} className="flex-shrink-0" />
+        <div className="flex-shrink-0 mb-3 mt-3 px-1 flex items-center justify-between">
+          <h4 className="text-base font-semibold text-gray-900">Объекты на карте</h4>
+          <button
+            onClick={onAddMarker}
+            className="w-6 h-6 bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-50 flex items-center justify-center transition-colors flex-shrink-0 rounded-md cursor-pointer"
+            title="Добавить точку"
+          >
+            <span className="text-[16px] leading-none relative top-[-1px]">+</span>
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto">
           <style>{`
@@ -226,9 +248,8 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
             treeData={treeData}
             blockNode
             titleRender={(nodeData: DataNode) => {
-              const childrenCount = nodeData.children?.length || 0;
-              const isRoot = nodeData.key === 'objects';
-              const showCount = childrenCount > 0 && !isRoot;
+              const childrenCount = countAllChildren(nodeData);
+              const showCount = childrenCount > 0;
               const isExpanded = expandedKeys.includes(String(nodeData.key) as React.Key);
               const hasChildren = nodeData.children && nodeData.children.length > 0;
               
@@ -315,15 +336,6 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
           />
         </div>
       </div>
-
-      <Button
-        type="primary"
-        block
-        onClick={onAddMarker}
-        className="flex-shrink-0 mt-4"
-      >
-        Добавить точку
-      </Button>
     </div>
   );
 }
