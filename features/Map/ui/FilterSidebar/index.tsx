@@ -164,7 +164,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   };
 
   return (
-    <div className="w-[300px] h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">      
+    <div className="min-w-[300px] h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">      
       <div className="flex-1 overflow-hidden flex flex-col">
         <div className="flex items-center justify-between mb-4 mt-2 flex-shrink-0">
           <h4 className="text-base font-semibold text-gray-900">Быстрые фильтры</h4>
@@ -213,6 +213,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
               width: 100% !important;
               display: flex !important;
               align-items: center !important;
+              padding-right: 0 !important;
             }
             .my-tree .ant-tree-treenode {
               width: 100% !important;
@@ -277,59 +278,70 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px',
+                    justifyContent: 'space-between',
                     flex: 1,
                     overflow: 'hidden',
-                    minWidth: 0
+                    minWidth: 0,
+                    position: 'relative'
                   }}>
-                    {hasChildren && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      overflow: 'hidden',
+                      minWidth: 0,
+                      flex: 1
+                    }}>
+                      {hasChildren && (
+                        <span 
+                          style={{ 
+                            fontSize: '10px', 
+                            color: '#8c8c8c',
+                            flexShrink: 0,
+                            width: '14px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          {isExpanded ? <CaretDownOutlined /> : <CaretRightOutlined />}
+                        </span>
+                      )}
+                      {!hasChildren && <span style={{ width: '14px', flexShrink: 0 }} />}
+                      <div style={{ 
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        minWidth: 0,
+                        flex: 1
+                      }}>
+                        {nodeData.title as string}
+                      </div>
+                    </div>
+                    {showCount && (
                       <span 
                         style={{ 
-                          fontSize: '10px', 
+                          backgroundColor: 'transparent', 
                           color: '#8c8c8c',
-                          flexShrink: 0,
-                          width: '14px',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
+                          fontSize: '11px',
+                          fontWeight: 500,
+                          minWidth: '22px',
+                          height: '18px',
+                          lineHeight: '18px',
+                          padding: '0 6px',
+                          borderRadius: '9px',
+                          textAlign: 'center',
+                          display: 'inline-block',
+                          position: 'absolute',
+                          right: '0',
+                          top: '50%',
+                          transform: 'translateY(-50%)'
                         }}
                       >
-                        {isExpanded ? <CaretDownOutlined /> : <CaretRightOutlined />}
+                        {childrenCount}
                       </span>
                     )}
-                    {!hasChildren && <span style={{ width: '14px', flexShrink: 0 }} />}
-                    <div style={{ 
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      minWidth: 0,
-                      flex: 1,
-                      width: '100%',
-                      position: 'relative'
-                    }}>
-                      {nodeData.title as string}
-                    </div>
                   </div>
-                  {showCount && (
-                    <span 
-                      style={{ 
-                        backgroundColor: 'transparent', 
-                        color: '#8c8c8c',
-                        fontSize: '11px',
-                        fontWeight: 500,
-                        minWidth: '22px',
-                        height: '18px',
-                        lineHeight: '18px',
-                        padding: '0 6px',
-                        borderRadius: '9px',
-                        textAlign: 'center',
-                        display: 'inline-block',
-                        flexShrink: 0
-                      }}
-                    >
-                      {childrenCount}
-                    </span>
-                  )}
                 </div>
               );
             }}
