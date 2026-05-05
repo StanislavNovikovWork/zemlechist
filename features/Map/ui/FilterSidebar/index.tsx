@@ -1,8 +1,15 @@
 "use client";
 
-import { Button, Tree, Checkbox } from "antd";
+import { Button, Tree } from "antd";
 import { useState } from "react";
 import { MarkerFeature, MarkersGeoJSON } from "../../types";
+import { FilterCard } from "@/ui";
+import {
+  TruckOutlined,
+  DeleteOutlined,
+  HomeOutlined,
+  GoldOutlined,
+} from "@ant-design/icons";
 
 /**
  * Пропсы компонента FilterSidebar
@@ -23,10 +30,30 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
 
   const filterOptions = [
-    { label: "Спецтехника", value: "specialTechnique" },
-    { label: "Вывоз мусора", value: "garbageCollection" },
-    { label: "Строй площадки", value: "constructionSite" },
-    { label: "Нерудные материалы", value: "nonMetallicMaterials" },
+    { 
+      label: "Спецтехника", 
+      value: "specialTechnique",
+      icon: <TruckOutlined />,
+      color: 'blue' as const,
+    },
+    { 
+      label: "Вывоз мусора", 
+      value: "garbageCollection",
+      icon: <DeleteOutlined />,
+      color: 'blue' as const,
+    },
+    { 
+      label: "Строй площадки", 
+      value: "constructionSite",
+      icon: <HomeOutlined />,
+      color: 'blue' as const,
+    },
+    { 
+      label: "Нерудные материалы", 
+      value: "nonMetallicMaterials",
+      icon: <GoldOutlined />,
+      color: 'blue' as const,
+    },
   ];
 
   const supplierOptions = [
@@ -107,25 +134,39 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
     }
   };
 
+  const handleReset = () => {
+    setCheckedTypes(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
+    onFilterChange?.(null);
+  };
+
   return (
     <div className="w-[300px] h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">      
       <div className="flex-1 overflow-hidden flex flex-col">
-        <h4 className="text-sm font-medium mb-3 text-gray-700 dark:text-gray-300 flex-shrink-0">Дерево объектов</h4>
-        <div className="mb-3 flex-shrink-0">
+        <div className="flex items-center justify-between mb-3 flex-shrink-0">
+          <h4 className="text-sm font-medium text-gray-900">Быстрые фильтры</h4>
+          <button 
+            onClick={handleReset}
+            className="text-sm text-blue-500 hover:text-blue-600 transition-colors"
+          >
+            Сбросить
+          </button>
+        </div>
+        <div className="mb-3 flex-shrink-0 space-y-2">
           {filterOptions.map((option) => (
-            <div key={option.value} className="mb-2">
-              <Checkbox
-                checked={checkedTypes.includes(option.value)}
-                onChange={(e) => {
-                  const newChecked = e.target.checked
-                    ? [...checkedTypes, option.value]
-                    : checkedTypes.filter((t) => t !== option.value);
-                  handleFilterChange(newChecked);
-                }}
-              >
-                {option.label}
-              </Checkbox>
-            </div>
+            <FilterCard
+              key={option.value}
+              icon={option.icon}
+              label={option.label}
+              count={markersByType[option.value]?.length || 0}
+              checked={checkedTypes.includes(option.value)}
+              onChange={(checked) => {
+                const newChecked = checked
+                  ? [...checkedTypes, option.value]
+                  : checkedTypes.filter((t) => t !== option.value);
+                handleFilterChange(newChecked);
+              }}
+              color={option.color}
+            />
           ))}
         </div>
         <div className="flex-1 overflow-y-auto">
