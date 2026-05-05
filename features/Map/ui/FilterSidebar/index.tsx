@@ -176,7 +176,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   };
 
   return (
-    <div className="min-w-[300px] h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">      
+    <div className="absolute left-22 top-[8px] bottom-[8px] w-[300px] bg-gray-100/90 dark:bg-gray-800/80 backdrop-blur-md rounded-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg p-4 flex flex-col z-10">      
       <div className="flex-1 overflow-hidden flex flex-col">
         <div className="flex items-center justify-between mb-4 mt-2 flex-shrink-0">
           <h4 className="text-base font-semibold text-gray-900">Быстрые фильтры</h4>
@@ -216,8 +216,11 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
             <span className="text-[16px] leading-none relative top-[-1px]">+</span>
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto rounded-lg">
           <style>{`
+            .my-tree {
+              background: transparent !important;
+            }
             .my-tree .ant-tree-switcher {
               display: none !important;
             }
