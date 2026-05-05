@@ -1,7 +1,8 @@
 "use client";
 
-import { Button, Tree } from "antd";
-import { useState } from "react";
+import { Button, Tree, Badge } from "antd";
+import { useState, useCallback } from "react";
+import type { DataNode } from "antd/es/tree";
 import { MarkerFeature, MarkersGeoJSON } from "../../types";
 import { FilterCard } from "@/ui";
 import {
@@ -186,6 +187,50 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
             onExpand={setExpandedKeys}
             onSelect={handleSelect}
             treeData={treeData}
+            blockNode
+            titleRender={(nodeData: DataNode) => {
+              const childrenCount = nodeData.children?.length || 0;
+              const showCount = childrenCount > 0;
+              
+              return (
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  minWidth: 0
+                }}>
+                  <span style={{ 
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    flex: 1
+                  }}>
+                    {nodeData.title as string}
+                  </span>
+                  {showCount && (
+                    <span 
+                      style={{ 
+                        backgroundColor: '#f0f0f0', 
+                        color: '#595959',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        minWidth: '22px',
+                        height: '18px',
+                        lineHeight: '18px',
+                        padding: '0 6px',
+                        borderRadius: '9px',
+                        textAlign: 'center',
+                        display: 'inline-block',
+                        flexShrink: 0
+                      }}
+                    >
+                      {childrenCount}
+                    </span>
+                  )}
+                </div>
+              );
+            }}
           />
         </div>
       </div>
