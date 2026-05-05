@@ -10,6 +10,8 @@ import {
   DeleteOutlined,
   HomeOutlined,
   GoldOutlined,
+  CaretRightOutlined,
+  CaretDownOutlined,
 } from "@ant-design/icons";
 
 /**
@@ -181,6 +183,19 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
           ))}
         </div>
         <div className="flex-1 overflow-y-auto">
+          <style>{`
+            .my-tree .ant-tree-switcher {
+              display: none !important;
+            }
+            .my-tree .ant-tree-node-content-wrapper {
+              width: 100%;
+            }
+            .my-tree .ant-tree-treenode:hover,
+            .my-tree .ant-tree-treenode:hover .ant-tree-node-content-wrapper {
+              background-color: #f5f5f5 !important;
+              border-radius: 6px;
+            }
+          `}</style>
           <Tree
             className="my-tree"
             expandedKeys={expandedKeys}
@@ -190,24 +205,63 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
             blockNode
             titleRender={(nodeData: DataNode) => {
               const childrenCount = nodeData.children?.length || 0;
-              const showCount = childrenCount > 0;
+              const isRoot = nodeData.key === 'objects';
+              const showCount = childrenCount > 0 && !isRoot;
+              const isExpanded = expandedKeys.includes(String(nodeData.key) as React.Key);
+              const hasChildren = nodeData.children && nodeData.children.length > 0;
               
               return (
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'space-between',
-                  width: '100%',
-                  minWidth: 0
-                }}>
-                  <span style={{ 
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    flex: 1
+                <div 
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    minWidth: 0,
+                    cursor: 'pointer'
+                  }}
+                  onClick={(e) => {
+                    if (hasChildren) {
+                      e.stopPropagation();
+                      const key = String(nodeData.key);
+                      const newExpanded = isExpanded 
+                        ? expandedKeys.filter((k) => String(k) !== key)
+                        : [...expandedKeys, key as React.Key];
+                      setExpandedKeys(newExpanded);
+                    }
+                  }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    flex: 1,
+                    overflow: 'hidden'
                   }}>
-                    {nodeData.title as string}
-                  </span>
+                    {hasChildren && (
+                      <span 
+                        style={{ 
+                          fontSize: '10px', 
+                          color: '#8c8c8c',
+                          flexShrink: 0,
+                          width: '14px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        {isExpanded ? <CaretDownOutlined /> : <CaretRightOutlined />}
+                      </span>
+                    )}
+                    {!hasChildren && <span style={{ width: '14px', flexShrink: 0 }} />}
+                    <span style={{ 
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {nodeData.title as string}
+                    </span>
+                  </div>
                   {showCount && (
                     <span 
                       style={{ 
