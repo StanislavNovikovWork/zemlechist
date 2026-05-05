@@ -33,36 +33,36 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
 
   const filterOptions = [
-    { 
-      label: "Спецтехника", 
+    {
+      label: "Спецтехника",
       value: "specialTechnique",
       icon: <TruckOutlined />,
       color: 'blue' as const,
     },
-    { 
-      label: "Вывоз мусора", 
+    {
+      label: "Вывоз мусора",
       value: "garbageCollection",
       icon: <DeleteOutlined />,
-      color: 'blue' as const,
+      color: 'green' as const,
     },
-    { 
-      label: "Строй площадки", 
+    {
+      label: "Строй площадки",
       value: "constructionSite",
       icon: <HomeOutlined />,
-      color: 'blue' as const,
+      color: 'orange' as const,
     },
-    { 
-      label: "Нерудные материалы", 
+    {
+      label: "Нерудные материалы",
       value: "nonMetallicMaterials",
       icon: <GoldOutlined />,
-      color: 'blue' as const,
+      color: 'purple' as const,
     },
   ];
 
   const supplierOptions = [
-    { label: "Спецтехника", value: "specialTechnique" },
-    { label: "Вывоз мусора", value: "garbageCollection" },
-    { label: "Нерудные материалы", value: "nonMetallicMaterials" },
+    { label: "Спецтехника", value: "specialTechnique", icon: <TruckOutlined />, color: 'blue' as const },
+    { label: "Вывоз мусора", value: "garbageCollection", icon: <DeleteOutlined />, color: 'green' as const },
+    { label: "Нерудные материалы", value: "nonMetallicMaterials", icon: <GoldOutlined />, color: 'purple' as const },
   ];
 
   // Группируем маркеры по типу
@@ -74,6 +74,14 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
     acc[type].push(marker);
     return acc;
   }, {}) || {};
+
+  // Маппинг цветов
+  const colorMap: Record<string, string> = {
+    blue: '#1890ff',
+    green: '#52c41a',
+    orange: '#fa8c16',
+    purple: '#722ed1',
+  };
 
   // Рекурсивная функция для подсчета всех дочерних элементов
   const countAllChildren = (node: any): number => {
@@ -109,6 +117,8 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
       children: supplierOptions.map((option) => ({
         key: option.value,
         title: option.label,
+        icon: option.icon,
+        color: option.color,
         children: markersByType[option.value]?.map((marker) => ({
           key: String(marker.id),
           title: marker.properties.name || `Маркер #${marker.id}`,
@@ -118,11 +128,13 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
     {
       key: 'constructionSite',
       title: 'Строй площадки',
+      icon: <HomeOutlined />,
+      color: 'orange' as const,
       children: constructionSites.map((site: MarkerFeature) => {
         const orderNum = site.properties.orderNumber;
         const responsible = site.properties.responsible;
         let title: string;
-        
+
         if (orderNum && responsible) {
           title = `${orderNum} ${responsible}`;
         } else if (orderNum) {
@@ -132,7 +144,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
         } else {
           title = `Строй площадка #${site.id}`;
         }
-        
+
         return {
           key: `cs-${site.id}`,
           title,
@@ -308,6 +320,18 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
                         </span>
                       )}
                       {!hasChildren && <span style={{ width: '14px', flexShrink: 0 }} />}
+                      {(nodeData as any).icon && (
+                        <span style={{
+                          color: (nodeData as any).color ? colorMap[(nodeData as any).color] : '#8c8c8c',
+                          flexShrink: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          fontSize: '14px',
+                          marginRight: '6px'
+                        }}>
+                          {(nodeData as any).icon}
+                        </span>
+                      )}
                       <div style={{ 
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
