@@ -6,6 +6,7 @@ import {
   YMapListener,
   YMapClusterer,
   clusterByGrid,
+  YMapFeature,
 } from "@/lib/ymaps3";
 import { Marker } from "../Marker";
 import { ClickMarker } from "../ClickMarker";
@@ -55,6 +56,33 @@ export function MapContent({
 }: MapContentProps) {
   const gridSizedMethod = useMemo(() => clusterByGrid({ gridSize: 64 }), []);
 
+  // Координаты полигона Московской области
+//   const POLYGONS_COORDINATES = [
+//     [
+//       [36.50, 56.05],  // северо-запад (район Твери)
+//       [37.80, 56.10],  // север (Дубна)
+//       [39.20, 56.00],  // северо-восток (Александров)
+//       [39.50, 55.40],  // восток (Орехово-Зуево)
+//       [39.30, 54.90],  // юго-восток (Коломна)
+//       [38.80, 54.70],  // юг (Ступино)
+//       [37.80, 54.60],  // юг (Серпухов)
+//       [36.80, 54.70],  // юго-запад (Калуга обл)
+//       [36.40, 55.20],  // запад
+//       [36.30, 55.60],  // северо-запад (Волоколамск)
+//       [36.50, 56.05],  // замыкание полигона
+//     ]
+//   ];
+
+//   const POLYGON_STYLE = {
+//     stroke: [
+//         {
+//             color: '#196DFF99',
+//             width: 3
+//         }
+//     ],
+//     fill: '#196DFF14'
+// };
+
   const marker = useCallback(
     (feature: MarkerFeature) => (
       <Marker
@@ -84,6 +112,18 @@ export function MapContent({
     <YMap location={location}>
       <YMapDefaultSchemeLayer />
       <YMapDefaultFeaturesLayer />
+
+      {/* Полигоны */}
+      {/* {POLYGONS_COORDINATES.map((polygonCoords, index) => (
+        <YMapFeature
+          key={`polygon-${index}`}
+          geometry={{
+            type: 'Polygon',
+            coordinates: [polygonCoords]
+          }}
+          style={POLYGON_STYLE}
+        />
+      ))} */}
       <YMapListener 
         layer="any"
         onClick={(object: any, event: any) => {
