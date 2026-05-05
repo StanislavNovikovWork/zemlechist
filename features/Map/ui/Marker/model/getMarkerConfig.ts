@@ -10,7 +10,10 @@ interface MarkerConfig {
   offset: [number, number]; // смещение попапа
   color: {
     default: string;
-    hover: string;
+  };
+  scale: {
+    default: number;
+    hover: number;
   };
 }
 
@@ -19,24 +22,33 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
     Icon: GarbageCollectionMarker,
     offset: [0, -5],
     color: {
-      default: "rgb(59, 179, 0)",
-      hover: "rgb(255, 68, 51)",
+      default: "#52c41a", // green из FilterCard
+    },
+    scale: {
+      default: 1,
+      hover: 1.2, // небольшое увеличение при наведении
     },
   },
   constructionSite: {
     Icon: ConstructionMarkerIcon,
     offset: [0, -10],
     color: {
-      default: "rgb(255, 68, 51)",
-      hover: "rgb(255, 68, 51)",
+      default: "#fa8c16", // orange из FilterCard
+    },
+    scale: {
+      default: 1,
+      hover: 1.2, // небольшое увеличение при наведении
     },
   },
   specialTechnique: {
     Icon: SpecialTechniqueMarker,
     offset: [0, -7],
     color: {
-      default: "rgb(59, 179, 0)",
-      hover: "rgb(255, 68, 51)",
+      default: "#1890ff", // blue из FilterCard
+    },
+    scale: {
+      default: 1,
+      hover: 1.2, // небольшое увеличение при наведении
     },
   },
 };
@@ -44,13 +56,13 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
 export function getMarkerConfig(type: MarkerType, isHovered: boolean) {
   const config = markerConfig[type] || markerConfig.specialTechnique;
 
-  const color = isHovered
-    ? config.color.hover
-    : config.color.default;
+  const color = config.color.default;
+  const scale = isHovered ? config.scale.hover : config.scale.default;
 
   return {
     Icon: config.Icon,
     offset: config.offset,
     color,
+    scale,
   };
 }

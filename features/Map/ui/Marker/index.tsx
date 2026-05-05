@@ -28,7 +28,7 @@ export function Marker({
   onMouseLeave,
   onOpenModal,
 }: MarkerProps) {
-  const { Icon, offset, color } = getMarkerConfig(
+  const { Icon, offset, color, scale } = getMarkerConfig(
     feature.properties.type,
     isHovered
   );
@@ -43,7 +43,10 @@ export function Marker({
         onMouseEnter={() => onMouseEnter(feature.id)}
         onMouseLeave={onMouseLeave}
         className="relative z-[1]"
-        style={{ transform: "translate(-50%, -100%)" }}
+        style={{ 
+          transform: `translate(-50%, -100%) scale(${scale})`,
+          transition: "transform 0.2s ease-in-out"
+        }}
       >
         <Icon color={color} />
 

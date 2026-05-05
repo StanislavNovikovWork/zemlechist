@@ -20,15 +20,15 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="w-[300px] bg-white px-4 py-3 rounded shadow-lg text-sm relative"
+      className="w-[220px] bg-white px-3 py-2 rounded shadow-lg text-xs relative"
     >
       {marker.properties.reliability && (
-        <div className="absolute top-2 right-2 flex items-center gap-1">
-          <StarFilled className="text-xs" style={{ color: '#FADB14' }} />
-          <span className="text-gray-700 text-xs font-medium">{marker.properties.reliability}</span>
+        <div className="absolute top-1 right-1 flex items-center gap-1">
+          <StarFilled className="text-[10px]" style={{ color: '#FADB14' }} />
+          <span className="text-gray-700 text-[10px] font-medium">{marker.properties.reliability}</span>
         </div>
       )}
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {marker.properties.orderNumber && (
           <div>
             <span className="font-semibold text-gray-700">Заказ:</span>{' '}
@@ -68,7 +68,7 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
       </div>
       <button
         onClick={() => onOpenModal(marker)}
-        className="mt-3 w-full px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm font-medium transition-colors"
+        className="mt-2 w-full px-2 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded text-xs font-medium transition-colors"
       >
         Подробнее
       </button>
