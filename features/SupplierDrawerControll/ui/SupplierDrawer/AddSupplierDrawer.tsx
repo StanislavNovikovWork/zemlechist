@@ -93,15 +93,13 @@ export function AddSupplierDrawer() {
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
         },
         section: {
-          background: 'rgba(243, 244, 246, 0.6)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
+          background: '#f3f4f6',
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
           borderRadius: '12px',
         },
         header: {
           background: 'transparent',
-          borderBottom: '1px solid rgba(229, 231, 235, 0.5)',
+          borderBottom: '1px solid #e5e7eb',
         },
         body: {
           background: 'transparent',

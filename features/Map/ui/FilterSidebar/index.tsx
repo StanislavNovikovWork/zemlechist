@@ -176,7 +176,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   };
 
   return (
-    <div className="absolute left-22 top-[8px] bottom-[8px] w-[300px] bg-gray-100/60 dark:bg-gray-800/60 backdrop-blur-md rounded-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg p-4 flex flex-col z-10">      
+    <div className="absolute left-22 top-[8px] bottom-[8px] w-[300px] bg-gray-100 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg p-4 flex flex-col z-10">      
       <div className="flex-1 overflow-hidden flex flex-col">
         <div className="flex items-center justify-between mb-4 mt-2 flex-shrink-0">
           <h4 className="text-base font-semibold text-gray-900">Быстрые фильтры</h4>
