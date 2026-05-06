@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined, EnvironmentOutlined, ShopOutlined, FileTextOutlined } from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined, EnvironmentOutlined, ShopOutlined, CalendarOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,7 @@ const navItems = [
   { key: "/", label: "Главная", href: "/", icon: <HomeOutlined /> },
   { key: "/map", label: "Карта", href: "/map", icon: <EnvironmentOutlined /> },
   { key: "/suppliers", label: "Поставщики", href: "/suppliers", icon: <ShopOutlined /> },
-  { key: "/orders", label: "Заказы", href: "/orders", icon: <FileTextOutlined /> },
+  { key: "/orders", label: "Работы", href: "/orders", icon: <CalendarOutlined /> },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

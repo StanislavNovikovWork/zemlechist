@@ -1,5 +1,5 @@
 import type { SupplierForm } from "./supplier.types";
-import { foremenConfig } from "@/features/Orders/config/foremen";
+import { foremenConfig } from "@/features/Works/config/foremen";
 
 type FieldType =
   | "input"

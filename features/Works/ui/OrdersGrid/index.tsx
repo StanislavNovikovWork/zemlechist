@@ -1,8 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import { foremenConfig, Foreman } from "../../config/foremen";
+import { useMarkersQuery } from "@/features/Map/hooks/queries/useMarkersQuery";
+import dayjs from 'dayjs';
+import type { MarkerFeature } from "@/features/Map/types";
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
+dayjs.extend(isSameOrBefore);
 
 interface OrdersGridProps {}
 
@@ -16,6 +23,55 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
 
   // Состояние для текущего отображаемого месяца
   const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  // Получаем данные маркеров с бэкенда
+  const { data: markersData, isLoading } = useMarkersQuery();
+
+  // Фильтруем и группируем строй площадки по прорабам и датам
+  const constructionSitesByForeman = useMemo(() => {
+    if (!markersData?.features) return {};
+
+    const filtered = markersData.features.filter(
+      (feature: MarkerFeature) => feature.properties.type === 'constructionSite' && 
+                  feature.properties.responsible && 
+                  feature.properties.duration
+    );
+
+    const grouped: Record<string, Record<string, any[]>> = {};
+
+    filtered.forEach((site: MarkerFeature) => {
+      const responsible = site.properties.responsible;
+      const duration = site.properties.duration;
+      
+      if (duration && duration.length === 2 && duration[0] && duration[1] && responsible) {
+        const startDate = dayjs(duration[0], 'DD.MM.YYYY');
+        const endDate = dayjs(duration[1], 'DD.MM.YYYY');
+        
+        // Создаем все даты в диапазоне
+        let currentDate = startDate;
+        while (currentDate.isSameOrBefore(endDate)) {
+          const dateKey = currentDate.format('YYYY-MM-DD');
+          
+          if (!grouped[responsible]) {
+            grouped[responsible] = {};
+          }
+          if (!grouped[responsible][dateKey]) {
+            grouped[responsible][dateKey] = [];
+          }
+          
+          grouped[responsible][dateKey].push({
+            id: site.id,
+            orderNumber: site.properties.orderNumber,
+            name: site.properties.name,
+          });
+          
+          currentDate = currentDate.add(1, 'day');
+        }
+      }
+    });
+
+    return grouped;
+  }, [markersData]);
 
   // Генерация дат для указанного месяца
   const generateDatesForMonth = (date: Date) => {
@@ -70,12 +126,32 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
 
   const dates = generateDatesForMonth(currentMonth);
 
+  // Получаем строй площадки для конкретной ячейки
+  const getConstructionSitesForCell = (foreman: Foreman, date: Date) => {
+    const dateKey = dayjs(date).format('YYYY-MM-DD');
+    return constructionSitesByForeman[foreman.name]?.[dateKey] || [];
+  };
+
+  // Обработчик клика по строй площадке (заглушка для будущего функционала)
+  const handleSiteClick = (site: { id: number; orderNumber?: string; name?: string }) => {
+    console.log('Clicked on site:', site);
+    // TODO: Добавить будущий функционал
+  };
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex items-center justify-center bg-white">
+        <Spin size="large" />
+      </div>
+    );
+  }
+
   return (
     <div className="h-full overflow-auto bg-white">
       {/* Заголовок с навигацией по месяцам */}
       <div className="sticky top-0 z-10 bg-white border-b border-gray-200 p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Заказы</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Работы</h1>
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigateMonth('prev')}
@@ -112,7 +188,7 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
                 <th
                   key={index}
                   className={`w-40 min-w-40 h-16 p-2 border border-gray-200 text-center ${
-                    isToday(date) ? 'border-l-4 border-l-blue-500 border-r-4 border-r-blue-500' : ''
+                    isToday(date) ? 'border-l-2 border-l-blue-400 border-r-2 border-r-blue-400' : ''
                   }`}
                 >
                   <div className="text-sm font-medium text-gray-900">
@@ -133,16 +209,30 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
                   {foreman.name}
                 </td>
                 {/* Ячейки для заказов */}
-                {dates.map((date, index) => (
-                  <td
-                    key={index}
-                    className={`w-40 min-w-40 h-16 p-1 border border-gray-200 bg-white hover:bg-gray-50 transition-colors ${
-                      isToday(date) ? 'border-l-4 border-l-blue-500 border-r-4 border-r-blue-500' : ''
-                    }`}
-                  >
-                    {/* Здесь будут размещаться заказы */}
-                  </td>
-                ))}
+                {dates.map((date, index) => {
+                  const sites = getConstructionSitesForCell(foreman, date);
+                  return (
+                    <td
+                      key={index}
+                      className={`w-40 min-w-40 h-16 p-1 border border-gray-200 bg-white hover:bg-gray-50 transition-colors ${
+                        isToday(date) ? 'border-l-2 border-l-blue-400 border-r-2 border-r-blue-400' : ''
+                      }`}
+                    >
+                      <div className="space-y-1">
+                        {sites.map((site) => (
+                          <div
+                            key={site.id}
+                            onClick={() => handleSiteClick(site)}
+                            className="px-2 py-1 bg-blue-100 hover:bg-blue-200 rounded text-xs font-medium text-blue-800 cursor-pointer transition-colors truncate"
+                            title={site.orderNumber || site.name}
+                          >
+                            {site.orderNumber || site.name}
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
