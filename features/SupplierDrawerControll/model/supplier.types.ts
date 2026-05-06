@@ -19,22 +19,20 @@ export type SupplierForm = {
   orderNumber?: string;
   responsible?: string;
   paymentMethod?: 'cash' | 'cashless' | 'both';
+  duration?: [Dayjs, Dayjs];
 };
 
 export type SupplierWithId = SupplierForm & { id: number };
 
 
 
-export type SupplierFormValues = Omit<SupplierForm, 'coordinates' | 'updatedAt'> & {
-  coordinates: string;
-  updatedAt?: Dayjs;
-};
 
 type FieldType =
   | 'input'
   | 'textarea'
   | 'select'
   | 'date'
+  | 'dateRange'
   | 'rate'
   | 'phone';
 

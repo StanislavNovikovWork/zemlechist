@@ -20,6 +20,7 @@ export interface MarkerFeature {
     orderNumber?: string;
     responsible?: string;
     paymentMethod?: string;
+    duration?: [string, string];
   };
 }
 

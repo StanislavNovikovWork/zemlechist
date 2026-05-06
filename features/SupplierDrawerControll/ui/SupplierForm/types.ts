@@ -1,9 +1,10 @@
 import type { SupplierForm } from '../../model/supplier.types';
 import type { Dayjs } from 'dayjs';
 
-export type SupplierFormValues = Omit<SupplierForm, 'coordinates' | 'updatedAt'> & {
+export type SupplierFormValues = Omit<SupplierForm, 'coordinates' | 'updatedAt' | 'duration'> & {
   coordinates: string;
   updatedAt?: Dayjs;
+  duration?: [Dayjs, Dayjs];
 };
 
 type FieldType =
@@ -11,6 +12,7 @@ type FieldType =
   | 'textarea'
   | 'select'
   | 'date'
+  | 'dateRange'
   | 'rate'
   | 'phone';
 

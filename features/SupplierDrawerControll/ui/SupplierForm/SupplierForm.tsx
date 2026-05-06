@@ -1,9 +1,12 @@
 'use client';
 
 import { Form, Input, Button, Space, Select, DatePicker, Rate } from 'antd';
+import ruRU from 'antd/locale/ru_RU';
+const { RangePicker } = DatePicker;
 import { PhoneInput } from '@/ui/PhoneInput';
 import { useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
 import { FieldSchema } from './types';
@@ -28,14 +31,14 @@ export function AddSupplierForm({
   // Фильтруем поля формы в зависимости от типа
   const filteredSchema = useMemo(() => {
     if (typeValue === 'constructionSite') {
-      // Для строительной площадки показываем только type, orderNumber, responsible и coordinates
+      // Для строительной площадки показываем только type, orderNumber, responsible, coordinates и duration
       return supplierFormSchema.filter(
-        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'responsible' || field.name === 'coordinates'
+        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'responsible' || field.name === 'coordinates' || field.name === 'duration'
       );
     }
-    // Для остальных типов показываем все поля кроме orderNumber и responsible
+    // Для остальных типов показываем все поля кроме orderNumber, responsible и duration
     return supplierFormSchema.filter(
-      (field) => field.name !== 'orderNumber' && field.name !== 'responsible'
+      (field) => field.name !== 'orderNumber' && field.name !== 'responsible' && field.name !== 'duration'
     );
   }, [typeValue]);
 
@@ -58,6 +61,17 @@ export function AddSupplierForm({
       values.coordinates = `${lat}, ${lng}`;
     }
 
+    // Обработка поля duration - конвертируем строки в dayjs объекты
+    if (values.duration && Array.isArray(values.duration)) {
+      values.duration = values.duration.map((date: any) => {
+        if (typeof date === 'string') {
+          const parsed = dayjs(date, 'DD.MM.YYYY');
+          return parsed.isValid() ? parsed : undefined;
+        }
+        return date;
+      });
+    }
+
     form.setFieldsValue(values);
   }, [initialValues, form]);
 
@@ -67,6 +81,51 @@ export function AddSupplierForm({
 
   type SchemaFormProps = {
     schema: FieldSchema[];
+  };
+
+  // Кастомный компонент для поля диапазона дат
+  const DateRangeInput = () => {
+    const startDate = Form.useWatch('duration', form)?.[0];
+    const endDate = Form.useWatch('duration', form)?.[1];
+
+    return (
+      <Space.Compact style={{ width: '100%' }}>
+        <DatePicker 
+          style={{ width: 'calc(50% - 15px)', borderRadius: '6px' }} 
+          format="DD.MM.YYYY"
+          placeholder="Начало"
+          value={startDate}
+          onChange={(date) => {
+            const currentDuration = form.getFieldValue('duration') || [];
+            form.setFieldValue('duration', [date, currentDuration[1]]);
+          }}
+        />
+        <Input 
+          style={{ 
+            width: '30px', 
+            pointerEvents: 'none', 
+            textAlign: 'center', 
+            backgroundColor: 'transparent',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            borderTop: 'none',
+            borderBottom: 'none'
+          }} 
+          value="-" 
+          readOnly 
+        />
+        <DatePicker 
+          style={{ width: 'calc(50% - 15px)', borderRadius: '6px' }} 
+          format="DD.MM.YYYY"
+          placeholder="Конец"
+          value={endDate}
+          onChange={(date) => {
+            const currentDuration = form.getFieldValue('duration') || [];
+            form.setFieldValue('duration', [currentDuration[0], date]);
+          }}
+        />
+      </Space.Compact>
+    );
   };
 
   const renderField = (field: FieldSchema) => {
@@ -81,7 +140,10 @@ export function AddSupplierForm({
         return <Select options={field.options} {...field.initialValue} style={{ width: '100%' }} />;
 
       case 'date':
-        return <DatePicker style={{ width: '100%' }} {...field.initialValue} />;
+        return <DatePicker style={{ width: '100%' }} />;
+
+      case 'dateRange':
+        return <DateRangeInput />;
 
       case 'rate':
         return <Rate {...field.initialValue} />;

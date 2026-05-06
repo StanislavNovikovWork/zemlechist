@@ -5,6 +5,7 @@ type FieldType =
   | "textarea"
   | "select"
   | "date"
+  | "dateRange"
   | "rate"
   | "phone";
 
@@ -55,6 +56,12 @@ export const supplierFormSchema: FieldSchema[] = [
         message: "Неверный формат. Пример: 55.370000, 35.850000",
       },
     ],
+  },
+  {
+    name: "duration",
+    label: "Продолжительность",
+    type: "dateRange",
+    placeholder: "Выберите период",
   },
   {
     name: "phone",

@@ -22,7 +22,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod } = body;
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration } = body;
 
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
@@ -43,15 +43,16 @@ export async function PUT(
         values.push(orderNumber);
       }
 
-      // Проверяем, существуют ли поля responsible и payment_method
+      // Проверяем, существуют ли поля responsible, payment_method и duration
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
       const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
+      const hasDurationField = tableInfo.rows.some(row => row.column_name === 'duration');
 
       if (responsible !== undefined && hasResponsibleField) {
         updates.push(`responsible = $${paramIndex++}`);
@@ -61,6 +62,11 @@ export async function PUT(
       if (paymentMethod !== undefined && hasPaymentMethodField) {
         updates.push(`payment_method = $${paramIndex++}`);
         values.push(paymentMethod);
+      }
+
+      if (duration !== undefined && hasDurationField) {
+        updates.push(`duration = $${paramIndex++}`);
+        values.push(duration);
       }
 
       if (updates.length === 0) {

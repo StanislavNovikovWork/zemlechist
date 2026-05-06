@@ -62,6 +62,15 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
 
+              {/* Продолжительность (только для стройплощадок) */}
+              {isConstructionSite && initialValues.duration && (
+                <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
+                  <Text>
+                    {initialValues.duration[0]?.format('DD.MM.YYYY')} - {initialValues.duration[1]?.format('DD.MM.YYYY')}
+                  </Text>
+                </Descriptions.Item>
+              )}
+
               {/* Координаты (только для стройплощадок) */}
               {isConstructionSite && initialValues.coordinates && (
                 <Descriptions.Item label="Координаты" style={{ paddingBottom: '4px' }}>

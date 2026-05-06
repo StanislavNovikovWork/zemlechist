@@ -10,6 +10,7 @@ import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSupplierDrawerController } from "../SupplierDrawerControll/model/supplierDrawer.store";
+import dayjs from 'dayjs';
 
 /**
  * Пропсы компонента Map
@@ -75,6 +76,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         orderNumber: marker.properties.orderNumber,
         responsible: marker.properties.responsible,
         paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
+        duration: marker.properties.duration?.map(date => dayjs(date, 'DD.MM.YYYY')) as [any, any] | undefined,
         phone: '',
         name: '',
         description: '',

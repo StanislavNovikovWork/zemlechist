@@ -18,6 +18,7 @@ export interface CreateSupplierRequest {
   website?: string;
   reliability?: number;
   description?: string;
+  duration?: [string, string];
 }
 
 export interface SupplierProperties {
@@ -30,11 +31,13 @@ export interface SupplierProperties {
   inn?: string;
   updatedAt?: string | null;
   reliability?: number;
-  type?: 'specialTechnique' | 'garbageCollection';
+  type?: 'specialTechnique' | 'garbageCollection' | 'constructionSite' | 'nonMetallicMaterials';
+  duration?: [string, string];
 }
 
 // Тип для значений формы (включая Dayjs для DatePicker)
-export interface SupplierFormValues extends Omit<SupplierProperties, 'updatedAt'> {
+export interface SupplierFormValues extends Omit<SupplierProperties, 'updatedAt' | 'duration'> {
   coordinates?: string;
   updatedAt?: string | null | any; // any для поддержки Dayjs в DatePicker
+  duration?: [any, any]; // any для поддержки Dayjs в DatePicker
 }

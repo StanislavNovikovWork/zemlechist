@@ -23,6 +23,7 @@ function toApiPayload(values: SupplierForm) {
     orderNumber: values.orderNumber,
     responsible: values.responsible,
     paymentMethod: values.paymentMethod,
+    duration: values.duration,
   };
 }
 

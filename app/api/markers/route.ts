@@ -23,15 +23,22 @@ export async function GET() {
       WHERE column_name = 'payment_method' AND table_name IN ('markers', 'construction_sites')
     `);
     
+    const durationInfo = await pool.query(`
+      SELECT table_name, column_name 
+      FROM information_schema.columns 
+      WHERE column_name = 'duration' AND table_name IN ('markers', 'construction_sites')
+    `);
+    
     const hasPaymentMethodInMarkers = paymentMethodInfo.rows.some(row => row.table_name === 'markers');
     const hasPaymentMethodInConstructionSites = paymentMethodInfo.rows.some(row => row.table_name === 'construction_sites');
+    const hasDurationInConstructionSites = durationInfo.rows.some(row => row.table_name === 'construction_sites');
 
-    // Строим запрос с payment_method для каждой таблицы отдельно
+    // Строим запрос с payment_method и duration для каждой таблицы отдельно
     let query = `
-      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible${hasPaymentMethodInMarkers ? ', payment_method' : ', NULL as payment_method'}
+      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration${hasPaymentMethodInMarkers ? ', payment_method' : ', NULL as payment_method'}
       FROM markers
       UNION ALL
-      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}${hasPaymentMethodInConstructionSites ? ', payment_method' : ', NULL as payment_method'}
+      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}${hasDurationInConstructionSites ? ', duration' : ', NULL as duration'}${hasPaymentMethodInConstructionSites ? ', payment_method' : ', NULL as payment_method'}
       FROM construction_sites
       ORDER BY id
     `;
@@ -66,6 +73,7 @@ export async function GET() {
           orderNumber: row.order_number,
           responsible: row.responsible,
           paymentMethod: row.payment_method,
+          duration: row.duration,
         },
       };
     });
@@ -85,7 +93,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod } = body;
+    const { lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration } = body;
 
     if (type === 'constructionSite') {
       // Получаем максимальный ID из обеих таблиц для гарантии уникальности
@@ -101,21 +109,23 @@ export async function POST(request: Request) {
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
       const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
+      const hasDurationField = tableInfo.rows.some(row => row.column_name === 'duration');
 
       let query = `
-        INSERT INTO construction_sites (id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''})
-        VALUES ($1, $2, $3, $4${hasResponsibleField ? ', $5' : ''}${hasPaymentMethodField ? (hasResponsibleField ? ', $6' : ', $5') : ''})
-        RETURNING id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}, created_at, updated_at
+        INSERT INTO construction_sites (id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}${hasDurationField ? ', duration' : ''})
+        VALUES ($1, $2, $3, $4${hasResponsibleField ? ', $5' : ''}${hasPaymentMethodField ? (hasResponsibleField ? ', $6' : ', $5') : ''}${hasDurationField ? (hasResponsibleField && hasPaymentMethodField ? ', $7' : (hasResponsibleField || hasPaymentMethodField) ? ', $6' : ', $5') : ''})
+        RETURNING id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}${hasDurationField ? ', duration' : ''}, created_at, updated_at
       `;
 
       const params = [nextId, lat, lon, orderNumber];
       if (hasResponsibleField) params.push(responsible);
       if (hasPaymentMethodField) params.push(paymentMethod);
+      if (hasDurationField) params.push(duration);
 
       const result = await pool.query(query, params);
       return NextResponse.json(result.rows[0]);
