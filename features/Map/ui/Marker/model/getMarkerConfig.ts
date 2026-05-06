@@ -33,7 +33,7 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
     Icon: ConstructionMarkerIcon,
     offset: [0, -10],
     color: {
-      default: "#fa8c16", // orange из FilterCard
+      default: "#f43", // orange из FilterCard
     },
     scale: {
       default: 1,
@@ -44,7 +44,7 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
     Icon: SpecialTechniqueMarker,
     offset: [0, -7],
     color: {
-      default: "#1890ff", // blue из FilterCard
+      default: "#1890ff", // синий как в Ant Design кнопках
     },
     scale: {
       default: 1,

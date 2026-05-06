@@ -100,7 +100,7 @@ export function MapContent({
   const cluster = useCallback(
     (coordinates: [number, number], features: MarkerFeature[]) => (
       <YMapMarker coordinates={coordinates}>
-        <div className="w-10 h-10 rounded-full bg-blue-500 border-2 border-white shadow-md flex items-center justify-center text-white font-bold">
+        <div className="w-10 h-10 rounded-full border-2 border-white shadow-md flex items-center justify-center text-white font-bold" style={{ backgroundColor: '#00ACC1' }}>
           {features.length}
         </div>
       </YMapMarker>
