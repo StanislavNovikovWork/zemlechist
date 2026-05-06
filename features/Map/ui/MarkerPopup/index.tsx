@@ -31,7 +31,9 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
       <div className="space-y-0.5">
         {marker.properties.orderNumber && (
           <div>
-            <span className="font-semibold text-gray-700">Заказ:</span>{' '}
+            <span className="font-semibold text-gray-700">
+              {marker.properties.type === 'constructionSite' ? 'Заказ:' : 'Заказ:'}
+            </span>{' '}
             <span className="text-gray-900">{marker.properties.orderNumber}</span>
           </div>
         )}
@@ -47,10 +49,18 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
             <span className="text-gray-900">{marker.properties.phone}</span>
           </div>
         )}
-        {marker.properties.name && (
+        {marker.properties.name && marker.properties.type !== 'constructionSite' && (
           <div>
             <span className="font-semibold text-gray-700">Имя:</span>{' '}
             <span className="text-gray-900">{marker.properties.name}</span>
+          </div>
+        )}
+        {marker.properties.duration && marker.properties.type === 'constructionSite' && (
+          <div>
+            <span className="font-semibold text-gray-700">Продолжительность:</span>{' '}
+            <span className="text-gray-900">
+              {marker.properties.duration[0]} - {marker.properties.duration[1]}
+            </span>
           </div>
         )}
         {marker.properties.description && (

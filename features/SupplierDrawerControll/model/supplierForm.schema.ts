@@ -1,4 +1,5 @@
 import type { SupplierForm } from "./supplier.types";
+import { foremenConfig } from "@/features/Orders/config/foremen";
 
 type FieldType =
   | "input"
@@ -41,8 +42,12 @@ export const supplierFormSchema: FieldSchema[] = [
   {
     name: "responsible",
     label: "Ответственный",
-    type: "input",
-    placeholder: "ФИО ответственного",
+    type: "select",
+    placeholder: "Выберите ответственного",
+    options: foremenConfig.map(foreman => ({
+      label: foreman.name,
+      value: foreman.name,
+    })),
   },
   {
     name: "coordinates",
