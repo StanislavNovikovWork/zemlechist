@@ -88,6 +88,15 @@ export async function POST(request: Request) {
     const { lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod } = body;
 
     if (type === 'constructionSite') {
+      // Получаем максимальный ID из обеих таблиц для гарантии уникальности
+      const maxIdResult = await pool.query(`
+        SELECT GREATEST(
+          COALESCE((SELECT MAX(id) FROM markers), 0),
+          COALESCE((SELECT MAX(id) FROM construction_sites), 0)
+        ) as max_id
+      `);
+      const nextId = (maxIdResult.rows[0].max_id || 0) + 1;
+
       // Проверяем наличие полей в таблице construction_sites
       const tableInfo = await pool.query(`
         SELECT column_name 
@@ -99,12 +108,12 @@ export async function POST(request: Request) {
       const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
 
       let query = `
-        INSERT INTO construction_sites (lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''})
-        VALUES ($1, $2, $3${hasResponsibleField ? ', $4' : ''}${hasPaymentMethodField ? (hasResponsibleField ? ', $5' : ', $4') : ''})
+        INSERT INTO construction_sites (id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''})
+        VALUES ($1, $2, $3, $4${hasResponsibleField ? ', $5' : ''}${hasPaymentMethodField ? (hasResponsibleField ? ', $6' : ', $5') : ''})
         RETURNING id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}, created_at, updated_at
       `;
 
-      const params = [lat, lon, orderNumber];
+      const params = [nextId, lat, lon, orderNumber];
       if (hasResponsibleField) params.push(responsible);
       if (hasPaymentMethodField) params.push(paymentMethod);
 
