@@ -8,7 +8,7 @@ import { SupplierView } from '../SupplierView';
 import { SupplierForm } from '../../model/supplier.types';
 
 export function AddSupplierDrawer() {
-  const { isOpen, mode, data, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
+  const { isOpen, mode, data, initialData, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
     useSupplierDrawerController();
 
   const { mutateAsync: updateSupplier, isPending: updatePending } =
@@ -123,7 +123,7 @@ export function AddSupplierDrawer() {
         />
       ) : (
         <AddSupplierForm
-          initialValues={data}
+          initialValues={data || initialData as SupplierForm | null}
           loading={isLoading}
           onSubmit={handleSubmit}
           onCancel={handleCancel}

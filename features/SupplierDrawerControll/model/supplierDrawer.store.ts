@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
-import { SupplierWithId } from './supplier.types';
+import { SupplierWithId, SupplierForm } from './supplier.types';
 
 
 type AddSupplierDrawerState =
@@ -8,6 +8,7 @@ type AddSupplierDrawerState =
       isOpen: boolean;
       mode: 'create';
       data: null;
+      initialData?: Partial<SupplierForm>;
     }
   | {
       isOpen: boolean;
@@ -16,7 +17,7 @@ type AddSupplierDrawerState =
     };
 
 type AddSupplierDrawerActions = {
-  openCreateSupplier: () => void;
+  openCreateSupplier: (initialData?: Partial<SupplierForm>) => void;
   openEditSupplier: (data: SupplierWithId) => void;
   openViewSupplier: (data: SupplierWithId) => void;
   closeSupplierDrawer: () => void;
@@ -35,11 +36,12 @@ const initialState: AddSupplierDrawerState = {
 export const useSupplierDrawerStore = create<AddSupplierDrawerStore>((set) => ({
   ...initialState,
 
-  openCreateSupplier: () =>
+  openCreateSupplier: (initialData) =>
     set({
       isOpen: true,
       mode: 'create',
       data: null,
+      initialData,
     }),
 
   openEditSupplier: (data) =>
@@ -71,6 +73,7 @@ export const useSupplierDrawerController = () => {
       isOpen: s.isOpen,
       mode: s.mode,
       data: s.data,
+      initialData: s.mode === 'create' ? s.initialData : undefined,
 
       openCreateSupplier: s.openCreateSupplier,
       openEditSupplier: s.openEditSupplier,

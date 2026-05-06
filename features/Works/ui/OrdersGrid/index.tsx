@@ -5,6 +5,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { foremenConfig, Foreman } from "../../config/foremen";
 import { useMarkersQuery } from "@/features/Map/hooks/queries/useMarkersQuery";
+import { useSupplierDrawerController } from "@/features/SupplierDrawerControll/model/supplierDrawer.store";
 import dayjs from 'dayjs';
 import type { MarkerFeature } from "@/features/Map/types";
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
@@ -26,6 +27,9 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
 
   // Получаем данные маркеров с бэкенда
   const { data: markersData, isLoading } = useMarkersQuery();
+
+  // Контроллер для открытия формы создания поставщика
+  const { openCreateSupplier } = useSupplierDrawerController();
 
   // Фильтруем и группируем строй площадки по прорабам и датам
   const constructionSitesByForeman = useMemo(() => {
@@ -138,6 +142,11 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     // TODO: Добавить будущий функционал
   };
 
+  // Обработчик клика по кнопке добавления точки
+  const handleAddMarker = () => {
+    openCreateSupplier({ type: 'constructionSite' });
+  };
+
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center bg-white">
@@ -151,7 +160,16 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
       {/* Заголовок с навигацией по месяцам */}
       <div className="sticky top-0 z-10 bg-white border-b border-gray-200 p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Работы</h1>
+          <div className="flex items-center space-x-3">
+            <h1 className="text-2xl font-bold text-gray-900">Работы</h1>
+            <button
+              onClick={handleAddMarker}
+              className="w-6 h-6 bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-50 flex items-center justify-center transition-colors flex-shrink-0 rounded-md cursor-pointer"
+              title="Добавить точку"
+            >
+              <span className="text-[16px] leading-none relative top-[-1px]">+</span>
+            </button>
+          </div>
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigateMonth('prev')}
