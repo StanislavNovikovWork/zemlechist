@@ -142,8 +142,8 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
 
-              {/* Надежность */}
-              {initialValues.reliability !== undefined && (
+              {/* Надежность (кроме стройплощадок) */}
+              {!isConstructionSite && initialValues.reliability !== undefined && (
                 <Descriptions.Item label="Надежность" style={{ paddingBottom: '4px' }}>
                   <Rate disabled value={initialValues.reliability} />
                 </Descriptions.Item>

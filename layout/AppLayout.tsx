@@ -10,9 +10,9 @@ const { Header, Sider, Content } = Layout;
 
 const navItems = [
   { key: "/", label: "Главная", href: "/", icon: <HomeOutlined /> },
+  { key: "/orders", label: "Работы", href: "/orders", icon: <CalendarOutlined /> },
   { key: "/map", label: "Карта", href: "/map", icon: <EnvironmentOutlined /> },
   { key: "/suppliers", label: "Поставщики", href: "/suppliers", icon: <ShopOutlined /> },
-  { key: "/orders", label: "Работы", href: "/orders", icon: <CalendarOutlined /> },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

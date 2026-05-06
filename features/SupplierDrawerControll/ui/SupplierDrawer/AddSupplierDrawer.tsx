@@ -82,11 +82,7 @@ export function AddSupplierDrawer() {
       mask={mode === 'create' || mode === 'edit'}
       rootClassName="glass-drawer"
       style={{
-        position: 'absolute',
-        top: 8,
-        bottom: 8,
-        right: 16,
-        height: 'auto',
+        
       }}
       styles={{
          mask: {
@@ -107,6 +103,17 @@ export function AddSupplierDrawer() {
       }}
     >
       <style>{`
+        .glass-drawer .ant-drawer-content-wrapper {
+          height: calc(100vh - 16px) !important;
+          position: absolute;
+          top: 8px;
+          bottom: 8px ;
+          right: 16px;
+          border-radius: 12px !important;
+        }
+        .glass-drawer .ant-drawer-section {
+          height: 100%;
+        }
         .dark .glass-drawer .ant-drawer-section {
           background: rgba(31, 41, 55, 0.8) !important;
         }
