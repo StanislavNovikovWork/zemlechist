@@ -29,7 +29,7 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   const { data: markersData, isLoading } = useMarkersQuery();
 
   // Контроллер для открытия формы создания поставщика
-  const { openCreateSupplier } = useSupplierDrawerController();
+  const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
   // Фильтруем и группируем строй площадки по прорабам и датам
   const constructionSitesByForeman = useMemo(() => {
@@ -136,10 +136,24 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     return constructionSitesByForeman[foreman.name]?.[dateKey] || [];
   };
 
-  // Обработчик клика по строй площадке (заглушка для будущего функционала)
+  // Обработчик клика по строй площадке
   const handleSiteClick = (site: { id: number; orderNumber?: string; name?: string }) => {
-    console.log('Clicked on site:', site);
-    // TODO: Добавить будущий функционал
+    // Находим полный объект поставщика по ID
+    const supplier = markersData?.features?.find((marker: MarkerFeature) => marker.id === site.id);
+    if (supplier) {
+      // Преобразуем в формат SupplierForm
+      const supplierData: any = {
+        id: supplier.id,
+        ...supplier.properties
+      };
+      
+      // Конвертируем duration из строк в Dayjs объекты, если это стройплощадка
+      if (supplierData.type === 'constructionSite' && supplierData.duration && Array.isArray(supplierData.duration)) {
+        supplierData.duration = supplierData.duration.map((dateStr: string) => dayjs(dateStr, 'DD.MM.YYYY'));
+      }
+      
+      openViewSupplier(supplierData);
+    }
   };
 
   // Обработчик клика по кнопке добавления точки
