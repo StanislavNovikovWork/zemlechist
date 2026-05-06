@@ -136,6 +136,26 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     return constructionSitesByForeman[foreman.name]?.[dateKey] || [];
   };
 
+  // Определяем цвет полосы сверху в зависимости от статуса сайта
+  const getSiteTopBorderColor = (site: { id: number; orderNumber?: string; name?: string }) => {
+    const supplier = markersData?.features?.find((marker: MarkerFeature) => marker.id === site.id);
+    if (!supplier?.properties.duration || !Array.isArray(supplier.properties.duration) || supplier.properties.duration.length !== 2) {
+      return 'border-t-blue-200'; // по умолчанию
+    }
+    
+    const startDate = dayjs(supplier.properties.duration[0], 'DD.MM.YYYY');
+    const endDate = dayjs(supplier.properties.duration[1], 'DD.MM.YYYY');
+    const today = dayjs();
+    
+    if (today.isBefore(startDate, 'day')) {
+      return 'border-t-orange-400'; // оранжевая - еще не началось
+    } else if (today.isAfter(endDate, 'day')) {
+      return 'border-t-red-400'; // красная - уже закончилось
+    } else {
+      return 'border-t-green-400'; // зеленая - в работе
+    }
+  };
+
   // Обработчик клика по строй площадке
   const handleSiteClick = (site: { id: number; orderNumber?: string; name?: string }) => {
     // Находим полный объект поставщика по ID
@@ -161,6 +181,31 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     openCreateSupplier({ type: 'constructionSite' });
   };
 
+  // Считаем общее количество site с первого числа месяца до текущей даты
+  const getTotalSitesCount = useMemo(() => {
+    const today = dayjs();
+    const firstDayOfMonth = today.startOf('month');
+    
+    let totalCount = 0;
+    
+    // Проходим по всем прорабам
+    foremen.forEach((foreman: Foreman) => {
+      // Проходим по всем датам с начала месяца до сегодня
+      let currentDate = firstDayOfMonth;
+      while (currentDate.isSameOrBefore(today, 'day')) {
+        const dateKey = currentDate.format('YYYY-MM-DD');
+        const sites = constructionSitesByForeman[foreman.name]?.[dateKey] || [];
+        totalCount += sites.length;
+        currentDate = currentDate.add(1, 'day');
+      }
+    });
+    
+    return totalCount;
+  }, [foremen, constructionSitesByForeman]);
+
+  // Считаем итоговую сумму по формуле 350 * количество site
+  const totalAmount = getTotalSitesCount * 350;
+
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center bg-white">
@@ -172,10 +217,10 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   return (
     <div className="h-full overflow-auto bg-white">
       {/* Заголовок с навигацией по месяцам */}
-      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 p-4">
+      <div className="sticky top-0 z-10 bg-white p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <h1 className="text-2xl font-bold text-gray-900">Работы</h1>
+            <h1 className="text-2xl font-bold text-gray-900">График работ</h1>
             <button
               onClick={handleAddMarker}
               className="w-6 h-6 bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-50 flex items-center justify-center transition-colors flex-shrink-0 rounded-md cursor-pointer"
@@ -207,8 +252,9 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
       </div>
 
       {/* Таблица с фиксированным столбцом */}
-      <div className="overflow-x-auto bg-white">
-        <table className="min-w-full border-collapse">
+      <div className="mx-4">
+        <div className="overflow-x-auto bg-white border border-gray-200 rounded-lg">
+          <table className="min-w-full border-collapse">
           <thead>
             <tr>
               {/* Заголовок прорабов */}
@@ -255,7 +301,7 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
                           <div
                             key={site.id}
                             onClick={() => handleSiteClick(site)}
-                            className="px-2 py-1 bg-blue-100 hover:bg-blue-200 rounded text-xs font-medium text-blue-800 cursor-pointer transition-colors truncate"
+                            className={`px-2 py-1 bg-blue-100 hover:bg-blue-200 rounded text-xs font-medium text-blue-800 cursor-pointer transition-colors truncate border-t-3 ${getSiteTopBorderColor(site)}`}
                             title={site.orderNumber || site.name}
                           >
                             {site.orderNumber || site.name}
@@ -270,6 +316,17 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
           </tbody>
         </table>
       </div>
+    </div>
+    
+    {/* Счетчик в низу экрана */}
+    <div className="fixed bottom-4 left-25 bg-white border border-gray-300 rounded-lg shadow-lg p-3 z-20">
+      <div className="text-sm font-semibold text-gray-700">
+        Объектов с начала месяца: {getTotalSitesCount}
+      </div>
+      <div className="text-lg font-bold text-blue-600">
+        {totalAmount.toLocaleString('ru-RU')} ₽
+      </div>
+    </div>
     </div>
   );
 };
