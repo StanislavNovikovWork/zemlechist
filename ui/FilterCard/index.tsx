@@ -22,7 +22,7 @@ interface FilterCardProps {
 const checkboxStyles: Record<string, React.CSSProperties> = {
   blue: { '--ant-color-primary': '#1890ff' } as React.CSSProperties,
   green: { '--ant-color-primary': '#52c41a' } as React.CSSProperties,
-  orange: { '--ant-color-primary': '#fa8c16' } as React.CSSProperties,
+  orange: { '--ant-color-primary': '#f43' } as React.CSSProperties,
   purple: { '--ant-color-primary': '#722ed1' } as React.CSSProperties,
 };
 

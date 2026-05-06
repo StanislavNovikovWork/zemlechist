@@ -30,9 +30,13 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
   // Filter markers based on selected types
-  const filteredMarkers = selectedTypes
+  const allConstructionSiteMarkers = markers?.features?.filter((marker: MarkerFeature) => marker.properties.type === 'constructionSite') || [];
+  const filteredByTypes = selectedTypes && selectedTypes.length > 0
     ? markers?.features?.filter((marker: MarkerFeature) => selectedTypes.includes(marker.properties.type)) || []
-    : markers?.features || [];
+    : [];
+  
+  // Always include construction sites + filtered markers (without duplicates)
+  const filteredMarkers = [...allConstructionSiteMarkers, ...filteredByTypes.filter((marker: MarkerFeature) => marker.properties.type !== 'constructionSite')];
 
   // Разделяем маркеры на constructionSite и остальные
   const constructionSiteMarkers = filteredMarkers.filter((marker: MarkerFeature) => marker.properties.type === 'constructionSite');

@@ -6,13 +6,8 @@
   border-radius: 8px;
   border: 1px solid;
   cursor: pointer;
-  transition: all 0.2s ease;
   background: #fff;
   user-select: none;
-}
-
-.card:hover {
-  transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
@@ -67,20 +62,20 @@
 }
 
 .orange.checked {
-  border-color: #fa8c16;
+  border-color: #f43;
   background: #ffe7ba;
 }
 
 .orange .icon {
-  color: #fa8c16;
+  color: #f43;
 }
 
 .orange .label {
-  color: #fa8c16;
+  color: #f43;
 }
 
 .orange .count {
-  color: #fa8c16;
+  color: #f43;
 }
 
 .purple {
@@ -131,8 +126,8 @@
 
 /* Оранжевый чекбокс */
 .orange .checkbox :global(.ant-checkbox-checked) :global(.ant-checkbox-inner) {
-  background-color: #fa8c16;
-  border-color: #fa8c16;
+  background-color: #f43;
+  border-color: #f43;
 }
 
 /* Фиолетовый чекбокс */

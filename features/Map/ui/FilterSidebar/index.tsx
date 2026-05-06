@@ -30,7 +30,7 @@ interface FilterSidebarProps {
 
 export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterChange }: FilterSidebarProps) {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
-  const [checkedTypes, setCheckedTypes] = useState<string[]>(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
+  const [checkedTypes, setCheckedTypes] = useState<string[]>([]);
 
   const filterOptions = [
     {
@@ -44,12 +44,6 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
       value: "garbageCollection",
       icon: <DeleteOutlined />,
       color: 'green' as const,
-    },
-    {
-      label: "Строй площадки",
-      value: "constructionSite",
-      icon: <HomeOutlined />,
-      color: 'orange' as const,
     },
     {
       label: "Нерудные материалы",
@@ -79,7 +73,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   const colorMap: Record<string, string> = {
     blue: '#1890ff',
     green: '#52c41a',
-    orange: '#fa8c16',
+    orange: '#f43',
     purple: '#722ed1',
   };
 
@@ -171,7 +165,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
   };
 
   const handleReset = () => {
-    setCheckedTypes(['specialTechnique', 'garbageCollection', 'constructionSite', 'nonMetallicMaterials']);
+    setCheckedTypes([]);
     onFilterChange?.(null);
   };
 
@@ -230,6 +224,9 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
               align-items: center !important;
               padding-right: 0 !important;
             }
+            .my-tree .ant-tree-treenode:not(.ant-tree-treenode-leaf) .ant-tree-title {
+              font-weight: 600 !important;
+            }
             .my-tree .ant-tree-treenode {
               width: 100% !important;
               max-width: 100% !important;
@@ -237,7 +234,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
             }
             .my-tree .ant-tree-treenode:hover,
             .my-tree .ant-tree-treenode:hover .ant-tree-node-content-wrapper {
-              background-color: #f5f5f5 !important;
+              background-color: #e5e7eb !important;
               border-radius: 6px;
             }
             .my-tree .ant-tree-title {
