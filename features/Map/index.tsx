@@ -76,7 +76,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         orderNumber: marker.properties.orderNumber,
         responsible: marker.properties.responsible,
         paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
-        duration: marker.properties.duration?.map(date => dayjs(date, 'DD.MM.YYYY')) as [any, any] | undefined,
+        duration: marker.properties.duration,
         phone: '',
         name: '',
         description: '',

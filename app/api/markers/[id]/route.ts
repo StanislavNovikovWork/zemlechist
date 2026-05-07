@@ -47,12 +47,15 @@ export async function PUT(
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
       const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
       const hasDurationField = tableInfo.rows.some(row => row.column_name === 'duration');
+      const hasNewDurationFields = tableInfo.rows.some(row => 
+        ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
+      );
 
       if (responsible !== undefined && hasResponsibleField) {
         updates.push(`responsible = $${paramIndex++}`);
@@ -64,9 +67,34 @@ export async function PUT(
         values.push(paymentMethod);
       }
 
-      if (duration !== undefined && hasDurationField) {
-        updates.push(`duration = $${paramIndex++}`);
-        values.push(duration);
+      // Обработка duration с поддержкой двух периодов
+      if (duration !== undefined) {
+        if (hasNewDurationFields && duration.period1) {
+          // Конвертируем даты из DD.MM.YYYY в YYYY-MM-DD
+          const convertDate = (dateStr: string) => {
+            const [day, month, year] = dateStr.split('.');
+            return `${year}-${month}-${day}`;
+          };
+          
+          updates.push(`duration_period1_start = $${paramIndex++}`);
+          values.push(convertDate(duration.period1[0]));
+          updates.push(`duration_period1_end = $${paramIndex++}`);
+          values.push(convertDate(duration.period1[1]));
+          
+          if (duration.period2) {
+            updates.push(`duration_period2_start = $${paramIndex++}`);
+            values.push(convertDate(duration.period2[0]));
+            updates.push(`duration_period2_end = $${paramIndex++}`);
+            values.push(convertDate(duration.period2[1]));
+          } else {
+            // Очищаем второй период если он был
+            updates.push(`duration_period2_start = NULL`);
+            updates.push(`duration_period2_end = NULL`);
+          }
+        } else if (hasDurationField) {
+          updates.push(`duration = $${paramIndex++}`);
+          values.push(duration);
+        }
       }
 
       if (updates.length === 0) {

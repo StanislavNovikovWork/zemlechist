@@ -21,33 +21,33 @@ export const foremenConfig: Foreman[] = [
   },
     {
     id: 2,
-    name: "Липаткин Максим",
-    firstName: "Максим",
-    lastName: "Липаткин",
-  },
-  {
-    id: 3,
     name: "Гулин Георгий",
     firstName: "Георгий",
     lastName: "Гулин",
   },
-  {
-    id: 4,
+    {
+    id: 3,
     name: "Ломакин Александр",
     firstName: "Александр",
     lastName: "Ломакин",
   },
-  {
-    id: 5,
+   {
+    id: 4,
     name: "Орлов Максим",
     firstName: "Максим",
     lastName: "Орлов",
   },
-    {
-    id: 6,
+  {
+    id: 5,
     name: "Добросол Андрей",
     firstName: "Андрей",
     lastName: "Добросол",
+  },
+  {
+    id: 6,
+    name: "Липаткин Максим",
+    firstName: "Максим",
+    lastName: "Липаткин",
   },
 ];
 

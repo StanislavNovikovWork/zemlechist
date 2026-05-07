@@ -9,8 +9,10 @@ import { useSupplierDrawerController } from "@/features/SupplierDrawerControll/m
 import dayjs from 'dayjs';
 import type { MarkerFeature } from "@/features/Map/types";
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 
 dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
 
 interface OrdersGridProps {}
 
@@ -41,7 +43,8 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     const filtered = markersData.features.filter(
       (feature: MarkerFeature) => feature.properties.type === 'constructionSite' && 
                   feature.properties.responsible && 
-                  feature.properties.duration
+                  feature.properties.duration &&
+                  feature.properties.duration.period1
     );
 
     const grouped: Record<string, Record<string, any[]>> = {};
@@ -50,29 +53,40 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
       const responsible = site.properties.responsible;
       const duration = site.properties.duration;
       
-      if (duration && duration.length === 2 && duration[0] && duration[1] && responsible) {
-        const startDate = dayjs(duration[0], 'DD.MM.YYYY');
-        const endDate = dayjs(duration[1], 'DD.MM.YYYY');
+      if (duration && duration.period1 && responsible) {
+        // Функция для добавления дат одного периода
+        const addPeriodDates = (period: [string, string]) => {
+          const startDate = dayjs(period[0], 'DD.MM.YYYY');
+          const endDate = dayjs(period[1], 'DD.MM.YYYY');
+          
+          // Создаем все даты в диапазоне
+          let currentDate = startDate;
+          while (currentDate.isSameOrBefore(endDate)) {
+            const dateKey = currentDate.format('YYYY-MM-DD');
+            
+            if (!grouped[responsible]) {
+              grouped[responsible] = {};
+            }
+            if (!grouped[responsible][dateKey]) {
+              grouped[responsible][dateKey] = [];
+            }
+            
+            grouped[responsible][dateKey].push({
+              id: site.id,
+              orderNumber: site.properties.orderNumber,
+              name: site.properties.name,
+            });
+            
+            currentDate = currentDate.add(1, 'day');
+          }
+        };
         
-        // Создаем все даты в диапазоне
-        let currentDate = startDate;
-        while (currentDate.isSameOrBefore(endDate)) {
-          const dateKey = currentDate.format('YYYY-MM-DD');
-          
-          if (!grouped[responsible]) {
-            grouped[responsible] = {};
-          }
-          if (!grouped[responsible][dateKey]) {
-            grouped[responsible][dateKey] = [];
-          }
-          
-          grouped[responsible][dateKey].push({
-            id: site.id,
-            orderNumber: site.properties.orderNumber,
-            name: site.properties.name,
-          });
-          
-          currentDate = currentDate.add(1, 'day');
+        // Добавляем даты первого периода
+        addPeriodDates(duration.period1);
+        
+        // Добавляем даты второго периода, если он есть
+        if (duration.period2) {
+          addPeriodDates(duration.period2);
         }
       }
     });
@@ -149,20 +163,47 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   // Определяем цвет полосы сверху в зависимости от статуса сайта
   const getSiteTopBorderColor = (site: { id: number; orderNumber?: string; name?: string }) => {
     const supplier = markersData?.features?.find((marker: MarkerFeature) => marker.id === site.id);
-    if (!supplier?.properties.duration || !Array.isArray(supplier.properties.duration) || supplier.properties.duration.length !== 2) {
+    if (!supplier?.properties.duration || !supplier.properties.duration.period1) {
       return 'border-t-blue-200'; // по умолчанию
     }
     
-    const startDate = dayjs(supplier.properties.duration[0], 'DD.MM.YYYY');
-    const endDate = dayjs(supplier.properties.duration[1], 'DD.MM.YYYY');
     const today = dayjs();
+    const period1 = supplier.properties.duration.period1;
+    const period2 = supplier.properties.duration.period2;
     
-    if (today.isBefore(startDate, 'day')) {
-      return 'border-t-orange-400'; // оранжевая - еще не началось
-    } else if (today.isAfter(endDate, 'day')) {
-      return 'border-t-red-400'; // красная - уже закончилось
+    // Проверяем статус первого периода
+    const startDate1 = dayjs(period1[0], 'DD.MM.YYYY');
+    const endDate1 = dayjs(period1[1], 'DD.MM.YYYY');
+    
+    let isInFirstPeriod = today.isSameOrAfter(startDate1, 'day') && today.isSameOrBefore(endDate1, 'day');
+    let isBeforeFirstPeriod = today.isBefore(startDate1, 'day');
+    let isAfterFirstPeriod = today.isAfter(endDate1, 'day');
+    
+    // Если есть второй период, проверяем его
+    if (period2) {
+      const startDate2 = dayjs(period2[0], 'DD.MM.YYYY');
+      const endDate2 = dayjs(period2[1], 'DD.MM.YYYY');
+      
+      const isInSecondPeriod = today.isSameOrAfter(startDate2, 'day') && today.isSameOrBefore(endDate2, 'day');
+      const isBeforeSecondPeriod = today.isBefore(startDate2, 'day');
+      
+      // Определяем общий статус
+      if (isBeforeFirstPeriod) {
+        return 'border-t-orange-400'; // оранжевая - еще не началось
+      } else if (isInFirstPeriod || isInSecondPeriod) {
+        return 'border-t-green-400'; // зеленая - в работе
+      } else {
+        return 'border-t-red-400'; // красная - уже закончилось
+      }
     } else {
-      return 'border-t-green-400'; // зеленая - в работе
+      // Только один период
+      if (isBeforeFirstPeriod) {
+        return 'border-t-orange-400'; // оранжевая - еще не началось
+      } else if (isInFirstPeriod) {
+        return 'border-t-green-400'; // зеленая - в работе
+      } else {
+        return 'border-t-red-400'; // красная - уже закончилось
+      }
     }
   };
 
@@ -179,8 +220,16 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
       };
       
       // Конвертируем duration из строк в Dayjs объекты, если это стройплощадка
-      if (supplierData.type === 'constructionSite' && supplierData.duration && Array.isArray(supplierData.duration)) {
-        supplierData.duration = supplierData.duration.map((dateStr: string) => dayjs(dateStr, 'DD.MM.YYYY'));
+      if (supplierData.type === 'constructionSite' && supplierData.duration && supplierData.duration.period1) {
+        const convertPeriod = (period: [string, string]): [dayjs.Dayjs, dayjs.Dayjs] => [
+          dayjs(period[0], 'DD.MM.YYYY'),
+          dayjs(period[1], 'DD.MM.YYYY')
+        ];
+        
+        supplierData.duration = {
+          period1: convertPeriod(supplierData.duration.period1),
+          period2: supplierData.duration.period2 ? convertPeriod(supplierData.duration.period2) : undefined
+        };
       }
       
       openViewSupplier(supplierData);

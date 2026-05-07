@@ -19,7 +19,10 @@ export type SupplierForm = {
   orderNumber?: string;
   responsible?: string;
   paymentMethod?: 'cash' | 'cashless' | 'both';
-  duration?: [Dayjs, Dayjs];
+  duration?: {
+  period1: [string, string];
+  period2?: [string, string];
+};
 };
 
 export type SupplierWithId = SupplierForm & { id: number };

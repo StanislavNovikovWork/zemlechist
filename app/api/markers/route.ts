@@ -26,19 +26,56 @@ export async function GET() {
     const durationInfo = await pool.query(`
       SELECT table_name, column_name 
       FROM information_schema.columns 
-      WHERE column_name = 'duration' AND table_name IN ('markers', 'construction_sites')
+      WHERE column_name IN ('duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end') 
+      AND table_name IN ('markers', 'construction_sites')
     `);
     
     const hasPaymentMethodInMarkers = paymentMethodInfo.rows.some(row => row.table_name === 'markers');
     const hasPaymentMethodInConstructionSites = paymentMethodInfo.rows.some(row => row.table_name === 'construction_sites');
     const hasDurationInConstructionSites = durationInfo.rows.some(row => row.table_name === 'construction_sites');
+    const hasNewDurationFields = durationInfo.rows.some(row => 
+      ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
+    );
 
     // Строим запрос с payment_method и duration для каждой таблицы отдельно
+    let markersFields = `id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end`;
+    let constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number`;
+    
+    if (hasResponsibleField) {
+      constructionFields += ', responsible';
+    } else {
+      constructionFields += ', NULL as responsible';
+    }
+    
+    if (hasDurationInConstructionSites) {
+      constructionFields += ', duration';
+    } else {
+      constructionFields += ', NULL as duration';
+    }
+    
+    if (hasNewDurationFields) {
+      constructionFields += ', duration_period1_start, duration_period1_end, duration_period2_start, duration_period2_end';
+    } else {
+      constructionFields += ', NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end';
+    }
+    
+    if (hasPaymentMethodInConstructionSites) {
+      constructionFields += ', payment_method';
+    } else {
+      constructionFields += ', NULL as payment_method';
+    }
+    
+    if (hasPaymentMethodInMarkers) {
+      markersFields += ', payment_method';
+    } else {
+      markersFields += ', NULL as payment_method';
+    }
+    
     let query = `
-      SELECT id, lat, lon, phone, name, description, "iconCaption" as "iconCaption", "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration${hasPaymentMethodInMarkers ? ', payment_method' : ', NULL as payment_method'}
+      SELECT ${markersFields}
       FROM markers
       UNION ALL
-      SELECT id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "iconCaption", NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, ${hasResponsibleField ? 'responsible' : 'NULL as responsible'}${hasDurationInConstructionSites ? ', duration' : ', NULL as duration'}${hasPaymentMethodInConstructionSites ? ', payment_method' : ', NULL as payment_method'}
+      SELECT ${constructionFields}
       FROM construction_sites
       ORDER BY id
     `;
@@ -48,6 +85,35 @@ export async function GET() {
     // Convert to GeoJSON format
     const features = result.rows.map((row) => {
       const isConstructionSite = row.type === 'constructionSite';
+      
+      // Формируем duration в новом формате
+      let duration: { period1: [string, string]; period2?: [string, string] } | undefined = undefined;
+      if (isConstructionSite) {
+        if (row.duration_period1_start && row.duration_period1_end) {
+          duration = {
+            period1: [
+              dayjs(row.duration_period1_start).format('DD.MM.YYYY'),
+              dayjs(row.duration_period1_end).format('DD.MM.YYYY')
+            ]
+          };
+          
+          if (row.duration_period2_start && row.duration_period2_end) {
+            duration.period2 = [
+              dayjs(row.duration_period2_start).format('DD.MM.YYYY'),
+              dayjs(row.duration_period2_end).format('DD.MM.YYYY')
+            ];
+          }
+        } else if (row.duration && typeof row.duration === 'string') {
+          // Обратная совместимость со старым форматом
+          duration = {
+            period1: [
+              row.duration.substring(0, 10),
+              row.duration.substring(12, 22)
+            ]
+          };
+        }
+      }
+      
       return {
         type: 'Feature',
         id: row.id,
@@ -73,7 +139,7 @@ export async function GET() {
           orderNumber: row.order_number,
           responsible: row.responsible,
           paymentMethod: row.payment_method,
-          duration: row.duration,
+          duration,
         },
       };
     });
@@ -92,10 +158,14 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    console.log('POST /api/markers called');
     const body = await request.json();
+    console.log('POST /api/markers body parsed:', body);
     const { lat, lon, phone, name, description, iconCaption, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration } = body;
-
+    
+    
     if (type === 'constructionSite') {
+      console.log('Processing construction site creation...');
       // Получаем максимальный ID из обеих таблиц для гарантии уникальности
       const maxIdResult = await pool.query(`
         SELECT GREATEST(
@@ -109,25 +179,80 @@ export async function POST(request: Request) {
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
       const hasPaymentMethodField = tableInfo.rows.some(row => row.column_name === 'payment_method');
       const hasDurationField = tableInfo.rows.some(row => row.column_name === 'duration');
+      const hasNewDurationFields = tableInfo.rows.some(row => 
+        ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
+      );
 
+      // Строим запрос более простым способом
+      let fields = 'id, lat, lon, order_number';
+      let placeholders = '$1, $2, $3, $4';
+      let returnFields = 'id, lat, lon, order_number';
+      let params = [nextId, lat, lon, orderNumber];
+      let paramIndex = 5;
+      
+      if (hasResponsibleField) {
+        fields += ', responsible';
+        placeholders += `, $${paramIndex}`;
+        returnFields += ', responsible';
+        params.push(responsible);
+        paramIndex++;
+      }
+      
+      if (hasPaymentMethodField) {
+        fields += ', payment_method';
+        placeholders += `, $${paramIndex}`;
+        returnFields += ', payment_method';
+        params.push(paymentMethod);
+        paramIndex++;
+      }
+      
+      // Добавляем поля duration
+      if (hasNewDurationFields && duration && duration.period1) {
+        fields += ', duration_period1_start, duration_period1_end';
+        placeholders += `, $${paramIndex}, $${paramIndex + 1}`;
+        returnFields += ', duration_period1_start, duration_period1_end';
+        
+        // Конвертируем даты из DD.MM.YYYY в YYYY-MM-DD
+        const convertDate = (dateStr: string) => {
+          const [day, month, year] = dateStr.split('.');
+          return `${year}-${month}-${day}`;
+        };
+        
+        params.push(convertDate(duration.period1[0]), convertDate(duration.period1[1]));
+        paramIndex += 2;
+        
+        if (duration.period2) {
+          fields += ', duration_period2_start, duration_period2_end';
+          placeholders += `, $${paramIndex}, $${paramIndex + 1}`;
+          returnFields += ', duration_period2_start, duration_period2_end';
+          params.push(convertDate(duration.period2[0]), convertDate(duration.period2[1]));
+          paramIndex += 2;
+        }
+      } else if (hasDurationField && duration) {
+        fields += ', duration';
+        placeholders += `, $${paramIndex}`;
+        returnFields += ', duration';
+        params.push(duration);
+        paramIndex++;
+      }
+      
       let query = `
-        INSERT INTO construction_sites (id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}${hasDurationField ? ', duration' : ''})
-        VALUES ($1, $2, $3, $4${hasResponsibleField ? ', $5' : ''}${hasPaymentMethodField ? (hasResponsibleField ? ', $6' : ', $5') : ''}${hasDurationField ? (hasResponsibleField && hasPaymentMethodField ? ', $7' : (hasResponsibleField || hasPaymentMethodField) ? ', $6' : ', $5') : ''})
-        RETURNING id, lat, lon, order_number${hasResponsibleField ? ', responsible' : ''}${hasPaymentMethodField ? ', payment_method' : ''}${hasDurationField ? ', duration' : ''}, created_at, updated_at
+        INSERT INTO construction_sites (${fields})
+        VALUES (${placeholders})
+        RETURNING ${returnFields}, created_at, updated_at
       `;
 
-      const params = [nextId, lat, lon, orderNumber];
-      if (hasResponsibleField) params.push(responsible);
-      if (hasPaymentMethodField) params.push(paymentMethod);
-      if (hasDurationField) params.push(duration);
-
+      console.log('Construction Site SQL Query:', query);
+      console.log('Construction Site SQL Params:', params);
+      
       const result = await pool.query(query, params);
+      console.log('Construction Site Insert result:', result.rows[0]);
       return NextResponse.json(result.rows[0]);
     } else {
       // Проверяем наличие поля payment_method в таблице markers

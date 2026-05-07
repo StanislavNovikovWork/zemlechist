@@ -63,10 +63,13 @@ export function SupplierView({
               )}
 
               {/* Продолжительность (только для стройплощадок) */}
-              {isConstructionSite && initialValues.duration && (
+              {isConstructionSite && initialValues.duration && initialValues.duration.period1 && (
                 <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
                   <Text>
-                    {initialValues.duration[0]?.format('DD.MM.YYYY')} - {initialValues.duration[1]?.format('DD.MM.YYYY')}
+                    {initialValues.duration.period1[0]} - {initialValues.duration.period1[1]}
+                    {initialValues.duration.period2 && (
+                      <><br />{initialValues.duration.period2[0]} - {initialValues.duration.period2[1]}</>
+                    )}
                   </Text>
                 </Descriptions.Item>
               )}

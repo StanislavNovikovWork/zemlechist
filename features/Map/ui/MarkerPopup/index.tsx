@@ -59,7 +59,14 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
           <div>
             <span className="font-semibold text-gray-700">Продолжительность:</span>{' '}
             <span className="text-gray-900">
-              {marker.properties.duration[0]} - {marker.properties.duration[1]}
+              {marker.properties.duration.period1 && (
+                <>
+                  {marker.properties.duration.period1[0]} - {marker.properties.duration.period1[1]}
+                  {marker.properties.duration.period2 && (
+                    <> и {marker.properties.duration.period2[0]} - {marker.properties.duration.period2[1]}</>
+                  )}
+                </>
+              )}
             </span>
           </div>
         )}
