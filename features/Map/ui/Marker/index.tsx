@@ -28,9 +28,10 @@ export function Marker({
   onMouseLeave,
   onOpenModal,
 }: MarkerProps) {
-  const { Icon, offset, color, scale } = getMarkerConfig(
+  const { Icon, offset, color, scale, hasGoldBorder } = getMarkerConfig(
     feature.properties.type,
-    isHovered
+    isHovered,
+    feature
   );
 
   return (
@@ -48,7 +49,35 @@ export function Marker({
           transition: "transform 0.2s ease-in-out"
         }}
       >
-        <Icon color={color} />
+        <Icon color={color} hasGoldBorder={hasGoldBorder} />
+        
+        {/* Звездочка для надежности 5 */}
+        {hasGoldBorder && (
+          <div
+            style={{
+              position: "absolute",
+              right: "-8px",
+              top: "8px",
+              width: "16px",
+              height: "16px",
+              backgroundColor: "#FFD700",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
+            }}
+          >
+            <span style={{ 
+              fontSize: "10px", 
+              color: "#fff", 
+              fontWeight: "bold",
+              lineHeight: 1 
+            }}>
+              ★
+            </span>
+          </div>
+        )}
 
         {isHovered && (
           <div

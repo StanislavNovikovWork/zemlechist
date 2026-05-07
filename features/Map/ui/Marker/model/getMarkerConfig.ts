@@ -6,7 +6,7 @@ import { ConstructionMarkerIcon } from "@/icons/ConstructionMarker";
 type MarkerType = MarkerFeature["properties"]["type"];
 
 interface MarkerConfig {
-  Icon: React.ComponentType<{ color: string }>;
+  Icon: React.ComponentType<{ color: string; hasGoldBorder?: boolean }>;
   offset: [number, number]; // смещение попапа
   color: {
     default: string;
@@ -53,16 +53,18 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
   },
 };
 
-export function getMarkerConfig(type: MarkerType, isHovered: boolean) {
+export function getMarkerConfig(type: MarkerType, isHovered: boolean, feature?: MarkerFeature) {
   const config = markerConfig[type] || markerConfig.specialTechnique;
 
   const color = config.color.default;
   const scale = isHovered ? config.scale.hover : config.scale.default;
+  const hasGoldBorder = feature?.properties.reliability === 5;
 
   return {
     Icon: config.Icon,
     offset: config.offset,
     color,
     scale,
+    hasGoldBorder,
   };
 }
