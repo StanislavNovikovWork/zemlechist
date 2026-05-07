@@ -20,6 +20,54 @@ type FieldSchema = {
   options?: { label: string; value: string }[];
 };
 
+
+export const constructionSiteFormSchema: FieldSchema[] = [
+  {
+    name: "type",
+    label: "Тип",
+    type: "select",
+    rules: [{ required: true, message: "Выберите тип" }],
+    options: [
+      { value: "constructionSite", label: "Строительная площадка" },
+    ],
+  },
+  {
+    name: "orderNumber",
+    label: "Заказ",
+    type: "input",
+    placeholder: "Номер заказа",
+  },
+  {
+    name: "responsible",
+    label: "Ответственный",
+    type: "select",
+    placeholder: "Выберите ответственного",
+    options: foremenConfig.map(foreman => ({
+      label: foreman.name,
+      value: foreman.name,
+    })),
+  },
+  {
+    name: "coordinates",
+    label: "Координаты",
+    type: "input",
+    placeholder: "55.370000, 35.850000",
+    rules: [
+      { required: true, message: "Введите координаты" },
+      {
+        pattern: /^-?\d+\.?\d*,\s*-?\d+\.?\d*$/,
+        message: "Неверный формат. Пример: 55.370000, 35.850000",
+      },
+    ],
+  },
+  {
+    name: "duration",
+    label: "Продолжительность",
+    type: "dateRange",
+    placeholder: "Выберите период",
+  },
+];
+
 export const supplierFormSchema: FieldSchema[] = [
   {
     name: "type",
@@ -30,7 +78,6 @@ export const supplierFormSchema: FieldSchema[] = [
       { value: "specialTechnique", label: "Спецтехника" },
       { value: "garbageCollection", label: "Вывоз мусора" },
       { value: "nonMetallicMaterials", label: "Нерудные материалы" },
-      { value: "constructionSite", label: "Строительная площадка" },
     ],
   },
   {

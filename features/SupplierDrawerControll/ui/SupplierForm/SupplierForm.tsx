@@ -10,7 +10,7 @@ import 'dayjs/locale/ru';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
 import { FieldSchema } from './types';
-import { supplierFormSchema } from '../../model/supplierForm.schema';
+import { supplierFormSchema, constructionSiteFormSchema } from '../../model/supplierForm.schema';
 
 type AddSupplierFormProps = {
   initialValues?: SupplierForm | null;
@@ -29,18 +29,9 @@ export function AddSupplierForm({
   const [showPeriod2, setShowPeriod2] = useState(false);
   const typeValue = Form.useWatch('type', form);
 
-  // Фильтруем поля формы в зависимости от типа
-  const filteredSchema = useMemo(() => {
-    if (typeValue === 'constructionSite') {
-      // Для строительной площадки показываем только type, orderNumber, responsible, coordinates и duration
-      return supplierFormSchema.filter(
-        (field) => field.name === 'type' || field.name === 'orderNumber' || field.name === 'responsible' || field.name === 'coordinates' || field.name === 'duration'
-      );
-    }
-    // Для остальных типов показываем все поля кроме orderNumber, responsible и duration
-    return supplierFormSchema.filter(
-      (field) => field.name !== 'orderNumber' && field.name !== 'responsible' && field.name !== 'duration'
-    );
+  // Получаем схему в зависимости от типа
+  const currentSchema = useMemo(() => {
+    return typeValue === 'constructionSite' ? constructionSiteFormSchema : supplierFormSchema;
   }, [typeValue]);
 
   useEffect(() => {
@@ -295,7 +286,7 @@ export function AddSupplierForm({
           onFinish={handleFinish}
           className="px-4"
         >
-          {renderFormItems({ schema: filteredSchema })}
+          {renderFormItems({ schema: currentSchema })}
         </Form>
       </div>
       <div className="pt-4 px-4 bg-inherit w-full">
