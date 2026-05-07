@@ -111,15 +111,15 @@ export function MapContent({
   return (
     <YMap location={location}>
         <YMapDefaultSchemeLayer 
-      // customization={[
-      //   {
-      //     "stylers": [
-      //       {
-      //         "saturation": -1
-      //       }
-      //     ]
-      //   }
-      // ]}
+      customization={[
+        {
+          "stylers": [
+            {
+              "saturation": -1
+            }
+          ]
+        }
+      ]}
     />
         <YMapDefaultFeaturesLayer />
 

@@ -74,7 +74,7 @@ export function SupplierView({
               {/* Координаты (только для стройплощадок) */}
               {isConstructionSite && initialValues.coordinates && (
                 <Descriptions.Item label="Координаты" style={{ paddingBottom: '4px' }}>
-                  <Text>{`${initialValues.coordinates[0]}, ${initialValues.coordinates[1]}`}</Text>
+                  <Text>{`${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`}</Text>
                 </Descriptions.Item>
               )}
 
