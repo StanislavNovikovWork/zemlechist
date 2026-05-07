@@ -80,8 +80,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         phone: '',
         name: '',
         description: '',
-      'marker-color': '',
-    };
+      };
     openViewSupplier(constructionSiteForm);
       return;
     }
@@ -90,7 +89,6 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       phone: marker.properties.phone || '',
       name: marker.properties.name || '',
       description: marker.properties.description || '',
-      'marker-color': marker.properties['marker-color'] || '',
       coordinates: marker.geometry.coordinates,
       type: marker.properties.type as 'specialTechnique' | 'garbageCollection',
       website: marker.properties.website,

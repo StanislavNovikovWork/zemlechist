@@ -38,8 +38,8 @@ export async function GET() {
     );
 
     // Строим запрос с payment_method и duration для каждой таблицы отдельно
-    let markersFields = `id, lat, lon, phone, name, description, "marker_color" as "markerColor", type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end`;
-    let constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, NULL as "markerColor", 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number`;
+    let markersFields = `id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end`;
+    let constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number`;
     
     if (hasResponsibleField) {
       constructionFields += ', responsible';
@@ -127,7 +127,6 @@ export async function GET() {
             ? (row.order_number ? `Заказ ${row.order_number}` : `Строй площадка #${row.id}`)
             : row.name,
           description: row.description,
-          'marker-color': isConstructionSite ? '#3BB300' : row.markerColor,
           type: row.type,
           website: row.website,
           inn: row.inn,

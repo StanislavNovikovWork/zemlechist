@@ -8,7 +8,6 @@ export interface MarkerFeature {
     phone?: string;
     name?: string;
     description?: string;
-    "marker-color"?: string;
     type: string;
     website?: string;
     inn?: string;

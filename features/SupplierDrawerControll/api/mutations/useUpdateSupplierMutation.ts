@@ -15,7 +15,6 @@ function toApiPayload(values: SupplierForm) {
     phone: values.phone,
     name: values.name,
     description: values.description,
-    markerColor: values["marker-color"],
     type: values.type,
     website: values.website,
     inn: values.inn,
