@@ -174,6 +174,7 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
       // Преобразуем в формат SupplierForm
       const supplierData: any = {
         id: supplier.id,
+        coordinates: supplier.geometry.coordinates,
         ...supplier.properties
       };
       
