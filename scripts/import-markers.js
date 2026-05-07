@@ -21,7 +21,6 @@ async function importMarkers() {
       const props = feature.properties;
 
       await pool.query(
-        `INSERT INTO markers (lat, lon, phone, name, description, "iconCaption", "marker_color", type, "createdAt", "updatedAt")
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())`,
         [
           coords[1],
@@ -29,7 +28,6 @@ async function importMarkers() {
           props.phone || null,
           props.name || null,
           props.description || null,
-          props.iconCaption || null,
           props['marker-color'] || '#ffd21e',
           'specialTechnique',
         ]

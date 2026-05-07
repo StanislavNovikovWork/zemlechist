@@ -6,7 +6,6 @@ export type SupplierForm = {
   coordinates: [number, number];
   name: string;
   description: string;
-  iconCaption: string;
   "marker-color": string;
   type: 'specialTechnique' | 'garbageCollection' | 'constructionSite' | 'nonMetallicMaterials';
   reliability?: number;
