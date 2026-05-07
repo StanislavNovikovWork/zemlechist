@@ -78,7 +78,7 @@ export function Suppliers() {
         <Title level={2} className="m-0">
           Поставщики
         </Title>
-        <Button type="primary" icon={<PlusOutlined />} onClick={openCreateSupplier}>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => openCreateSupplier()}>
           Добавить поставщика
         </Button>
       </div>
