@@ -25,6 +25,9 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   // Состояние для текущего отображаемого месяца
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
+  // Состояние для отслеживания наведенной строй площадки
+  const [hoveredSiteId, setHoveredSiteId] = useState<number | null>(null);
+
   // Получаем данные маркеров с бэкенда
   const { data: markersData, isLoading } = useMarkersQuery();
 
@@ -134,6 +137,13 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   const getConstructionSitesForCell = (foreman: Foreman, date: Date) => {
     const dateKey = dayjs(date).format('YYYY-MM-DD');
     return constructionSitesByForeman[foreman.name]?.[dateKey] || [];
+  };
+
+  // Проверяем, содержит ли ячейка наведенную строй площадку
+  const hasHoveredSite = (foreman: Foreman, date: Date) => {
+    if (!hoveredSiteId) return false;
+    const sites = getConstructionSitesForCell(foreman, date);
+    return sites.some(site => site.id === hoveredSiteId);
   };
 
   // Определяем цвет полосы сверху в зависимости от статуса сайта
@@ -289,10 +299,11 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
                 {/* Ячейки для заказов */}
                 {dates.map((date, index) => {
                   const sites = getConstructionSitesForCell(foreman, date);
+                  const hasHovered = hasHoveredSite(foreman, date);
                   return (
                     <td
                       key={index}
-                      className={`w-40 min-w-40 h-16 p-1 border border-gray-200 bg-white hover:bg-gray-50 transition-colors ${
+                      className={`w-40 min-w-40 h-16 p-1 border border-gray-200 bg-white ${
                         isToday(date) ? 'border-l-2 border-l-blue-400 border-r-2 border-r-blue-400' : ''
                       }`}
                     >
@@ -301,7 +312,13 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
                           <div
                             key={site.id}
                             onClick={() => handleSiteClick(site)}
-                            className={`px-2 py-1 bg-blue-100 hover:bg-blue-200 rounded text-xs font-medium text-blue-800 cursor-pointer transition-colors truncate border-t-3 ${getSiteTopBorderColor(site)}`}
+                            onMouseEnter={() => setHoveredSiteId(site.id)}
+                            onMouseLeave={() => setHoveredSiteId(null)}
+                            className={`px-2 py-1 rounded text-xs font-medium cursor-pointer transition-all truncate border-t-3 ${
+                              hoveredSiteId === site.id 
+                                ? 'bg-blue-200 text-blue-900 -translate-y-0.5 shadow-md' 
+                                : 'bg-blue-100 hover:bg-blue-200 hover:-translate-y-0.5 hover:shadow-md text-blue-800'
+                            } ${getSiteTopBorderColor(site)}`}
                             title={site.orderNumber || site.name}
                           >
                             {site.orderNumber || site.name}
