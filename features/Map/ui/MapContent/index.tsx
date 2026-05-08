@@ -82,6 +82,16 @@ export function MapContent({
     fill: '#196DFF14'
 };
 
+const WORK_ZONE_STYLE = {
+    stroke: [
+        {
+            color: '#196DFF99',
+            width: 3
+        }
+    ],
+    fill: 'transparent'
+};
+
   const marker = useCallback(
     (feature: MarkerFeature) => (
       <Marker
@@ -132,7 +142,7 @@ export function MapContent({
               type: 'Polygon',
               coordinates: [polygonCoords]
             }}
-            style={POLYGON_STYLE}
+            style={zoneNumber === 1 ? WORK_ZONE_STYLE : POLYGON_STYLE}
           />
         ) : null;
       })}
