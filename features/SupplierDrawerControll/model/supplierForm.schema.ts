@@ -84,6 +84,7 @@ export const supplierFormSchema: FieldSchema[] = [
       { value: "specialTechnique", label: "Спецтехника" },
       { value: "garbageCollection", label: "Вывоз мусора" },
       { value: "nonMetallicMaterials", label: "Нерудные материалы" },
+      { value: "constructionSite", label: "Строительная площадка" },
     ],
   },
   {
@@ -114,12 +115,6 @@ export const supplierFormSchema: FieldSchema[] = [
         message: "Неверный формат. Пример: 55.370000, 35.850000",
       },
     ],
-  },
-  {
-    name: "duration",
-    label: "Продолжительность",
-    type: "dateRange",
-    placeholder: "Выберите период",
   },
   {
     name: "phone",
