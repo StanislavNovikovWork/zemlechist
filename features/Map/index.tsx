@@ -6,6 +6,7 @@ import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "./ui/MapSearch";
 import { MapContent } from "./ui/MapContent";
 import { FilterSidebar } from "./ui/FilterSidebar";
+import { ZoneFilter } from "./ui/ZoneFilter";
 import { MarkerFeature } from "./types";
 import { useMarkersQuery } from "./hooks/queries/useMarkersQuery";
 import { useQueryClient } from "@tanstack/react-query";
@@ -26,6 +27,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedTypes, setSelectedTypes] = useState<string[] | null>(null);
+  const [visibleZones, setVisibleZones] = useState<Record<number, boolean>>({});
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
@@ -63,7 +65,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   };
 
 
-  const handleMapClick = () => {
+  const handleMapClick = (coordinates: [number, number]) => {
     setClickMarker(null);
   };
 
@@ -116,6 +118,13 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     setSelectedTypes(types);
   };
 
+  const handleZoneToggle = (zoneNumber: number, visible: boolean) => {
+    setVisibleZones(prev => ({
+      ...prev,
+      [zoneNumber]: visible
+    }));
+  };
+
 
   const handleCancelAddMarker = () => {
     setClickMarker(null);
@@ -151,6 +160,10 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
           </div>
         ) : (
           <>
+            <ZoneFilter 
+              visibleZones={visibleZones}
+              onZoneToggle={handleZoneToggle}
+            />
             <MapSearch onLocationChange={handleLocationChange} onMapClick={setClickMarker} />
             <MapContent
               location={location}
@@ -164,6 +177,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
               onMapClick={handleMapClick}
               onAddMarker={openCreateSupplier}
               onCancelAddMarker={handleCancelAddMarker}
+              visibleZones={visibleZones}
             />
           </>
         )}
