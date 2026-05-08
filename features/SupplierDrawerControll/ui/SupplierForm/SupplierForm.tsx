@@ -48,13 +48,19 @@ export function AddSupplierForm({
       values.updatedAt = parsed.isValid() ? parsed : undefined;
     }
 
-    if (values.duration?.period1) {
-      const startDate = dayjs(values.duration.period1[0], 'DD.MM.YYYY');
-      const endDate = dayjs(values.duration.period1[1], 'DD.MM.YYYY');
-      values.duration = [
-        startDate.isValid() ? startDate : null,
-        endDate.isValid() ? endDate : null,
-      ];
+    if (values.duration) {
+      // Игнорируем старый формат массива, работаем только с period1/period2
+      if (values.duration.period1) {
+        values.duration.period1 = values.duration.period1.map((d: string) => dayjs(d, 'DD.MM.YYYY'));
+      }
+      if (values.duration.period2) {
+        values.duration.period2 = values.duration.period2.map((d: string) => dayjs(d, 'DD.MM.YYYY'));
+      }
+    } else if (Array.isArray(values.duration)) {
+      // Если пришел старый формат массива, конвертируем в новую структуру
+      values.duration = {
+        period1: values.duration.map((d: string) => dayjs(d, 'DD.MM.YYYY'))
+      };
     }
 
     if (values.coordinates && Array.isArray(values.coordinates)) {
@@ -107,7 +113,7 @@ export function AddSupplierForm({
       <>
         {schema.map((field) => (
           <Form.Item
-            key={field.name}
+            key={Array.isArray(field.name) ? field.name.join('.') : field.name}
             name={field.name}
             label={field.label}
             rules={field.rules}

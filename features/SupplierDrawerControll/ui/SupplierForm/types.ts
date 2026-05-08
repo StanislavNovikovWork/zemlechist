@@ -4,7 +4,10 @@ import type { Dayjs } from 'dayjs';
 export type SupplierFormValues = Omit<SupplierForm, 'coordinates' | 'updatedAt' | 'duration'> & {
   coordinates: string;
   updatedAt?: Dayjs;
-  duration?: [Dayjs, Dayjs];
+  duration?: {
+    period1: [Dayjs, Dayjs];
+    period2?: [Dayjs, Dayjs];
+  };
 };
 
 type FieldType =
@@ -17,7 +20,7 @@ type FieldType =
   | 'phone';
 
 export type FieldSchema = {
-  name: keyof SupplierForm;
+  name: keyof SupplierForm | string[];
   label: string;
   type: FieldType;
   rules?: any[];

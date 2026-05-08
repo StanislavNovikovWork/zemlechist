@@ -17,13 +17,28 @@ export function toSubmitValues(values: SupplierFormValues): SupplierForm {
   }
 
   // Обработка поля duration - конвертируем dayjs объекты в строки
-  if (duration && Array.isArray(duration)) {
-    (result as any).duration = duration.map((date: any) => {
-      if (date && typeof date.format === 'function') {
-        return date.format('DD.MM.YYYY');
-      }
-      return date;
-    });
+  if (duration) {
+    const durationResult: any = {};
+    
+    if (duration.period1) {
+      durationResult.period1 = duration.period1.map((date: any) => {
+        if (date && typeof date.format === 'function') {
+          return date.format('DD.MM.YYYY');
+        }
+        return date;
+      });
+    }
+    
+    if (duration.period2) {
+      durationResult.period2 = duration.period2.map((date: any) => {
+        if (date && typeof date.format === 'function') {
+          return date.format('DD.MM.YYYY');
+        }
+        return date;
+      });
+    }
+    
+    (result as any).duration = durationResult;
   }
 
   return result;

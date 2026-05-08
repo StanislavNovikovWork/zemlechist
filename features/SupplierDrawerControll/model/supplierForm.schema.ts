@@ -11,7 +11,7 @@ type FieldType =
   | "phone";
 
 type FieldSchema = {
-  name: keyof SupplierForm;
+  name: keyof SupplierForm | string[];
   label: string;
   type: FieldType;
   rules?: any[];
@@ -61,10 +61,16 @@ export const constructionSiteFormSchema: FieldSchema[] = [
     ],
   },
   {
-    name: "duration",
-    label: "Продолжительность",
-    type: "dateRange",
-    placeholder: "Выберите период",
+    name: ['duration', 'period1'],
+    label: 'Первый период',
+    type: 'dateRange',
+    placeholder: 'Выберите период',
+  },
+  {
+    name: ['duration', 'period2'],
+    label: 'Второй период',
+    type: 'dateRange',
+    placeholder: 'Выберите период',
   },
 ];
 
