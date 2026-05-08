@@ -16,21 +16,14 @@ export function toSubmitValues(values: SupplierFormValues): SupplierForm {
     result.coordinates = [lng, lat];
   }
 
-  // Обработка поля duration - конвертируем dayjs объекты в строки для двух периодов
-  if (duration && duration.period1) {
-    const convertPeriod = (period: any): [string, string] => {
-      return period.map((date: any) => {
-        if (date && typeof date.format === 'function') {
-          return date.format('DD.MM.YYYY');
-        }
-        return date;
-      }) as [string, string];
-    };
-
-    (result as any).duration = {
-      period1: convertPeriod(duration.period1),
-      period2: duration.period2 ? convertPeriod(duration.period2) : undefined
-    };
+  // Обработка поля duration - конвертируем dayjs объекты в строки
+  if (duration && Array.isArray(duration)) {
+    (result as any).duration = duration.map((date: any) => {
+      if (date && typeof date.format === 'function') {
+        return date.format('DD.MM.YYYY');
+      }
+      return date;
+    });
   }
 
   return result;
