@@ -23,7 +23,6 @@ export async function PUT(
 
     const body = await request.json();
     const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration } = body;
-
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
       const updates: string[] = [];

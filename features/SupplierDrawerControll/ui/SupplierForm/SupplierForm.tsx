@@ -38,7 +38,6 @@ export function AddSupplierForm({
   }, [form]);
 
   useEffect(() => {
-    console.log(initialValues)
     if (!initialValues) return;
 
     const values: any = { ...initialValues };
@@ -56,13 +55,7 @@ export function AddSupplierForm({
       if (values.duration.period2) {
         values.duration.period2 = values.duration.period2.map((d: string) => dayjs(d, 'DD.MM.YYYY'));
       }
-    } else if (Array.isArray(values.duration)) {
-      // Если пришел старый формат массива, конвертируем в новую структуру
-      values.duration = {
-        period1: values.duration.map((d: string) => dayjs(d, 'DD.MM.YYYY'))
-      };
-    }
-
+    } 
     if (values.coordinates && Array.isArray(values.coordinates)) {
       const [lng, lat] = values.coordinates;
       values.coordinates = `${lat}, ${lng}`;
