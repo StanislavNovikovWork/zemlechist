@@ -66,9 +66,9 @@ export function SupplierView({
               {isConstructionSite && initialValues.duration && initialValues.duration.period1 && (
                 <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
                   <Text>
-                    {initialValues.duration.period1[0]} - {initialValues.duration.period1[1]}
+                    {new Date(initialValues.duration.period1[0]).toLocaleDateString()} - {new Date(initialValues.duration.period1[1]).toLocaleDateString()}
                     {initialValues.duration.period2 && (
-                      <><br />{initialValues.duration.period2[0]} - {initialValues.duration.period2[1]}</>
+                      <><br />{new Date(initialValues.duration.period2[0]).toLocaleDateString()} - {new Date(initialValues.duration.period2[1]).toLocaleDateString()}</>
                     )}
                   </Text>
                 </Descriptions.Item>
