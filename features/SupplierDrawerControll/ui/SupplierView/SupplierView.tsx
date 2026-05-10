@@ -1,4 +1,4 @@
-import { Descriptions, Typography, Rate, Button, Modal } from "antd";
+import { Descriptions, Typography, Rate, Button, Modal, Drawer } from "antd";
 import { useState } from "react";
 import type { SupplierForm } from "@/features/SupplierDrawerControll/model/supplier.types";
 
@@ -28,6 +28,7 @@ export function SupplierView({
   allMarkers,
 }: SupplierViewProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
   const isConstructionSite = initialValues.type === 'constructionSite';
   console.log(initialValues)
 
@@ -270,16 +271,100 @@ export function SupplierView({
                 <div>
                   <span className="text-xs text-gray-500">Вывоз мусора</span>
                   <div>
-                    <Text>
+                    <Text 
+                      style={{ cursor: 'pointer', color: '#1890ff' }}
+                      onClick={() => setIsSupplierDrawerOpen(true)}
+                    >
                       {garbageSupplier.properties.name || `Поставщик #${garbageSupplier.id}`}
-                      {garbageSupplier.properties.phone && ` ${garbageSupplier.properties.phone}`}
                     </Text>
+                    {garbageSupplier.properties.phone && (
+                      <Text style={{ marginLeft: '4px' }}>
+                        {garbageSupplier.properties.phone}
+                      </Text>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           )}
         </div>
+
+        {/* Вложенный drawer с информацией о поставщике */}
+        <Drawer
+          title="Информация о поставщике"
+          placement="right"
+          open={isSupplierDrawerOpen}
+          onClose={() => setIsSupplierDrawerOpen(false)}
+          size={420}
+          rootClassName="glass-drawer"
+        >
+          {garbageSupplier && (
+            <Descriptions 
+              column={1} 
+              size="small" 
+              layout="vertical"
+              colon={true}
+            >
+              <Descriptions.Item label="Тип">
+                <Text>Вывоз мусора</Text>
+              </Descriptions.Item>
+              
+              <Descriptions.Item label="Название">
+                <Text>{garbageSupplier.properties.name || `Поставщик #${garbageSupplier.id}`}</Text>
+              </Descriptions.Item>
+
+              {garbageSupplier.properties.phone && (
+                <Descriptions.Item label="Телефон">
+                  <Text>{garbageSupplier.properties.phone}</Text>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.description && (
+                <Descriptions.Item label="Описание">
+                  <Text>{garbageSupplier.properties.description}</Text>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.website && (
+                <Descriptions.Item label="Сайт">
+                  <Link href={garbageSupplier.properties.website} target="_blank">
+                    {garbageSupplier.properties.website}
+                  </Link>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.email && (
+                <Descriptions.Item label="Email">
+                  <Text>{garbageSupplier.properties.email}</Text>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.inn && (
+                <Descriptions.Item label="ИНН">
+                  <Text>{garbageSupplier.properties.inn}</Text>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.organizationName && (
+                <Descriptions.Item label="Организация">
+                  <Text>{garbageSupplier.properties.organizationName}</Text>
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.reliability !== undefined && (
+                <Descriptions.Item label="Надежность">
+                  <Rate disabled value={garbageSupplier.properties.reliability} />
+                </Descriptions.Item>
+              )}
+
+              {garbageSupplier.properties.updatedAt && (
+                <Descriptions.Item label="Дата обновления">
+                  <Text>{garbageSupplier.properties.updatedAt}</Text>
+                </Descriptions.Item>
+              )}
+            </Descriptions>
+          )}
+        </Drawer>
 
         <div className="pt-4 space-y-2">
             <Button type="primary" block onClick={onEdit}>

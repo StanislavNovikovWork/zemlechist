@@ -41,3 +41,43 @@
 .dark .ant-drawer-header {
   border-bottom-color: rgba(55, 65, 81, 0.5) !important;
 }
+
+/* Специальные стили для вложенного drawer - правильная структура DOM */
+.ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-content-wrapper {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  background: #f3f4f6 !important;
+  border-radius: 12px !important;
+  z-index: 1201 !important;
+}
+
+/* Дополнительные селекторы для фона - максимальная специфичность */
+body .ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-content-wrapper {
+  background: #f3f4f6 !important;
+}
+
+html body .ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-content-wrapper {
+  background: #f3f4f6 !important;
+}
+
+.ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-header {
+  background: transparent !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-body {
+  background: transparent !important;
+}
+
+.ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-section {
+  background: #f3f4f6 !important;
+  border-radius: 12px !important;
+}
+
+/* Стили для темной темы вложенного drawer */
+.dark .ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-content-wrapper {
+  background: rgba(31, 41, 55, 0.95) !important;
+}
+
+.dark .ant-drawer-right.glass-drawer.ant-drawer-open .ant-drawer-section {
+  background: rgba(31, 41, 55, 0.95) !important;
+}

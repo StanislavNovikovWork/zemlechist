@@ -1,4 +1,4 @@
-import { Drawer, message } from 'antd';
+import { Drawer, App } from 'antd';
 import { AddSupplierForm } from '../SupplierForm';
 import { useSupplierDrawerController } from '@/features/SupplierDrawerControll/model/supplierDrawer.store';
 import { useUpdateSupplierMutation } from '../../api/mutations/useUpdateSupplierMutation';
@@ -9,6 +9,7 @@ import { SupplierForm } from '../../model/supplier.types';
 import { useSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
 export function AddSupplierDrawer() {
+  const { message } = App.useApp();
   const { isOpen, mode, data, initialData, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
     useSupplierDrawerController();
 

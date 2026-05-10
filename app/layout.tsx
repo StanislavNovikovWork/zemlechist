@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, App } from 'antd';
 import AppLayout from "@/layout/AppLayout";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { AddSupplierDrawerWrapper } from "@/features/SupplierDrawerControll";
@@ -35,13 +35,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
+      <body className="h-screen overflow-hidden">
         <Script
           src={`https://api-maps.yandex.ru/v3/?apikey=${apiKey}&lang=ru_RU`}
           strategy="beforeInteractive"
         />
-      </head>
-      <body className="h-screen overflow-hidden">
         <QueryProvider>
           <ConfigProvider
             theme={{
@@ -56,8 +54,10 @@ export default function RootLayout({
               },
             }}
           >
-            <AppLayout>{children}</AppLayout>
-            <AddSupplierDrawerWrapper />
+            <App>
+              <AppLayout>{children}</AppLayout>
+              <AddSupplierDrawerWrapper />
+            </App>
           </ConfigProvider>
         </QueryProvider>
       </body>
