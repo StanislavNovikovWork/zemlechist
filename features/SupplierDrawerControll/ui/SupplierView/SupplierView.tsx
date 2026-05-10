@@ -66,9 +66,101 @@ export function SupplierView({
               {isConstructionSite && initialValues.duration && initialValues.duration.period1 && (
                 <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
                   <Text>
-                    {initialValues.duration.period1[0]} - {initialValues.duration.period1[1]}
+                    {(() => {
+                      const formatDate = (dateValue: any) => {
+                        console.log('formatDate input:', dateValue, typeof dateValue);
+                        
+                        if (typeof dateValue === 'string') {
+                          // Проверяем формат дд.мм.гггг
+                          if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
+                            return dateValue;
+                          }
+                          // Пробуем распарсить другие строки
+                          const parsed = new Date(dateValue);
+                          if (!isNaN(parsed.getTime())) {
+                            return parsed.toLocaleDateString();
+                          }
+                          return dateValue; // возвращаем как есть если не удалось распарсить
+                        }
+                        
+                        if (dateValue instanceof Date) {
+                          if (!isNaN(dateValue.getTime())) {
+                            return dateValue.toLocaleDateString();
+                          }
+                          return 'Некорректная дата';
+                        }
+                        
+                        if (dateValue && typeof dateValue === 'object') {
+                          // Проверяем на Dayjs объект
+                          if ('$L' in dateValue && '$d' in dateValue) {
+                            const dayjsDate = (dateValue as any).$d;
+                            if (dayjsDate instanceof Date && !isNaN(dayjsDate.getTime())) {
+                              return dayjsDate.toLocaleDateString();
+                            }
+                          }
+                          // Проверяем наличие метода toLocaleDateString
+                          if ('toLocaleDateString' in dateValue) {
+                            try {
+                              return (dateValue as any).toLocaleDateString();
+                            } catch {
+                              return 'Некорректная дата';
+                            }
+                          }
+                        }
+                        
+                        return 'Некорректная дата';
+                      };
+                      return `${formatDate(initialValues.duration.period1[0])} - ${formatDate(initialValues.duration.period1[1])}`;
+                    })()}
                     {initialValues.duration.period2 && (
-                      <><br />{initialValues.duration.period2[0]} - {initialValues.duration.period2[1]}</>
+                      <><br />
+                        {(() => {
+                          const formatDate = (dateValue: any) => {
+                            console.log('formatDate input (period2):', dateValue, typeof dateValue);
+                            
+                            if (typeof dateValue === 'string') {
+                              // Проверяем формат дд.мм.гггг
+                              if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
+                                return dateValue;
+                              }
+                              // Пробуем распарсить другие строки
+                              const parsed = new Date(dateValue);
+                              if (!isNaN(parsed.getTime())) {
+                                return parsed.toLocaleDateString();
+                              }
+                              return dateValue; // возвращаем как есть если не удалось распарсить
+                            }
+                            
+                            if (dateValue instanceof Date) {
+                              if (!isNaN(dateValue.getTime())) {
+                                return dateValue.toLocaleDateString();
+                              }
+                              return 'Некорректная дата';
+                            }
+                            
+                            if (dateValue && typeof dateValue === 'object') {
+                              // Проверяем на Dayjs объект
+                              if ('$L' in dateValue && '$d' in dateValue) {
+                                const dayjsDate = (dateValue as any).$d;
+                                if (dayjsDate instanceof Date && !isNaN(dayjsDate.getTime())) {
+                                  return dayjsDate.toLocaleDateString();
+                                }
+                              }
+                              // Проверяем наличие метода toLocaleDateString
+                              if ('toLocaleDateString' in dateValue) {
+                                try {
+                                  return (dateValue as any).toLocaleDateString();
+                                } catch {
+                                  return 'Некорректная дата';
+                                }
+                              }
+                            }
+                            
+                            return 'Некорректная дата';
+                          };
+                          return `${formatDate(initialValues.duration.period2[0])} - ${formatDate(initialValues.duration.period2[1])}`;
+                        })()}
+                      </>
                     )}
                   </Text>
                 </Descriptions.Item>
