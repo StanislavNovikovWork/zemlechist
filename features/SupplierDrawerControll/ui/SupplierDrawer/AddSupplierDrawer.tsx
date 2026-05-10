@@ -85,46 +85,7 @@ export function AddSupplierDrawer() {
       destroyOnHidden
       mask={mode === 'create' || mode === 'edit'}
       rootClassName="glass-drawer"
-      style={{
-        
-      }}
-      styles={{
-         mask: {
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        },
-        section: {
-          background: '#f3f4f6',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-          borderRadius: '12px',
-        },
-        header: {
-          background: 'transparent',
-          borderBottom: '1px solid #e5e7eb',
-        },
-        body: {
-          background: 'transparent',
-        },
-      }}
     >
-      <style>{`
-        .glass-drawer .ant-drawer-content-wrapper {
-          height: calc(100vh - 16px) !important;
-          position: absolute;
-          top: 8px;
-          bottom: 8px ;
-          right: 16px;
-          border-radius: 12px !important;
-        }
-        .glass-drawer .ant-drawer-section {
-          height: 100%;
-        }
-        .dark .glass-drawer .ant-drawer-section {
-          background: rgba(31, 41, 55, 0.8) !important;
-        }
-        .dark .glass-drawer .ant-drawer-header {
-          border-bottom-color: rgba(55, 65, 81, 0.5) !important;
-        }
-      `}</style>
       {mode === 'view' && data ? (
         <SupplierView
           initialValues={data}

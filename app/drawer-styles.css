@@ -1,0 +1,43 @@
+/* Глобальные стили для всех drawer в проекте */
+
+/* Основные стили для drawer */
+.ant-drawer-content-wrapper {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Прозрачные header и body */
+.ant-drawer-header {
+  background: transparent !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.ant-drawer-body {
+  background: transparent !important;
+}
+
+/* Стили для glass-drawer */
+.glass-drawer .ant-drawer-content-wrapper {
+  height: calc(100vh - 16px) !important;
+  position: absolute !important;
+  top: 8px !important;
+  bottom: 8px !important;
+  right: 16px !important;
+  border-radius: 12px !important;
+}
+
+.glass-drawer .ant-drawer-section {
+  height: 100% !important;
+}
+
+/* Темная тема */
+.dark .glass-drawer .ant-drawer-section {
+  background: rgba(31, 41, 55, 0.8) !important;
+}
+
+.dark .glass-drawer .ant-drawer-header {
+  border-bottom-color: rgba(55, 65, 81, 0.5) !important;
+}
+
+.dark .ant-drawer-header {
+  border-bottom-color: rgba(55, 65, 81, 0.5) !important;
+}

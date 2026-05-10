@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { ConfigProvider } from "antd";
 import AppLayout from "@/layout/AppLayout";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { AddSupplierDrawerWrapper } from "@/features/SupplierDrawerControll";
 import "./globals.css";
+import "./drawer-styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,8 +43,22 @@ export default function RootLayout({
       </head>
       <body className="h-screen overflow-hidden">
         <QueryProvider>
-          <AppLayout>{children}</AppLayout>
-          <AddSupplierDrawerWrapper />
+          <ConfigProvider
+            theme={{
+              components: {
+                Drawer: {
+                  colorBgElevated: '#f3f4f6',
+                  colorBgMask: 'rgba(0,0,0,0.3)',
+                  borderRadiusLG: 12,
+                  footerPaddingBlock: 16,
+                  footerPaddingInline: 16,
+                },
+              },
+            }}
+          >
+            <AppLayout>{children}</AppLayout>
+            <AddSupplierDrawerWrapper />
+          </ConfigProvider>
         </QueryProvider>
       </body>
     </html>
