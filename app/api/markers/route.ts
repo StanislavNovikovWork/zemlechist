@@ -18,7 +18,6 @@ export async function GET() {
       UNION ALL
       SELECT ${constructionFields}
       FROM construction_sites
-      ORDER BY id
     `;
     
     const result = await pool.query(query);
