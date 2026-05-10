@@ -1,4 +1,5 @@
 import React from 'react';
+import { TractorIcon } from '@/components/icons/TractorIcon';
 
 interface SpecialTechniqueMarkerProps {
   color: string;
@@ -6,6 +7,12 @@ interface SpecialTechniqueMarkerProps {
   hasGoldBorder?: boolean;
 }
 
+/**
+ * Компонент маркера для спецтехники с иконкой трактора
+ * @param color - цвет маркера
+ * @param size - размер маркера
+ * @param hasGoldBorder - флаг золотого бордера для высокой надежности
+ */
 export function SpecialTechniqueMarker({ color, size = 42, hasGoldBorder = false }: SpecialTechniqueMarkerProps) {
   return (
     <svg 
@@ -28,15 +35,9 @@ export function SpecialTechniqueMarker({ color, size = 42, hasGoldBorder = false
       <circle cx="30" cy="64" r="4" fill="#FFFFFF"/>
       <circle cx="30" cy="64" r="2" fill={color}/>
 
-      <g transform="translate(14,12) scale(0.068) translate(440,0) scale(-1,1)" fill="#FFFFFF">
-        <path d="M30,169.612H0v145.604c7.692-11.316,17.98-20.73,30-27.384V169.612z"/>
-        <path d="M72,307c-31.43,0-57,25.57-57,57s25.57,57,57,57s57-25.57,57-57S103.43,307,72,307z"/>
-        <path d="M294,297.416V214L206,49H60v228.832c3.924-0.544,7.929-0.832,12-0.832c47.972,0,87,39.028,87,87
-          c0,3.382-0.201,6.718-0.578,10H209c0-42.458,34.542-77,77-77C288.701,297,291.37,297.143,294,297.416z
-          M90,214V79h98l72,135H90z"/>
-        <path d="M441.25,344L373,214h-49v93.071c23.267,13.262,39,38.285,39,66.929h107v-30H441.25z"/>
-        <path d="M286,327c-25.916,0-47,21.084-47,47s21.084,47,47,47s47-21.084,47-47S311.916,327,286,327z"/>
-        <rect x="400" y="341" width="70" height="5" rx="2"/>
+      {/* Иконка трактора */}
+      <g transform="translate(14, 13) scale(1.3)">
+        <TractorIcon size={24} color="#FFFFFF" />
       </g>
     </svg>
   );
