@@ -72,6 +72,13 @@ export const constructionSiteFormSchema: FieldSchema[] = [
     type: 'dateRange',
     placeholder: 'Выберите период',
   },
+  {
+    name: "garbageCollectionSupplier",
+    label: "Вывоз мусора",
+    type: "select",
+    placeholder: "Выберите поставщика вывоза мусора",
+    options: [], // Будет заполнено динамически
+  },
 ];
 
 export const supplierFormSchema: FieldSchema[] = [

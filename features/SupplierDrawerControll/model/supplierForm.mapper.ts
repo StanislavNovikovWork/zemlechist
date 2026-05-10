@@ -8,8 +8,14 @@ export function toSubmitValues(values: SupplierFormValues): SupplierForm {
   const result: SupplierForm = {
     ...rest,
     coordinates: [0, 0],
-    updatedAt: updatedAt?.format('DD.MM.YYYY'),
   };
+
+  // Добавляем updatedAt только если оно существует и является объектом Dayjs
+  if (updatedAt && typeof updatedAt === 'object' && typeof updatedAt.format === 'function') {
+    result.updatedAt = updatedAt.format('DD.MM.YYYY');
+  } else if (typeof updatedAt === 'string') {
+    result.updatedAt = updatedAt;
+  }
 
   if (coordinates) {
     const [lat, lng] = coordinates.split(',').map(Number);

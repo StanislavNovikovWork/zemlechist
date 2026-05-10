@@ -4,13 +4,14 @@ import { Form, Input, Button, Space, Select, DatePicker, Rate, ConfigProvider } 
 import ruRU from 'antd/locale/ru_RU';
 const { RangePicker } = DatePicker;
 import { PhoneInput } from '@/ui/PhoneInput';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
 import { FieldSchema } from './types';
 import { supplierFormSchema, constructionSiteFormSchema } from '../../model/supplierForm.schema';
+import { useGarbageSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
 type AddSupplierFormProps = {
   initialValues?: SupplierForm | null;
@@ -27,11 +28,35 @@ export function AddSupplierForm({
 }: AddSupplierFormProps) {
   const [form] = Form.useForm();
   const typeValue = Form.useWatch('type', form);
+  const { data: garbageSuppliers = [] } = useGarbageSuppliersQuery();
+
+  // Получаем опции для селекта поставщиков вывоза мусора
+  const garbageSupplierOptions = useMemo(() => {
+    return garbageSuppliers.map((supplier: any) => ({
+      value: supplier.id,
+      label: supplier.properties.name || `Поставщик #${supplier.id}`,
+    }));
+  }, [garbageSuppliers]);
 
   // Получаем схему в зависимости от типа
   const currentSchema = useMemo(() => {
-    return typeValue === 'constructionSite' ? constructionSiteFormSchema : supplierFormSchema;
-  }, [typeValue]);
+    let schema = typeValue === 'constructionSite' ? constructionSiteFormSchema : supplierFormSchema;
+    
+    // Обновляем опции для селекта вывоза мусора
+    if (typeValue === 'constructionSite') {
+      schema = schema.map(field => {
+        if (field.name === 'garbageCollectionSupplier') {
+          return {
+            ...field,
+            options: garbageSupplierOptions,
+          };
+        }
+        return field;
+      });
+    }
+    
+    return schema;
+  }, [typeValue, garbageSupplierOptions]);
 
   useEffect(() => {
       form.resetFields();
@@ -42,9 +67,13 @@ export function AddSupplierForm({
 
     const values: any = { ...initialValues };
 
-    if (values.updatedAt) {
+    // Обрабатываем updatedAt только для не-строительных площадок
+    if (values.updatedAt && values.type !== 'constructionSite') {
       const parsed = dayjs(values.updatedAt, 'DD.MM.YYYY');
       values.updatedAt = parsed.isValid() ? parsed : undefined;
+    } else if (values.type === 'constructionSite') {
+      // Для строй площадок удаляем поле updatedAt чтобы избежать ошибок
+      delete values.updatedAt;
     }
 
     if (values.duration) {

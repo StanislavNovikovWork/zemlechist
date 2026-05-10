@@ -16,86 +16,95 @@ interface MarkerPopupProps {
 }
 
 export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }: MarkerPopupProps) {
+  // Очищаем данные от возможных объектов Dayjs
+  const safeMarker = {
+    ...marker,
+    properties: {
+      ...marker.properties,
+      updatedAt: (() => {
+        const updatedAt = marker.properties.updatedAt;
+        if (!updatedAt) return null;
+        if (typeof updatedAt === 'string') return updatedAt;
+        if (typeof updatedAt === 'object' && 'format' in updatedAt && typeof (updatedAt as any).format === 'function') {
+          return (updatedAt as any).format('DD.MM.YYYY');
+        }
+        if (typeof updatedAt === 'object' && 'toLocaleDateString' in updatedAt) {
+          return (updatedAt as any).toLocaleDateString();
+        }
+        return 'Некорректная дата';
+      })()
+    }
+  };
+
   return (
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className="w-[220px] bg-white px-3 py-2 rounded shadow-lg text-xs relative"
     >
-      {marker.properties.reliability && (
+      {safeMarker.properties.reliability && (
         <div className="absolute top-1 right-1 flex items-center gap-1">
           <StarFilled className="text-[10px]" style={{ color: '#FADB14' }} />
-          <span className="text-gray-700 text-[10px] font-medium">{marker.properties.reliability}</span>
+          <span className="text-gray-700 text-[10px] font-medium">{safeMarker.properties.reliability}</span>
         </div>
       )}
       <div className="space-y-0.5">
-        {marker.properties.orderNumber && (
+        {safeMarker.properties.orderNumber && (
           <div>
             <span className="font-semibold text-gray-700">
-              {marker.properties.type === 'constructionSite' ? 'Заказ:' : 'Заказ:'}
+              {safeMarker.properties.type === 'constructionSite' ? 'Заказ:' : 'Заказ:'}
             </span>{' '}
-            <span className="text-gray-900">{marker.properties.orderNumber}</span>
+            <span className="text-gray-900">{safeMarker.properties.orderNumber}</span>
           </div>
         )}
-        {marker.properties.responsible && (
+        {safeMarker.properties.responsible && (
           <div>
             <span className="font-semibold text-gray-700">Ответственный:</span>{' '}
-            <span className="text-gray-900">{marker.properties.responsible}</span>
+            <span className="text-gray-900">{safeMarker.properties.responsible}</span>
           </div>
         )}
-        {marker.properties.phone && (
+        {safeMarker.properties.phone && (
           <div>
             <span className="font-semibold text-gray-700">Телефон:</span>{' '}
-            <span className="text-gray-900">{marker.properties.phone}</span>
+            <span className="text-gray-900">{safeMarker.properties.phone}</span>
           </div>
         )}
-        {marker.properties.name && marker.properties.type !== 'constructionSite' && (
+        {safeMarker.properties.name && safeMarker.properties.type !== 'constructionSite' && (
           <div>
             <span className="font-semibold text-gray-700">Имя:</span>{' '}
-            <span className="text-gray-900">{marker.properties.name}</span>
+            <span className="text-gray-900">{safeMarker.properties.name}</span>
           </div>
         )}
-        {marker.properties.duration && marker.properties.type === 'constructionSite' && (
+        {safeMarker.properties.duration && safeMarker.properties.type === 'constructionSite' && (
           <div>
             <span className="font-semibold text-gray-700">Продолжительность:</span>{' '}
             <span className="text-gray-900">
-              {marker.properties.duration.period1 && (
+              {safeMarker.properties.duration.period1 && (
                 <>
-                  {marker.properties.duration.period1[0]} - {marker.properties.duration.period1[1]}
-                  {marker.properties.duration.period2 && (
-                    <> и {marker.properties.duration.period2[0]} - {marker.properties.duration.period2[1]}</>
+                  {safeMarker.properties.duration.period1[0]} - {safeMarker.properties.duration.period1[1]}
+                  {safeMarker.properties.duration.period2 && (
+                    <> и {safeMarker.properties.duration.period2[0]} - {safeMarker.properties.duration.period2[1]}</>
                   )}
                 </>
               )}
             </span>
           </div>
         )}
-        {marker.properties.description && (
+        {safeMarker.properties.description && (
           <div>
             <span className="font-semibold text-gray-700">Описание:</span>{' '}
-            <span className="text-gray-900">{marker.properties.description}</span>
+            <span className="text-gray-900">{safeMarker.properties.description}</span>
           </div>
         )}
-        {marker.properties.updatedAt && (
+        {safeMarker.properties.updatedAt && (
           <div>
             <span className="font-semibold text-gray-700">Обновлено:</span>{' '}
-            <span className="text-gray-900">
-              {(() => {
-                const updatedAt = marker.properties.updatedAt;
-                if (typeof updatedAt === 'string') {
-                  return updatedAt;
-                }
-                if (updatedAt && typeof updatedAt === 'object' && 'toLocaleDateString' in updatedAt) {
-                  return (updatedAt as any).toLocaleDateString();
-                }
-                return 'Некорректная дата';
-              })()}
-            </span>
+            <span className="text-gray-900">{safeMarker.properties.updatedAt}</span>
           </div>
         )}
       </div>
       <button
-        onClick={() => onOpenModal(marker)}
+        onClick={() => onOpenModal(safeMarker)}
         className="mt-2 w-full px-2 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded text-xs font-medium transition-colors"
       >
         Подробнее

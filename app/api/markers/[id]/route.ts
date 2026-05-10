@@ -172,7 +172,12 @@ export async function PUT(
 
     const updatedMarker = result.rows[0];
     if (updatedMarker.updated_at) {
-      updatedMarker.updated_at = dayjs(updatedMarker.updated_at).format('DD.MM.YYYY');
+      // Конвертируем дату из YYYY-MM-DD в DD.MM.YYYY
+      const date = new Date(updatedMarker.updated_at);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      updatedMarker.updated_at = `${day}.${month}.${year}`;
     }
 
     return NextResponse.json(updatedMarker);

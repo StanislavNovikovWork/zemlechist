@@ -90,17 +90,25 @@ export async function GET() {
       let duration: { period1: [string, string]; period2?: [string, string] } | undefined = undefined;
       if (isConstructionSite) {
         if (row.duration_period1_start && row.duration_period1_end) {
+          const formatDate = (dateStr: string) => {
+            const date = new Date(dateStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}.${month}.${year}`;
+          };
+          
           duration = {
             period1: [
-              dayjs(row.duration_period1_start).format('DD.MM.YYYY'),
-              dayjs(row.duration_period1_end).format('DD.MM.YYYY')
+              formatDate(row.duration_period1_start),
+              formatDate(row.duration_period1_end)
             ]
           };
           
           if (row.duration_period2_start && row.duration_period2_end) {
             duration.period2 = [
-              dayjs(row.duration_period2_start).format('DD.MM.YYYY'),
-              dayjs(row.duration_period2_end).format('DD.MM.YYYY')
+              formatDate(row.duration_period2_start),
+              formatDate(row.duration_period2_end)
             ];
           }
         } else if (row.duration && typeof row.duration === 'string') {
@@ -132,7 +140,13 @@ export async function GET() {
           inn: row.inn,
           organizationName: row.organization_name,
           email: row.email,
-          updatedAt: row.updated_at ? dayjs(row.updated_at).format('DD.MM.YYYY') : null,
+          updatedAt: row.updated_at ? (() => {
+            const date = new Date(row.updated_at);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}.${month}.${year}`;
+          })() : null,
           reliability: row.reliability,
           orderNumber: row.order_number,
           responsible: row.responsible,
