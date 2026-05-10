@@ -6,6 +6,7 @@ import { useCreateSupplierMutation } from '../../api/mutations/useCreateSupplier
 import { useDeleteSupplierMutation } from '../../api/mutations/useDeleteSupplierMutation';
 import { SupplierView } from '../SupplierView';
 import { SupplierForm } from '../../model/supplier.types';
+import { useSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
 export function AddSupplierDrawer() {
   const { isOpen, mode, data, initialData, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
@@ -17,6 +18,9 @@ export function AddSupplierDrawer() {
     useCreateSupplierMutation();
   const { mutateAsync: deleteSupplier, isPending: deletePending } =
     useDeleteSupplierMutation();
+
+  const { data: markersData } = useSuppliersQuery();
+  const allMarkers = markersData?.features || [];
 
   const isLoading = updatePending || createPending || deletePending;
 
@@ -127,6 +131,7 @@ export function AddSupplierDrawer() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           deleteLoading={deletePending}
+          allMarkers={allMarkers}
         />
       ) : (
         <AddSupplierForm

@@ -10,12 +10,14 @@ const { Text, Link } = Typography;
  * @property onEdit - Callback при нажатии кнопки "Редактировать"
  * @property onDelete - Callback при подтверждении удаления
  * @property deleteLoading - Флаг загрузки удаления
+ * @property allMarkers - Все маркеры для поиска поставщика по ID
  */
 type SupplierViewProps = {
   initialValues: SupplierForm;
   onEdit?: () => void;
   onDelete?: () => Promise<void>;
   deleteLoading?: boolean;
+  allMarkers?: any[];
 };
 
 export function SupplierView({
@@ -23,10 +25,16 @@ export function SupplierView({
   onEdit,
   onDelete,
   deleteLoading,
+  allMarkers,
 }: SupplierViewProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const isConstructionSite = initialValues.type === 'constructionSite';
   console.log(initialValues)
+
+  // Находим поставщика по ID из всех маркеров
+  const garbageSupplier = allMarkers?.find(
+    (marker: any) => marker.id === initialValues.garbageCollectionSupplier && marker.properties.type === 'garbageCollection'
+  );
   return (
     <>
       <div className="flex flex-col h-full">
@@ -166,6 +174,7 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
 
+              
               {/* Координаты (только для стройплощадок) */}
               {isConstructionSite && initialValues.coordinates && (
                 <Descriptions.Item label="Координаты" style={{ paddingBottom: '4px' }}>
@@ -252,6 +261,24 @@ export function SupplierView({
               )}
             </>
           </Descriptions>
+
+          {/* Блок Поставщики (только для стройплощадок) */}
+          {isConstructionSite && garbageSupplier && (
+            <div className="border border-gray-200 rounded-lg p-3 mb-4">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Поставщики</h4>
+              <div className="space-y-1">
+                <div>
+                  <span className="text-xs text-gray-500">Вывоз мусора</span>
+                  <div>
+                    <Text>
+                      {garbageSupplier.properties.name || `Поставщик #${garbageSupplier.id}`}
+                      {garbageSupplier.properties.phone && ` ${garbageSupplier.properties.phone}`}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="pt-4 space-y-2">
