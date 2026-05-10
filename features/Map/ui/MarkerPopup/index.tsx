@@ -79,7 +79,18 @@ export function MarkerPopup({ marker, onOpenModal, onMouseEnter, onMouseLeave }:
         {marker.properties.updatedAt && (
           <div>
             <span className="font-semibold text-gray-700">Обновлено:</span>{' '}
-            <span className="text-gray-900">{marker.properties.updatedAt}</span>
+            <span className="text-gray-900">
+              {(() => {
+                const updatedAt = marker.properties.updatedAt;
+                if (typeof updatedAt === 'string') {
+                  return updatedAt;
+                }
+                if (updatedAt && typeof updatedAt === 'object' && 'toLocaleDateString' in updatedAt) {
+                  return (updatedAt as any).toLocaleDateString();
+                }
+                return 'Некорректная дата';
+              })()}
+            </span>
           </div>
         )}
       </div>

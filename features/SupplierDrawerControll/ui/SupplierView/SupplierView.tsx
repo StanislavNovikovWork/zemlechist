@@ -26,7 +26,7 @@ export function SupplierView({
 }: SupplierViewProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const isConstructionSite = initialValues.type === 'constructionSite';
-
+  console.log(initialValues)
   return (
     <>
       <div className="flex flex-col h-full">
@@ -66,9 +66,9 @@ export function SupplierView({
               {isConstructionSite && initialValues.duration && initialValues.duration.period1 && (
                 <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
                   <Text>
-                    {new Date(initialValues.duration.period1[0]).toLocaleDateString()} - {new Date(initialValues.duration.period1[1]).toLocaleDateString()}
+                    {initialValues.duration.period1[0]} - {initialValues.duration.period1[1]}
                     {initialValues.duration.period2 && (
-                      <><br />{new Date(initialValues.duration.period2[0]).toLocaleDateString()} - {new Date(initialValues.duration.period2[1]).toLocaleDateString()}</>
+                      <><br />{initialValues.duration.period2[0]} - {initialValues.duration.period2[1]}</>
                     )}
                   </Text>
                 </Descriptions.Item>

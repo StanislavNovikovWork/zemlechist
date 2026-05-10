@@ -28,10 +28,28 @@ export function Marker({
   onMouseLeave,
   onOpenModal,
 }: MarkerProps) {
+  // Проверка на наличие объектов Dayjs в свойствах и их преобразование
+  const safeFeature = {
+    ...feature,
+    properties: {
+      ...feature.properties,
+      updatedAt: (() => {
+        const updatedAt = feature.properties.updatedAt;
+        if (typeof updatedAt === 'string') {
+          return updatedAt;
+        }
+        if (updatedAt && typeof updatedAt === 'object' && 'toLocaleDateString' in updatedAt) {
+          return (updatedAt as any).toLocaleDateString();
+        }
+        return null;
+      })()
+    }
+  };
+
   const { Icon, offset, color, scale, hasGoldBorder } = getMarkerConfig(
-    feature.properties.type,
+    safeFeature.properties.type,
     isHovered,
-    feature
+    safeFeature
   );
 
   return (
@@ -89,7 +107,7 @@ export function Marker({
             }}
           >
             <MarkerPopup
-              marker={feature}
+              marker={safeFeature}
               onOpenModal={onOpenModal}
               onMouseLeave={onMouseLeave}
             />
