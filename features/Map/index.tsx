@@ -79,6 +79,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         responsible: marker.properties.responsible,
         paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
         duration: marker.properties.duration,
+        garbageCollectionSupplier: marker.properties.garbageCollectionSupplier,
         phone: '',
         name: '',
         description: '',

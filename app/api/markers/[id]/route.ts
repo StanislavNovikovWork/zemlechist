@@ -22,7 +22,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration } = body;
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration, garbageCollectionSupplier } = body;
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
       const updates: string[] = [];
@@ -42,11 +42,11 @@ export async function PUT(
         values.push(orderNumber);
       }
 
-      // Проверяем, существуют ли поля responsible, payment_method и duration
+      // Проверяем, существуют ли поля responsible, payment_method, duration и garbage_collection_supplier
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
@@ -55,6 +55,7 @@ export async function PUT(
       const hasNewDurationFields = tableInfo.rows.some(row => 
         ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
       );
+      const hasGarbageCollectionSupplierField = tableInfo.rows.some(row => row.column_name === 'garbage_collection_supplier');
 
       if (responsible !== undefined && hasResponsibleField) {
         updates.push(`responsible = $${paramIndex++}`);
@@ -94,6 +95,11 @@ export async function PUT(
           updates.push(`duration = $${paramIndex++}`);
           values.push(duration);
         }
+      }
+
+      if (garbageCollectionSupplier !== undefined && hasGarbageCollectionSupplierField) {
+        updates.push(`garbage_collection_supplier = $${paramIndex++}`);
+        values.push(garbageCollectionSupplier);
       }
 
       if (updates.length === 0) {

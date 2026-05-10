@@ -26,6 +26,7 @@ function toApiPayload(values: SupplierForm) {
     responsible: values.responsible,
     paymentMethod: values.paymentMethod,
     duration: values.duration,
+    garbageCollectionSupplier: values.garbageCollectionSupplier,
   };
 }
 

@@ -28,22 +28,36 @@ export function Marker({
   onMouseLeave,
   onOpenModal,
 }: MarkerProps) {
+  // Рекурсивная функция для очистки данных от объектов Dayjs
+  const cleanDayjsObjects = (obj: any): any => {
+    if (obj === null || obj === undefined) {
+      return obj;
+    }
+    
+    if (typeof obj === 'object' && 'format' in obj && typeof (obj as any).format === 'function') {
+      // Это объект Dayjs - конвертируем в строку
+      return (obj as any).format('DD.MM.YYYY');
+    }
+    
+    if (Array.isArray(obj)) {
+      return obj.map(cleanDayjsObjects);
+    }
+    
+    if (typeof obj === 'object') {
+      const cleaned: any = {};
+      for (const [key, value] of Object.entries(obj)) {
+        cleaned[key] = cleanDayjsObjects(value);
+      }
+      return cleaned;
+    }
+    
+    return obj;
+  };
+
   // Проверка на наличие объектов Dayjs в свойствах и их преобразование
   const safeFeature = {
     ...feature,
-    properties: {
-      ...feature.properties,
-      updatedAt: (() => {
-        const updatedAt = feature.properties.updatedAt;
-        if (typeof updatedAt === 'string') {
-          return updatedAt;
-        }
-        if (updatedAt && typeof updatedAt === 'object' && 'toLocaleDateString' in updatedAt) {
-          return (updatedAt as any).toLocaleDateString();
-        }
-        return null;
-      })()
-    }
+    properties: cleanDayjsObjects(feature.properties)
   };
 
   const { Icon, offset, color, scale, hasGoldBorder } = getMarkerConfig(
@@ -54,12 +68,12 @@ export function Marker({
 
   return (
     <YMapMarker
-      key={feature.id}
-      coordinates={feature.geometry.coordinates as [number, number]}
-      zIndex={feature.properties.type === 'constructionSite' ? 1000 : (isHovered ? 1000 : 0)}
+      key={safeFeature.id}
+      coordinates={safeFeature.geometry.coordinates as [number, number]}
+      zIndex={safeFeature.properties.type === 'constructionSite' ? 1000 : (isHovered ? 1000 : 0)}
     >
       <div
-        onMouseEnter={() => onMouseEnter(feature.id)}
+        onMouseEnter={() => onMouseEnter(safeFeature.id)}
         onMouseLeave={onMouseLeave}
         className="relative z-[1]"
         style={{ 

@@ -32,10 +32,13 @@ export function AddSupplierForm({
 
   // Получаем опции для селекта поставщиков вывоза мусора
   const garbageSupplierOptions = useMemo(() => {
-    return garbageSuppliers.map((supplier: any) => ({
+    console.log('Garbage suppliers data:', garbageSuppliers);
+    const options = garbageSuppliers.map((supplier: any) => ({
       value: supplier.id,
       label: supplier.properties.name || `Поставщик #${supplier.id}`,
     }));
+    console.log('Garbage supplier options:', options);
+    return options;
   }, [garbageSuppliers]);
 
   // Получаем схему в зависимости от типа
@@ -90,11 +93,15 @@ export function AddSupplierForm({
       values.coordinates = `${lat}, ${lng}`;
     }
 
+    console.log('Setting form values:', values);
     form.setFieldsValue(values);
   }, [initialValues, form]);
 
   const handleFinish = (values: any) => {
-    onSubmit(toSubmitValues(values));
+    console.log('Form values before submit:', values);
+    const submitValues = toSubmitValues(values);
+    console.log('Form values after mapper:', submitValues);
+    onSubmit(submitValues);
   };
 
   type SchemaFormProps = {

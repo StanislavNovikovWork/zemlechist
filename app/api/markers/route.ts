@@ -8,68 +8,9 @@ const pool = new Pool({
 
 export async function GET() {
   try {
-    // Проверяем наличие полей в таблицах
-    const responsibleInfo = await pool.query(`
-      SELECT column_name 
-      FROM information_schema.columns 
-      WHERE table_name = 'construction_sites' AND column_name = 'responsible'
-    `);
-    
-    const hasResponsibleField = responsibleInfo.rows.length > 0;
-
-    const paymentMethodInfo = await pool.query(`
-      SELECT table_name, column_name 
-      FROM information_schema.columns 
-      WHERE column_name = 'payment_method' AND table_name IN ('markers', 'construction_sites')
-    `);
-    
-    const durationInfo = await pool.query(`
-      SELECT table_name, column_name 
-      FROM information_schema.columns 
-      WHERE column_name IN ('duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end') 
-      AND table_name IN ('markers', 'construction_sites')
-    `);
-    
-    const hasPaymentMethodInMarkers = paymentMethodInfo.rows.some(row => row.table_name === 'markers');
-    const hasPaymentMethodInConstructionSites = paymentMethodInfo.rows.some(row => row.table_name === 'construction_sites');
-    const hasDurationInConstructionSites = durationInfo.rows.some(row => row.table_name === 'construction_sites');
-    const hasNewDurationFields = durationInfo.rows.some(row => 
-      ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
-    );
-
-    // Строим запрос с payment_method и duration для каждой таблицы отдельно
-    let markersFields = `id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end`;
-    let constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number`;
-    
-    if (hasResponsibleField) {
-      constructionFields += ', responsible';
-    } else {
-      constructionFields += ', NULL as responsible';
-    }
-    
-    if (hasDurationInConstructionSites) {
-      constructionFields += ', duration';
-    } else {
-      constructionFields += ', NULL as duration';
-    }
-    
-    if (hasNewDurationFields) {
-      constructionFields += ', duration_period1_start, duration_period1_end, duration_period2_start, duration_period2_end';
-    } else {
-      constructionFields += ', NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end';
-    }
-    
-    if (hasPaymentMethodInConstructionSites) {
-      constructionFields += ', payment_method';
-    } else {
-      constructionFields += ', NULL as payment_method';
-    }
-    
-    if (hasPaymentMethodInMarkers) {
-      markersFields += ', payment_method';
-    } else {
-      markersFields += ', NULL as payment_method';
-    }
+    // Используем статические поля которые мы знаем существуют в таблице construction_sites
+    const markersFields = `id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end, NULL as garbage_collection_supplier, NULL as is_completed, NULL as payment_method`;
+    const constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, responsible, duration, duration_period1_start, duration_period1_end, duration_period2_start, duration_period2_end, garbage_collection_supplier, is_completed, payment_method`;
     
     let query = `
       SELECT ${markersFields}
@@ -152,6 +93,7 @@ export async function GET() {
           responsible: row.responsible,
           paymentMethod: row.payment_method,
           duration,
+          garbageCollectionSupplier: row.garbage_collection_supplier,
         },
       };
     });
@@ -173,7 +115,7 @@ export async function POST(request: Request) {
     console.log('POST /api/markers called');
     const body = await request.json();
     console.log('POST /api/markers body parsed:', body);
-    const { lat, lon, phone, name, description, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration } = body;
+    const { lat, lon, phone, name, description, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration, garbageCollectionSupplier } = body;
     
     
     if (type === 'constructionSite') {
@@ -191,7 +133,7 @@ export async function POST(request: Request) {
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
@@ -200,6 +142,7 @@ export async function POST(request: Request) {
       const hasNewDurationFields = tableInfo.rows.some(row => 
         ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
       );
+      const hasGarbageCollectionSupplierField = tableInfo.rows.some(row => row.column_name === 'garbage_collection_supplier');
 
       // Строим запрос более простым способом
       let fields = 'id, lat, lon, order_number';
@@ -251,6 +194,14 @@ export async function POST(request: Request) {
         placeholders += `, $${paramIndex}`;
         returnFields += ', duration';
         params.push(duration);
+        paramIndex++;
+      }
+      
+      if (garbageCollectionSupplier !== undefined && hasGarbageCollectionSupplierField) {
+        fields += ', garbage_collection_supplier';
+        placeholders += `, $${paramIndex}`;
+        returnFields += ', garbage_collection_supplier';
+        params.push(garbageCollectionSupplier);
         paramIndex++;
       }
       
