@@ -6,7 +6,7 @@ import { useCreateSupplierMutation } from '../../api/mutations/useCreateSupplier
 import { useDeleteSupplierMutation } from '../../api/mutations/useDeleteSupplierMutation';
 import { SupplierView } from '../SupplierView';
 import { SupplierForm } from '../../model/supplier.types';
-import { useSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
+import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
 
 export function AddSupplierDrawer() {
   const { message } = App.useApp();
@@ -20,7 +20,7 @@ export function AddSupplierDrawer() {
   const { mutateAsync: deleteSupplier, isPending: deletePending } =
     useDeleteSupplierMutation();
 
-  const { data: markersData } = useSuppliersQuery();
+  const { data: markersData } = useMarkersQuery();
   const allMarkers = markersData?.features || [];
 
   const isLoading = updatePending || createPending || deletePending;
