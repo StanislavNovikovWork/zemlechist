@@ -22,14 +22,12 @@ export function useGarbageSuppliersQuery() {
         throw new Error("Failed to fetch garbage suppliers");
       }
       const data = await response.json();
-      console.log('All markers data:', data);
       
       // Фильтруем поставщиков с типом "garbageCollection"
       const garbageSuppliers = data.features?.filter(
         (marker: any) => marker.properties.type === 'garbageCollection'
       ) || [];
       
-      console.log('Filtered garbage suppliers:', garbageSuppliers);
       return garbageSuppliers;
     },
   });

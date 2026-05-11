@@ -30,7 +30,6 @@ export function SupplierView({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
   const isConstructionSite = initialValues.type === 'constructionSite';
-  console.log(initialValues)
 
   // Находим поставщика по ID из всех маркеров
   const garbageSupplier = allMarkers?.find(
@@ -77,8 +76,6 @@ export function SupplierView({
                   <Text>
                     {(() => {
                       const formatDate = (dateValue: any) => {
-                        console.log('formatDate input:', dateValue, typeof dateValue);
-                        
                         if (typeof dateValue === 'string') {
                           // Проверяем формат дд.мм.гггг
                           if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
@@ -125,8 +122,6 @@ export function SupplierView({
                       <><br />
                         {(() => {
                           const formatDate = (dateValue: any) => {
-                            console.log('formatDate input (period2):', dateValue, typeof dateValue);
-                            
                             if (typeof dateValue === 'string') {
                               // Проверяем формат дд.мм.гггг
                               if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
@@ -217,6 +212,13 @@ export function SupplierView({
               {initialValues.description && (
                 <Descriptions.Item label="Описание" style={{ paddingBottom: '4px' }}>
                   <Text>{initialValues.description}</Text>
+                </Descriptions.Item>
+              )}
+
+              {/* Зоны (только для не-строительных площадок) */}
+              {!isConstructionSite && initialValues.zones && initialValues.zones.length > 0 && (
+                <Descriptions.Item label="Зоны" style={{ paddingBottom: '4px' }}>
+                  <Text>{initialValues.zones.join(', ')}</Text>
                 </Descriptions.Item>
               )}
 

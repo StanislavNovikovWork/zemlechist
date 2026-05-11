@@ -101,6 +101,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       email: marker.properties.email,
       reliability: marker.properties.reliability,
       paymentMethod: marker.properties.paymentMethod as 'cash' | 'cashless' | 'both' | undefined,
+      zones: marker.properties.zones,
     };
     openViewSupplier(supplierForm);
   };

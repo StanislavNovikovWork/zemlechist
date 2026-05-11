@@ -5,7 +5,6 @@ import type { SupplierForm } from "../../model/supplier.types";
  * Преобразует данные формы в формат API
  */
 function toApiPayload(values: SupplierForm) {
-  console.log('toApiPayload input:', values);
   const [lon, lat] = values.coordinates || [0, 0];
   const payload = {
     lat,
@@ -24,8 +23,8 @@ function toApiPayload(values: SupplierForm) {
     paymentMethod: values.paymentMethod,
     duration: values.duration,
     garbageCollectionSupplier: values.garbageCollectionSupplier,
+    zones: values.zones,
   };
-  console.log('toApiPayload output:', payload);
   return payload;
 }
 
@@ -39,7 +38,6 @@ export function useCreateSupplierMutation() {
   return useMutation({
     mutationFn: async (values: SupplierForm) => {
       const payload = toApiPayload(values);
-      console.log('Sending request with payload:', payload);
       
       const response = await fetch('/api/markers', {
         method: 'POST',
@@ -49,12 +47,7 @@ export function useCreateSupplierMutation() {
         body: JSON.stringify(payload),
       });
       
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-      
       if (!response.ok) {
-        const errorText = await response.text();
-        console.log('Error response:', errorText);
         throw new Error('Failed to create marker');
       }
       return response.json();

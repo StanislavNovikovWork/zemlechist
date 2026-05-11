@@ -9,8 +9,8 @@ const pool = new Pool({
 export async function GET() {
   try {
     // Используем статические поля которые мы знаем существуют в таблице construction_sites
-    const markersFields = `id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end, NULL as garbage_collection_supplier, NULL as is_completed, NULL as payment_method`;
-    const constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, responsible, duration, duration_period1_start, duration_period1_end, duration_period2_start, duration_period2_end, garbage_collection_supplier, is_completed, payment_method`;
+    const markersFields = `id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability, NULL as order_number, NULL as responsible, NULL as duration, NULL as duration_period1_start, NULL as duration_period1_end, NULL as duration_period2_start, NULL as duration_period2_end, NULL as garbage_collection_supplier, NULL as is_completed, NULL as payment_method, zones`;
+    const constructionFields = `id, lat, lon, NULL as phone, NULL as name, NULL as description, 'constructionSite' as type, NULL as website, NULL as inn, NULL as organization_name, NULL as email, NULL as updated_at, NULL as reliability, order_number, responsible, duration, duration_period1_start, duration_period1_end, duration_period2_start, duration_period2_end, garbage_collection_supplier, is_completed, payment_method, NULL as zones`;
     
     let query = `
       SELECT ${markersFields}
@@ -93,6 +93,7 @@ export async function GET() {
           paymentMethod: row.payment_method,
           duration,
           garbageCollectionSupplier: row.garbage_collection_supplier,
+          zones: row.zones,
         },
       };
     });
@@ -111,14 +112,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    console.log('POST /api/markers called');
     const body = await request.json();
-    console.log('POST /api/markers body parsed:', body);
-    const { lat, lon, phone, name, description, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration, garbageCollectionSupplier } = body;
+    const { lat, lon, phone, name, description, markerColor, type, website, inn, organizationName, email, reliability, orderNumber, responsible, paymentMethod, duration, garbageCollectionSupplier, zones } = body;
     
     
     if (type === 'constructionSite') {
-      console.log('Processing construction site creation...');
       // Получаем максимальный ID из обеих таблиц для гарантии уникальности
       const maxIdResult = await pool.query(`
         SELECT GREATEST(
@@ -132,7 +130,7 @@ export async function POST(request: Request) {
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier', 'zones')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
@@ -142,6 +140,7 @@ export async function POST(request: Request) {
         ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
       );
       const hasGarbageCollectionSupplierField = tableInfo.rows.some(row => row.column_name === 'garbage_collection_supplier');
+      const hasZonesField = tableInfo.rows.some(row => row.column_name === 'zones');
 
       // Строим запрос более простым способом
       let fields = 'id, lat, lon, order_number';
@@ -204,36 +203,42 @@ export async function POST(request: Request) {
         paramIndex++;
       }
       
+      if (zones && hasZonesField) {
+        fields += ', zones';
+        placeholders += `, $${paramIndex}`;
+        returnFields += ', zones';
+        params.push(zones);
+        paramIndex++;
+      }
+      
       let query = `
         INSERT INTO construction_sites (${fields})
         VALUES (${placeholders})
         RETURNING ${returnFields}, created_at, updated_at
       `;
 
-      console.log('Construction Site SQL Query:', query);
-      console.log('Construction Site SQL Params:', params);
-      
       const result = await pool.query(query, params);
-      console.log('Construction Site Insert result:', result.rows[0]);
       return NextResponse.json(result.rows[0]);
     } else {
       // Проверяем наличие поля payment_method в таблице markers
       const paymentMethodInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'markers' AND column_name = 'payment_method'
+        WHERE table_name = 'markers' AND column_name IN ('payment_method', 'zones')
       `);
       
-      const hasPaymentMethodField = paymentMethodInfo.rows.length > 0;
+      const hasPaymentMethodField = paymentMethodInfo.rows.some(row => row.column_name === 'payment_method');
+      const hasZonesField = paymentMethodInfo.rows.some(row => row.column_name === 'zones');
 
       let query = `
-        INSERT INTO markers (lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability${hasPaymentMethodField ? ', payment_method' : ''})
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12${hasPaymentMethodField ? ', $13' : ''})
-        RETURNING id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability${hasPaymentMethodField ? ', payment_method' : ''}
+        INSERT INTO markers (lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability${hasPaymentMethodField ? ', payment_method' : ''}${hasZonesField ? ', zones' : ''})
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12${hasPaymentMethodField ? ', $13' : ''}${hasZonesField ? (hasPaymentMethodField ? ', $14' : ', $13') : ''})
+        RETURNING id, lat, lon, phone, name, description, type, website, inn, organization_name, email, updated_at, reliability${hasPaymentMethodField ? ', payment_method' : ''}${hasZonesField ? ', zones' : ''}
       `;
 
       const params = [lat, lon, phone, name, description, type, website, inn, organizationName, email, new Date().toISOString().split('T')[0], reliability];
       if (hasPaymentMethodField) params.push(paymentMethod);
+      if (hasZonesField) params.push(zones);
 
       const result = await pool.query(query, params);
       return NextResponse.json(result.rows[0]);

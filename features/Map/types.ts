@@ -23,6 +23,7 @@ export interface MarkerFeature {
   period2?: [string, string];
 };
     garbageCollectionSupplier?: number;
+    zones?: string[];
   };
 }
 

@@ -22,7 +22,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration, garbageCollectionSupplier } = body;
+    const { type, coordinates, orderNumber, phone, name, description, website, inn, organizationName, email, updatedAt, reliability, responsible, paymentMethod, duration, garbageCollectionSupplier, zones } = body;
     // Строительная площадка — обновляем в отдельной таблице
     if (type === 'constructionSite') {
       const updates: string[] = [];
@@ -42,11 +42,11 @@ export async function PUT(
         values.push(orderNumber);
       }
 
-      // Проверяем, существуют ли поля responsible, payment_method, duration и garbage_collection_supplier
+      // Проверяем, существуют ли поля responsible, payment_method, duration, garbage_collection_supplier и zones
       const tableInfo = await pool.query(`
         SELECT column_name 
         FROM information_schema.columns 
-        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier')
+        WHERE table_name = 'construction_sites' AND column_name IN ('responsible', 'payment_method', 'duration', 'duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end', 'garbage_collection_supplier', 'zones')
       `);
       
       const hasResponsibleField = tableInfo.rows.some(row => row.column_name === 'responsible');
@@ -56,6 +56,7 @@ export async function PUT(
         ['duration_period1_start', 'duration_period1_end', 'duration_period2_start', 'duration_period2_end'].includes(row.column_name)
       );
       const hasGarbageCollectionSupplierField = tableInfo.rows.some(row => row.column_name === 'garbage_collection_supplier');
+      const hasZonesField = tableInfo.rows.some(row => row.column_name === 'zones');
 
       if (responsible !== undefined && hasResponsibleField) {
         updates.push(`responsible = $${paramIndex++}`);
@@ -102,6 +103,11 @@ export async function PUT(
         values.push(garbageCollectionSupplier);
       }
 
+      if (zones !== undefined && hasZonesField) {
+        updates.push(`zones = $${paramIndex++}`);
+        values.push(zones);
+      }
+
       if (updates.length === 0) {
         return NextResponse.json(
           { error: 'No fields to update' },
@@ -136,16 +142,17 @@ export async function PUT(
       dbUpdatedAt = `${year}-${month}-${day}`;
     }
 
-    // Проверяем наличие поля payment_method в таблице markers
+    // Проверяем наличие полей payment_method и zones в таблице markers
     const paymentMethodInfo = await pool.query(`
       SELECT column_name 
       FROM information_schema.columns 
-      WHERE table_name = 'markers' AND column_name = 'payment_method'
+      WHERE table_name = 'markers' AND column_name IN ('payment_method', 'zones')
     `);
     
-    const hasPaymentMethodField = paymentMethodInfo.rows.length > 0;
+    const hasPaymentMethodField = paymentMethodInfo.rows.some(row => row.column_name === 'payment_method');
+    const hasZonesField = paymentMethodInfo.rows.some(row => row.column_name === 'zones');
 
-    // Строим запрос динамически в зависимости от наличия поля
+    // Строим запрос динамически в зависимости от наличия полей
     let updateQuery = `
       UPDATE markers
       SET phone = COALESCE($1, phone),
@@ -158,12 +165,16 @@ export async function PUT(
           updated_at = COALESCE($8, updated_at),
           reliability = COALESCE($9, reliability)
           ${hasPaymentMethodField ? ', payment_method = COALESCE($10, payment_method)' : ''}
-      WHERE id = $${hasPaymentMethodField ? '11' : '10'}
+          ${hasZonesField ? (hasPaymentMethodField ? ', zones = COALESCE($11, zones)' : ', zones = COALESCE($10, zones)') : ''}
+      WHERE id = $${hasPaymentMethodField && hasZonesField ? '12' : (hasPaymentMethodField || hasZonesField ? '11' : '10')}
       RETURNING *`;
     
     const queryParams = [phone, name, description, website, inn, organizationName, email, dbUpdatedAt, reliability];
     if (hasPaymentMethodField) {
       queryParams.push(paymentMethod);
+    }
+    if (hasZonesField) {
+      queryParams.push(zones);
     }
     queryParams.push(id);
 

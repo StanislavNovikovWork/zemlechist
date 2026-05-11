@@ -8,6 +8,7 @@ export type SupplierFormValues = Omit<SupplierForm, 'coordinates' | 'updatedAt' 
     period1: [Dayjs, Dayjs];
     period2?: [Dayjs, Dayjs];
   };
+  zones?: string[];
 };
 
 type FieldType =

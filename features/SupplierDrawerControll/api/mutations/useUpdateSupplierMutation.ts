@@ -27,6 +27,7 @@ function toApiPayload(values: SupplierForm) {
     paymentMethod: values.paymentMethod,
     duration: values.duration,
     garbageCollectionSupplier: values.garbageCollectionSupplier,
+    zones: values.zones,
   };
 }
 
@@ -43,12 +44,13 @@ export function useUpdateSupplierMutation() {
       if (!id) {
         throw new Error('ID is required for update');
       }
+      const payload = toApiPayload(data);
       const response = await fetch(`/api/markers/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(toApiPayload(data)),
+        body: JSON.stringify(payload),
       });
       if (!response.ok) {
         throw new Error('Failed to update marker');

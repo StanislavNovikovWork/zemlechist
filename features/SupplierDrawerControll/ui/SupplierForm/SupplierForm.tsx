@@ -40,12 +40,10 @@ export function AddSupplierForm({
 
   // Получаем опции для селекта поставщиков вывоза мусора
   const garbageSupplierOptions = useMemo(() => {
-    console.log('Garbage suppliers data:', garbageSuppliers);
     const options = garbageSuppliers.map((supplier: any) => ({
       value: supplier.id,
       label: supplier.properties.name || `Поставщик #${supplier.id}`,
     }));
-    console.log('Garbage supplier options:', options);
     return options;
   }, [garbageSuppliers]);
 
@@ -109,14 +107,23 @@ export function AddSupplierForm({
       values.coordinates = `${lat}, ${lng}`;
     }
 
-    console.log('Setting form values:', values);
+    // Обрабатываем zones - убеждаемся что это массив
+    if (values.zones && !Array.isArray(values.zones)) {
+      // Если zones пришел как строка или другой формат, преобразуем в массив
+      if (typeof values.zones === 'string') {
+        values.zones = [values.zones];
+      } else {
+        values.zones = [];
+      }
+    } else if (!values.zones) {
+      values.zones = [];
+    }
+
     form.setFieldsValue(values);
   }, [initialValues, form]);
 
   const handleFinish = (values: any) => {
-    console.log('Form values before submit:', values);
     const submitValues = toSubmitValues(values);
-    console.log('Form values after mapper:', submitValues);
     onSubmit(submitValues);
   };
 

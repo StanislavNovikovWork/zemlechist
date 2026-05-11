@@ -3,12 +3,17 @@ import type { SupplierForm } from "./supplier.types";
 
 
 export function toSubmitValues(values: SupplierFormValues): SupplierForm {
-  const { coordinates, updatedAt, duration, ...rest } = values;
+  const { coordinates, updatedAt, duration, zones, ...rest } = values;
 
   const result: SupplierForm = {
     ...rest,
     coordinates: [0, 0],
   };
+
+  // Добавляем zones если оно есть
+  if (zones && Array.isArray(zones) && zones.length > 0) {
+    result.zones = zones;
+  }
 
   // Добавляем updatedAt только если оно существует и является объектом Dayjs
   if (updatedAt && typeof updatedAt === 'object' && typeof updatedAt.format === 'function') {

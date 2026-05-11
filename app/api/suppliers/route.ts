@@ -8,7 +8,7 @@ const pool = new Pool({
 export async function GET() {
   try {
     const result = await pool.query(
-      `SELECT id, company, product_category, phone, website, reliability, description, created_at, updated_at
+      `SELECT id, company, product_category, phone, website, reliability, description, created_at, updated_at, zones
        FROM suppliers
        ORDER BY id`
     );
@@ -23,6 +23,7 @@ export async function GET() {
       description: row.description,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
+      zones: row.zones,
     }));
 
     return NextResponse.json(suppliers);
@@ -38,13 +39,13 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { company, productCategory, phone, website, reliability, description } = body;
+    const { company, productCategory, phone, website, reliability, description, zones } = body;
 
     const result = await pool.query(
-      `INSERT INTO suppliers (company, product_category, phone, website, reliability, description)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, company, product_category, phone, website, reliability, description, created_at, updated_at`,
-      [company, productCategory, phone, website, reliability || 3, description]
+      `INSERT INTO suppliers (company, product_category, phone, website, reliability, description, zones)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id, company, product_category, phone, website, reliability, description, created_at, updated_at, zones`,
+      [company, productCategory, phone, website, reliability || 3, description, zones]
     );
 
     const createdSupplier = result.rows[0];
@@ -59,6 +60,7 @@ export async function POST(request: Request) {
       description: createdSupplier.description,
       createdAt: createdSupplier.created_at,
       updatedAt: createdSupplier.updated_at,
+      zones: createdSupplier.zones,
     };
 
     return NextResponse.json(supplier, { status: 201 });
