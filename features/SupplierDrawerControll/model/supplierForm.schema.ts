@@ -167,23 +167,8 @@ export const supplierFormSchema: FieldSchema[] = [
       { value: "garbageCollection", label: "Вывоз мусора" },
       { value: "nonMetallicMaterials", label: "Нерудные материалы" },
       { value: "constructionSite", label: "Строительная площадка" },
+      { value: "specialTechnique", label: "Спецтехника" },
     ],
-  },
-  {
-    name: "orderNumber",
-    label: "Заказ",
-    type: "input",
-    placeholder: "Номер заказа",
-  },
-  {
-    name: "responsible",
-    label: "Ответственный",
-    type: "select",
-    placeholder: "Выберите ответственного",
-    options: foremenConfig.map(foreman => ({
-      label: foreman.name,
-      value: foreman.name,
-    })),
   },
   {
     name: "coordinates",
