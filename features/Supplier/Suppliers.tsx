@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Table, Button, message, Typography, Rate, Select } from "antd";
+import { Table, Button, Typography, Rate, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Supplier } from "@/types/supplier.types";
 import { useSupplierDrawerController } from '@/features/SupplierDrawerControll/model/supplierDrawer.store';
 import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
@@ -11,8 +10,7 @@ import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
 const { Title, Link } = Typography;
 
 export function Suppliers() {
-  const queryClient = useQueryClient();
-  const { openCreateSupplier } = useSupplierDrawerController();
+  const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
   
   // State for zones filter
   const [selectedZones, setSelectedZones] = useState<string[]>([]);
@@ -172,6 +170,29 @@ export function Suppliers() {
             rowKey="id"
             loading={isLoading}
             pagination={{ pageSize: 10 }}
+            onRow={(record) => ({
+              onClick: () => {
+                // Convert supplier data to SupplierWithId format
+                // Find the original feature data to get missing properties
+                const originalFeature = markersData?.features?.find((f: any) => f.id === record.id);
+                
+                const supplierData = {
+                  id: record.id,
+                  phone: record.phone || '',
+                  coordinates: originalFeature?.geometry?.coordinates || [0, 0],
+                  name: record.company,
+                  description: record.description || '',
+                  type: originalFeature?.properties?.type || 'specialTechnique',
+                  reliability: record.reliability,
+                  zones: Array.isArray(record.zones) ? record.zones : (record.zones ? [record.zones] : []),
+                  website: record.website,
+                  company: record.company, // Keep for backward compatibility
+                  productCategory: record.productCategory, // Keep for backward compatibility
+                };
+                openViewSupplier(supplierData);
+              },
+              style: { cursor: 'pointer' },
+            })}
           />
         )}
       </div>
