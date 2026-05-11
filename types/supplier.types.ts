@@ -9,6 +9,7 @@ export interface Supplier {
   description: string;
   createdAt?: string;
   updatedAt?: string;
+  zones?: any;
 }
 
 export interface CreateSupplierRequest {

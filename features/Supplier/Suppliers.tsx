@@ -1,28 +1,76 @@
 "use client";
 
 import { useState } from "react";
-import { Table, Button, message, Typography, Rate } from "antd";
+import { Table, Button, message, Typography, Rate, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Supplier } from "@/types/supplier.types";
 import { useSupplierDrawerController } from '@/features/SupplierDrawerControll/model/supplierDrawer.store';
+import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
 
 const { Title, Link } = Typography;
 
 export function Suppliers() {
   const queryClient = useQueryClient();
   const { openCreateSupplier } = useSupplierDrawerController();
+  
+  // State for zones filter
+  const [selectedZones, setSelectedZones] = useState<string[]>([]);
+  
+  // Zone options 1-8
+  const zoneOptions = Array.from({ length: 8 }, (_, i) => ({
+    value: String(i + 1),
+    label: `Зона ${i + 1}`,
+  }));
 
-  // Fetch suppliers
-  const { data: suppliers = [], isLoading } = useQuery<Supplier[]>({
-    queryKey: ["suppliers"],
-    queryFn: async () => {
-      const response = await fetch("/api/suppliers");
-      if (!response.ok) throw new Error("Failed to fetch suppliers");
-      const data = await response.json();
-      // Защита от случаев когда API возвращает не массив
-      return Array.isArray(data) ? data : [];
-    },
+  // Fetch markers as suppliers
+  const { data: markersData, isLoading, error } = useMarkersQuery();
+  
+  // Helper function to map marker types to readable category names
+  const getTypeLabel = (type: string) => {
+    const typeLabels: Record<string, string> = {
+      'specialTechnique': 'Специальная техника',
+      'garbageCollection': 'Мусоровывоз',
+      'constructionSite': 'Стройплощадка',
+      'nonMetallicMaterials': 'Неметаллические материалы'
+    };
+    return typeLabels[type] || type;
+  };
+
+  // Extract supplier data from markers GeoJSON
+  const allSuppliers = markersData?.features?.map((feature: any) => ({
+    id: feature.id,
+    company: feature.properties.name || '',
+    productCategory: getTypeLabel(feature.properties.type || ''),
+    phone: feature.properties.phone || '',
+    website: feature.properties.website || '',
+    reliability: feature.properties.reliability || 3,
+    description: feature.properties.description || '',
+    createdAt: feature.properties.updatedAt,
+    updatedAt: feature.properties.updatedAt,
+    zones: feature.properties.zones,
+  })) || [];
+
+  // Filter suppliers based on selected zones
+  const suppliers = allSuppliers.filter((supplier: any) => {
+    if (selectedZones.length === 0) return true; // No filter applied
+    
+    if (!supplier.zones) return false; // No zones data
+    
+    // Handle different zones data formats
+    let supplierZones: string[] = [];
+    if (typeof supplier.zones === 'string') {
+      supplierZones = [supplier.zones];
+    } else if (Array.isArray(supplier.zones)) {
+      supplierZones = supplier.zones.map(String);
+    } else if (typeof supplier.zones === 'object') {
+      supplierZones = Object.values(supplier.zones).map(String);
+    }
+    
+    // Check if any supplier zone matches selected zones
+    return selectedZones.some(selectedZone => 
+      supplierZones.some(supplierZone => supplierZone === selectedZone)
+    );
   });
 
 
@@ -43,6 +91,17 @@ export function Suppliers() {
       title: "Телефон",
       dataIndex: "phone",
       key: "phone",
+    },
+    {
+      title: "Зоны работ",
+      dataIndex: "zones",
+      key: "zones",
+      render: (zones: any) => {
+        if (!zones) return "-";
+        if (typeof zones === 'string') return zones;
+        if (Array.isArray(zones)) return zones.join(", ");
+        return JSON.stringify(zones);
+      },
     },
     {
       title: "Сайт",
@@ -85,14 +144,36 @@ export function Suppliers() {
         </Button>
       </div>
 
+      {/* Filter Section */}
+      <div className="mb-4">
+        <div className="flex items-center gap-4">
+          <span className="font-medium">Зоны работ:</span>
+          <Select
+            mode="multiple"
+            placeholder="Выберите зоны"
+            style={{ minWidth: 300 }}
+            value={selectedZones}
+            onChange={setSelectedZones}
+            options={zoneOptions}
+            allowClear
+          />
+        </div>
+      </div>
+
       <div className="flex-1 overflow-auto">
-        <Table
-          columns={columns}
-          dataSource={suppliers}
-          rowKey="id"
-          loading={isLoading}
-          pagination={{ pageSize: 10 }}
-        />
+        {error ? (
+          <div className="p-4 text-red-500">
+            Error loading suppliers: {error instanceof Error ? error.message : 'Unknown error'}
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={Array.isArray(suppliers) ? suppliers : []}
+            rowKey="id"
+            loading={isLoading}
+            pagination={{ pageSize: 10 }}
+          />
+        )}
       </div>
     </div>
         </div>
