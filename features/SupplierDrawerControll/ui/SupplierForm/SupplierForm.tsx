@@ -10,7 +10,7 @@ import 'dayjs/locale/ru';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
 import { FieldSchema } from './types';
-import { supplierFormSchema, constructionSiteFormSchema } from '../../model/supplierForm.schema';
+import { supplierFormSchema, constructionSiteFormSchema, specialTechniqueFormSchema } from '../../model/supplierForm.schema';
 import { useGarbageSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
 type AddSupplierFormProps = {
@@ -43,7 +43,15 @@ export function AddSupplierForm({
 
   // Получаем схему в зависимости от типа
   const currentSchema = useMemo(() => {
-    let schema = typeValue === 'constructionSite' ? constructionSiteFormSchema : supplierFormSchema;
+    let schema;
+    
+    if (typeValue === 'constructionSite') {
+      schema = constructionSiteFormSchema;
+    } else if (typeValue === 'specialTechnique') {
+      schema = specialTechniqueFormSchema;
+    } else {
+      schema = supplierFormSchema;
+    }
     
     // Обновляем опции для селекта вывоза мусора
     if (typeValue === 'constructionSite') {
