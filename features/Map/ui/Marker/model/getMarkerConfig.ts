@@ -2,6 +2,7 @@ import { MarkerFeature } from "../../../types";
 import { SpecialTechniqueMarker } from "@/icons/SpecialTechniqueMarker";
 import { GarbageCollectionMarker } from "@/icons/GarbageCollectionMarker";
 import { ConstructionMarkerIcon } from "@/icons/ConstructionMarker";
+import dayjs from 'dayjs';
 
 type MarkerType = MarkerFeature["properties"]["type"];
 
@@ -15,6 +16,39 @@ interface MarkerConfig {
     default: number;
     hover: number;
   };
+}
+
+/**
+ * Проверяет, просрочены ли все периоды продолжительности стройплощадки
+ * @param duration - Объект с периодами продолжительности
+ * @returns true если все периоды просрочены, иначе false
+ */
+function isConstructionSiteExpired(duration?: { period1?: string[]; period2?: string[] }): boolean {
+  if (!duration) return false;
+  
+  const now = dayjs();
+  let hasActivePeriod = false;
+  
+  // Проверяем первый период
+  if (duration.period1 && duration.period1.length === 2) {
+    const endDate = dayjs(duration.period1[1], 'DD.MM.YYYY');
+    const dayDiff = endDate.diff(now, 'day');
+    if (endDate.isValid() && (now.isBefore(endDate) || dayDiff === 0)) {
+      hasActivePeriod = true;
+    }
+  }
+  
+  // Проверяем второй период
+  if (!hasActivePeriod && duration.period2 && duration.period2.length === 2) {
+    const endDate = dayjs(duration.period2[1], 'DD.MM.YYYY');
+    const dayDiff = endDate.diff(now, 'day');
+    if (endDate.isValid() && (now.isBefore(endDate) || dayDiff === 0)) {
+      hasActivePeriod = true;
+    }
+  }
+  
+  // Если нет активных периодов, значит стройплощадка просрочена
+  return !hasActivePeriod;
 }
 
 const markerConfig: Record<MarkerType, MarkerConfig> = {
@@ -56,7 +90,16 @@ const markerConfig: Record<MarkerType, MarkerConfig> = {
 export function getMarkerConfig(type: MarkerType, isHovered: boolean, feature?: MarkerFeature) {
   const config = markerConfig[type] || markerConfig.specialTechnique;
 
-  const color = config.color.default;
+  let color = config.color.default;
+  
+  // Для стройплощадок проверяем, не просрочены ли периоды
+  if (type === 'constructionSite' && feature?.properties.duration) {
+    const isExpired = isConstructionSiteExpired(feature.properties.duration);
+    if (isExpired) {
+      color = '#999999'; // серый цвет для просроченных стройплощадок
+    }
+  }
+  
   const scale = isHovered ? config.scale.hover : config.scale.default;
   const hasGoldBorder = feature?.properties.reliability === 5;
 
