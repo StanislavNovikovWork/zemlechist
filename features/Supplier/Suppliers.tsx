@@ -19,7 +19,9 @@ export function Suppliers() {
     queryFn: async () => {
       const response = await fetch("/api/suppliers");
       if (!response.ok) throw new Error("Failed to fetch suppliers");
-      return response.json();
+      const data = await response.json();
+      // Защита от случаев когда API возвращает не массив
+      return Array.isArray(data) ? data : [];
     },
   });
 
