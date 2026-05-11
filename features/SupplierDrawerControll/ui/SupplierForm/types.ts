@@ -17,7 +17,8 @@ type FieldType =
   | 'date'
   | 'dateRange'
   | 'rate'
-  | 'phone';
+  | 'phone'
+  | 'zones';
 
 export type FieldSchema = {
   name: keyof SupplierForm | string[];

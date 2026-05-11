@@ -8,6 +8,7 @@ export type SupplierForm = {
   description: string;
   type: 'specialTechnique' | 'garbageCollection' | 'constructionSite' | 'nonMetallicMaterials';
   reliability?: number;
+  zones?: string[];
 
   website?: string;
   inn?: string;
@@ -36,7 +37,8 @@ type FieldType =
   | 'date'
   | 'dateRange'
   | 'rate'
-  | 'phone';
+  | 'phone'
+  | 'zones';
 
 export type FieldSchema = {
   name: keyof SupplierForm;

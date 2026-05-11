@@ -13,6 +13,14 @@ import { FieldSchema } from './types';
 import { supplierFormSchema, constructionSiteFormSchema, specialTechniqueFormSchema } from '../../model/supplierForm.schema';
 import { useGarbageSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
+/**
+ * @interface AddSupplierFormProps
+ * @description Свойства компонента формы добавления поставщика
+ * @property {SupplierForm | null} initialValues - Начальные значения формы или null для создания новой записи
+ * @property {boolean} [loading] - Флаг загрузки для отображения состояния ожидания
+ * @property {(values: SupplierForm) => void} onSubmit - Callback-функция при отправке формы
+ * @property {() => void} onCancel - Callback-функция при отмене формы
+ */
 type AddSupplierFormProps = {
   initialValues?: SupplierForm | null;
   loading?: boolean;
@@ -127,6 +135,9 @@ export function AddSupplierForm({
 
       case 'select':
         return <Select options={field.options} style={{ width: '100%' }} />;
+
+      case 'zones':
+        return <Select mode="multiple" options={field.options} placeholder={field.placeholder} style={{ width: '100%' }} />;
 
       case 'date':
         return <DatePicker style={{ width: '100%' }} format="DD.MM.YYYY" />;

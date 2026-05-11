@@ -8,7 +8,8 @@ type FieldType =
   | "date"
   | "dateRange"
   | "rate"
-  | "phone";
+  | "phone"
+  | "zones";
 
 type FieldSchema = {
   name: keyof SupplierForm | string[];
@@ -92,6 +93,22 @@ export const specialTechniqueFormSchema: FieldSchema[] = [
     ],
   },
   {
+    name: "zones",
+    label: "Зоны",
+    type: "zones",
+    placeholder: "Выберите зоны",
+    options: [
+      { value: "1", label: "Зона 1" },
+      { value: "2", label: "Зона 2" },
+      { value: "3", label: "Зона 3" },
+      { value: "4", label: "Зона 4" },
+      { value: "5", label: "Зона 5" },
+      { value: "6", label: "Зона 6" },
+      { value: "7", label: "Зона 7" },
+      { value: "8", label: "Зона 8" },
+    ],
+  },
+  {
     name: "phone",
     label: "Телефон",
     type: "phone",
@@ -168,6 +185,22 @@ export const supplierFormSchema: FieldSchema[] = [
       { value: "nonMetallicMaterials", label: "Нерудные материалы" },
       { value: "constructionSite", label: "Строительная площадка" },
       { value: "specialTechnique", label: "Спецтехника" },
+    ],
+  },
+  {
+    name: "zones",
+    label: "Зоны",
+    type: "zones",
+    placeholder: "Выберите зоны",
+    options: [
+      { value: "1", label: "Зона 1" },
+      { value: "2", label: "Зона 2" },
+      { value: "3", label: "Зона 3" },
+      { value: "4", label: "Зона 4" },
+      { value: "5", label: "Зона 5" },
+      { value: "6", label: "Зона 6" },
+      { value: "7", label: "Зона 7" },
+      { value: "8", label: "Зона 8" },
     ],
   },
   {
