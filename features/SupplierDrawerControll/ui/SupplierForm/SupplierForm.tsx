@@ -22,7 +22,6 @@ import { FieldSchema } from './types';
 import {
   supplierFormSchema,
   constructionSiteFormSchema,
-  specialTechniqueFormSchema,
 } from '../../model/supplierForm.schema';
 import { useGarbageSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
@@ -75,8 +74,6 @@ export function AddSupplierForm({
 
     if (typeValue === 'constructionSite') {
       schema = constructionSiteFormSchema;
-    } else if (typeValue === 'specialTechnique') {
-      schema = specialTechniqueFormSchema;
     } else {
       schema = supplierFormSchema;
     }
