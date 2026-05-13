@@ -92,7 +92,11 @@ export async function GET() {
           responsible: row.responsible,
           paymentMethod: row.payment_method,
           duration,
-          garbageCollectionSupplier: row.garbage_collection_supplier,
+          garbageCollectionSupplier: row.garbage_collection_supplier
+        ? (typeof row.garbage_collection_supplier === 'string'
+            ? row.garbage_collection_supplier.split(',').map(Number).filter(Boolean)
+            : [row.garbage_collection_supplier])
+        : [],
           zones: row.zones,
         },
       };

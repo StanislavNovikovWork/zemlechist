@@ -31,10 +31,10 @@ export function SupplierView({
   const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
   const isConstructionSite = initialValues.type === 'constructionSite';
 
-  // Находим поставщика по ID из всех маркеров
-  const garbageSupplier = allMarkers?.find(
-    (marker: any) => marker.id === initialValues.garbageCollectionSupplier && marker.properties.type === 'garbageCollection'
-  );
+  // Находим поставщиков по ID из всех маркеров
+  const garbageSuppliers = allMarkers?.filter(
+    (marker: any) => initialValues.garbageCollectionSupplier?.includes(marker.id)
+  ) || [];
   return (
     <>
       <div className="flex flex-col h-full">
@@ -266,26 +266,23 @@ export function SupplierView({
           </Descriptions>
 
           {/* Блок Поставщики (только для стройплощадок) */}
-          {isConstructionSite && garbageSupplier && (
+          {isConstructionSite && garbageSuppliers.length > 0 && (
             <div className="border border-gray-200 rounded-lg p-3 mb-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">Поставщики</h4>
-              <div className="space-y-1">
-                <div>
-                  <span className="text-xs text-gray-500">Вывоз мусора</span>
-                  <div>
-                    <Text 
-                      style={{ cursor: 'pointer', color: '#1890ff' }}
-                      onClick={() => setIsSupplierDrawerOpen(true)}
-                    >
-                      {garbageSupplier.properties.name || `Поставщик #${garbageSupplier.id}`}
-                    </Text>
-                    {garbageSupplier.properties.phone && (
-                      <Text style={{ marginLeft: '4px' }}>
-                        {garbageSupplier.properties.phone}
+              <div className="space-y-2">
+                {garbageSuppliers.map((supplier: any) => (
+                  <div key={supplier.id}>
+                    <span className="text-xs text-gray-500">{supplier.properties.type === 'garbageCollection' ? 'Вывоз мусора' : supplier.properties.type === 'specialTechnique' ? 'Спецтехника' : 'Нерудные материалы'}</span>
+                    <div className="ml-2">
+                      <Text style={{ cursor: 'pointer', color: '#1890ff' }} onClick={() => setIsSupplierDrawerOpen(true)}>
+                        {supplier.properties.name || `Поставщик #${supplier.id}`}
                       </Text>
-                    )}
+                      {supplier.properties.phone && (
+                        <Text style={{ marginLeft: '4px' }}>{supplier.properties.phone}</Text>
+                      )}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           )}
@@ -300,15 +297,15 @@ export function SupplierView({
           size={420}
           rootClassName="glass-drawer"
         >
-          {garbageSupplier && (
-            <Descriptions 
+          {garbageSuppliers.map((garbageSupplier: any) => (
+            <Descriptions key={garbageSupplier.id}
               column={1} 
               size="small" 
               layout="vertical"
               colon={true}
             >
               <Descriptions.Item label="Тип">
-                <Text>Вывоз мусора</Text>
+                <Text>{garbageSupplier.properties.type === 'garbageCollection' ? 'Вывоз мусора' : garbageSupplier.properties.type === 'specialTechnique' ? 'Спецтехника' : 'Нерудные материалы'}</Text>
               </Descriptions.Item>
               
               <Descriptions.Item label="Название">
@@ -365,7 +362,7 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
             </Descriptions>
-          )}
+          ))}
         </Drawer>
 
         <div className="pt-4 space-y-2">

@@ -38,12 +38,20 @@ export function AddSupplierForm({
   const typeValue = Form.useWatch('type', form);
   const { data: garbageSuppliers = [] } = useGarbageSuppliersQuery();
 
-  // Получаем опции для селекта поставщиков вывоза мусора
-  const garbageSupplierOptions = useMemo(() => {
-    const options = garbageSuppliers.map((supplier: any) => ({
-      value: supplier.id,
-      label: supplier.properties.name || `Поставщик #${supplier.id}`,
-    }));
+  // Получаем опции для селекта поставщиков
+  const supplierOptions = useMemo(() => {
+    const options = garbageSuppliers.map((supplier: any) => {
+      const typeLabels: Record<string, string> = {
+        garbageCollection: 'Вывоз мусора',
+        specialTechnique: 'Спецтехника',
+        nonMetallicMaterials: 'Нерудные материалы',
+      };
+      const typeLabel = typeLabels[supplier.properties.type] || supplier.properties.type;
+      return {
+        value: supplier.id,
+        label: `${supplier.properties.name || `Поставщик #${supplier.id}`} (${typeLabel})`,
+      };
+    });
     return options;
   }, [garbageSuppliers]);
 
@@ -59,13 +67,13 @@ export function AddSupplierForm({
       schema = supplierFormSchema;
     }
     
-    // Обновляем опции для селекта вывоза мусора
+    // Обновляем опции для селекта поставщиков
     if (typeValue === 'constructionSite') {
       schema = schema.map(field => {
         if (field.name === 'garbageCollectionSupplier') {
           return {
             ...field,
-            options: garbageSupplierOptions,
+            options: supplierOptions,
           };
         }
         return field;
@@ -73,7 +81,7 @@ export function AddSupplierForm({
     }
     
     return schema;
-  }, [typeValue, garbageSupplierOptions]);
+  }, [typeValue, supplierOptions]);
 
   useEffect(() => {
       form.resetFields();
@@ -119,6 +127,17 @@ export function AddSupplierForm({
       values.zones = [];
     }
 
+    // Обрабатываем garbageCollectionSupplier - преобразуем строку в массив
+    if (values.garbageCollectionSupplier && !Array.isArray(values.garbageCollectionSupplier)) {
+      if (typeof values.garbageCollectionSupplier === 'string') {
+        values.garbageCollectionSupplier = values.garbageCollectionSupplier.split(',').map(Number).filter(Boolean);
+      } else {
+        values.garbageCollectionSupplier = [];
+      }
+    } else if (!values.garbageCollectionSupplier) {
+      values.garbageCollectionSupplier = [];
+    }
+
     form.setFieldsValue(values);
   }, [initialValues, form]);
 
@@ -142,6 +161,9 @@ export function AddSupplierForm({
 
       case 'select':
         return <Select options={field.options} style={{ width: '100%' }} />;
+
+      case 'multiselect':
+        return <Select mode="multiple" showSearch options={field.options} placeholder={field.placeholder} style={{ width: '100%' }} filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())} />;
 
       case 'zones':
         return <Select mode="multiple" options={field.options} placeholder={field.placeholder} style={{ width: '100%' }} />;
@@ -167,15 +189,16 @@ export function AddSupplierForm({
     return (
       <>
         {schema.map((field) => (
-          <Form.Item
-            key={Array.isArray(field.name) ? field.name.join('.') : field.name}
-            name={field.name}
-            label={field.label}
-            rules={field.rules}
-            style={{ marginBottom: '8px' }}
-          >
-            {renderField(field)}
-          </Form.Item>
+<Form.Item
+             key={Array.isArray(field.name) ? field.name.join('.') : field.name}
+             name={field.name}
+             label={field.label}
+             rules={field.rules}
+             style={{ marginBottom: '8px' }}
+             initialValue={field.initialValue}
+           >
+             {renderField(field)}
+           </Form.Item>
         ))}
       </>
     );

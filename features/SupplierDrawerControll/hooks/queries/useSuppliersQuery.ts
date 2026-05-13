@@ -23,9 +23,9 @@ export function useGarbageSuppliersQuery() {
       }
       const data = await response.json();
       
-      // Фильтруем поставщиков с типом "garbageCollection"
+      // Фильтруем поставщиков с типом "garbageCollection", "specialTechnique" и "nonMetallicMaterials"
       const garbageSuppliers = data.features?.filter(
-        (marker: any) => marker.properties.type === 'garbageCollection'
+        (marker: any) => ['garbageCollection', 'specialTechnique', 'nonMetallicMaterials'].includes(marker.properties.type)
       ) || [];
       
       return garbageSuppliers;

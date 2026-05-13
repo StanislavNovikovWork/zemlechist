@@ -15,6 +15,7 @@ type FieldType =
   | 'input'
   | 'textarea'
   | 'select'
+  | 'multiselect'
   | 'date'
   | 'dateRange'
   | 'rate'

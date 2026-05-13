@@ -22,7 +22,7 @@ export type SupplierForm = {
   period1: [string, string];
   period2?: [string, string];
 };
-  garbageCollectionSupplier?: number;
+  garbageCollectionSupplier?: number[];
 };
 
 export type SupplierWithId = SupplierForm & { id: number };

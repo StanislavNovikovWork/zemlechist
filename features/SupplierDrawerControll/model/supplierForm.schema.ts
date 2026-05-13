@@ -5,6 +5,7 @@ type FieldType =
   | "input"
   | "textarea"
   | "select"
+  | "multiselect"
   | "date"
   | "dateRange"
   | "rate"
@@ -75,10 +76,11 @@ export const constructionSiteFormSchema: FieldSchema[] = [
   },
   {
     name: "garbageCollectionSupplier",
-    label: "Вывоз мусора",
-    type: "select",
-    placeholder: "Выберите поставщика вывоза мусора",
+    label: "Поставщики",
+    type: "multiselect",
+    placeholder: "Выберите поставщиков",
     options: [], // Будет заполнено динамически
+    initialValue: [],
   },
 ];
 
