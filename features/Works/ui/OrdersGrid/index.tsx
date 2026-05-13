@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { foremenConfig, Foreman } from "../../config/foremen";
@@ -25,10 +25,12 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
   const foremen = foremenConfig;
 
   // Состояние для текущего отображаемого месяца
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  // Состояние для отслеживания наведенной строй площадки
-  const [hoveredSiteId, setHoveredSiteId] = useState<number | null>(null);
+   const [hoveredSiteId, setHoveredSiteId] = useState<number | null>(null);
+
+   // Референс к контейнеру таблицы для авто-прокрутки
+   const containerRef = useRef<HTMLDivElement>(null);
 
   // Получаем данные маркеров с бэкенда
   const { data: markersData, isLoading } = useMarkersQuery();
@@ -263,8 +265,36 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
     return totalCount;
   }, [foremen, constructionSitesByForeman]);
 
-  // Считаем итоговую сумму по формуле 350 * количество site
-  const totalAmount = getTotalSitesCount * 350;
+   // Считаем итоговую сумму по формуле 350 * количество site
+   const totalAmount = getTotalSitesCount * 350;
+
+   // Реф для отслеживания, была ли уже автопрокрутка
+   const hasScrolledRef = useRef(false);
+
+   // Авто-прокрутка к текущему дню при первой загрузке
+   useEffect(() => {
+     if (isLoading || hasScrolledRef.current) return;
+     const container = containerRef.current;
+     if (!container) return;
+
+     const todayIdx = dates.findIndex(d => isToday(d));
+     if (todayIdx === -1) return;
+
+     const headerRow = container.querySelector('thead tr');
+     if (!headerRow) return;
+
+     const headers = Array.from(headerRow.children);
+     const todayHeader = headers[todayIdx + 1] as HTMLElement; // +1 пропускаем столбец "Прораб"
+     if (!todayHeader) return;
+
+     const containerWidth = container.clientWidth;
+     const cellWidth = todayHeader.getBoundingClientRect().width;
+     const cellOffset = todayHeader.offsetLeft;
+     const scrollPos = cellOffset - (containerWidth / 2) + (cellWidth / 2);
+     container.scrollLeft = scrollPos;
+     hasScrolledRef.current = true;
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [isLoading]);
 
   if (isLoading) {
     return (
@@ -313,7 +343,7 @@ export const OrdersGrid: React.FC<OrdersGridProps> = () => {
 
       {/* Таблица с фиксированным столбцом */}
       <div className="mx-4">
-        <div className="overflow-x-auto bg-white border border-gray-200 rounded-lg">
+        <div ref={containerRef} className="overflow-x-auto bg-white border border-gray-200 rounded-lg">
           <table className="min-w-full border-collapse">
           <thead>
             <tr>

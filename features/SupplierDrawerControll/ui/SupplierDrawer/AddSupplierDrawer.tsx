@@ -10,8 +10,15 @@ import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
 
 export function AddSupplierDrawer() {
   const { message } = App.useApp();
-  const { isOpen, mode, data, initialData, closeSupplierDrawer, openEditSupplier, openViewSupplier } =
-    useSupplierDrawerController();
+  const {
+    isOpen,
+    mode,
+    data,
+    initialData,
+    closeSupplierDrawer,
+    openEditSupplier,
+    openViewSupplier,
+  } = useSupplierDrawerController();
 
   const { mutateAsync: updateSupplier, isPending: updatePending } =
     useUpdateSupplierMutation();
@@ -26,9 +33,18 @@ export function AddSupplierDrawer() {
   const isLoading = updatePending || createPending || deletePending;
 
   const titles = {
-    create: data?.type === 'constructionSite' ? 'Добавить строй площадку' : 'Добавить поставщика',
-    edit: data?.type === 'constructionSite' ? 'Редактировать строй площадку' : 'Редактировать поставщика',
-    view: data?.type === 'constructionSite' ? 'Информация о строй площадке' : 'Информация о поставщике',
+    create:
+      data?.type === 'constructionSite'
+        ? 'Добавить строй площадку'
+        : 'Добавить поставщика',
+    edit:
+      data?.type === 'constructionSite'
+        ? 'Редактировать строй площадку'
+        : 'Редактировать поставщика',
+    view:
+      data?.type === 'constructionSite'
+        ? 'Информация о строй площадке'
+        : 'Информация о поставщике',
   } as const;
 
   const title = titles[mode];
@@ -54,7 +70,11 @@ export function AddSupplierDrawer() {
 
     await deleteSupplier(data.id, {
       onSuccess: () => {
-        message.success(data.type === 'constructionSite' ? 'Строительная площадка удалена' : 'Поставщик удалён');
+        message.success(
+          data.type === 'constructionSite'
+            ? 'Строительная площадка удалена'
+            : 'Поставщик удалён'
+        );
         closeSupplierDrawer();
       },
       onError: () => {
@@ -63,7 +83,6 @@ export function AddSupplierDrawer() {
     });
   };
 
-
   const handleEdit = () => {
     if (data) {
       openEditSupplier(data);
@@ -71,7 +90,7 @@ export function AddSupplierDrawer() {
   };
 
   const handleCancel = () => {
-    if(data) {
+    if (data) {
       openViewSupplier(data);
     }
   };
@@ -84,7 +103,7 @@ export function AddSupplierDrawer() {
       onClose={closeSupplierDrawer}
       size={420}
       destroyOnHidden
-      mask={mode === 'create' || mode === 'edit'}
+      mask
       rootClassName="glass-drawer"
     >
       {mode === 'view' && data ? (
@@ -97,7 +116,7 @@ export function AddSupplierDrawer() {
         />
       ) : (
         <AddSupplierForm
-          initialValues={data || initialData as SupplierForm | null}
+          initialValues={data || (initialData as SupplierForm | null)}
           loading={isLoading}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
