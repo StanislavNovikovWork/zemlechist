@@ -1,6 +1,15 @@
 'use client';
 
-import { Form, Input, Button, Space, Select, DatePicker, Rate, ConfigProvider } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  Select,
+  DatePicker,
+  Rate,
+  ConfigProvider,
+} from 'antd';
 import ruRU from 'antd/locale/ru_RU';
 const { RangePicker } = DatePicker;
 import { PhoneInput } from '@/ui/PhoneInput';
@@ -10,7 +19,11 @@ import 'dayjs/locale/ru';
 import type { SupplierForm } from '../../model/supplier.types';
 import { toSubmitValues } from '../../model/supplierForm.mapper';
 import { FieldSchema } from './types';
-import { supplierFormSchema, constructionSiteFormSchema, specialTechniqueFormSchema } from '../../model/supplierForm.schema';
+import {
+  supplierFormSchema,
+  constructionSiteFormSchema,
+  specialTechniqueFormSchema,
+} from '../../model/supplierForm.schema';
 import { useGarbageSuppliersQuery } from '../../hooks/queries/useSuppliersQuery';
 
 /**
@@ -46,10 +59,11 @@ export function AddSupplierForm({
         specialTechnique: 'Спецтехника',
         nonMetallicMaterials: 'Нерудные материалы',
       };
-      const typeLabel = typeLabels[supplier.properties.type] || supplier.properties.type;
+      const typeLabel =
+        typeLabels[supplier.properties.type] || supplier.properties.type;
       return {
         value: supplier.id,
-        label: `${supplier.properties.name || `Поставщик #${supplier.id}`} (${typeLabel})`,
+        label: `${supplier.properties.organizationName || `Маркер #${supplier.id}`} (${typeLabel})`,
       };
     });
     return options;
@@ -58,7 +72,7 @@ export function AddSupplierForm({
   // Получаем схему в зависимости от типа
   const currentSchema = useMemo(() => {
     let schema;
-    
+
     if (typeValue === 'constructionSite') {
       schema = constructionSiteFormSchema;
     } else if (typeValue === 'specialTechnique') {
@@ -66,10 +80,10 @@ export function AddSupplierForm({
     } else {
       schema = supplierFormSchema;
     }
-    
+
     // Обновляем опции для селекта поставщиков
     if (typeValue === 'constructionSite') {
-      schema = schema.map(field => {
+      schema = schema.map((field) => {
         if (field.name === 'garbageCollectionSupplier') {
           return {
             ...field,
@@ -79,12 +93,12 @@ export function AddSupplierForm({
         return field;
       });
     }
-    
+
     return schema;
   }, [typeValue, supplierOptions]);
 
   useEffect(() => {
-      form.resetFields();
+    form.resetFields();
   }, [form]);
 
   useEffect(() => {
@@ -104,12 +118,16 @@ export function AddSupplierForm({
     if (values.duration) {
       // Игнорируем старый формат массива, работаем только с period1/period2
       if (values.duration.period1) {
-        values.duration.period1 = values.duration.period1.map((d: string) => dayjs(d, 'DD.MM.YYYY'));
+        values.duration.period1 = values.duration.period1.map((d: string) =>
+          dayjs(d, 'DD.MM.YYYY')
+        );
       }
       if (values.duration.period2) {
-        values.duration.period2 = values.duration.period2.map((d: string) => dayjs(d, 'DD.MM.YYYY'));
+        values.duration.period2 = values.duration.period2.map((d: string) =>
+          dayjs(d, 'DD.MM.YYYY')
+        );
       }
-    } 
+    }
     if (values.coordinates && Array.isArray(values.coordinates)) {
       const [lng, lat] = values.coordinates;
       values.coordinates = `${lat}, ${lng}`;
@@ -128,9 +146,15 @@ export function AddSupplierForm({
     }
 
     // Обрабатываем garbageCollectionSupplier - преобразуем строку в массив
-    if (values.garbageCollectionSupplier && !Array.isArray(values.garbageCollectionSupplier)) {
+    if (
+      values.garbageCollectionSupplier &&
+      !Array.isArray(values.garbageCollectionSupplier)
+    ) {
       if (typeof values.garbageCollectionSupplier === 'string') {
-        values.garbageCollectionSupplier = values.garbageCollectionSupplier.split(',').map(Number).filter(Boolean);
+        values.garbageCollectionSupplier = values.garbageCollectionSupplier
+          .split(',')
+          .map(Number)
+          .filter(Boolean);
       } else {
         values.garbageCollectionSupplier = [];
       }
@@ -150,23 +174,48 @@ export function AddSupplierForm({
     schema: FieldSchema[];
   };
 
-  
   const renderField = (field: FieldSchema) => {
     switch (field.type) {
       case 'input':
-        return <Input placeholder={field.placeholder} style={{ width: '100%' }} />;
+        return (
+          <Input placeholder={field.placeholder} style={{ width: '100%' }} />
+        );
 
       case 'textarea':
-        return <Input.TextArea rows={4} placeholder={field.placeholder} style={{ width: '100%' }} />;
+        return (
+          <Input.TextArea
+            rows={4}
+            placeholder={field.placeholder}
+            style={{ width: '100%' }}
+          />
+        );
 
       case 'select':
         return <Select options={field.options} style={{ width: '100%' }} />;
 
       case 'multiselect':
-        return <Select mode="multiple" showSearch options={field.options} placeholder={field.placeholder} style={{ width: '100%' }} filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())} />;
+        return (
+          <Select
+            mode="multiple"
+            showSearch
+            options={field.options}
+            placeholder={field.placeholder}
+            style={{ width: '100%' }}
+            filterOption={(input, option) =>
+              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+            }
+          />
+        );
 
       case 'zones':
-        return <Select mode="multiple" options={field.options} placeholder={field.placeholder} style={{ width: '100%' }} />;
+        return (
+          <Select
+            mode="multiple"
+            options={field.options}
+            placeholder={field.placeholder}
+            style={{ width: '100%' }}
+          />
+        );
 
       case 'date':
         return <DatePicker style={{ width: '100%' }} format="DD.MM.YYYY" />;
@@ -189,16 +238,16 @@ export function AddSupplierForm({
     return (
       <>
         {schema.map((field) => (
-<Form.Item
-             key={Array.isArray(field.name) ? field.name.join('.') : field.name}
-             name={field.name}
-             label={field.label}
-             rules={field.rules}
-             style={{ marginBottom: '8px' }}
-             initialValue={field.initialValue}
-           >
-             {renderField(field)}
-           </Form.Item>
+          <Form.Item
+            key={Array.isArray(field.name) ? field.name.join('.') : field.name}
+            name={field.name}
+            label={field.label}
+            rules={field.rules}
+            style={{ marginBottom: '8px' }}
+            initialValue={field.initialValue}
+          >
+            {renderField(field)}
+          </Form.Item>
         ))}
       </>
     );
