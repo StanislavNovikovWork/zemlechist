@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { SupplierForm } from "../../model/supplier.types";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { SupplierForm } from '../../model/supplier.types';
 
 type UpdatePayload = SupplierForm & { id?: number };
 
@@ -26,7 +26,8 @@ function toApiPayload(values: SupplierForm) {
     responsible: values.responsible,
     paymentMethod: values.paymentMethod,
     duration: values.duration,
-    garbageCollectionSupplier: values.garbageCollectionSupplier,
+    garbageCollectionSupplier:
+      values.garbageCollectionSupplier?.join(',') || null,
     zones: values.zones,
   };
 }
