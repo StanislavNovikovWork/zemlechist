@@ -115,7 +115,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
         color: option.color,
         children: markersByType[option.value]?.map((marker) => ({
           key: String(marker.id),
-          title: marker.properties.name || `Маркер #${marker.id}`,
+          title: marker.properties.organizationName || `Маркер #${marker.id}`,
         })) || [],
       })),
     },
