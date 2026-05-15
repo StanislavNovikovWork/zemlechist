@@ -1,6 +1,6 @@
-import { Descriptions, Typography, Rate, Button, Modal, Drawer } from "antd";
-import { useState } from "react";
-import type { SupplierForm } from "@/features/SupplierDrawerControll/model/supplier.types";
+import { Descriptions, Typography, Rate, Button, Modal, Drawer } from 'antd';
+import { useState } from 'react';
+import type { SupplierForm } from '@/features/SupplierDrawerControll/model/supplier.types';
 
 const { Text, Link } = Typography;
 
@@ -32,16 +32,17 @@ export function SupplierView({
   const isConstructionSite = initialValues.type === 'constructionSite';
 
   // Находим поставщиков по ID из всех маркеров
-  const garbageSuppliers = allMarkers?.filter(
-    (marker: any) => initialValues.garbageCollectionSupplier?.includes(marker.id)
-  ) || [];
+  const garbageSuppliers =
+    allMarkers?.filter((marker: any) =>
+      initialValues.garbageCollectionSupplier?.includes(marker.id)
+    ) || [];
   return (
     <>
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">
-          <Descriptions 
-            column={1} 
-            size="small" 
+          <Descriptions
+            column={1}
+            size="small"
             layout="vertical"
             style={{ marginBottom: '8px' }}
             colon={true}
@@ -50,137 +51,181 @@ export function SupplierView({
               {/* Тип */}
               <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
                 <Text>
-                  {initialValues.type === 'constructionSite' ? 'Строительная площадка' :
-                   initialValues.type === 'specialTechnique' ? 'Спецтехника' :
-                   initialValues.type === 'nonMetallicMaterials' ? 'Нерудные материалы' : 'Вывоз мусора'}
+                  {initialValues.type === 'constructionSite'
+                    ? 'Строительная площадка'
+                    : initialValues.type === 'specialTechnique'
+                      ? 'Спецтехника'
+                      : initialValues.type === 'nonMetallicMaterials'
+                        ? 'Нерудные материалы'
+                        : 'Вывоз мусора'}
                 </Text>
               </Descriptions.Item>
 
+              {!isConstructionSite &&
+                initialValues.zones &&
+                initialValues.zones.length > 0 && (
+                  <Descriptions.Item
+                    label="Зоны работ"
+                    style={{ paddingBottom: '4px' }}
+                  >
+                    <Text>
+                      {initialValues.zones[0] === 'all'
+                        ? 'Все зоны'
+                        : initialValues.zones.join(', ')}
+                    </Text>
+                  </Descriptions.Item>
+                )}
+
               {/* Заказ (только для стройплощадок) */}
               {initialValues.orderNumber && (
-                <Descriptions.Item label="Заказ" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Заказ"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.orderNumber}</Text>
                 </Descriptions.Item>
               )}
 
               {/* Ответственный (только для стройплощадок) */}
               {initialValues.responsible && (
-                <Descriptions.Item label="Ответственный" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Ответственный"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.responsible}</Text>
                 </Descriptions.Item>
               )}
 
               {/* Продолжительность (только для стройплощадок) */}
-              {isConstructionSite && initialValues.duration && initialValues.duration.period1 && (
-                <Descriptions.Item label="Продолжительность" style={{ paddingBottom: '4px' }}>
-                  <Text>
-                    {(() => {
-                      const formatDate = (dateValue: any) => {
-                        if (typeof dateValue === 'string') {
-                          // Проверяем формат дд.мм.гггг
-                          if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
-                            return dateValue;
-                          }
-                          // Пробуем распарсить другие строки
-                          const parsed = new Date(dateValue);
-                          if (!isNaN(parsed.getTime())) {
-                            return parsed.toLocaleDateString();
-                          }
-                          return dateValue; // возвращаем как есть если не удалось распарсить
-                        }
-                        
-                        if (dateValue instanceof Date) {
-                          if (!isNaN(dateValue.getTime())) {
-                            return dateValue.toLocaleDateString();
-                          }
-                          return 'Некорректная дата';
-                        }
-                        
-                        if (dateValue && typeof dateValue === 'object') {
-                          // Проверяем на Dayjs объект
-                          if ('$L' in dateValue && '$d' in dateValue) {
-                            const dayjsDate = (dateValue as any).$d;
-                            if (dayjsDate instanceof Date && !isNaN(dayjsDate.getTime())) {
-                              return dayjsDate.toLocaleDateString();
+              {isConstructionSite &&
+                initialValues.duration &&
+                initialValues.duration.period1 && (
+                  <Descriptions.Item
+                    label="Продолжительность"
+                    style={{ paddingBottom: '4px' }}
+                  >
+                    <Text>
+                      {(() => {
+                        const formatDate = (dateValue: any) => {
+                          if (typeof dateValue === 'string') {
+                            // Проверяем формат дд.мм.гггг
+                            if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
+                              return dateValue;
                             }
+                            // Пробуем распарсить другие строки
+                            const parsed = new Date(dateValue);
+                            if (!isNaN(parsed.getTime())) {
+                              return parsed.toLocaleDateString();
+                            }
+                            return dateValue; // возвращаем как есть если не удалось распарсить
                           }
-                          // Проверяем наличие метода toLocaleDateString
-                          if ('toLocaleDateString' in dateValue) {
-                            try {
-                              return (dateValue as any).toLocaleDateString();
-                            } catch {
-                              return 'Некорректная дата';
-                            }
-                          }
-                        }
-                        
-                        return 'Некорректная дата';
-                      };
-                      return `${formatDate(initialValues.duration.period1[0])} - ${formatDate(initialValues.duration.period1[1])}`;
-                    })()}
-                    {initialValues.duration.period2 && (
-                      <><br />
-                        {(() => {
-                          const formatDate = (dateValue: any) => {
-                            if (typeof dateValue === 'string') {
-                              // Проверяем формат дд.мм.гггг
-                              if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
-                                return dateValue;
-                              }
-                              // Пробуем распарсить другие строки
-                              const parsed = new Date(dateValue);
-                              if (!isNaN(parsed.getTime())) {
-                                return parsed.toLocaleDateString();
-                              }
-                              return dateValue; // возвращаем как есть если не удалось распарсить
-                            }
-                            
-                            if (dateValue instanceof Date) {
-                              if (!isNaN(dateValue.getTime())) {
-                                return dateValue.toLocaleDateString();
-                              }
-                              return 'Некорректная дата';
-                            }
-                            
-                            if (dateValue && typeof dateValue === 'object') {
-                              // Проверяем на Dayjs объект
-                              if ('$L' in dateValue && '$d' in dateValue) {
-                                const dayjsDate = (dateValue as any).$d;
-                                if (dayjsDate instanceof Date && !isNaN(dayjsDate.getTime())) {
-                                  return dayjsDate.toLocaleDateString();
-                                }
-                              }
-                              // Проверяем наличие метода toLocaleDateString
-                              if ('toLocaleDateString' in dateValue) {
-                                try {
-                                  return (dateValue as any).toLocaleDateString();
-                                } catch {
-                                  return 'Некорректная дата';
-                                }
-                              }
-                            }
-                            
-                            return 'Некорректная дата';
-                          };
-                          return `${formatDate(initialValues.duration.period2[0])} - ${formatDate(initialValues.duration.period2[1])}`;
-                        })()}
-                      </>
-                    )}
-                  </Text>
-                </Descriptions.Item>
-              )}
 
-              
+                          if (dateValue instanceof Date) {
+                            if (!isNaN(dateValue.getTime())) {
+                              return dateValue.toLocaleDateString();
+                            }
+                            return 'Некорректная дата';
+                          }
+
+                          if (dateValue && typeof dateValue === 'object') {
+                            // Проверяем на Dayjs объект
+                            if ('$L' in dateValue && '$d' in dateValue) {
+                              const dayjsDate = (dateValue as any).$d;
+                              if (
+                                dayjsDate instanceof Date &&
+                                !isNaN(dayjsDate.getTime())
+                              ) {
+                                return dayjsDate.toLocaleDateString();
+                              }
+                            }
+                            // Проверяем наличие метода toLocaleDateString
+                            if ('toLocaleDateString' in dateValue) {
+                              try {
+                                return (dateValue as any).toLocaleDateString();
+                              } catch {
+                                return 'Некорректная дата';
+                              }
+                            }
+                          }
+
+                          return 'Некорректная дата';
+                        };
+                        return `${formatDate(initialValues.duration.period1[0])} - ${formatDate(initialValues.duration.period1[1])}`;
+                      })()}
+                      {initialValues.duration.period2 && (
+                        <>
+                          <br />
+                          {(() => {
+                            const formatDate = (dateValue: any) => {
+                              if (typeof dateValue === 'string') {
+                                // Проверяем формат дд.мм.гггг
+                                if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateValue)) {
+                                  return dateValue;
+                                }
+                                // Пробуем распарсить другие строки
+                                const parsed = new Date(dateValue);
+                                if (!isNaN(parsed.getTime())) {
+                                  return parsed.toLocaleDateString();
+                                }
+                                return dateValue; // возвращаем как есть если не удалось распарсить
+                              }
+
+                              if (dateValue instanceof Date) {
+                                if (!isNaN(dateValue.getTime())) {
+                                  return dateValue.toLocaleDateString();
+                                }
+                                return 'Некорректная дата';
+                              }
+
+                              if (dateValue && typeof dateValue === 'object') {
+                                // Проверяем на Dayjs объект
+                                if ('$L' in dateValue && '$d' in dateValue) {
+                                  const dayjsDate = (dateValue as any).$d;
+                                  if (
+                                    dayjsDate instanceof Date &&
+                                    !isNaN(dayjsDate.getTime())
+                                  ) {
+                                    return dayjsDate.toLocaleDateString();
+                                  }
+                                }
+                                // Проверяем наличие метода toLocaleDateString
+                                if ('toLocaleDateString' in dateValue) {
+                                  try {
+                                    return (
+                                      dateValue as any
+                                    ).toLocaleDateString();
+                                  } catch {
+                                    return 'Некорректная дата';
+                                  }
+                                }
+                              }
+
+                              return 'Некорректная дата';
+                            };
+                            return `${formatDate(initialValues.duration.period2[0])} - ${formatDate(initialValues.duration.period2[1])}`;
+                          })()}
+                        </>
+                      )}
+                    </Text>
+                  </Descriptions.Item>
+                )}
+
               {/* Координаты (только для стройплощадок) */}
               {isConstructionSite && initialValues.coordinates && (
-                <Descriptions.Item label="Координаты" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Координаты"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{`${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`}</Text>
                 </Descriptions.Item>
               )}
 
               {/* Телефон (кроме стройплощадок) */}
               {!isConstructionSite && initialValues.phone && (
-                <Descriptions.Item label="Телефон" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Телефон"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.phone}</Text>
                 </Descriptions.Item>
               )}
@@ -194,7 +239,10 @@ export function SupplierView({
 
               {/* Email */}
               {initialValues.email && (
-                <Descriptions.Item label="Почта" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Почта"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Link href={`mailto:${initialValues.email}`}>
                     {initialValues.email}
                   </Link>
@@ -203,28 +251,32 @@ export function SupplierView({
 
               {/* Организация */}
               {initialValues.organizationName && (
-                <Descriptions.Item label="Организация" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Организация"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.organizationName}</Text>
                 </Descriptions.Item>
               )}
 
               {/* Описание */}
               {initialValues.description && (
-                <Descriptions.Item label="Описание" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Описание"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.description}</Text>
                 </Descriptions.Item>
               )}
 
               {/* Зоны (только для не-строительных площадок) */}
-              {!isConstructionSite && initialValues.zones && initialValues.zones.length > 0 && (
-                <Descriptions.Item label="Зоны" style={{ paddingBottom: '4px' }}>
-                  <Text>{initialValues.zones.join(', ')}</Text>
-                </Descriptions.Item>
-              )}
 
               {/* Сайт */}
               {initialValues.website && (
-                <Descriptions.Item label="Сайт" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Сайт"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Link href={initialValues.website} target="_blank">
                     {initialValues.website}
                   </Link>
@@ -240,25 +292,37 @@ export function SupplierView({
 
               {/* Способ оплаты */}
               {initialValues.paymentMethod && (
-                <Descriptions.Item label="Оплата" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Оплата"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>
-                    {initialValues.paymentMethod === 'cash' ? 'Нал' : 
-                     initialValues.paymentMethod === 'cashless' ? 'Без нал' : 
-                     'Оба варианта'}
+                    {initialValues.paymentMethod === 'cash'
+                      ? 'Нал'
+                      : initialValues.paymentMethod === 'cashless'
+                        ? 'Без нал'
+                        : 'Оба варианта'}
                   </Text>
                 </Descriptions.Item>
               )}
 
               {/* Надежность (кроме стройплощадок) */}
-              {!isConstructionSite && initialValues.reliability !== undefined && (
-                <Descriptions.Item label="Надежность" style={{ paddingBottom: '4px' }}>
-                  <Rate disabled value={initialValues.reliability} />
-                </Descriptions.Item>
-              )}
+              {!isConstructionSite &&
+                initialValues.reliability !== undefined && (
+                  <Descriptions.Item
+                    label="Надежность"
+                    style={{ paddingBottom: '4px' }}
+                  >
+                    <Rate disabled value={initialValues.reliability} />
+                  </Descriptions.Item>
+                )}
 
               {/* Дата обновления */}
               {initialValues.updatedAt && (
-                <Descriptions.Item label="Дата" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Дата"
+                  style={{ paddingBottom: '4px' }}
+                >
                   <Text>{initialValues.updatedAt}</Text>
                 </Descriptions.Item>
               )}
@@ -268,17 +332,31 @@ export function SupplierView({
           {/* Блок Поставщики (только для стройплощадок) */}
           {isConstructionSite && garbageSuppliers.length > 0 && (
             <div className="border border-gray-200 rounded-lg p-3 mb-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Поставщики</h4>
+              <h4 className="text-sm font-medium text-gray-700 mb-2">
+                Поставщики
+              </h4>
               <div className="space-y-2">
                 {garbageSuppliers.map((supplier: any) => (
                   <div key={supplier.id}>
-                    <span className="text-xs text-gray-500">{supplier.properties.type === 'garbageCollection' ? 'Вывоз мусора' : supplier.properties.type === 'specialTechnique' ? 'Спецтехника' : 'Нерудные материалы'}</span>
+                    <span className="text-xs text-gray-500">
+                      {supplier.properties.type === 'garbageCollection'
+                        ? 'Вывоз мусора'
+                        : supplier.properties.type === 'specialTechnique'
+                          ? 'Спецтехника'
+                          : 'Нерудные материалы'}
+                    </span>
                     <div className="ml-2">
-                      <Text style={{ cursor: 'pointer', color: '#1890ff' }} onClick={() => setIsSupplierDrawerOpen(true)}>
-                        {supplier.properties.name || `Поставщик #${supplier.id}`}
+                      <Text
+                        style={{ cursor: 'pointer', color: '#1890ff' }}
+                        onClick={() => setIsSupplierDrawerOpen(true)}
+                      >
+                        {supplier.properties.name ||
+                          `Поставщик #${supplier.id}`}
                       </Text>
                       {supplier.properties.phone && (
-                        <Text style={{ marginLeft: '4px' }}>{supplier.properties.phone}</Text>
+                        <Text style={{ marginLeft: '4px' }}>
+                          {supplier.properties.phone}
+                        </Text>
                       )}
                     </div>
                   </div>
@@ -298,18 +376,28 @@ export function SupplierView({
           rootClassName="glass-drawer"
         >
           {garbageSuppliers.map((garbageSupplier: any) => (
-            <Descriptions key={garbageSupplier.id}
-              column={1} 
-              size="small" 
+            <Descriptions
+              key={garbageSupplier.id}
+              column={1}
+              size="small"
               layout="vertical"
               colon={true}
             >
               <Descriptions.Item label="Тип">
-                <Text>{garbageSupplier.properties.type === 'garbageCollection' ? 'Вывоз мусора' : garbageSupplier.properties.type === 'specialTechnique' ? 'Спецтехника' : 'Нерудные материалы'}</Text>
+                <Text>
+                  {garbageSupplier.properties.type === 'garbageCollection'
+                    ? 'Вывоз мусора'
+                    : garbageSupplier.properties.type === 'specialTechnique'
+                      ? 'Спецтехника'
+                      : 'Нерудные материалы'}
+                </Text>
               </Descriptions.Item>
-              
+
               <Descriptions.Item label="Название">
-                <Text>{garbageSupplier.properties.name || `Поставщик #${garbageSupplier.id}`}</Text>
+                <Text>
+                  {garbageSupplier.properties.name ||
+                    `Поставщик #${garbageSupplier.id}`}
+                </Text>
               </Descriptions.Item>
 
               {garbageSupplier.properties.phone && (
@@ -326,7 +414,10 @@ export function SupplierView({
 
               {garbageSupplier.properties.website && (
                 <Descriptions.Item label="Сайт">
-                  <Link href={garbageSupplier.properties.website} target="_blank">
+                  <Link
+                    href={garbageSupplier.properties.website}
+                    target="_blank"
+                  >
                     {garbageSupplier.properties.website}
                   </Link>
                 </Descriptions.Item>
@@ -352,7 +443,10 @@ export function SupplierView({
 
               {garbageSupplier.properties.reliability !== undefined && (
                 <Descriptions.Item label="Надежность">
-                  <Rate disabled value={garbageSupplier.properties.reliability} />
+                  <Rate
+                    disabled
+                    value={garbageSupplier.properties.reliability}
+                  />
                 </Descriptions.Item>
               )}
 
@@ -366,17 +460,17 @@ export function SupplierView({
         </Drawer>
 
         <div className="pt-4 space-y-2">
-            <Button type="primary" block onClick={onEdit}>
-              Редактировать
-            </Button>
-            <Button
-              danger
-              block
-              onClick={() => setIsDeleteModalOpen(true)}
-              loading={deleteLoading}
-            >
-              Удалить
-            </Button>
+          <Button type="primary" block onClick={onEdit}>
+            Редактировать
+          </Button>
+          <Button
+            danger
+            block
+            onClick={() => setIsDeleteModalOpen(true)}
+            loading={deleteLoading}
+          >
+            Удалить
+          </Button>
         </div>
       </div>
 

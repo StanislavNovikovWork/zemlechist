@@ -96,10 +96,11 @@ export const supplierFormSchema: FieldSchema[] = [
   },
   {
     name: 'zones',
-    label: 'Зоны',
+    label: 'Зоны работ',
     type: 'zones',
     placeholder: 'Выберите зоны',
     options: [
+      { value: 'all', label: 'Все зоны' },
       { value: '1', label: 'Зона 1' },
       { value: '2', label: 'Зона 2' },
       { value: '3', label: 'Зона 3' },
