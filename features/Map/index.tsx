@@ -14,6 +14,28 @@ import { useSupplierDrawerController } from "../SupplierDrawerControll/model/sup
 import dayjs from 'dayjs';
 
 /**
+ * Checks whether today's date falls within a single period (start-end inclusive).
+ */
+function isTodayInPeriod(period: string[]): boolean {
+  if (!period || period.length < 2) return false;
+  const start = dayjs(period[0], 'DD.MM.YYYY');
+  const end = dayjs(period[1], 'DD.MM.YYYY');
+  const today = dayjs();
+  if (!start.isValid() || !end.isValid()) return false;
+  return today.isSame(start, 'day') || today.isSame(end, 'day') || (today.isAfter(start, 'day') && today.isBefore(end, 'day'));
+}
+
+/**
+ * Checks whether a construction-site marker is active today (falls in period1 or period2).
+ */
+function isConstructionSiteActiveToday(marker: MarkerFeature): boolean {
+  if (marker.properties.type !== 'constructionSite') return false;
+  const { duration } = marker.properties;
+  if (!duration) return false;
+  return isTodayInPeriod(duration.period1) || (duration.period2 ? isTodayInPeriod(duration.period2) : false);
+}
+
+/**
  * Пропсы компонента Map
  * @property location - Начальное расположение карты с координатами центра и уровнем масштаба
  */
@@ -27,18 +49,23 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const [clickMarker, setClickMarker] = useState<[number, number] | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [selectedTypes, setSelectedTypes] = useState<string[] | null>(null);
+  const [todayOrders, setTodayOrders] = useState(false);
   const [visibleZones, setVisibleZones] = useState<Record<number, boolean>>({});
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { data: markers, isLoading } = useMarkersQuery();
   const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
   // Filter markers based on selected types
-  const allConstructionSiteMarkers = markers?.features?.filter((marker: MarkerFeature) => marker.properties.type === 'constructionSite') || [];
+  const allConstructionSiteMarkers = markers?.features?.filter((marker: MarkerFeature) => {
+    if (marker.properties.type !== 'constructionSite') return false;
+    return todayOrders ? isConstructionSiteActiveToday(marker) : true;
+  }) || [];
+
   const filteredByTypes = selectedTypes && selectedTypes.length > 0
     ? markers?.features?.filter((marker: MarkerFeature) => selectedTypes.includes(marker.properties.type)) || []
     : [];
-  
-  // Always include construction sites + filtered markers (without duplicates)
+
+  // Merge: date-filtered construction sites + type-filtered suppliers
   const filteredMarkers = [...allConstructionSiteMarkers, ...filteredByTypes.filter((marker: MarkerFeature) => marker.properties.type !== 'constructionSite')];
 
   // Разделяем маркеры на constructionSite и остальные
@@ -54,6 +81,9 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
     type: 'FeatureCollection' as const,
     features: constructionSiteMarkers,
   };
+
+  // Count of construction-site markers active today (for the "Сегодняшние заказы" filter badge)
+  const todaySitesCount = markers?.features?.filter(isConstructionSiteActiveToday).length || 0;
 
   const otherMarkersGeoJSON = {
     type: 'FeatureCollection' as const,
@@ -118,6 +148,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
 
   const handleFilterChange = (types: string[] | null) => {
     setSelectedTypes(types);
+    setTodayOrders(types?.includes('todayOrders') ?? false);
   };
 
   const handleZoneToggle = (zoneNumber: number, visible: boolean) => {
@@ -154,6 +185,8 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         markers={markers}
         onMarkerClick={handleMarkerClick}
         onFilterChange={handleFilterChange}
+        todayOrders={todayOrders}
+        todaySitesCount={todaySitesCount}
       />
       <div className="flex-1 relative">
         {isLoading ? (

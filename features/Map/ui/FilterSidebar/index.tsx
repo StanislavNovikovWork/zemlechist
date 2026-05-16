@@ -12,6 +12,7 @@ import {
   GoldOutlined,
   CaretRightOutlined,
   CaretDownOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 
 /**
@@ -26,9 +27,11 @@ interface FilterSidebarProps {
   markers: MarkersGeoJSON | null;
   onMarkerClick?: (marker: MarkerFeature) => void;
   onFilterChange?: (types: string[] | null) => void;
+  todayOrders?: boolean;
+  todaySitesCount?: number;
 }
 
-export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterChange }: FilterSidebarProps) {
+export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterChange, todayOrders, todaySitesCount = 0 }: FilterSidebarProps) {
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
   const [checkedTypes, setCheckedTypes] = useState<string[]>([]);
 
@@ -50,6 +53,12 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
       value: "nonMetallicMaterials",
       icon: <GoldOutlined />,
       color: 'purple' as const,
+    },
+    {
+      label: "Сегодняшние заказы",
+      value: "todayOrders",
+      icon: <CalendarOutlined />,
+      color: 'orange' as const,
     },
   ];
 
@@ -187,7 +196,7 @@ export function FilterSidebar({ onAddMarker, markers, onMarkerClick, onFilterCha
               key={option.value}
               icon={option.icon}
               label={option.label}
-              count={markersByType[option.value]?.length || 0}
+              count={option.value === 'todayOrders' ? todaySitesCount : (markersByType[option.value]?.length || 0)}
               checked={checkedTypes.includes(option.value)}
               onChange={(checked) => {
                 const newChecked = checked
