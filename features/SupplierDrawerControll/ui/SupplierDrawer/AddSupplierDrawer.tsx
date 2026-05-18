@@ -108,7 +108,7 @@ export function AddSupplierDrawer() {
       placement="right"
       open={isOpen}
       onClose={handleClose}
-      size={isInvoiceOpen ? 960 : 420}
+      size={isInvoiceOpen ? 1200 : 420}
       destroyOnHidden
       mask
       rootClassName="glass-drawer"
@@ -148,54 +148,73 @@ type InvoiceItem = {
 };
 
 function InvoicePanel() {
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+
   return (
     <div
       style={{
-        width: 520,
+        width: 720,
         flexShrink: 0,
         borderLeft: '1px solid #e8e8e8',
+        borderRight: '1px solid #e8e8e8',
         overflowY: 'auto',
+        backgroundColor: '#fff',
       }}
     >
       <div style={{ padding: '24px' }}>
-        <h4 className="text-base font-semibold text-gray-800" style={{ marginBottom: 16 }}>
+        <h4 className="text-base font-semibold text-gray-800" style={{ marginBottom: 12 }}>
           Смета
         </h4>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '36px 1fr 56px 56px',
-            gap: '8px',
-            fontSize: '12px',
-            fontWeight: 600,
-            paddingBottom: 8,
-            borderBottom: '2px solid #e8e8e8',
-          }}
-        >
-          <span>№</span>
-          <span>Наименование</span>
-          <span style={{ textAlign: 'right' }}>Ед. изм.</span>
-          <span style={{ textAlign: 'right' }}>Кол-во</span>
-        </div>
-        {INVOICE_DATA.map((item: InvoiceItem) => (
-          <div
-            key={item.num}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '36px 1fr 56px 56px',
-              gap: '8px',
-              padding: '6px 0',
-              borderBottom: '1px solid #f0f0f0',
-              fontSize: '13px',
-              color: '#262626',
-            }}
-          >
-            <span>{item.num}</span>
-            <span>{item.name}</span>
-            <span style={{ textAlign: 'right' }}>{item.unit}</span>
-            <span style={{ textAlign: 'right' }}>{item.quantity}</span>
-          </div>
-        ))}
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+          <thead>
+            <tr style={{ borderBottom: '2px solid #e8e8e8' }}>
+              {['№', 'Наименование', 'Ед. изм.', 'Кол-во'].map((h) => (
+                <th
+                  key={h}
+                  style={{
+                    textAlign: h === 'Кол-во' || h === 'Ед. изм.' ? 'right' : 'left',
+                    fontWeight: 600,
+                    fontSize: '12px',
+                    color: '#595959',
+                    padding: '6px 8px',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {INVOICE_DATA.map((item: InvoiceItem) => {
+              const evenRow = item.num % 2 === 0;
+              const isHovered = hoveredRow === item.num;
+              return (
+                <tr
+                  key={item.num}
+                  onMouseEnter={() => setHoveredRow(item.num)}
+                  onMouseLeave={() => setHoveredRow(null)}
+                  style={{
+                    backgroundColor: isHovered
+                      ? '#f0f5ff'
+                      : evenRow
+                        ? '#fafafa'
+                        : '#fff',
+                    transition: 'background-color 0.15s ease',
+                    cursor: 'default',
+                  }}
+                >
+                  <td style={{ padding: '6px 8px', color: '#8c8c8c' }}>{item.num}</td>
+                  <td style={{ padding: '6px 8px', color: '#262626' }}>{item.name}</td>
+                  <td style={{ textAlign: 'right', padding: '6px 8px', color: '#595959' }}>{item.unit}</td>
+                  <td style={{ textAlign: 'right', padding: '6px 8px', color: '#262626', fontWeight: 500 }}>
+                    {item.quantity}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
