@@ -4,6 +4,37 @@ import type { SupplierForm } from '@/features/SupplierDrawerControll/model/suppl
 
 const { Text, Link } = Typography;
 
+type InvoiceItem = {
+  num: number;
+  name: string;
+  unit: string;
+  quantity: number;
+};
+
+export type { InvoiceItem };
+export const INVOICE_DATA: InvoiceItem[] = [
+  { num: 1, name: 'Песок карьерный', unit: 'куб.м*', quantity: 20 },
+  { num: 2, name: 'Доставка гусеничной техники < 10 тонн', unit: 'рейс', quantity: 1 },
+  { num: 3, name: 'Щебень гравийный фр.20-40', unit: 'куб.м*', quantity: 20 },
+  { num: 4, name: 'Труба дренажная в геотекстиле Ø 110', unit: 'пог.м', quantity: 100 },
+  { num: 5, name: 'Геотекстиль нетканый иглопробивной 200 г/м2', unit: 'кв.м', quantity: 200 },
+  { num: 6, name: 'Песок карьерный', unit: 'куб.м*', quantity: 5 },
+  { num: 7, name: 'Муфта соединительная Ø110 ПВХ', unit: 'шт.', quantity: 4 },
+  { num: 8, name: 'Смотровой колодец Ø315 мм в сборе', unit: 'шт.', quantity: 2 },
+  { num: 9, name: 'Переход для врезки в колодец Ø110', unit: 'шт.', quantity: 3 },
+  { num: 10, name: 'Смотровой колодец Ø500 мм в сборе', unit: 'шт.', quantity: 1 },
+  { num: 11, name: 'Доставка материалов автомобилем', unit: 'рейс', quantity: 1 },
+  { num: 12, name: 'Песок карьерный', unit: 'куб.м*', quantity: 5 },
+  { num: 13, name: 'Щебень гравийный фр.5-20', unit: 'куб.м*', quantity: 5 },
+  { num: 14, name: 'Геотекстиль нетканый иглопробивной 200 г/м2', unit: 'кв.м', quantity: 200 },
+  { num: 15, name: 'Решетка газонная пласт черн ECORASTER S50 330х330х50 мм', unit: 'кв.м', quantity: 14.63 },
+  { num: 16, name: 'Грунт плодородный', unit: 'куб.м*', quantity: 5 },
+  { num: 17, name: 'Травосмесь газонная партерная', unit: 'кг', quantity: 5 },
+  { num: 18, name: 'Камень плитняк 80-100мм', unit: 'кв.м', quantity: 11 },
+  { num: 19, name: 'Доставка материалов манипулятором', unit: 'рейс', quantity: 1 },
+  { num: 20, name: 'Доставка материалов автомобилем', unit: 'рейс', quantity: 2 },
+];
+
 /**
  * Пропсы компонента SupplierView
  * @property initialValues - Данные поставщика или строй площадки для отображения
@@ -11,6 +42,8 @@ const { Text, Link } = Typography;
  * @property onDelete - Callback при подтверждении удаления
  * @property deleteLoading - Флаг загрузки удаления
  * @property allMarkers - Все маркеры для поиска поставщика по ID
+ * @property isInvoiceOpen - Открыта ли панель сметы (контролируется извне)
+ * @property onToggleInvoice - Колбэк для переключения видимости сметы
  */
 type SupplierViewProps = {
   initialValues: SupplierForm;
@@ -18,6 +51,8 @@ type SupplierViewProps = {
   onDelete?: () => Promise<void>;
   deleteLoading?: boolean;
   allMarkers?: any[];
+  isInvoiceOpen?: boolean;
+  onToggleInvoice?: (next: boolean) => void;
 };
 
 export function SupplierView({
@@ -26,9 +61,13 @@ export function SupplierView({
   onDelete,
   deleteLoading,
   allMarkers,
+  isInvoiceOpen: propIsInvoiceOpen,
+  onToggleInvoice: propOnToggleInvoice,
 }: SupplierViewProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
+
+  const isInvoiceOpen = propIsInvoiceOpen ?? false;
   const isConstructionSite = initialValues.type === 'constructionSite';
 
   // Находим поставщиков по ID из всех маркеров
@@ -460,6 +499,15 @@ export function SupplierView({
         </Drawer>
 
         <div className="pt-4 space-y-2">
+          {isConstructionSite && (
+            <Button
+              type={isInvoiceOpen ? 'default' : 'primary'}
+              block
+              onClick={() => propOnToggleInvoice?.(!isInvoiceOpen)}
+            >
+              {isInvoiceOpen ? 'Закрыть смету' : 'Открыть смету'}
+            </Button>
+          )}
           <Button type="primary" block onClick={onEdit}>
             Редактировать
           </Button>
