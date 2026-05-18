@@ -97,13 +97,17 @@ export function AddSupplierDrawer() {
       openViewSupplier(data);
     }
   };
+  const handleClose = () => {
+    setIsInvoiceOpen(false);
+    closeSupplierDrawer();
+  };
 
   return (
     <Drawer
       title={title}
       placement="right"
       open={isOpen}
-      onClose={closeSupplierDrawer}
+      onClose={handleClose}
       size={isInvoiceOpen ? 960 : 420}
       destroyOnHidden
       mask
