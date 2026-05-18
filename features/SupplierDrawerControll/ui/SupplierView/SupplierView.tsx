@@ -1,4 +1,4 @@
-import { Descriptions, Typography, Rate, Button, Modal, Drawer } from 'antd';
+import { Descriptions, Typography, Rate, Drawer } from 'antd';
 import { useState } from 'react';
 import type { SupplierForm } from '@/features/SupplierDrawerControll/model/supplier.types';
 
@@ -39,35 +39,20 @@ export const INVOICE_DATA: InvoiceItem[] = [
  * Пропсы компонента SupplierView
  * @property initialValues - Данные поставщика или строй площадки для отображения
  * @property onEdit - Callback при нажатии кнопки "Редактировать"
- * @property onDelete - Callback при подтверждении удаления
- * @property deleteLoading - Флаг загрузки удаления
  * @property allMarkers - Все маркеры для поиска поставщика по ID
- * @property isInvoiceOpen - Открыта ли панель сметы (контролируется извне)
- * @property onToggleInvoice - Колбэк для переключения видимости сметы
  */
 type SupplierViewProps = {
   initialValues: SupplierForm;
   onEdit?: () => void;
-  onDelete?: () => Promise<void>;
-  deleteLoading?: boolean;
   allMarkers?: any[];
-  isInvoiceOpen?: boolean;
-  onToggleInvoice?: (next: boolean) => void;
 };
 
 export function SupplierView({
   initialValues,
   onEdit,
-  onDelete,
-  deleteLoading,
   allMarkers,
-  isInvoiceOpen: propIsInvoiceOpen,
-  onToggleInvoice: propOnToggleInvoice,
 }: SupplierViewProps) {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
-
-  const isInvoiceOpen = propIsInvoiceOpen ?? false;
   const isConstructionSite = initialValues.type === 'constructionSite';
 
   // Находим поставщиков по ID из всех маркеров
@@ -495,47 +480,9 @@ export function SupplierView({
                 </Descriptions.Item>
               )}
             </Descriptions>
-          ))}
+            ))}
         </Drawer>
-
-        <div className="pt-4 space-y-2">
-          {isConstructionSite && (
-            <Button
-              type={isInvoiceOpen ? 'default' : 'primary'}
-              block
-              onClick={() => propOnToggleInvoice?.(!isInvoiceOpen)}
-            >
-              {isInvoiceOpen ? 'Закрыть смету' : 'Открыть смету'}
-            </Button>
-          )}
-          <Button type="primary" block onClick={onEdit}>
-            Редактировать
-          </Button>
-          <Button
-            danger
-            block
-            onClick={() => setIsDeleteModalOpen(true)}
-            loading={deleteLoading}
-          >
-            Удалить
-          </Button>
-        </div>
       </div>
-
-      <Modal
-        title="Удалить?"
-        open={isDeleteModalOpen}
-        onOk={async () => {
-          await onDelete?.();
-          setIsDeleteModalOpen(false);
-        }}
-        onCancel={() => setIsDeleteModalOpen(false)}
-        okText="Удалить"
-        cancelText="Отмена"
-        okButtonProps={{ danger: true, loading: deleteLoading }}
-      >
-        <p>Вы уверены?</p>
-      </Modal>
     </>
   );
 }
