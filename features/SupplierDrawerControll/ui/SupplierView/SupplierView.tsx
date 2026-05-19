@@ -230,9 +230,10 @@ export function SupplierView({
           <Descriptions
             column={1}
             size="small"
-            layout="vertical"
+            layout="horizontal"
+            styles={{ label: { width: '110px' } }}
             style={{ marginBottom: '8px' }}
-            colon={true}
+            colon={false}
           >
             <>
               {/* Тип */}
@@ -253,6 +254,7 @@ export function SupplierView({
                   <Descriptions.Item
                     label="Зоны работ"
                     style={{ paddingBottom: '4px' }}
+                    styles={{ label: { width: '110px' } }}
                   >
                     <Text>
                       {initialValues.zones[0] === 'all'
@@ -267,6 +269,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Заказ"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '155px' } }}
                 >
                   <Text>{initialValues.orderNumber}</Text>
                 </Descriptions.Item>
@@ -277,6 +280,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Ответственный"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '155px' } }}
                 >
                   <Text>{initialValues.responsible}</Text>
                 </Descriptions.Item>
@@ -289,6 +293,7 @@ export function SupplierView({
                   <Descriptions.Item
                     label="Продолжительность"
                     style={{ paddingBottom: '4px' }}
+                    styles={{ label: { width: '155px' } }}
                   >
                     <Text>
                       {(() => {
@@ -401,6 +406,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Координаты"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '155px' } }}
                 >
                   <Text>{`${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`}</Text>
                 </Descriptions.Item>
@@ -411,6 +417,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Телефон"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Text>{initialValues.phone}</Text>
                 </Descriptions.Item>
@@ -418,7 +425,11 @@ export function SupplierView({
 
               {/* Имя (кроме стройплощадок) */}
               {!isConstructionSite && initialValues.name && (
-                <Descriptions.Item label="Имя" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="Имя"
+                  style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
+                >
                   <Text>{initialValues.name}</Text>
                 </Descriptions.Item>
               )}
@@ -428,6 +439,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Почта"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Link href={`mailto:${initialValues.email}`}>
                     {initialValues.email}
@@ -440,6 +452,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Организация"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Text>{initialValues.organizationName}</Text>
                 </Descriptions.Item>
@@ -450,6 +463,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Описание"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Text>{initialValues.description}</Text>
                 </Descriptions.Item>
@@ -462,6 +476,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Сайт"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Link href={initialValues.website} target="_blank">
                     {initialValues.website}
@@ -471,7 +486,11 @@ export function SupplierView({
 
               {/* ИНН */}
               {initialValues.inn && (
-                <Descriptions.Item label="ИНН" style={{ paddingBottom: '4px' }}>
+                <Descriptions.Item
+                  label="ИНН"
+                  style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
+                >
                   <Text>{initialValues.inn}</Text>
                 </Descriptions.Item>
               )}
@@ -481,6 +500,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Оплата"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Text>
                     {initialValues.paymentMethod === 'cash'
@@ -498,6 +518,7 @@ export function SupplierView({
                   <Descriptions.Item
                     label="Надежность"
                     style={{ paddingBottom: '4px' }}
+                    styles={{ label: { width: '110px' } }}
                   >
                     <Rate disabled value={initialValues.reliability} />
                   </Descriptions.Item>
@@ -508,6 +529,7 @@ export function SupplierView({
                 <Descriptions.Item
                   label="Дата"
                   style={{ paddingBottom: '4px' }}
+                  styles={{ label: { width: '110px' } }}
                 >
                   <Text>{initialValues.updatedAt}</Text>
                 </Descriptions.Item>
@@ -566,8 +588,9 @@ export function SupplierView({
               key={garbageSupplier.id}
               column={1}
               size="small"
-              layout="vertical"
-              colon={true}
+              layout="horizontal"
+              colon={false}
+              styles={{ label: { width: '110px' } }}
             >
               <Descriptions.Item label="Тип">
                 <Text>
