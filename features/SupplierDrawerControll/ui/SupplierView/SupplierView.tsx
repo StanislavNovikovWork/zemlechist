@@ -518,7 +518,7 @@ export function SupplierView({
 
           {/* Блок Поставщики (только для стройплощадок) */}
           {isConstructionSite && garbageSuppliers.length > 0 && (
-            <div className="border border-gray-200 rounded-lg p-3 mb-4">
+            <div className="border border-gray-300 rounded-lg p-3 mb-4 mr-3">
               <h4 className="text-sm font-medium text-gray-700 mb-2">
                 Поставщики
               </h4>
