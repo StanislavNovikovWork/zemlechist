@@ -39,15 +39,15 @@ export function AddSupplierDrawer() {
   const titles = {
     create:
       data?.type === 'constructionSite'
-        ? 'Добавить строй площадку'
+        ? 'Добавить Заказ'
         : 'Добавить поставщика',
     edit:
       data?.type === 'constructionSite'
-        ? 'Редактировать строй площадку'
+        ? 'Редактировать Заказ'
         : 'Редактировать поставщика',
     view:
       data?.type === 'constructionSite'
-        ? 'Информация о строй площадке'
+        ? 'Информация о заказе'
         : 'Информация о поставщике',
   } as const;
 
@@ -195,7 +195,7 @@ export function AddSupplierDrawer() {
         placement="right"
         open={isOpen}
         onClose={handleClose}
-        size={isInvoiceOpen ? 1200 : 440}
+        size={isInvoiceOpen ? 1250 : 440}
         destroyOnHidden
         mask
         rootClassName="glass-drawer"
@@ -399,9 +399,7 @@ function InvoicePanel() {
                         minWidth: '130px',
                         textAlign: 'center',
                         backgroundColor:
-                          item.status === 'Поставлено'
-                            ? '#09b76b'
-                            : '#1094f7',
+                          item.status === 'Поставлено' ? '#09b76b' : '#1094f7',
                         color: '#fff',
                         border:
                           item.status === 'Поставлено'

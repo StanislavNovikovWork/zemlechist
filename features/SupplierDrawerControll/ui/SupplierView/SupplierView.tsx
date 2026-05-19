@@ -1,4 +1,5 @@
 import { Descriptions, Typography, Rate, Drawer } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import type { SupplierForm } from '@/features/SupplierDrawerControll/model/supplier.types';
 
@@ -216,6 +217,7 @@ export function SupplierView({
   allMarkers,
 }: SupplierViewProps) {
   const [isSupplierDrawerOpen, setIsSupplierDrawerOpen] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState<string | null>(null);
   const isConstructionSite = initialValues.type === 'constructionSite';
 
   // Находим поставщиков по ID из всех маркеров
@@ -408,7 +410,32 @@ export function SupplierView({
                   style={{ paddingBottom: '4px' }}
                   styles={{ label: { width: '155px' } }}
                 >
-                  <Text>{`${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`}</Text>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+                  >
+                    <Text>{`${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`}</Text>
+                    <CopyOutlined
+                      style={{
+                        cursor: 'pointer',
+                        color:
+                          copiedPhone ===
+                          `${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`
+                            ? '#09b76b'
+                            : '#8c8c8c',
+                        fontSize: '14px',
+                        transition: 'color 0.3s ease',
+                      }}
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`
+                        );
+                        setCopiedPhone(
+                          `${initialValues.coordinates[1]}, ${initialValues.coordinates[0]}`
+                        );
+                        setTimeout(() => setCopiedPhone(null), 1000);
+                      }}
+                    />
+                  </div>
                 </Descriptions.Item>
               )}
 
@@ -419,7 +446,27 @@ export function SupplierView({
                   style={{ paddingBottom: '4px' }}
                   styles={{ label: { width: '110px' } }}
                 >
-                  <Text>{initialValues.phone}</Text>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+                  >
+                    <Text>{initialValues.phone}</Text>
+                    <CopyOutlined
+                      style={{
+                        cursor: 'pointer',
+                        color:
+                          copiedPhone === initialValues.phone
+                            ? '#09b76b'
+                            : '#8c8c8c',
+                        fontSize: '14px',
+                        transition: 'color 0.3s ease',
+                      }}
+                      onClick={() => {
+                        navigator.clipboard.writeText(initialValues.phone);
+                        setCopiedPhone(initialValues.phone);
+                        setTimeout(() => setCopiedPhone(null), 1000);
+                      }}
+                    />
+                  </div>
                 </Descriptions.Item>
               )}
 
@@ -611,7 +658,29 @@ export function SupplierView({
 
               {garbageSupplier.properties.phone && (
                 <Descriptions.Item label="Телефон">
-                  <Text>{garbageSupplier.properties.phone}</Text>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+                  >
+                    <Text>{garbageSupplier.properties.phone}</Text>
+                    <CopyOutlined
+                      style={{
+                        cursor: 'pointer',
+                        color:
+                          copiedPhone === garbageSupplier.properties.phone
+                            ? '#09b76b'
+                            : '#8c8c8c',
+                        fontSize: '14px',
+                        transition: 'color 0.3s ease',
+                      }}
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          garbageSupplier.properties.phone!
+                        );
+                        setCopiedPhone(garbageSupplier.properties.phone);
+                        setTimeout(() => setCopiedPhone(null), 1000);
+                      }}
+                    />
+                  </div>
                 </Descriptions.Item>
               )}
 
@@ -660,7 +729,7 @@ export function SupplierView({
               )}
 
               {garbageSupplier.properties.updatedAt && (
-                <Descriptions.Item label="Дата обновления">
+                <Descriptions.Item label="Обновленно">
                   <Text>{garbageSupplier.properties.updatedAt}</Text>
                 </Descriptions.Item>
               )}
