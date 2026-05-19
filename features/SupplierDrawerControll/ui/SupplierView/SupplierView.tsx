@@ -236,18 +236,17 @@ export function SupplierView({
           >
             <>
               {/* Тип */}
-              <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
-                <Text>
-                  {initialValues.type === 'constructionSite'
-                    ? 'Строительная площадка'
-                    : initialValues.type === 'specialTechnique'
+              {!isConstructionSite && (
+                <Descriptions.Item label="Тип" style={{ paddingBottom: '4px' }}>
+                  <Text>
+                    {initialValues.type === 'specialTechnique'
                       ? 'Спецтехника'
                       : initialValues.type === 'nonMetallicMaterials'
                         ? 'Нерудные материалы'
                         : 'Вывоз мусора'}
-                </Text>
-              </Descriptions.Item>
-
+                  </Text>
+                </Descriptions.Item>
+              )}
               {!isConstructionSite &&
                 initialValues.zones &&
                 initialValues.zones.length > 0 && (

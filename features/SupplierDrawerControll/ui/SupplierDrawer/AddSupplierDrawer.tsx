@@ -248,6 +248,12 @@ function InvoicePanel() {
         flexShrink: 0,
         borderLeft: '1px solid #e8e8e8',
         borderRight: '1px solid #e8e8e8',
+        borderTop: '1px solid #e8e8e8',
+        borderBottom: '1px solid #e8e8e8',
+        borderTopLeftRadius: '8px',
+        borderTopRightRadius: '8px',
+        borderBottomLeftRadius: '8px',
+        borderBottomRightRadius: '8px',
         overflowY: 'auto',
         backgroundColor: '#fff',
       }}
@@ -386,9 +392,12 @@ function InvoicePanel() {
                   >
                     <span
                       style={{
+                        display: 'inline-block',
                         padding: '2px 8px',
                         borderRadius: '4px',
                         fontSize: '12px',
+                        minWidth: '130px',
+                        textAlign: 'center',
                         backgroundColor:
                           item.status === 'Поставлено'
                             ? '#09b76b'
