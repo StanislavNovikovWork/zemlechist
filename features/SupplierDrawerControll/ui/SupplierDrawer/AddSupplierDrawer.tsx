@@ -6,7 +6,7 @@ import { useUpdateSupplierMutation } from '../../api/mutations/useUpdateSupplier
 import { useCreateSupplierMutation } from '../../api/mutations/useCreateSupplierMutation';
 import { useDeleteSupplierMutation } from '../../api/mutations/useDeleteSupplierMutation';
 import { SupplierForm } from '../../model/supplier.types';
-import { SupplierView, INVOICE_DATA } from '../SupplierView';
+import { SupplierView, INVOICE_DATA, type InvoiceItem } from '../SupplierView';
 import { useMarkersQuery } from '@/features/Map/hooks/queries/useMarkersQuery';
 
 export function AddSupplierDrawer() {
@@ -238,20 +238,13 @@ export function AddSupplierDrawer() {
   );
 }
 
-type InvoiceItem = {
-  num: number;
-  name: string;
-  unit: string;
-  quantity: number;
-};
-
 function InvoicePanel() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
   return (
     <div
       style={{
-        width: 720,
+        width: 850,
         flexShrink: 0,
         borderLeft: '1px solid #e8e8e8',
         borderRight: '1px solid #e8e8e8',
@@ -273,14 +266,36 @@ function InvoicePanel() {
             fontSize: '13px',
           }}
         >
+          <colgroup>
+            <col style={{ width: '45px' }} />
+            <col style={{ width: '290px' }} />
+            <col style={{ width: '60px' }} />
+            <col style={{ width: '60px' }} />
+            <col style={{ width: '85px' }} />
+            <col style={{ width: '100px' }} />
+            <col style={{ width: '130px' }} />
+          </colgroup>
           <thead>
             <tr style={{ borderBottom: '2px solid #e8e8e8' }}>
-              {['№', 'Наименование', 'Ед. изм.', 'Кол-во'].map((h) => (
+              {[
+                '№',
+                'Наименование',
+                'Ед. изм.',
+                'Кол-во',
+                'Цена, руб.',
+                'Стоимость, руб.',
+                'Статус',
+              ].map((h) => (
                 <th
                   key={h}
                   style={{
-                    textAlign:
-                      h === 'Кол-во' || h === 'Ед. изм.' ? 'right' : 'left',
+                    textAlign: [
+                      'Кол-во',
+                      'Цена, руб.',
+                      'Стоимость, руб.',
+                    ].includes(h)
+                      ? 'right'
+                      : 'left',
                     fontWeight: 600,
                     fontSize: '12px',
                     color: '#595959',
@@ -336,6 +351,57 @@ function InvoicePanel() {
                     }}
                   >
                     {item.quantity}
+                  </td>
+                  <td
+                    style={{
+                      textAlign: 'right',
+                      padding: '6px 8px',
+                      color: '#262626',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {item.price.toLocaleString('ru-RU', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
+                  <td
+                    style={{
+                      textAlign: 'right',
+                      padding: '6px 8px',
+                      color: '#262626',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {item.total.toLocaleString('ru-RU', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
+                  <td
+                    style={{
+                      padding: '6px 8px',
+                      color: '#262626',
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        fontSize: '12px',
+                        backgroundColor:
+                          item.status === 'Поставлено'
+                            ? '#09b76b'
+                            : '#1094f7',
+                        color: '#fff',
+                        border:
+                          item.status === 'Поставлено'
+                            ? '1px solid #06944e'
+                            : '1px solid #0b6fb5',
+                      }}
+                    >
+                      {item.status}
+                    </span>
                   </td>
                 </tr>
               );
