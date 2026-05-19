@@ -1,17 +1,8 @@
-import {
-  YMap,
-  YMapDefaultSchemeLayer,
-  YMapDefaultFeaturesLayer,
-  YMapMarker,
-  YMapListener,
-  YMapClusterer,
-  clusterByGrid,
-  YMapFeature,
-} from '@/lib/ymaps3';
+import { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapListener, YMapClusterer, clusterByGrid, YMapFeature } from '@/lib/ymaps3';
 import { Marker } from '../Marker';
 import { ClickMarker } from '../ClickMarker';
 import { MarkerFeature, MarkersGeoJSON } from '../../types';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, memo } from 'react';
 
 /**
  * Пропсы компонента MapContent
@@ -43,7 +34,7 @@ interface MapContentProps {
   visibleZones: Record<number, boolean>;
 }
 
-export function MapContent({
+export const MapContent = memo(function MapContent({
   location,
   constructionSiteMarkers,
   otherMarkers,
@@ -365,4 +356,4 @@ export function MapContent({
       )}
     </YMap>
   );
-}
+});

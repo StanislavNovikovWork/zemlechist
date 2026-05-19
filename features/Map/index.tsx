@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 import { Spin } from "antd";
 import { DEFAULT_LOCATION } from "@/constants/map.constants";
 import MapSearch from "./ui/MapSearch";
@@ -55,51 +55,61 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
   const { data: markers, isLoading } = useMarkersQuery();
   const { openCreateSupplier, openViewSupplier } = useSupplierDrawerController();
 
-  // Filter markers based on selected types
-  const allConstructionSiteMarkers = markers?.features?.filter((marker: MarkerFeature) => {
-    if (marker.properties.type !== 'constructionSite') return false;
-    return todayOrders ? isConstructionSiteActiveToday(marker) : true;
-  }) || [];
+  // Мемоизируем производные данные о маркерах, чтобы не пересоздавать ссылки при каждом рендере
+  const allConstructionSiteMarkers = useMemo(
+    () =>
+      markers?.features?.filter((marker: MarkerFeature) => {
+        if (marker.properties.type !== 'constructionSite') return false;
+        return todayOrders ? isConstructionSiteActiveToday(marker) : true;
+      }) || [],
+    [markers, todayOrders]
+  );
 
-  const filteredByTypes = selectedTypes && selectedTypes.length > 0
-    ? markers?.features?.filter((marker: MarkerFeature) => selectedTypes.includes(marker.properties.type)) || []
-    : [];
+  const filteredByTypes = useMemo(
+    () =>
+      selectedTypes && selectedTypes.length > 0
+        ? (markers?.features?.filter((marker: MarkerFeature) =>
+            selectedTypes.includes(marker.properties.type)
+          ) || [])
+        : [],
+    [markers, selectedTypes]
+  );
 
-  // Merge: date-filtered construction sites + type-filtered suppliers
-  const filteredMarkers = [...allConstructionSiteMarkers, ...filteredByTypes.filter((marker: MarkerFeature) => marker.properties.type !== 'constructionSite')];
+  const constructionSiteGeoJSON = useMemo(
+    () => ({
+      type: 'FeatureCollection' as const,
+      features: allConstructionSiteMarkers,
+    }),
+    [allConstructionSiteMarkers]
+  );
 
-  // Разделяем маркеры на constructionSite и остальные
-  const constructionSiteMarkers = filteredMarkers.filter((marker: MarkerFeature) => marker.properties.type === 'constructionSite');
-  const otherMarkers = filteredMarkers.filter((marker: MarkerFeature) => marker.properties.type !== 'constructionSite');
+  const otherMarkersGeoJSON = useMemo(
+    () => ({
+      type: 'FeatureCollection' as const,
+      features: filteredByTypes,
+    }),
+    [filteredByTypes]
+  );
 
-  const filteredGeoJSON = {
-    type: 'FeatureCollection' as const,
-    features: filteredMarkers,
-  };
+  // Количество активных сегодня стройплощадок (для бейджа в сайдбаре)
+  const todaySitesCount = useMemo(
+    () => markers?.features?.filter(isConstructionSiteActiveToday).length || 0,
+    [markers]
+  );
 
-  const constructionSiteGeoJSON = {
-    type: 'FeatureCollection' as const,
-    features: constructionSiteMarkers,
-  };
+  // Мемоизируем обработчики, чтобы их ссылки были стабильными
+  const handleLocationChange = useCallback(
+    (newLocation: { center: [number, number]; zoom: number }) => {
+      setLocation(newLocation);
+    },
+    []
+  );
 
-  // Count of construction-site markers active today (for the "Сегодняшние заказы" filter badge)
-  const todaySitesCount = markers?.features?.filter(isConstructionSiteActiveToday).length || 0;
-
-  const otherMarkersGeoJSON = {
-    type: 'FeatureCollection' as const,
-    features: otherMarkers,
-  };
-
-  const handleLocationChange = (newLocation: { center: [number, number]; zoom: number }) => {
-    setLocation(newLocation);
-  };
-
-
-  const handleMapClick = (coordinates: [number, number]) => {
+  const handleMapClick = useCallback((_coordinates: [number, number]) => {
     setClickMarker(null);
-  };
+  }, []);
 
-  const handleOpenModal = (marker: MarkerFeature) => {
+  const handleOpenModal = useCallback((marker: MarkerFeature) => {
     if (marker.properties.type === 'constructionSite') {
       const constructionSiteForm = {
         id: marker.id,
@@ -114,7 +124,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
         name: '',
         description: '',
       };
-    openViewSupplier(constructionSiteForm);
+      openViewSupplier(constructionSiteForm);
       return;
     }
     const supplierForm = {
@@ -134,48 +144,49 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
       zones: marker.properties.zones,
     };
     openViewSupplier(supplierForm);
-  };
+  }, [openViewSupplier]);
 
-  const handleMarkerClick = (marker: MarkerFeature) => {
-    // Перемещаем карту к маркеру
+  const handleMarkerClick = useCallback((marker: MarkerFeature) => {
     setLocation({
       center: marker.geometry.coordinates,
       zoom: 14,
     });
-    // Устанавливаем маркер как hovered для показа попапа
     setHoveredId(marker.id);
-  };
+  }, []);
 
-  const handleFilterChange = (types: string[] | null) => {
+  const handleFilterChange = useCallback((types: string[] | null) => {
     setSelectedTypes(types);
     setTodayOrders(types?.includes('todayOrders') ?? false);
-  };
+  }, []);
 
-  const handleZoneToggle = (zoneNumber: number, visible: boolean) => {
-    setVisibleZones(prev => ({
+  const handleZoneToggle = useCallback((zoneNumber: number, visible: boolean) => {
+    setVisibleZones((prev) => ({
       ...prev,
-      [zoneNumber]: visible
+      [zoneNumber]: visible,
     }));
-  };
+  }, []);
 
+  const handleAddMarker = useCallback(() => {
+    openCreateSupplier();
+  }, [openCreateSupplier]);
 
-  const handleCancelAddMarker = () => {
+  const handleCancelAddMarker = useCallback(() => {
     setClickMarker(null);
-  };
+  }, []);
 
-  const handleMouseEnter = (id: number) => {
+  const handleMouseEnter = useCallback((id: number) => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
     }
     setHoveredId(id);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredId(null);
     }, 200);
-  };
+  }, []);
 
 
   return (
@@ -210,7 +221,7 @@ export function Map({ location: propLocation = DEFAULT_LOCATION }: MapProps) {
               handleMouseLeave={handleMouseLeave}
               onOpenModal={handleOpenModal}
               onMapClick={handleMapClick}
-              onAddMarker={openCreateSupplier}
+              onAddMarker={handleAddMarker}
               onCancelAddMarker={handleCancelAddMarker}
               visibleZones={visibleZones}
             />

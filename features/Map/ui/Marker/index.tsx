@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from 'react';
 import { YMapMarker } from "@/lib/ymaps3";
 import { MarkerFeature } from "../../types";
 import { MarkerPopup } from "../MarkerPopup";
@@ -21,7 +22,7 @@ interface MarkerProps {
   onOpenModal: (marker: MarkerFeature) => void;
 }
 
-export function Marker({
+export const Marker = memo(function Marker({
   feature,
   isHovered,
   onMouseEnter,
@@ -54,17 +55,22 @@ export function Marker({
     return obj;
   };
 
-  // Проверка на наличие объектов Dayjs в свойствах и их преобразование
-  const safeFeature = {
-    ...feature,
-    properties: cleanDayjsObjects(feature.properties)
-  };
-
-  const { Icon, offset, color, scale, hasGoldBorder } = getMarkerConfig(
-    safeFeature.properties.type,
-    isHovered,
-    safeFeature
+  // Мемоизируем safeFeature, чтобы не пересоздавать объект и не ререндерить MarkerPopup без причины
+  const safeFeature = useMemo(
+    () => ({
+      ...feature,
+      properties: cleanDayjsObjects(feature.properties),
+    }),
+    [feature, cleanDayjsObjects] // eslint-disable-line react-hooks/exhaustive-deps
   );
+
+  // Мемоизируем конфиг — пересчитывается только при изменении фичи или ховера
+  const markerConfig = useMemo(
+    () => getMarkerConfig(safeFeature.properties.type, isHovered, safeFeature),
+    [safeFeature, isHovered]
+  );
+
+  const { Icon, offset, color, scale, hasGoldBorder } = markerConfig;
 
   return (
     <YMapMarker
@@ -129,5 +135,6 @@ export function Marker({
         )}
       </div>
     </YMapMarker>
-  );
-}
+   );
+ });
+
